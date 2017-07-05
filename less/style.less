@@ -1,0 +1,76 @@
+@white: #ffffff;
+@red: #ff0000;
+@light-gray: #f4f4f4;
+@gray: #e6e6e6;
+@dark-gray: #333333;
+
+.custom-btn {
+  display: block;
+  cursor:pointer;
+  border: 2px solid @red;
+  padding: 0.5rem 2.5rem;
+  background-color: @red;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 2rem;
+  color: @white;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: @white;
+    color: @red;
+    text-decoration: none;
+  }
+}
+
+body {
+  padding-top: 40px;
+  background-color: @light-gray;
+  font-family: "Open Sans", sans-serif;
+}
+
+nav {
+  background-color: @white;
+}
+
+.login {
+  .custom-btn;
+}
+
+.login-collapse {
+  padding:0.5rem;
+  color: @dark-gray;
+}
+
+main {
+  height:100%;
+}
+
+.login-form {
+  width: 80%;
+  padding: 1.7rem 1.5rem;
+  border:1px solid @gray;
+  @media screen and (min-width: 1000px) {
+      width: 50%;
+    }
+}
+
+.login-form > * {
+  margin-bottom: 2.5rem;
+}
+
+.login-form-heading {
+  text-align: center;
+}
+
+.login-form-btn {
+  .custom-btn;
+  margin: 0 auto;
+}
+
+footer {
+  color: @light-gray;
+  text-align: center;
+  padding:1rem;
+  background-color: @dark-gray;
+}
+
