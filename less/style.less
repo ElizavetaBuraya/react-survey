@@ -3,6 +3,7 @@
 @light-gray: #f4f4f4;
 @gray: #e6e6e6;
 @dark-gray: #333333;
+@link-color: rgba(0,0,0,0.5);
 
 .custom-btn {
   display: block;
@@ -32,13 +33,20 @@ nav {
   background-color: @white;
 }
 
+.username {
+  vertical-align: top;
+}
+
 .login {
   .custom-btn;
 }
 
 .login-collapse {
   padding:0.5rem;
-  color: @dark-gray;
+  color: @link-color;
+  &:hover {
+    color: rgba(0,0,0,0.7);
+  }
 }
 
 main {

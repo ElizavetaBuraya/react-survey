@@ -23,6 +23,9 @@ body {
 nav {
   background-color: #ffffff;
 }
+.username {
+  vertical-align: top;
+}
 .login {
   display: block;
   cursor: pointer;
@@ -42,7 +45,10 @@ nav {
 }
 .login-collapse {
   padding: 0.5rem;
-  color: #333333;
+  color: rgba(0, 0, 0, 0.5);
+}
+.login-collapse:hover {
+  color: rgba(0, 0, 0, 0.7);
 }
 main {
   height: 100%;
