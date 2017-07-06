@@ -124,14 +124,14 @@ th {
   background-color: #e6e6e6;
 }
 #sorting-arrow {
-  margin-left: 5px;
+  margin-left: 0.3rem;
   cursor: pointer;
 }
 .paginate {
   text-align: center;
 }
 .paginate .fa:first-child {
-  margin-right: 15px;
+  margin-right: 1rem;
 }
 .paginate > * {
   cursor: pointer;
