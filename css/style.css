@@ -53,6 +53,89 @@ nav {
 main {
   height: 100%;
 }
+.sidebar {
+  background-color: #e6e6e6;
+  padding: 3rem 1.5rem;
+  height: 70%;
+}
+.sidebar-nav {
+  display: block;
+  cursor: pointer;
+  border: 2px solid #ff0000;
+  padding: 0.5rem 2.5rem;
+  background-color: #ff0000;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 2rem;
+  color: #ffffff;
+  transition: background-color 0.2s;
+  margin: 0rem 0rem 1rem 0rem;
+  border-color: #333333;
+  padding: 2rem 2.5rem;
+  background-color: #333333;
+}
+.sidebar-nav:hover {
+  background-color: #ffffff;
+  color: #ff0000;
+  text-decoration: none;
+}
+.active-nav {
+  background-color: #ffffff;
+  border-color: #ff0000;
+  color: #ff0000;
+  cursor: default;
+}
+.main-content {
+  width: 100%;
+  padding: 4rem 2rem;
+}
+.btn {
+  cursor: pointer;
+}
+.input-group {
+  width: 300px;
+}
+.page-name {
+  margin-bottom: 2rem;
+  flex-direction: row;
+  justify-content: space-between;
+}
+@media screen and (max-width: 1000px) {
+  .page-name {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+table {
+  text-align: center;
+}
+@media screen and (max-width: 640px) {
+  table {
+    overflow-x: auto;
+    display: block;
+  }
+}
+th {
+  text-align: center;
+  background-color: #e6e6e6;
+}
+.table-footer {
+  text-align: left;
+  background-color: #e6e6e6;
+}
+#sorting-arrow {
+  margin-left: 5px;
+  cursor: pointer;
+}
+.paginate {
+  text-align: center;
+}
+.paginate .fa:first-child {
+  margin-right: 15px;
+}
+.paginate > * {
+  cursor: pointer;
+}
 .login-form {
   width: 80%;
   padding: 1.7rem 1.5rem;

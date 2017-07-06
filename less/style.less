@@ -53,6 +53,85 @@ main {
   height:100%;
 }
 
+.sidebar {
+  background-color: @gray;
+  padding: 3rem 1.5rem;
+  height: 70%;
+}
+
+.sidebar-nav {
+  .custom-btn;
+  margin: 0rem 0rem 1rem 0rem;
+  border-color: @dark-gray;
+  padding: 2rem 2.5rem;
+  background-color: @dark-gray;
+}
+
+.active-nav {
+  background-color: @white;
+  border-color: @red;
+  color: @red;
+  cursor: default;
+}
+
+.main-content {
+  width: 100%;
+  padding: 4rem 2rem;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.input-group {
+  width: 300px;
+}
+
+.page-name {
+  margin-bottom: 2rem;
+  flex-direction: row;
+  justify-content: space-between;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+table {
+  text-align: center;
+  @media screen and (max-width: 640px) {
+    overflow-x: auto;
+    display: block;
+  }
+}
+
+th {
+  text-align: center;
+  background-color: @gray;
+}
+
+.table-footer {
+  text-align: left;
+  background-color: @gray;
+}
+
+#sorting-arrow {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.paginate {
+  text-align: center;
+}
+
+.paginate .fa:first-child {
+  margin-right: 15px;
+}
+ 
+.paginate > * {
+  cursor: pointer;
+}
+
 .login-form {
   width: 80%;
   padding: 1.7rem 1.5rem;
@@ -78,7 +157,7 @@ main {
 footer {
   color: @light-gray;
   text-align: center;
-  padding:1rem;
+  padding: 1rem;
   background-color: @dark-gray;
 }
 
