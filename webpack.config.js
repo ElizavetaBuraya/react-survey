@@ -45,16 +45,8 @@ module.exports = {
             {
                 // Match woff2 in addition to patterns like .woff?v=1.1.1.
                 test: /\.(ttf|eot|svg|woff|woff2)$/,
-                loader: 'url-loader',
+                loader: 'file-loader',
                 options: {
-                    // Limit at 50k. Above that it emits separate files
-                    limit: 50000,
-
-                    // url-loader sets mimetype if it's passed.
-                    // Without this it derives it from the file extension
-                    mimetype: 'application/font-woff',
-
-                    // Output below fonts directory
                     name: '../fonts/[name].[ext]',
                 },
             },
