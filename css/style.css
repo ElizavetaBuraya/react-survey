@@ -1,3 +1,7 @@
+@font-face {
+  font-family: 'FontAwesome';
+  src: url(../fonts/fontawesome-webfont.woff2) format('woff2'), url(../fonts/fontawesome-webfont.woff) format('woff'), url(../fonts/fontawesome-webfont.svg) format('svg'), url(../fonts/fontawesome-webfont.ttf) format('ttf'), url(../fonts/fontawesome-webfont.eot) format('eot');
+}
 .custom-btn {
   display: block;
   cursor: pointer;
@@ -26,6 +30,14 @@ nav {
 .username {
   vertical-align: top;
 }
+.username::before {
+  content: '\F007';
+  font-family: 'FontAwesome', sans-serif;
+  left: -0.2rem;
+  position: relative;
+  bottom: 0.3rem;
+  font-size: 1.7rem;
+}
 .login {
   display: block;
   cursor: pointer;
@@ -49,6 +61,20 @@ nav {
 }
 .login-collapse:hover {
   color: rgba(0, 0, 0, 0.7);
+}
+.logicon {
+  padding: 0.5rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+.logicon:hover {
+  color: rgba(0, 0, 0, 0.7);
+}
+.logicon::before {
+  content: '\F090';
+  font-family: 'FontAwesome', sans-serif;
+  position: relative;
+  bottom: 0.6rem;
+  font-size: 2rem;
 }
 main {
   height: 100%;
@@ -97,13 +123,23 @@ main {
 }
 .page-name {
   margin-bottom: 2rem;
-  flex-direction: row;
-  justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 @media screen and (max-width: 1000px) {
   .page-name {
-    flex-direction: column;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 }
 table {
@@ -119,21 +155,43 @@ th {
   text-align: center;
   background-color: #e6e6e6;
 }
+.name::after {
+  content: '\F0DD';
+  font-family: 'FontAwesome', sans-serif;
+  position: relative;
+  left: .5rem;
+  bottom: 0rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.action {
+  text-align: center;
+}
+.action > * {
+  cursor: pointer;
+  margin-left: .2rem;
+}
 .table-footer {
   text-align: left;
   background-color: #e6e6e6;
 }
-#sorting-arrow {
-  margin-left: 0.3rem;
-  cursor: pointer;
-}
 .paginate {
   text-align: center;
 }
-.paginate .fa:first-child {
-  margin-right: 1rem;
+.paginate::before {
+  content: '\F053';
+  font-family: 'FontAwesome', sans-serif;
+  position: relative;
+  left: -0.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
-.paginate > * {
+.paginate::after {
+  content: '\F054';
+  font-family: 'FontAwesome', sans-serif;
+  position: relative;
+  right: -0.5rem;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 .login-form {
