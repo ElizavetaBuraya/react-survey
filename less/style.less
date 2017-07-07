@@ -1,11 +1,4 @@
-@font-face {
-  font-family: 'FontAwesome';
-  src: url('../fonts/fontawesome-webfont.woff2') format('woff2'),
-  url('../fonts/fontawesome-webfont.woff') format('woff'),
-  url('../fonts/fontawesome-webfont.svg') format('svg'),
-  url('../fonts/fontawesome-webfont.ttf') format('ttf'),
-  url('../fonts/fontawesome-webfont.eot') format('eot')
-}
+@import 'fonts.less';
 
 @white: #ffffff;
 @red: #ff0000;
@@ -25,17 +18,23 @@
   margin-left: 2rem;
   color: @white;
   transition: background-color 0.2s;
-  &:hover {
+  text-decoration: none;
+  &:hover,  &:focus {
     background-color: @white;
     color: @red;
     text-decoration: none;
   }
+  &:active {
+    color: @dark-gray;
+  }
 }
 
 body {
-  padding-top: 40px;
+  padding-top: 2.5em;
   background-color: @light-gray;
   font-family: "Open Sans", sans-serif;
+  display:flex;
+  flex-direction: column;
 }
 
 nav {
@@ -79,6 +78,7 @@ nav {
 
 main {
   height:100%;
+  flex: 1;
 }
 
 .sidebar {
@@ -190,10 +190,9 @@ th {
   @media screen and (min-width: 1000px) {
       width: 50%;
     }
-}
-
-.login-form > * {
-  margin-bottom: 2.5rem;
+  & > * {
+    margin-bottom: 2.5rem;
+  }
 }
 
 .login-form-heading {
