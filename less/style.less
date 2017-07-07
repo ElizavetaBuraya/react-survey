@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fontawesome-webfont.woff2') format('woff2'),
+  url('../fonts/fontawesome-webfont.woff') format('woff'),
+  url('../fonts/fontawesome-webfont.svg') format('svg'),
+  url('../fonts/fontawesome-webfont.ttf') format('ttf'),
+  url('../fonts/fontawesome-webfont.eot') format('eot')
+}
+
 @white: #ffffff;
 @red: #ff0000;
 @light-gray: #f4f4f4;
@@ -34,7 +43,15 @@ nav {
 }
 
 .username {
-  vertical-align: top;
+  vertical-align:top;
+  &::before {
+    content:'\f007';
+    font-family: 'FontAwesome', sans-serif;
+    left:-0.2rem;
+    position:relative;
+    bottom:0.3rem;
+    font-size: 1.7rem;
+  }
 }
 
 .login {
@@ -46,6 +63,17 @@ nav {
   color: @link-color;
   &:hover {
     color: rgba(0,0,0,0.7);
+  }
+}
+
+.logicon {
+  .login-collapse;
+  &::before {
+    content:'\f090';
+    font-family: 'FontAwesome', sans-serif;
+    position:relative;
+    bottom: 0.6rem;
+    font-size: 2rem;
   }
 }
 
@@ -110,26 +138,49 @@ th {
   background-color: @gray;
 }
 
+.name {
+  &::after {
+    content:'\f0dd';
+    font-family: 'FontAwesome', sans-serif;
+    position:relative;
+    left:.5rem;
+    bottom:0rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+}
+
+.action {
+  text-align: center;
+  & > * {
+    cursor: pointer;
+    margin-left: .2rem;
+  }
+}
+
 .table-footer {
   text-align: left;
   background-color: @gray;
 }
 
-#sorting-arrow {
-  margin-left: 0.3rem;
-  cursor: pointer;
-}
-
 .paginate {
   text-align: center;
-}
-
-.paginate .fa:first-child {
-  margin-right: 1rem;
-}
-
-.paginate > * {
-  cursor: pointer;
+  &::before {
+    content:'\f053';
+    font-family: 'FontAwesome', sans-serif;
+    position:relative;
+    left:-.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  &::after {
+    content:'\f054';
+    font-family: 'FontAwesome', sans-serif;
+    position:relative;
+    right:-.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
 }
 
 .login-form {
