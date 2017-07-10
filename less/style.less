@@ -7,15 +7,14 @@
 @dark-gray: #333333;
 @link-color: rgba(0,0,0,0.5);
 
-.custom-btn {
+.custom-btn(@pad-tb, @pad-lr, @bord-col, @bg-col) {
   display: block;
   cursor:pointer;
-  border: 2px solid @red;
-  padding: 0.5rem 2.5rem;
-  background-color: @red;
+  border: 2px solid @bord-col;
+  padding: @pad-tb @pad-lr;
+  background-color: @bg-col;
   font-weight: bold;
   text-align: center;
-  margin-left: 2rem;
   color: @white;
   transition: background-color 0.2s;
   text-decoration: none;
@@ -27,6 +26,17 @@
   &:active {
     color: @dark-gray;
   }
+}
+
+.icon(@cont, @left, @btm, @f-size){
+  content:@cont;
+  font-family: 'FontAwesome', sans-serif;
+  left:@left;
+  position:relative;
+  bottom:@btm;
+  font-size: @f-size;
+  line-height: @f-size;
+  cursor: pointer;
 }
 
 body {
@@ -41,20 +51,23 @@ nav {
   background-color: @white;
 }
 
+.nav-item {
+  height:40px;
+}
+
 .username {
   vertical-align:top;
   &::before {
-    content:'\f007';
-    font-family: 'FontAwesome', sans-serif;
-    left:-0.2rem;
-    position:relative;
-    bottom:0.3rem;
-    font-size: 1.7rem;
+    .icon('\f007', -0.2rem, 0.3rem, 1.7rem);
+  }
+  &::after {
+    .icon('\f0dd', 0.5rem, 0.5rem, 1.7rem);
   }
 }
 
 .login {
-  .custom-btn;
+  .custom-btn(0.5rem, 2.5rem, @red, @red);
+  margin-left: 2rem;
 }
 
 .login-collapse {
@@ -68,11 +81,7 @@ nav {
 .logicon {
   .login-collapse;
   &::before {
-    content:'\f090';
-    font-family: 'FontAwesome', sans-serif;
-    position:relative;
-    bottom: 0.6rem;
-    font-size: 2rem;
+    .icon('\f090', 0rem, 0.2rem, 2rem);
   }
 }
 
@@ -88,11 +97,8 @@ main {
 }
 
 .sidebar-nav {
-  .custom-btn;
-  margin: 0rem 0rem 1rem 0rem;
-  border-color: @dark-gray;
-  padding: 2rem 2.5rem;
-  background-color: @dark-gray;
+  .custom-btn(2rem, 2.5rem, @dark-gray, @dark-gray);
+  margin-bottom: 1rem;
 }
 
 .active-nav {
@@ -105,6 +111,14 @@ main {
 .main-content {
   width: 100%;
   padding: 4rem 2rem;
+}
+
+.create-survey {
+  .custom-btn(0.5rem, .5rem, @red, @red);
+  vertical-align: middle;
+  font-size: 0.7rem;
+  display: inline;
+  margin-left: 1rem;
 }
 
 .btn {
@@ -138,15 +152,9 @@ th {
   background-color: @gray;
 }
 
-.name {
+.sort-column {
   &::after {
-    content:'\f0dd';
-    font-family: 'FontAwesome', sans-serif;
-    position:relative;
-    left:.5rem;
-    bottom:0rem;
-    font-size: 1rem;
-    cursor: pointer;
+    .icon('\f0dd', 0.5rem, 0.1rem, 1rem);
   }
 }
 
@@ -166,20 +174,11 @@ th {
 .paginate {
   text-align: center;
   &::before {
-    content:'\f053';
-    font-family: 'FontAwesome', sans-serif;
-    position:relative;
-    left:-.5rem;
-    font-size: 1.5rem;
-    cursor: pointer;
+    .icon('\f053', -0.5rem, 0rem, 1.5rem);
   }
   &::after {
-    content:'\f054';
-    font-family: 'FontAwesome', sans-serif;
-    position:relative;
+    .icon('\f054', 0rem, 0rem, 1.5rem);
     right:-.5rem;
-    font-size: 1.5rem;
-    cursor: pointer;
   }
 }
 
@@ -200,7 +199,7 @@ th {
 }
 
 .login-form-btn {
-  .custom-btn;
+  .custom-btn(0.5rem, 2.5rem, @red, @red);
   margin: 0 auto;
 }
 
