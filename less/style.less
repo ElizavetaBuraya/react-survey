@@ -43,12 +43,18 @@
 
 /* --PAGE START-- */
 
+html {
+  height: 100%;
+}
+
 body {
   padding-top: 2.5em;
+  overflow-x: hidden;
   background-color: @light-gray;
   font-family: "Open Sans", sans-serif;
   display:flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 /* --NAVIGATION-- */
@@ -94,20 +100,21 @@ nav {
 /* --MAIN CONTENT-- */
 
 main {
-  height:100%;
-  flex: 1;
+  flex: 1 0 auto;
 }
 
 /* Sidebar styles */
 
 .sidebar {
+  position: sticky;
   background-color: @gray;
   padding: 3rem 1.5rem;
   height: 70%;
+  top: 3rem;
 }
 
 .sidebar-nav {
-  .custom-btn(2rem, 2.5rem, @dark-gray, @dark-gray);
+  .custom-btn(2rem, .5rem, @dark-gray, @dark-gray);
   margin-bottom: 1rem;
 }
 
@@ -162,6 +169,11 @@ main {
   font-size: 0.7rem;
   display: inline;
   margin-left: 1rem;
+  @media screen and (max-width: 430px) {
+    display:block;
+    width: 10em;
+    margin: 0.4rem auto;
+  }
 }
 
 /* Search form styles */
@@ -175,11 +187,6 @@ main {
 }
 
 /* Tabs styles */
-
-.tab-content {
-  max-height:600px;
-  overflow-y: auto;
-}
 
 .nav-tabs {
   font-size: .9em;
@@ -233,7 +240,7 @@ main {
 
 table {
   text-align: center;
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 780px) {
     overflow-x: auto;
     display: block;
   }
@@ -274,6 +281,56 @@ th {
   }
 }
 
+/* Templates styles */
+
+.available-templates {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+}
+
+.template {
+  border: 1px solid @gray;
+  background-color: @white;
+  padding: 1rem;
+  max-width: 450px;
+  margin: 0 auto 2em;
+  & h2 {
+    width: 100%;
+    text-align: center;
+  }
+  & .create-survey {
+    display: block;
+    max-width: 10rem;
+    min-width: 5rem;
+    margin: 0 auto;
+  }
+  &:hover {
+    box-shadow:inset 0em 0em 0em .4em @gray;
+    cursor: pointer;
+  }
+}
+
+#active-template {
+  display: none;
+  text-align: right;
+  & i {
+    &:hover {
+     color: @gray;
+    }
+  }
+}
+
+.question-number, .page-number {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
 /* Login/Register forms styles */
 
 .login-form {
@@ -303,7 +360,8 @@ footer {
   margin-top: 1rem;
   color: @light-gray;
   text-align: center;
-  padding: 1rem;
+  flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+  padding: 20px;
   background-color: @dark-gray;
 }
 
