@@ -139,6 +139,80 @@ main {
   }
 }
 
+.about-page-name {
+  font-size: 0rem;
+  & > * {
+    display: inline-block;
+  }
+  & h1 {
+    font-size: 4rem;
+    vertical-align: middle;
+    @media screen and (max-width: 1167px) {
+      display: block;
+      text-align: center;
+    }
+  }
+  & img {
+    margin-left: 2rem;
+    @media screen and (max-width: 1167px) {
+      display: none;
+    }
+  }
+}
+
+.tab-content {
+  max-height:600px;
+  overflow-y: auto;
+}
+
+.nav-tabs {
+  font-size: .9em;
+  @media screen and (max-width: 1100px) {
+    flex-direction: column;
+  }
+  text-align: center;
+}
+
+.nav-tab-item {
+  & .nav-link {
+    color: @dark-gray;
+  }
+  & .nav-link:hover {
+    background-color: @white;
+    color: @red;
+  }
+  & .active {
+    background-color: @red !important;
+    color: @white !important;
+  }
+}
+
+.tab-pane {
+  padding: 1.5rem;
+  & > * {
+    display: inline-block;
+    vertical-align: top;
+  }
+  & img {
+    margin-right: 0.5em;
+  }
+  & p {
+    width: 70%;
+    display: inline-block;
+  }
+  @media screen and (max-width: 1100px) {
+    & > * {
+      display: block;
+    }
+    & p {
+      width: 100%;
+    }
+    & img {
+      margin: 0 auto 1.5rem;
+    }
+  }
+}
+
 table {
   text-align: center;
   @media screen and (max-width: 640px) {
@@ -204,6 +278,7 @@ th {
 }
 
 footer {
+  margin-top: 1rem;
   color: @light-gray;
   text-align: center;
   padding: 1rem;
