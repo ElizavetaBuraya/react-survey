@@ -21,7 +21,7 @@
   color: @white;
   transition: background-color 0.2s;
   text-decoration: none;
-  &:hover,  &:focus {
+  &:hover, &:focus {
     background-color: @white;
     color: @red;
     text-decoration: none;
@@ -204,21 +204,25 @@ main {
   border-color: @red;
   color: @red;
   cursor: default;
+  pointer-events: none;
 }
 
 /* Page header styles */
 
-.page-name {
+.page-head {
   margin-bottom: 2rem;
   @media screen and (max-width: 1000px) {
     align-items: center;
   }
   @media screen and (max-width: 768px) {
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    font-size: .9em;
   }
 }
 
-.about-page-name {
+.about-page-head {
   font-size: 0rem;
   & > * {
     display: inline-block;
@@ -248,6 +252,75 @@ main {
     display:block;
     width: 10em;
     margin: 0.4rem auto;
+  }
+}
+
+.survey-title {
+  font-size: 1.5em;
+  margin: 0em 1em 0em 0em;
+}
+
+.survey-answers {
+  text-decoration: underline;
+  font-size: 2em;
+  display: inline-block;
+  & + span {
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2em;
+    margin-left: .5em;
+  }
+}
+
+.survey-stats {
+  margin-bottom: .5em;
+}
+
+.question-number, .page-number {
+  display: inline-block;
+  margin-bottom: 0px;
+}
+
+.survey-command-panel {
+  & a {
+    .custom-control-btn;
+    margin-bottom: .5em;
+  }
+}
+
+.result-panel {
+  display: flex;
+  flex-direction: row;
+  font-size: 0em;
+  & a {
+    font-size: .8rem;
+    background-color: @dark-gray;
+    color: @white;
+    border-color: @dark-gray;
+    display: inline;
+    margin-right: 0em;
+  }
+  & .active {
+    cursor: default;
+    border-color: @red;
+    background-color: @red;
+    &:hover, &:active, &:focus {
+      border-color: @red;
+      background-color: @red;
+      color: @white;
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+}
+
+.choose-user {
+  &::before {
+    .icon("\f007", 0em, -.2em, 2em);
+    margin-right: .3em;
+  }
+  & select {
+    font-size: 1.1em;
   }
 }
 
@@ -404,11 +477,6 @@ th {
   }
 }
 
-.question-number, .page-number {
-  display: inline-block;
-  margin-bottom: 0px;
-}
-
 /* Survey styles */
 .survey {
   min-width: 65%;
@@ -451,19 +519,6 @@ th {
   max-width: 100%;
 }
 
-.survey-title {
-  font-size: 1.5em;
-  margin: 0em 1em 0em 0em;
-}
-
-.survey-command-panel {
-  margin-top: .5em;
-  & > * {
-    .custom-control-btn;
-    margin-bottom: .5em;
-  }
-}
-
 .tab {
   overflow: hidden;
   position: relative;
@@ -499,6 +554,23 @@ th {
 
 .question-title {
   font-weight: bold;
+}
+
+.question-answer {
+  max-width: 50%;
+  @media screen and (max-width: 1200px) {
+    max-width: 80%;
+  }
+  a::before {
+    .icon('\f15b', 0rem, -.2rem, 1.7rem);
+    margin-right: .2em;
+    color: @dark-gray;
+  }
+  & .rating {
+    & > input:checked ~ label {
+      color: #ddd; cursor: default;
+    }
+  }
 }
 
 .edited {
@@ -713,7 +785,7 @@ ul {
 }
 
 .bar {
-  width: 66%;
+  width: 100%;
   height: 30px;
   background-color: @red;
 }
