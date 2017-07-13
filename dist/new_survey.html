@@ -1,4 +1,5 @@
-<html><head>
+<!DOCTYPE html>
+<head>
     <title>New survey</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,14 +10,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </head>
-<body>
-<header>
+<body class="d-flex flex-column">
+<header class="d-flex flex-row">
     <nav class="navbar navbar-toggleable-sm fixed-top navbar-light">
         <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand hidden-sm-down" href="https://www.itechart.com/">
-            <img src="../img/logo.jpg" alt="Logo" height="40px">
+            <img src="../img/logo.jpg" alt="Logo" height="40">
         </a>
         <a class="login-collapse hidden-md-up ml-auto" href="#"><span class="username"> Привет, admin</span></a>
         <div class="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
@@ -48,16 +49,16 @@
         </div>
     </nav>
 </header>
-<main class="d-flex justify-content-start">
+<main class="d-flex flex-row">
     <aside class="sidebar d-flex flex-column hidden-sm-down">
         <a class="sidebar-nav active-nav" href="new_survey.html">Новый опрос</a>
         <a class="sidebar-nav" href="surveys.html">Мои опросы</a>
         <a class="sidebar-nav" href="templates.html">Шаблоны опросов</a>
         <a class="sidebar-nav" href="users.html">Пользователи</a>
     </aside>
-    <div class="main-content survey">
-        <div class="survey-name">
-            <label for="new_survey"><h1>Новый опрос:</h1></label>
+    <div class="main-content survey d-flex flex-column">
+        <div class="page-name">
+            <label for="new_survey"><p class="survey-title">Новый опрос:</p></label>
             <input type="text" name="new-survey" id="new_survey"><br>
             <div class="survey-stats">
                 <p class="question-number">Вопросов: <span>12</span></p>
@@ -70,18 +71,12 @@
                 <a href="#">Новая страница</a>
             </div>
         </div>
-        <div class="settings">
-            <div class="popup" id="question-popup">Вопрос
-                <div class="popup-content" id="question-content">content</div>
-            </div>
-        </div>
         <div id="page_1" class="survey-page">
-            <!--
             <div class="tab">
                 <a class="tablinks">Страница 1</a>
                 <a class="tablinks active-tab">Страница 2</a>
                 <a class="tablinks">Страница 3</a>
-            </div> -->
+            </div>
             <div class="survey-content">
                 <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                 <input type="text" name="page-name" id="page_name" placeholder="Страница 2"><br>
@@ -116,7 +111,7 @@
                 <div class="question">
                     <i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i>
                     <p class="question-title"><span class="question-number">4. </span> Вопрос-файл</p>
-                    <input type="file" class="inputfile" name="file" id="file">
+                    <input type="file" class="input-file" name="file" id="file">
                     <label for="file">Файл</label><span class="filepath">Ничего не выбрано</span>
                 </div>
                 <div class="question">
@@ -140,9 +135,9 @@
             </div>
         </div>
     </div>
-    <aside class="survey-params">
+    <aside class="survey-params d-flex flex-column hidden-md-down">
         <div class="params">
-            <h3>Тип вопроса</h3>
+            <p>Тип вопроса</p>
             <ul class="question-type-list">
                 <li class="single-answer">Варианты ответа (один)</li>
                 <li class="multiple-answer">Варианты ответа (несколько)</li>
@@ -153,7 +148,7 @@
             </ul>
         </div>
         <div class="params">
-            <h3>Параметры опроса</h3>
+            <p>Параметры опроса</p>
             <ul class="survey-params-list">
                 <li><input type="checkbox" name="checkbox-option" value="anonymous">Анонимный опрос</li>
                 <li><input type="checkbox" name="checkbox-option" value="anonymous">Номера вопросов</li>
@@ -164,8 +159,32 @@
             </ul>
         </div>
     </aside>
+    <div class="toggle-question-params hidden-lg-up"></div>
+    <div class="question-params-toggle-panel hidden-lg-up">
+        <p>Тип вопроса</p>
+        <ul class="question-type-list">
+            <li class="single-answer">Варианты ответа (один)</li>
+            <li class="multiple-answer">Варианты ответа (несколько)</li>
+            <li class="text-answer">Текст</li>
+            <li class="file-answer">Файл</li>
+            <li class="star-answer">Рейтинг в звездах</li>
+            <li class="range-answer">Шкала</li>
+        </ul>
+    </div>
+    <div class="toggle-survey-params hidden-lg-up"></div>
+    <div class="survey-params-toggle-panel hidden-lg-up">
+        <p>Параметры опроса</p>
+        <ul class="survey-params-list">
+            <li><input type="checkbox" name="checkbox-option" value="anonymous">Анонимный опрос</li>
+            <li><input type="checkbox" name="checkbox-option" value="anonymous">Номера вопросов</li>
+            <li><input type="checkbox" name="checkbox-option" value="anonymous">Номера страниц</li>
+            <li><input type="checkbox" name="checkbox-option" value="anonymous">Случайный порядок вопросов</li>
+            <li><input type="checkbox" name="checkbox-option" value="anonymous">Звездочки обязательных полей</li>
+            <li><input type="checkbox" name="checkbox-option" value="anonymous">Индикатор выполнения</li>
+        </ul>
+    </div>
 </main>
-<footer>
+<footer class="d-flex flex-row justify-content-center">
     <span class="copyright">© 2002 - 2017. :iTechArt All Rights Reserved.</span>
 </footer>
 <script src="./bundle.js"></script>
