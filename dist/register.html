@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
 <head>
     <title>Register</title>
     <meta charset="utf-8">
@@ -10,16 +10,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </head>
-<body>
-    <header>
+<body class="d-flex flex-column">
+    <header class="d-flex flex-row">
         <nav class="navbar navbar-toggleable-sm fixed-top navbar-light">
             <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand hidden-sm-down" href="https://www.itechart.com/">
-                <img src="../img/logo.jpg" alt="Logo" height="40px">
+                <img src="../img/logo.jpg" alt="Logo" height="40">
             </a>
-            <a class="login-collapse logicon ml-auto hidden-md-up " href="#"><i class="fa fa-sign-in fa-2x"></i></a>
+            <a class="login-collapse logicon ml-auto hidden-md-up " href="#"></a>
             <div class="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -28,16 +28,15 @@
                 </ul>
             </div>
             <a class="login mr-auto hidden-sm-down" href="">Вход</a>
-
         </nav>
     </header>
-    <main class="d-flex justify-content-center align-items-center">
+    <main class="d-flex flex-row justify-content-center align-items-center">
         <form class="login-form">
             <h2 class="login-form-heading">Регистрация</h2>
             <label for="inputName" class="sr-only">Имя</label>
             <input type="text" id="inputName" class="form-control" placeholder="Имя" required autofocus>
             <label for="inputEmail" class="sr-only">Имя</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Логин (e-mail)" required autofocus>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Логин (e-mail)" required>
             <label for="inputPassword" class="sr-only">Пароль</label>
             <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
             <label for="inputRepeatPassword" class="sr-only">Повторить пароль</label>
@@ -45,7 +44,7 @@
             <button class="login-form-btn" type="submit">Создать аккаунт</button>
         </form>
     </main>
-    <footer>
+    <footer  class="d-flex flex-row justify-content-center">
         <span class="copyright">© 2002 - 2017. :iTechArt All Rights Reserved.</span>
     </footer>
     <script src="./bundle.js"></script>
