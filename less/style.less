@@ -497,6 +497,10 @@ th {
   }
 }
 
+.question-title {
+  font-weight: bold;
+}
+
 .edited {
   border:2px solid @gray;
   padding: 1rem;
@@ -695,11 +699,37 @@ ul {
   .answer-icon-params("\f241");
 }
 
+/* Progress bar styles */
+
+.progress {
+  background-color: @light-gray;
+  margin: 2em 0em;
+}
+
+.progress-bar {
+  margin: 0em 2em;
+  width: 50%;
+  background-color: @gray;
+}
+
+.bar {
+  width: 66%;
+  height: 30px;
+  background-color: @red;
+}
+
+/* Page navigation styles */
+.page-navigation {
+  & a {
+    .custom-control-btn;
+    font-size: 1em;
+  }
+}
+
 /* --FOOTER-- */
 
 footer {
   width: 100%;
-  margin-top: 1rem;
   color: @light-gray;
   text-align: center;
   flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
