@@ -10,6 +10,7 @@
 @link-color: rgba(0,0,0,0.5);
 
 .custom-btn(@pad-tb, @pad-lr, @bord-col, @bg-col) {
+  font-size: 1em;
   display: block;
   cursor:pointer;
   border: 2px solid @bord-col;
@@ -30,6 +31,13 @@
   }
 }
 
+.custom-control-btn {
+  .custom-btn(0.5rem, .5rem, @red, @red);
+  font-size: 0.7rem;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
 .icon(@cont, @left, @btm, @f-size){
   content:@cont;
   font-family: 'FontAwesome', sans-serif;
@@ -39,6 +47,22 @@
   font-size: @f-size;
   line-height: @f-size;
   cursor: pointer;
+}
+
+.answer-icon-params(@cont) {
+  &::before {
+    .icon(@cont, -.6em, 0em, 1.25em);
+  }
+}
+
+.embedded-icon {
+  position: absolute;
+  top:.8em;
+  right:-.4em;
+  cursor: pointer;
+  &:hover {
+    color:@gray;
+  }
 }
 
 /* --PAGE START-- */
@@ -52,8 +76,6 @@ body {
   overflow-x: hidden;
   background-color: @light-gray;
   font-family: "Open Sans", sans-serif;
-  display:flex;
-  flex-direction: column;
   height: 100vh;
 }
 
@@ -61,6 +83,13 @@ body {
 
 nav {
   background-color: @white;
+  z-index: 3;
+}
+
+.invisible-sm-item {
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 }
 
 .nav-item {
@@ -103,14 +132,66 @@ main {
   flex: 1 0 auto;
 }
 
+.main-content {
+  min-width: 85%;
+  padding: 4rem 2rem;
+  @media screen and (max-width: 1200px) {
+    min-width: 81%;
+  }
+  @media screen and (max-width: 767px) {
+    min-width: 100%;
+    padding: 4rem .5rem;
+  }
+}
+
+/* Login/Register forms styles */
+
+.login-form {
+  width: 45%;
+  padding: 1.7rem 1.5rem;
+  border:1px solid @gray;
+  @media screen and (max-width: 1200px) {
+    padding: 1.7rem .5rem;
+    width: 55%;
+  }
+  @media screen and (max-width: 992px) {
+    padding: 1.7rem .5rem;
+    width: 65%;
+  }
+  @media screen and (max-width: 768px) {
+    padding: 1.7rem .5rem;
+    width: 75%;
+  }
+  @media screen and (max-width: 475px) {
+    width: 85%;
+  }
+  & > * {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.login-form-heading {
+  text-align: center;
+}
+
+.login-form-btn {
+  .custom-btn(0.5rem, 2.5rem, @red, @red);
+  margin: 0 auto;
+}
+
 /* Sidebar styles */
 
 .sidebar {
   position: sticky;
   background-color: @gray;
-  padding: 3rem 1.5rem;
+  padding: 3em 1em;
   height: 70%;
+  min-width: 15%;
   top: 3rem;
+  @media screen and (max-width: 1200px) {
+    padding: 3em .5em 1em;
+    min-width: 19%;
+  }
 }
 
 .sidebar-nav {
@@ -125,20 +206,15 @@ main {
   cursor: default;
 }
 
-.main-content {
-  width: 100%;
-  padding: 4rem 2rem;
-}
-
 /* Page header styles */
 
 .page-name {
   margin-bottom: 2rem;
-  flex-direction: row;
-  justify-content: space-between;
   @media screen and (max-width: 1000px) {
-    flex-direction: column;
     align-items: center;
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
   }
 }
 
@@ -164,9 +240,8 @@ main {
 }
 
 .create-survey {
-  .custom-btn(0.5rem, .5rem, @red, @red);
+  .custom-control-btn;
   vertical-align: middle;
-  font-size: 0.7rem;
   display: inline;
   margin-left: 1rem;
   @media screen and (max-width: 430px) {
@@ -178,12 +253,18 @@ main {
 
 /* Search form styles */
 
-.btn {
+.search-form {
+  font-size: 0em;
+  max-width: 300px;
+}
+.search-btn > * {
+  font-size: 1rem;
   cursor: pointer;
 }
 
-.input-group {
-  width: 300px;
+.search {
+  font-size: 1rem;
+  max-width: 300px;
 }
 
 /* Tabs styles */
@@ -224,6 +305,7 @@ main {
     display: inline-block;
   }
   @media screen and (max-width: 1100px) {
+    padding: .5rem;
     & > * {
       display: block;
     }
@@ -240,10 +322,6 @@ main {
 
 table {
   text-align: center;
-  @media screen and (max-width: 780px) {
-    overflow-x: auto;
-    display: block;
-  }
 }
 
 th {
@@ -308,7 +386,7 @@ th {
     display: block;
     max-width: 10rem;
     min-width: 5rem;
-    margin: 0 auto;
+    margin: 1em auto 0em;
   }
   &:hover {
     box-shadow:inset 0em 0em 0em .4em @gray;
@@ -328,40 +406,304 @@ th {
 
 .question-number, .page-number {
   display: inline-block;
-  margin-right: 1rem;
+  margin-bottom: 0px;
 }
 
-/* Login/Register forms styles */
-
-.login-form {
-  width: 80%;
-  padding: 1.7rem 1.5rem;
-  border:1px solid @gray;
-  @media screen and (min-width: 1000px) {
-      width: 50%;
-    }
-  & > * {
-    margin-bottom: 2.5rem;
+/* Survey styles */
+.survey {
+  min-width: 65%;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  @media screen and (max-width: 1200px) {
+    min-width: 55%;
+  }
+  @media screen and (max-width: 991px) {
+    min-width: 81%;
+  }
+  @media screen and (max-width: 767px) {
+    min-width: 100%;
   }
 }
 
-.login-form-heading {
-  text-align: center;
+.survey-content {
+  padding: 1.5rem;
+  background-color: @white;
+  border: 1px solid @gray;
+  position: relative;
+  z-index: 1;
+  & i {
+    .embedded-icon;
+    right: .3em;
+  }
+  & >  * {
+    margin-bottom: 1em;
+  }
+  & input[type="text"] {
+    width:400px
+  }
+  @media screen and (max-width: 767px) {
+    font-size: .9em;
+  }
 }
 
-.login-form-btn {
-  .custom-btn(0.5rem, 2.5rem, @red, @red);
-  margin: 0 auto;
+.survey-content input, .survey-content textarea {
+  margin-right: .2em;
+  max-width: 100%;
+}
+
+.survey-title {
+  font-size: 1.5em;
+  margin: 0em 1em 0em 0em;
+}
+
+.survey-command-panel {
+  margin-top: .5em;
+  & > * {
+    .custom-control-btn;
+    margin-bottom: .5em;
+  }
+}
+
+.tab {
+  overflow: hidden;
+  position: relative;
+  bottom: -.1em;
+  z-index: 2;
+}
+
+.tablinks {
+  .custom-btn(.5rem, .5rem, @gray, @gray);
+  float: left;
+  border: 1px solid @gray;
+  border-bottom: 1px solid @white !important;
+  outline: none;
+  @media screen and (max-width: 381px) {
+    font-size: .65em;
+  }
+}
+
+.active-tab {
+  background-color: @white !important;
+  position: relative;
+  border-bottom: none;
+  border-top: 1px solid @white;
+}
+
+.question {
+  position: relative;
+  padding: .5em;
+  & i {
+    .embedded-icon;
+  }
+}
+
+.edited {
+  border:2px solid @gray;
+  padding: 1rem;
+  & >  * {
+    margin-bottom: 1em;
+  }
+  & i {
+    right: .3em;
+  }
+}
+
+.edit-question-params {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  & p {
+    display: inline-block;
+    margin: 0em 1em 0em 0em;
+    & input {
+      margin-right: .7em;
+    }
+  }
+  @media screen and (max-width:390px) {
+    flex-direction: column;
+  }
+}
+
+.move {
+  &::before {
+    .icon("\f0b2", -.2em, 0em, 1.2em);
+  }
+}
+
+.save-edited {
+  display: flex;
+  justify-content: flex-end;
+  & > * {
+    .custom-control-btn;
+  }
+  @media screen and (max-width: 430px) {
+    justify-content: center;
+  }
+}
+
+.upload-file {
+  .custom-control-btn;
+  padding: .5em 3em;
+}
+
+.input-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  & + label {
+    .custom-control-btn;
+    padding: .5em 1.5em;
+  }
+}
+
+.rating {
+  border: none;
+  display: inline-block;
+  & > input {
+    display: none;
+  }
+  & > input:checked ~ label,
+  &:not(:checked) > label:hover,
+  &:not(:checked) > label:hover ~ label {
+      color: #FFD700; cursor: pointer;
+    }
+  & > input:checked + label:hover,
+  & > input:checked ~ label:hover,
+  & > label:hover ~ input:checked ~ label,
+  & > input:checked ~ label:hover ~ label {
+    color: #FFED85;
+  }
+}
+
+.star {
+  color: #ddd;
+  float: right;
+  &::before {
+    .icon("\f005", 0em, 0em, 1.25em);
+    margin: 5px;
+    display: inline-block;
+  }
+}
+
+/* Survey settings styles */
+
+.survey-params {
+  position: sticky;
+  padding: 3em .4em 0em 0em;
+  height: 60%;
+  top: 3rem;
+  min-width: 20%;
+  background-color: @light-gray;
+  @media screen and (max-width: 1200px) {
+    min-width: 26%;
+  }
+}
+
+.params {
+  background-color: @gray;
+  border: 1px solid @gray;
+  width: 100%;
+  padding: .5em;
+  margin-bottom: 1em;
+  & p {
+    background-color: @light-gray;
+    text-align: center;
+    font-size: 1.4em;
+    padding: .4em;
+    margin: -.3em -.3em .8em -.3em;
+  }
+}
+
+.toggle-question-params {
+  position: fixed;
+  bottom: 5em;
+  right: -1em;
+  z-index: 4;
+  &::before {
+    .icon("\f059", -1em, 0em, 1.25em);
+  }
+}
+
+.question-params-toggle-panel {
+  .params;
+  visibility: hidden;
+  width: 200px;
+  position: fixed;
+  bottom: 7.8em;
+  right: 1.5em;
+  z-index: 3;
+  font-size: .7em;
+}
+
+.toggle-survey-params {
+  position: fixed;
+  bottom: 3em;
+  right: -1em;
+  z-index: 4;
+  &::before {
+    .icon("\f013", -1em, 0em, 1.25em);
+  }
+}
+
+.survey-params-toggle-panel {
+  .question-params-toggle-panel;
+  bottom: 4.8em;
+}
+
+ul {
+  list-style: none;
+  padding: 0em;
+  & li {
+    margin-bottom: .9em;
+  }
+}
+
+.question-type-list {
+  margin-left: 1em;
+}
+
+.survey-params-list {
+  & input {
+    margin-right: 1em;
+  }
+}
+
+.single-answer {
+  .answer-icon-params("\f03a");
+}
+
+.multiple-answer {
+  .answer-icon-params("\f0cb");
+}
+
+.text-answer {
+  .answer-icon-params("\f031");
+}
+
+.file-answer {
+  .answer-icon-params("\f032");
+}
+
+.star-answer {
+  .answer-icon-params("\f006");
+}
+
+.range-answer {
+  .answer-icon-params("\f241");
 }
 
 /* --FOOTER-- */
 
 footer {
+  width: 100%;
   margin-top: 1rem;
   color: @light-gray;
   text-align: center;
   flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
-  padding: 20px;
+  padding: .7em;
   background-color: @dark-gray;
 }
 
