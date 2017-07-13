@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<head>
+    <title>Completing survey</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</head>
+<body class="d-flex flex-column">
+<header class="d-flex flex-row">
+    <nav class="navbar navbar-toggleable-sm fixed-top navbar-light">
+        <a class="navbar-brand hidden-sm-down" href="https://www.itechart.com/">
+            <img src="../img/logo.jpg" alt="Logo" height="40">
+        </a>
+        <a class="login-collapse logicon ml-auto hidden-md-up " href="#"></a>
+        <div class="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">О компании <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+        <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="login mr-auto hidden-sm-down" href="">Вход</a>
+    </nav>
+</header>
+<main class="d-flex flex-row">
+    <div class="main-content survey d-flex flex-column">
+        <div class="page-name d-flex justify-content-center">
+            <h1>Мой супер опрос</h1>
+        </div>
+        <div id="page_1" class="survey-page">
+            <div class="survey-content">
+                <h2>Страница 2</h2>
+                <div class="question">
+                    <p class="question-title"><span class="question-number">1. </span> Вопрос с несколькими вариантами ответа (*)</p>
+                    <input type="checkbox" name="checkbox-question" value="first-option" checked> Ответ 1<br>
+                    <input type="checkbox" name="checkbox-question" value="second-option"> Ответ 2<br>
+                    <input type="checkbox" name="checkbox-question" value="third-option"> Ответ 3<br>
+                </div>
+                <hr>
+                <div class="question">
+                    <p class="question-title"><span class="question-number">2. </span> Вопрос с одним вариантом ответа</p>
+                    <input type="radio" name="radio-option"> Ответ 1<br>
+                    <input type="radio" name="radio-option"> Ответ 2<br>
+                    <input type="radio" name="radio-option"> Ответ 3<br>
+                </div>
+                <hr>
+                <div class="question">
+                    <p class="question-title"><span class="question-number">3. </span> Вопрос с текстовым ответом (*)</p>
+                    <textarea name="text-area" id="text-area" style="width: 300px; height: 100px;"></textarea>
+                </div>
+                <hr>
+                <div class="question">
+                    <p class="question-title"><span class="question-number">4. </span> Вопрос-файл</p>
+                    <input type="file" class="input-file" name="file" id="file">
+                    <label for="file">Файл</label><span class="filepath">Ничего не выбрано</span>
+                </div>
+                <hr>
+                <div class="question">
+                    <p class="question-title"><span class="question-number">5. </span> Вопрос-рейтинг</p>
+                    <fieldset class="rating">
+                        <input type="radio" id="star5" name="rating" value="5"><label class = "star" for="star5" title="Отлично"></label>
+                        <input type="radio" id="star4" name="rating" value="4"><label class = "star" for="star4" title="Хорошо"></label>
+                        <input type="radio" id="star3" name="rating" value="3"><label class = "star" for="star3" title="Средне"></label>
+                        <input type="radio" id="star2" name="rating" value="2"><label class = "star" for="star2" title="Плохо"></label>
+                        <input type="radio" id="star1" name="rating" value="1"><label class = "star" for="star1" title="Очень плохо"></label>
+                    </fieldset>
+                </div>
+                <hr>
+                <div class="question">
+                    <p class="question-title"><span class="question-number">6. </span> Вопрос-шкала</p>
+                    <input type="range" id="rangeInput" name="rangeInput" min="0" max="100" value="0"
+                           oninput="amount.value=rangeInput.value">
+                    <output name="amount" id="amount" for="rangeInput">0</output>
+                </div>
+            </div>
+        </div>
+        <div class="progress d-flex justify-content-center">
+            <span class="done">2</span>/<span class="todo">3</span>
+            <div class="progress-bar">
+                <div class="bar"></div>
+            </div>
+            <span class="percent">66%</span>
+        </div>
+        <div class="page-navigation d-flex justify-content-center">
+            <a href="#">Предыдущая страница</a>
+            <a href="#">Следующая страница</a>
+        </div>
+    </div>
+</main>
+<footer class="d-flex flex-row justify-content-center">
+    <span class="copyright">© 2002 - 2017. :iTechArt All Rights Reserved.</span>
+</footer>
+<script src="./bundle.js"></script>
+</body>
+</html>
