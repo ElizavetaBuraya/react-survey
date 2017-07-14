@@ -5,11 +5,17 @@
   "main": "index.js",
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
+    "d3": "^4.9.1",
     "font-awesome": "^4.7.0",
-    "less-watch-compile": "^1.1.8"
+    "less-watch-compile": "^1.1.8",
+    "uglify-js": "^3.0.24"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
+    "babel": "^6.23.0",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
     "css-loader": "^0.28.4",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
@@ -19,8 +25,9 @@
     "postcss-loader": "^2.0.6",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "uglifyjs-webpack-plugin": "^0.4.6",
     "url-loader": "^0.5.9",
-    "webpack": "^3.1.0"
+    "webpack": "^3.2.0"
   },
   "scripts": {
     "start": "webpack --watch",
