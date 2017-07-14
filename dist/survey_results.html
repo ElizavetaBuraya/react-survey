@@ -51,7 +51,7 @@
 </header>
 <main class="d-flex flex-row">
     <aside class="sidebar d-flex flex-column hidden-sm-down">
-        <a class="sidebar-nav active-nav" href="new_survey.html">Новый опрос</a>
+        <a class="sidebar-nav" href="new_survey.html">Новый опрос</a>
         <a class="sidebar-nav" href="surveys.html">Мои опросы</a>
         <a class="sidebar-nav" href="templates.html">Шаблоны опросов</a>
         <a class="sidebar-nav" href="users.html">Пользователи</a>
@@ -66,10 +66,11 @@
             <div class="survey-command-panel result-panel">
                 <a href="#">Сводные данные по вопросам</a>
                 <a href="#" class="active">Отдельные ответы</a>
-                <span>Всего ответов: </span><span class="answers-count">112</span>
+                <span>Всего ответов: <span class="answers-count">110</span></span>
             </div>
-            <div class="choose-user">
-                <select class="">
+            <div class="choose">
+                <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                <select class="choose-user">
                     <option>Респондент 1</option>
                     <option>Респондент 2</option>
                 </select>
@@ -95,11 +96,12 @@
                 <hr>
                 <div class="question">
                     <p class="question-title"><span class="question-number">3. </span> Вопрос с текстовым ответом (*)</p>
-                    <p class="question-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                        officia deserunt mollit anim id est laborum.
+                    <p class="question-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                        sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </div>
                 <hr>
@@ -111,13 +113,7 @@
                 <div class="question">
                     <p class="question-title"><span class="question-number">5. </span> Вопрос-рейтинг</p>
                     <p class="question-answer">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" disabled><label class = "star" for="star5" title="Отлично"></label>
-                            <input type="radio" id="star4" name="rating" value="4" disabled><label class = "star" for="star4" title="Хорошо"></label>
-                            <input type="radio" id="star3" name="rating" value="3" disabled><label class = "star" for="star3" title="Средне"></label>
-                            <input type="radio" id="star2" name="rating" value="2" disabled><label class = "star" for="star2" title="Плохо" ></label>
-                            <input type="radio" id="star1" name="rating" value="1" checked><label class = "star" for="star1" title="Очень плохо"></label>
-                        </fieldset>
+                        <ul class="c-rating" id="star-rating"></ul>
                     </p>
                 </div>
             </div>
