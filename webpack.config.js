@@ -2,6 +2,7 @@ var path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const extractSass = new ExtractTextPlugin('../css/bootstrap.css');
 const extractLess = new ExtractTextPlugin('../css/style.css');
@@ -16,6 +17,16 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env']
+                    }
+                }
+            },
             {
                 test:   /\.css$/,
                 use: ["style-loader", "css-loader"]
@@ -55,5 +66,6 @@ module.exports = {
     plugins: [
         extractLess,
         extractSass,
+        new UglifyJSPlugin()
     ]
 }
