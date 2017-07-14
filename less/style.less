@@ -286,19 +286,26 @@ main {
     .custom-control-btn;
     margin-bottom: .5em;
   }
+  @media screen and (max-width:521px) {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   margin-bottom: -.5em;
+  }
 }
 
 .result-panel {
   display: flex;
   flex-direction: row;
   font-size: 0em;
+  margin-bottom: 1rem;
   & a {
     font-size: .8rem;
     background-color: @dark-gray;
     color: @white;
     border-color: @dark-gray;
     display: inline;
-    margin-right: 0em;
+    margin: 0rem;
   }
   & .active {
     cursor: default;
@@ -312,15 +319,32 @@ main {
       pointer-events: none;
     }
   }
+  & span {
+    font-size: 1rem;
+    padding: .5em;
+    &:not(.answers-count) {
+      margin-left: 1rem;
+    }
+  }
+  @media screen and (max-width: 592px) {
+    flex-direction: column;
+  }
 }
 
-.choose-user {
-  &::before {
-    .icon("\f007", 0em, -.2em, 2em);
-    margin-right: .3em;
+.choose {
+  display: flex;
+  align-items: center;
+  & i {
+    margin-right: .8em;
   }
   & select {
     font-size: 1.1em;
+  }
+  @media screen and (max-width: 430px) {
+    flex-direction: column;
+    & select {
+      max-width: 200px;
+    }
   }
 }
 
@@ -391,7 +415,7 @@ main {
   }
 }
 
-/* Table styles */
+/* Tables styles */
 
 table {
   text-align: center;
@@ -429,6 +453,28 @@ th {
   &::after {
     .icon('\f054', 0rem, 0rem, 1.5rem);
     right:-.5rem;
+  }
+}
+
+.answers-table {
+  max-width: 50%;
+  & > * {
+    text-align: left;
+  }
+  @media screen and (max-width: 1500px) {
+    max-width: 70%;
+  }
+  @media screen and (max-width: 1200px) {
+    max-width: 100%;
+  }
+}
+
+.answers-table-body {
+  & > tr td {
+    padding: .2em !important;
+    @media screen and (max-width: 768px) {
+      font-size: .8em;
+    }
   }
 }
 
@@ -481,7 +527,7 @@ th {
 .survey {
   min-width: 65%;
   margin: 0 auto;
-  padding: 4rem 1.5rem;
+  padding: 4em 1.5em;
   @media screen and (max-width: 1200px) {
     min-width: 55%;
   }
@@ -490,6 +536,7 @@ th {
   }
   @media screen and (max-width: 767px) {
     min-width: 100%;
+    padding: 2em 1.5em 1.5em;
   }
 }
 
@@ -533,7 +580,7 @@ th {
   border-bottom: 1px solid @white !important;
   outline: none;
   @media screen and (max-width: 381px) {
-    font-size: .65em;
+    font-size: .7em;
   }
 }
 
@@ -556,20 +603,20 @@ th {
   font-weight: bold;
 }
 
+.number-of-users {
+  font-size: .9em;
+  color:darken(@gray, 15%)
+}
+
 .question-answer {
-  max-width: 50%;
+  max-width: 550px;
   @media screen and (max-width: 1200px) {
-    max-width: 80%;
+    width: 80%;
   }
   a::before {
     .icon('\f15b', 0rem, -.2rem, 1.7rem);
     margin-right: .2em;
     color: @dark-gray;
-  }
-  & .rating {
-    & > input:checked ~ label {
-      color: #ddd; cursor: default;
-    }
   }
 }
 
@@ -632,35 +679,6 @@ th {
   & + label {
     .custom-control-btn;
     padding: .5em 1.5em;
-  }
-}
-
-.rating {
-  border: none;
-  display: inline-block;
-  & > input {
-    display: none;
-  }
-  & > input:checked ~ label,
-  &:not(:checked) > label:hover,
-  &:not(:checked) > label:hover ~ label {
-      color: #FFD700; cursor: pointer;
-    }
-  & > input:checked + label:hover,
-  & > input:checked ~ label:hover,
-  & > label:hover ~ input:checked ~ label,
-  & > input:checked ~ label:hover ~ label {
-    color: #FFED85;
-  }
-}
-
-.star {
-  color: #ddd;
-  float: right;
-  &::before {
-    .icon("\f005", 0em, 0em, 1.25em);
-    margin: 5px;
-    display: inline-block;
   }
 }
 
@@ -769,6 +787,27 @@ ul {
 
 .range-answer {
   .answer-icon-params("\f241");
+}
+
+/* Charts styles */
+
+.chart-container {
+  position: relative;
+  max-width: 90%;
+  margin: 0 auto 1.5em;
+  & #myChart {
+    min-height: 200px;
+  }
+}
+
+.answer-stats {
+  column-count: 3;
+  text-align: center;
+  > * {
+    display: block;
+    margin-bottom: 1em;
+    font-weight: bold;
+  }
 }
 
 /* Progress bar styles */
