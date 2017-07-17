@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
@@ -17,7 +17,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand hidden-sm-down" href="https://www.itechart.com/">
-            <img src="../img/logo.jpg" alt="Logo" height="40">
+            <img src="img/logo.jpg" alt="Logo" height="40">
         </a>
         <a class="login-collapse hidden-md-up ml-auto" href="#"><span class="username"> Привет, admin</span></a>
         <div class="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
@@ -83,9 +83,12 @@
                 <div class="question">
                     <i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i>
                     <p class="question-title"><span class="question-number">1. </span> Вопрос с несколькими вариантами ответа</p>
-                    <input type="checkbox" name="checkbox-question" value="first-option" checked> Ответ 1<br>
-                    <input type="checkbox" name="checkbox-question" value="second-option"> Ответ 2<br>
-                    <input type="checkbox" name="checkbox-question" value="third-option"> Ответ 3<br>
+                    <input type="checkbox" id="check-one" name="checkbox-question" value="first-option" checked>
+                    <label for="check-one">Ответ 1</label><br>
+                    <input type="checkbox" id="check-two" name="checkbox-question" value="second-option">
+                    <label for="check-two">Ответ 2</label><br>
+                    <input type="checkbox" id="check-three" name="checkbox-question" value="third-option">
+                    <label for="check-three">Ответ 3</label><br>
                 </div>
                 <div class="question edited">
                     <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
@@ -131,7 +134,7 @@
         <div class="progress d-flex justify-content-center">
             <span class="done">12</span>/<span class="todo">12</span>
             <div class="progress-bar">
-                <div class="bar"></div>
+                <div class="bar new-survey-bar"></div>
             </div>
             <span class="percent">100%</span>
         </div>
