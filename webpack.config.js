@@ -4,12 +4,15 @@ const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-const extractSass = new ExtractTextPlugin('../css/bootstrap.css');
-const extractLess = new ExtractTextPlugin('../css/style.css');
+const extractSass = new ExtractTextPlugin('./css/bootstrap.css');
+const extractLess = new ExtractTextPlugin('./css/style.css');
 
 module.exports = {
     entry: [
-        './src/index.js'
+        './src/index.js',
+        'font-awesome/scss/font-awesome.scss',
+        './src/styles/sass/style.scss',
+        './src/styles/less/style.less'
     ],
     output: {
         filename: 'bundle.js',
@@ -58,7 +61,8 @@ module.exports = {
                 test: /\.(ttf|eot|svg|woff|woff2)$/,
                 loader: 'file-loader',
                 options: {
-                    name: '../fonts/[name].[ext]',
+                    name: './fonts/[name].[ext]',
+                    publicPath: '../',
                 },
             },
         ]
