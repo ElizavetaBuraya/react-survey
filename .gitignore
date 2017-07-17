@@ -4,9 +4,6 @@
 # Auto-generated
 package-lock.json
 
-# Fonts
-fonts/
-
 # Logs
 logs
 *.log
