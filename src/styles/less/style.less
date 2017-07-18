@@ -81,7 +81,9 @@ html {
   height: 100%;
 }
 
-body {
+[data-reactroot] {
+  display: flex;
+  flex-direction: column;
   padding-top: 2.5em;
   overflow-x: hidden;
   background-color: @light-gray;
@@ -133,14 +135,23 @@ nav {
 
 .logicon {
   .login-collapse;
+  padding: 0.2rem;
   &::before {
     .icon('\f090', 0rem, 0.2rem, 2rem);
   }
 }
 
+.logicon-active {
+  visibility: hidden;
+}
+
 /* --MAIN CONTENT-- */
 
-main {
+.header-and-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 2.5em;
   flex: 1 0 auto;
 }
 
