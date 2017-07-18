@@ -1,20 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class Login extends React.Component {
-    constructor() {
-        super();
+class LoginControl extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleRegisterClick = this.handleRegisterClick.bind(this);
         this.state = {
-            registered: true,
+            isRegistered: true,
         };
     }
-    handleClick() {
-        if (!this.state.registered) {
-            this.state.registered = true;
-            }
-        }
+
+    handleRegisterClick() {
+        this.setState({isRegistered: false});
+    }
+
     render() {
-        if (this.state.registered) {
+        const isRegistered = this.state.isRegistered;
+        if (isRegistered) {
             return (
                 <form className="login-form">
                     <h2 className="login-form-heading">Вход</h2>
@@ -23,10 +25,10 @@ class Login extends React.Component {
                     <label htmlFor="inputPassword" className="sr-only">Пароль</label>
                     <input type="password" id="inputPassword" className="form-control" placeholder="******" required/>
                     <div className="d-flex justify-content-between">
-                        <a className="signup" href="register.html">Регистрация</a>
-                        <a className="getpassword" href="#">Забыли пароль?</a>
+                        <a className="signup" href="#" onClick={this.handleRegisterClick}>Регистрация</a>
+                        <a className="getpassword" href="">Забыли пароль?</a>
                     </div>
-                    <button onClick={() => this.handleClick()} className="login-form-btn" type="submit">Войти</button>
+                    <button className="login-form-btn" type="submit">Войти</button>
                 </form>
             )
         }
@@ -48,4 +50,4 @@ class Login extends React.Component {
             }
         }
 }
-ReactDOM.render(<Login />, document.getElementById('login-register'));
+ReactDOM.render(<LoginControl />, document.getElementById('login-register'));
