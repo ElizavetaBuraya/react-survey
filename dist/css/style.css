@@ -239,7 +239,7 @@ nav {
   visibility: hidden;
 }
 /* --MAIN CONTENT-- */
-.header-and-main {
+main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -299,7 +299,9 @@ nav {
     width: 85%;
   }
 }
-.login-form > * {
+.login-form input,
+.login-form h2,
+.login-form div {
   margin-bottom: 2.5rem;
 }
 .login-form-heading {
