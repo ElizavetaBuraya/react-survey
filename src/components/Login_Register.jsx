@@ -35,54 +35,44 @@ class Header extends React.Component {
     }
     render() {
         const isRegistered = this.props.isRegistered;
-        if (isRegistered) {
-            return (
-                <header className="d-flex flex-row">
-                    <nav className="navbar navbar-toggleable-sm fixed-top navbar-light">
-                        <a className="navbar-brand hidden-sm-down" href="https://www.itechart.com/">
-                            <img src="img/logo.jpg" alt="Logo" height="40" />
-                        </a>
+        return (
+            <header className="d-flex flex-row">
+                <nav className="navbar navbar-toggleable-sm fixed-top navbar-light">
+                    <a className="navbar-brand hidden-sm-down" href="https://www.itechart.com/">
+                        <img src="img/logo.jpg"
+                             alt="Logo"
+                             height="40" />
+                    </a>
+                    {isRegistered ? (
                         <a className="login-collapse logicon logicon-active ml-auto hidden-md-up" href="#"></a>
-                        <div className="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
-                            <ul className="navbar-nav ml-auto">
-                                <li className="nav-item">
-                                    <a className="nav-link" href="about.html">О компании <span className="sr-only">(current)</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <button className="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
+                    ) : (
+                        <a className="login-collapse logicon ml-auto hidden-md-up" href="#" onClick={this.changeState}></a>
+                    )}
+                    <div className="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <a className="nav-link" href="about.html">О компании <span className="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <button className="navbar-toggler navbar-toggler-left"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    {isRegistered ? (
                         <a className="login mr-auto hidden-sm-down active-nav" href="#">Вход</a>
-                    </nav>
-                </header>
+                    ) : (
+                        <a className="login mr-auto hidden-sm-down" href="#" onClick={this.changeState}>Вход</a>
+                    )}
+                </nav>
+            </header>
             )
         }
-        else {
-            return (
-                <header className="d-flex flex-row">
-                    <nav className="navbar navbar-toggleable-sm fixed-top navbar-light">
-                        <a className="navbar-brand hidden-sm-down" href="https://www.itechart.com/">
-                            <img src="img/logo.jpg" alt="Logo" height="40" />
-                        </a>
-                        <a className="login-collapse logicon ml-auto hidden-md-up" href="#" onClick={this.changeState}></a>
-                        <div className="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
-                            <ul className="navbar-nav ml-auto">
-                                <li className="nav-item">
-                                    <a className="nav-link" href="about.html">О компании <span className="sr-only">(current)</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <button className="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <a className="login mr-auto hidden-sm-down" href="#" onClick={this.changeState}>Вход</a>
-                    </nav>
-                </header>
-                )
-            }
-        }
-
 }
 
 class Main extends React.Component {
@@ -99,7 +89,7 @@ class Main extends React.Component {
         if (isRegistered) {
             return (
                 <main className="d-flex flex-row justify-content-center align-items-center">
-                    <form className="login-form" id="login-register">
+                    <form className="login-form">
                         <h2 className="login-form-heading">Вход</h2>
                         <label htmlFor="inputLogin" className="sr-only">Логин</label>
                         <input type="text" id="inputLogin" className="form-control" placeholder="Логин" required autoFocus />
@@ -133,7 +123,6 @@ class Main extends React.Component {
             )
         }
      }
-
 }
 
 class Footer extends React.Component {
