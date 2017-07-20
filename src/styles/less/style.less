@@ -123,6 +123,9 @@ nav {
 .login {
   .custom-btn(0.5rem, 2.5rem, @red, @red);
   margin-left: 2rem;
+  &:active {
+    color: @red;
+  }
 }
 
 .login-collapse {
@@ -151,7 +154,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 2.5em;
+  padding-top: 0em;
   flex: 1 0 auto;
 }
 
@@ -164,6 +167,20 @@ main {
   @media screen and (max-width: 767px) {
     min-width: 100%;
     padding: 4rem .5rem;
+  }
+}
+
+/* Error Page styles */
+.error-page {
+  align-items: center;
+  & h1, p {
+    color: @red;
+  }
+  & h1 {
+    font-size: 5rem;
+  }
+  & p {
+    font-size: 3rem;
   }
 }
 
@@ -198,8 +215,24 @@ main {
 }
 
 .login-form-btn {
-  .custom-btn(0.5rem, 2.5rem, @red, @red);
+  .custom-btn(0rem, 0rem, @red, @red);
   margin: 0 auto;
+}
+
+.login-redirect {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0.5rem 2.5rem;
+  color:inherit;
+  &:hover, &:focus {
+    text-decoration: none;
+    color: inherit;
+  }
+  &:active {
+    color: @red;
+  }
 }
 
 /* Sidebar styles */
@@ -210,7 +243,6 @@ main {
   padding: 3em 1em;
   height: 70%;
   min-width: 15%;
-  top: 3rem;
   @media screen and (max-width: 1200px) {
     padding: 3em .5em 1em;
     min-width: 19%;
@@ -425,7 +457,7 @@ main {
     vertical-align: top;
   }
   & img {
-    margin-right: 0.5em;
+    margin: 0rem 0.5em 2rem 0rem;
   }
   & p {
     width: 70%;
@@ -438,6 +470,7 @@ main {
     }
     & p {
       width: 100%;
+      font-size: .8rem;
     }
     & img {
       margin: 0 auto 1.5rem;
