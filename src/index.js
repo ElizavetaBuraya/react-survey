@@ -8,7 +8,7 @@ import './libraries/rating.min.js';
 import './custom_scripts/forms-script.js';
 
 ReactDOM.render((
-    <BrowserRouter basename={"/dist/"}>
+    <BrowserRouter basename={'/'}>
         <App />
     </BrowserRouter>
 ), document.getElementById('page-content'))
