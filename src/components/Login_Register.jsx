@@ -1,13 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Login_Register extends React.Component {
     constructor () {
         super();
-        this.changeState = this.changeState.bind(this)
-    }
-    changeState() {
-        let val = false;
-        this.props.handleRegisterClick(val);
     }
     render() {
         const isRegistered = this.props.isRegistered;
@@ -22,10 +18,12 @@ export default class Login_Register extends React.Component {
                         <label htmlFor="inputPassword" className="sr-only">Пароль</label>
                         <input type="password" id="inputPassword" className="form-control" placeholder="******" required />
                         <div className="d-flex justify-content-between">
-                            <a className="signup" href="#" onClick={this.changeState}>Регистрация</a>
+                            <a className="signup" href="#" onClick={this.props.handleChangeStateClick}>Регистрация</a>
                             <a className="getpassword" href="#">Забыли пароль?</a>
                         </div>
-                        <button className="login-form-btn" type="submit">Войти</button>
+                        <button className="login-form-btn" type="submit">
+                            <Link className="login-redirect" to='/starter_page' onClick={this.props.handleLogInClick}>Войти</Link>
+                        </button>
                     </div>
                     }
                     {!isRegistered &&
@@ -38,7 +36,9 @@ export default class Login_Register extends React.Component {
                         <input type="password" id="inputPassword" className="form-control" placeholder="Пароль" required />
                         <label htmlFor="inputRepeatPassword" className="sr-only">Повторить пароль</label>
                         <input type="password" id="inputRepeatPassword" className="form-control" placeholder="Повторить пароль" required />
-                        <button className="login-form-btn" type="submit">Создать аккаунт</button>
+                        <button className="login-form-btn" type="submit">
+                            <Link className="login-redirect" to='/starter_page' onClick={this.props.handleLogInClick}>Создать аккаунт</Link>
+                        </button>
                     </div>
                     }
                 </form>
