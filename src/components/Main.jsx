@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import Login_Register from './Login_Register.jsx';
 import About from './About.jsx';
 import Users from './Users.jsx';
@@ -13,13 +13,20 @@ export default class Main extends React.Component {
                        component={() => <Login_Register
                            isRegistered={this.props.isRegistered}
                            isAuthorized={this.props.isAuthorized}
-                           handleChangeStateClick = {this.props.handleChangeStateClick}
+                           handleNotRegisteredClick = {this.props.handleNotRegisteredClick}
                            handleLogInClick = {this.props.handleLogInClick}
                        />}
                 />
-                <Route path='/users' component={Users}/>
                 <Route path='/about' component={About}/>
+                <Route path="/users" render={() => (
+                        !this.props.isAuthorized ? (
+                            <Redirect to="/"/>
+                        ) : (
+                            <Users/>
+                        )
+                )}/>
                 <Route component={() => <NoMatch
+                        isRegistered={this.props.isRegistered}
                         isAuthorized={this.props.isAuthorized}
                     />}
                 />
