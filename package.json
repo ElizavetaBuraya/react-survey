@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
+    "classnames": "^2.2.5",
     "d3": "^4.9.1",
     "font-awesome": "^4.7.0",
     "history": "^4.6.3",
