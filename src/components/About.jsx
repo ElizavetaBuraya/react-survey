@@ -47,25 +47,88 @@ export default class About extends React.Component {
                         <div className="tab-content">
                             <TabsList tabs={navtabs}/>
                             <div className="tab-pane active" id="about" role="tabpanel">
-                                <Tab_About/>
+                                <img src="img/placeholder_2.png" alt="placeholder" height="200" />
+                                <p>
+                                    Page 1.<br />
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper
+                                    elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.
+                                    Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius. Nam nec
+                                    fringilla diam. Phasellus ac nibh sit amet nisl viverra posuere. Nulla vehicula commodo eros
+                                    eu posuere. Fusce finibus ligula pharetra, fringilla elit et, vestibulum mauris. Interdum et
+                                    malesuada fames ac ante ipsum primis in faucibus.
+                                </p>
                             </div>
                             <div className="tab-pane" id="training" role="tabpanel">
-                                <Tab_About/>
+                                <img src="img/placeholder_2.png" alt="placeholder" height="200" />
+                                <p>
+                                    Page 2.<br />
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper
+                                    elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.
+                                    Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius. Nam nec
+                                    fringilla diam. Phasellus ac nibh sit amet nisl viverra posuere. Nulla vehicula commodo eros
+                                    eu posuere. Fusce finibus ligula pharetra, fringilla elit et, vestibulum mauris. Interdum et
+                                    malesuada fames ac ante ipsum primis in faucibus.
+                                </p>
                             </div>
                             <div className="tab-pane" id="benefits" role="tabpanel">
-                                <Tab_About/>
+                                <img src="img/placeholder_2.png" alt="placeholder" height="200" />
+                                <p>
+                                    Page 3.<br />
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper
+                                    elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.
+                                    Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius. Nam nec
+                                    fringilla diam. Phasellus ac nibh sit amet nisl viverra posuere. Nulla vehicula commodo eros
+                                    eu posuere. Fusce finibus ligula pharetra, fringilla elit et, vestibulum mauris. Interdum et
+                                    malesuada fames ac ante ipsum primis in faucibus.
+                                </p>
                             </div>
                             <div className="tab-pane" id="students" role="tabpanel">
-                                <Tab_About/>
+                                <img src="img/placeholder_2.png" alt="placeholder" height="200" />
+                                <p>
+                                    Page 4.<br />
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper
+                                    elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.
+                                    Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius. Nam nec
+                                    fringilla diam. Phasellus ac nibh sit amet nisl viverra posuere. Nulla vehicula commodo eros
+                                    eu posuere. Fusce finibus ligula pharetra, fringilla elit et, vestibulum mauris. Interdum et
+                                    malesuada fames ac ante ipsum primis in faucibus.
+                                </p>
                             </div>
                             <div className="tab-pane" id="pros" role="tabpanel">
-                                <Tab_About/>
+                                <img src="img/placeholder_2.png" alt="placeholder" height="200" />
+                                <p>
+                                    Page 5.<br />
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper
+                                    elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.
+                                    Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius. Nam nec
+                                    fringilla diam. Phasellus ac nibh sit amet nisl viverra posuere. Nulla vehicula commodo eros
+                                    eu posuere. Fusce finibus ligula pharetra, fringilla elit et, vestibulum mauris. Interdum et
+                                    malesuada fames ac ante ipsum primis in faucibus.
+                                </p>
                             </div>
                             <div className="tab-pane" id="vacancies" role="tabpanel">
-                                <Tab_About/>
+                                <img src="img/placeholder_2.png" alt="placeholder" height="200" />
+                                <p>
+                                    Page 6.<br />
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper
+                                    elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.
+                                    Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius. Nam nec
+                                    fringilla diam. Phasellus ac nibh sit amet nisl viverra posuere. Nulla vehicula commodo eros
+                                    eu posuere. Fusce finibus ligula pharetra, fringilla elit et, vestibulum mauris. Interdum et
+                                    malesuada fames ac ante ipsum primis in faucibus.
+                                </p>
                             </div>
                             <div className="tab-pane" id="contacts" role="tabpanel">
-                                <Tab_About/>
+                                <img src="img/placeholder_2.png" alt="placeholder" height="200" />
+                                <p>
+                                    Page 7.<br />
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper
+                                    elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.
+                                    Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius. Nam nec
+                                    fringilla diam. Phasellus ac nibh sit amet nisl viverra posuere. Nulla vehicula commodo eros
+                                    eu posuere. Fusce finibus ligula pharetra, fringilla elit et, vestibulum mauris. Interdum et
+                                    malesuada fames ac ante ipsum primis in faucibus.
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 const navlinks = [
     {'href':'/new_survey', 'name':'Новый опрос'},
@@ -29,29 +30,33 @@ function NavlinksList(props) {
 }
 
 export default class Header extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
-        const isRegistered = this.props.isRegistered;
+        let logiconBtnClass = classNames({'login-collapse ml-auto hidden-md-up': true,
+            'logicon': !this.props.isAuthorized,
+            'logicon-active': this.props.isRegistered
+        });
+
+        let loginBtnClass = classNames({'login mr-auto hidden-sm-down': true,
+            'active-nav': this.props.isRegistered
+        });
+
         const isAuthorized = this.props.isAuthorized;
-        let logiconButton = null;
-        let logButton = null;
-        if (isAuthorized) {
-            logiconButton =  <a className="login-collapse hidden-md-up ml-auto" href="#"><span className="username"> Привет, admin</span></a>
-        } else {
-            if (isRegistered) {
-                logiconButton = <a className="login-collapse logicon logicon-active ml-auto hidden-md-up" href="#" />;
-                logButton =  <a className="login mr-auto hidden-sm-down active-nav" href="#">Вход</a>
-            } else {
-                logiconButton = <a className="login-collapse logicon ml-auto hidden-md-up" href="#" onClick={this.props.handleChangeStateClick} />;
-                logButton = <Link to="/" className="login mr-auto hidden-sm-down" href="#" onClick={this.props.handleChangeStateClick}>Вход</Link>
-            }
-        }
+
         return (
             <header className="d-flex flex-row">
                 <nav className="navbar navbar-toggleable-sm fixed-top navbar-light">
                     <a className="navbar-brand hidden-sm-down" href="https://www.itechart.com/">
                         <img src="img/logo.jpg" alt="Logo" height="40" />
                     </a>
-                    {logiconButton}
+                    {isAuthorized &&
+                        <a className='login-collapse ml-auto hidden-md-up' href="#"><span className="username"> Привет, admin</span></a>
+                    }
+                    {!isAuthorized &&
+                        <a className={logiconBtnClass} href="#" onClick={this.props.handleRegisteredClick}/>
+                    }
                     <div className="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
@@ -83,9 +88,12 @@ export default class Header extends React.Component {
                             aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
                     </button>
-                    {logButton}
+                    {!isAuthorized &&
+                        <Link to="/" className={loginBtnClass} onClick={this.props.handleRegisteredClick}>Вход</Link>
+                    }
                 </nav>
             </header>
         )
     }
 }
+

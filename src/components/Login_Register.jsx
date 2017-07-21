@@ -18,7 +18,7 @@ export default class Login_Register extends React.Component {
                         <label htmlFor="inputPassword" className="sr-only">Пароль</label>
                         <input type="password" id="inputPassword" className="form-control" placeholder="******" required />
                         <div className="d-flex justify-content-between">
-                            <a className="signup" href="#" onClick={this.props.handleChangeStateClick}>Регистрация</a>
+                            <a className="signup" href="#" onClick={this.props.handleNotRegisteredClick}>Регистрация</a>
                             <a className="getpassword" href="#">Забыли пароль?</a>
                         </div>
                         <button className="login-form-btn" type="submit">
