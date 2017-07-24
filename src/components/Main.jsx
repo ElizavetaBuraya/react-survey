@@ -15,9 +15,13 @@ export default class Main extends React.Component {
                            isAuthorized={this.props.isAuthorized}
                            handleNotRegisteredClick = {this.props.handleNotRegisteredClick}
                            handleLogInClick = {this.props.handleLogInClick}
+                           handleLogOutClick = {this.props.handleLogOutClick}
                        />}
                 />
-                <Route path='/about' component={About}/>
+                <Route path='/about' component={() => <About
+                    isAuthorized={this.props.isAuthorized}
+                    />}
+                />
                 <Route path="/users" render={() => (
                         !this.props.isAuthorized ? (
                             <Redirect to="/"/>
