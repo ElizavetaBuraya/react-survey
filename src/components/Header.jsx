@@ -33,13 +33,24 @@ export default class Header extends React.Component {
     constructor(props) {
         super(props);
     }
+    toggleLogOut() {
+        let logout_visibility =  $(".logout-popup").css("visibility");
+        if (logout_visibility == "hidden") {
+            $(".logout-popup").css("visibility", "visible");
+        } else {
+            function hide() {
+                $(".logout-popup").css("visibility", "hidden")
+            }
+            setTimeout(hide, 100);
+        }
+    }
     render() {
-        let logiconBtnClass = classNames({'login-collapse ml-auto hidden-md-up': true,
+        const logiconBtnClass = classNames({'login-collapse ml-auto hidden-md-up': true,
             'logicon': !this.props.isAuthorized,
             'logicon-active': this.props.isRegistered
         });
 
-        let loginBtnClass = classNames({'login mr-auto hidden-sm-down': true,
+        const loginBtnClass = classNames({'login mr-auto hidden-sm-down': true,
             'active-nav': this.props.isRegistered
         });
 
@@ -52,7 +63,9 @@ export default class Header extends React.Component {
                         <img src="img/logo.jpg" alt="Logo" height="40" />
                     </a>
                     {isAuthorized &&
-                        <a className='login-collapse ml-auto hidden-md-up' href="#"><span className="username"> Привет, admin</span></a>
+                        <div className='login-collapse ml-auto hidden-md-up'>
+                            <div><span className="username"> Привет, admin</span></div>
+                        </div>
                     }
                     {!isAuthorized &&
                         <a className={logiconBtnClass} href="#" onClick={this.props.handleRegisteredClick}/>
@@ -63,8 +76,13 @@ export default class Header extends React.Component {
                                 <Link to='/about' className="nav-link">О компании <span className="sr-only">(current)</span></Link>
                             </li>
                             {isAuthorized &&
-                                <li className="nav-item invisible-sm-item">
-                                    <a className="nav-link hidden-sm-down" href="#"><span className="username"> Привет, admin</span></a>
+                                <li className="nav-item invisible-sm-item" id="logout">
+                                    <a href="#" className="nav-link hidden-sm-down"
+                                       onFocus={this.toggleLogOut}
+                                       onBlur={this.toggleLogOut}>
+                                        <span className="username"> Привет, admin</span>
+                                    </a>
+                                    <Link to="/" className='logout-popup'>Выйти</Link>
                                 </li>
                             }
                             {isAuthorized &&
@@ -73,7 +91,7 @@ export default class Header extends React.Component {
                                     <NavlinksList navlinks={navlinks}/>
                                     <div className="dropdown-divider" />
                                     <li className="nav-item">
-                                        <Link to="/" className="nav-link hidden-md-up" >Выйти<span className="sr-only">(current)</span></Link>
+                                        <Link to="/" className="nav-link hidden-md-up">Выйти<span className="sr-only">(current)</span></Link>
                                     </li>
                                 </div>
                             }

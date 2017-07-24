@@ -112,11 +112,18 @@ nav {
 .username {
   vertical-align: top;
   display: flex;
+  color: @link-color;
   &::before {
     .icon('\f007', -0.2rem, 0.3rem, 1.7rem);
   }
-  &::after {
-    .icon('\f0dd', 0.5rem, 0.5rem, 1.7rem);
+  @media screen and (min-width: 767px) {
+    cursor: pointer;
+    &::after {
+      .icon('\f0dd', 0.5rem, 0.5rem, 1.7rem);
+    }
+    &:hover {
+      color: rgba(0,0,0,0.7);
+    }
   }
 }
 
@@ -130,10 +137,7 @@ nav {
 
 .login-collapse {
   padding:0.5rem;
-  color: @link-color;
-  &:hover {
-    color: rgba(0,0,0,0.7);
-  }
+  position: relative;
 }
 
 .logicon {
@@ -147,6 +151,28 @@ nav {
 
 .logicon-active {
   visibility: hidden;
+}
+
+.logout-popup {
+  visibility: hidden;
+  position: absolute;
+  right: 10px;
+  border:1px solid @gray;
+  display: block;
+  padding:.6rem 1.2rem;
+  background-color: @white;
+  &::before {
+    content:' ';
+    width:14px;
+    height:14px;
+    position: absolute;
+    top: -7px;
+    right: 7px;
+    background-color: @white;
+    border-left: 1px solid @gray;
+    border-top: 1px solid @gray;
+    transform: rotate(45deg);
+  }
 }
 
 /* --MAIN CONTENT-- */
