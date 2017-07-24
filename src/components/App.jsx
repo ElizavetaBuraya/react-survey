@@ -10,39 +10,31 @@ export default class App extends React.Component {
         this.handleLogOutClick = this.handleLogOutClick.bind(this);
         this.handleRegisteredClick = this.handleRegisteredClick.bind(this);
         this.handleNotRegisteredClick = this.handleNotRegisteredClick.bind(this);
-        this.handleChangeStateClick = this.handleChangeStateClick.bind(this);
         this.state = {
-            isRegistered: true,
-            isAuthorized: false,
+            isRegistered: JSON.parse(sessionStorage.getItem('isRegistered')),
+            isAuthorized: JSON.parse(sessionStorage.getItem('isAuthorized')),
         };
     }
-    handleChangeStateClick() {
-        let val;
-        if (!this.state.isRegistered) {
-            val = true;
-        } else {
-            val = false;
-        }
-        this.setState({
-            isRegistered: val
-        });
-    }
     handleRegisteredClick() {
+        sessionStorage.setItem('isRegistered', true);
         this.setState({
             isRegistered: true
         });
     }
     handleNotRegisteredClick() {
+        sessionStorage.setItem('isRegistered', false);
         this.setState({
             isRegistered: false
         });
     }
     handleLogInClick() {
+        sessionStorage.setItem('isAuthorized', true);
         this.setState({
             isAuthorized: true
         });
     }
     handleLogOutClick() {
+        sessionStorage.setItem('isAuthorized', false);
         this.setState({
             isAuthorized: false
         });
@@ -59,6 +51,7 @@ export default class App extends React.Component {
                     isRegistered={this.state.isRegistered}
                     isAuthorized={this.state.isAuthorized}
                     handleLogInClick = {this.handleLogInClick}
+                    handleLogOutClick = {this.handleLogOutClick}
                     handleNotRegisteredClick = {this.handleNotRegisteredClick}
                 />
                 <Footer />
