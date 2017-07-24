@@ -9,6 +9,7 @@ const extractLess = new ExtractTextPlugin('./css/style.css');
 
 module.exports = {
     entry: [
+        'babel-polyfill',
         './src/index.js',
         'font-awesome/scss/font-awesome.scss',
         './src/styles/sass/style.scss',
