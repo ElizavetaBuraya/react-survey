@@ -442,6 +442,9 @@ main {
     font-size: 1rem;
     min-width: 250px;
   }
+  @media screen and (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
 }
 
 /* Tabs styles */
@@ -502,18 +505,6 @@ th {
   background-color: @gray;
 }
 
-.edit-row {
-  &::after {
-    .icon('\f044', 0rem, 0.1rem, 2rem);
-  }
-}
-
-.delete-row {
-  &::after {
-    .icon('\f014', .5rem, 0.1rem, 2rem);
-  }
-}
-
 .sort-down {
    &::after {
      .icon('\f0dd', 1rem, 0.1rem, 1.5rem);
@@ -526,8 +517,26 @@ th {
   }
 }
 
-.pagination {
-  float: none;
+.active .page-link {
+  border-color: @red !important;
+  background-color: @red !important;
+  color: @white;
+}
+
+.page-link {
+  color:@dark-gray;
+}
+
+.delete-button {
+  visibility: hidden;
+  .custom-control-btn;
+  position: absolute;
+  width: 100px;
+  top:57px;
+  padding:.3rem .5rem;
+  @media screen and (max-width: 768px) {
+    top:107px;
+  }
 }
 
 .users-number {
