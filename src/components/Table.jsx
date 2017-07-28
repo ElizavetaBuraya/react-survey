@@ -1,20 +1,6 @@
 import React from 'react';
-import Sidebar from './Sidebar.jsx';
-import Users from './Users.jsx';
-import Surveys from './Surveys.jsx';
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
-class MySearchPanel extends React.Component {
-    render() {
-        return (
-            <div className="page-head d-flex justify-content-between align-items-center">
-                <h1>Мои опросы {(this.props.location == 'users') &&<a className="create-survey" href="#">Создать опрос</a>}</h1>
-                <div className="search-form">
-                    { this.props.searchField }
-                </div>
-            </div>
-        );
-    }
-}
 
 function getCaret(direction) {
     return direction === 'desc'
@@ -23,63 +9,52 @@ function getCaret(direction) {
 }
 
 export default class Table extends React.Component {
-    constructor(props) {
-        super(props);
-        this.onRowSelect = this.onRowSelect.bind(this);
-        this.renderTotal = this.renderTotal.bind(this);
-        this.selectedRows = [];
-        this.selectRowProp = {
+    render() {
+        const columns = Object.keys(this.props.data[0]);
+
+        const selectRowProp = {
             mode: 'checkbox',
-            onSelect: this.onRowSelect,
+            onSelect: this.props.onRowSelect,
         };
-        this.cellEditProp = {
+
+        const cellEditProp = {
             mode: 'click',
             blurToSave: true,
+            afterSaveCell: this.props.afterSaveCell
         };
-    }
 
-    onRowSelect(row, isSelected) {
-        (isSelected)
-            ? this.selectedRows.push(row)
-            : this.selectedRows.pop();
-        let visibility = (this.selectedRows.length > 0)
-            ? "visible"
-            : "hidden";
-        $(".delete-button").css("visibility", visibility);
-    }
-
-    createCustomDeleteButton(onBtnClick) {
         return (
-            <button className="delete-button" onClick={ onBtnClick }>Delete selected</button>
-        );
-    }
-
-    renderTotal() {
-        return (
-            <span className="users-number">
-            Всего опросов: { this.state.data.length }
-        </span>
-        );
-    }
-
-    render() {
-        const options = {
-            deleteBtn: this.createCustomDeleteButton,
-            sizePerPage: 10,
-            hideSizePerPage: true,
-            paginationShowsTotal: this.renderTotal,
-            defaultSortName: 'name',  // default sort column name
-            defaultSortOrder: 'asc',  // default sort order
-            searchPanel: (props) => (<MySearchPanel { ...props }/>),
-        };
-        return (
-            <main className="d-flex flex-row justify-content-start">
-                <Sidebar/>
-                <div className="main-content d-flex flex-column">
-                    {(this.props.location == 'users') && <Users />}
-                    {(this.props.location == 'surveys') && <Surveys />}
-                </div>
-            </main>
+            <BootstrapTable data={this.props.data}
+                            options={ this.props.options }
+                            ref='table'
+                            searchPlaceholder={'Поиск'}
+                            cellEdit={ cellEditProp }
+                            selectRow={ selectRowProp }
+                            deleteRow={ true }
+                            search
+                            hover
+                            pagination
+            >
+                {columns.map((key, index) =>
+                    <TableHeaderColumn
+                        key={index}
+                        isKey={(key === 'id')}
+                        dataField = {key}
+                        dataFormat = {(key == 'link' || key == 'results') ? this.props.surveyLink : undefined}
+                        thStyle={ { 'text-align': 'center' } }
+                        tdStyle={ { 'text-align': 'center' } }
+                        width='120'
+                        editable={(key === 'name')
+                            ? true
+                            : (key === 'role')
+                                ? { type: 'select', options: { values: this.props.roles }}
+                                : false }
+                        dataSort = {(key === 'name')}
+                        caretRender={ (key === 'name') ? getCaret : null }
+                        hidden = {(key === 'id')}
+                    >{this.props.columnNames[index]}</TableHeaderColumn>
+                )}
+            </BootstrapTable>
         )
     }
 }
