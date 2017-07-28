@@ -1,12 +1,13 @@
 import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import Table from './Table.jsx';
+import { Link } from 'react-router-dom';
 
 class MySearchPanel extends React.Component {
     render() {
         return (
             <div className="page-head d-flex justify-content-between align-items-center">
-                <h1>Пользователи</h1>
+                <h1>Мои опросы <Link to='/new_survey' className="create-survey" >Создать опрос</Link></h1>
                 <div className="search-form">
                     { this.props.searchField }
                 </div>
@@ -15,18 +16,18 @@ class MySearchPanel extends React.Component {
     }
 }
 
-export default class Users extends React.Component {
+export default class Surveys extends React.Component {
     constructor(props) {
         super(props);
         this.afterSaveCell = this.afterSaveCell.bind(this);
         this.onRowSelect = this.onRowSelect.bind(this);
         this.handleDeletedRow = this.handleDeletedRow.bind(this);
         this.renderTotal = this.renderTotal.bind(this);
+        this.surveyLink = this.surveyLink.bind(this);
         this.selectedRows = [];
         this.state = {
-            data: JSON.parse(localStorage.getItem('users')),
-            roles: ['Администратор', 'Пользователь'],
-            columnNames: ['ID', 'Имя','Роль','Зарегистрироваен','Опросы'],
+            data: JSON.parse(localStorage.getItem('surveys')),
+            columnNames: ['ID', 'Название','Изменен','Ответы','Ссылка','Результаты'],
         }
         this.options = {
             deleteBtn: this.createCustomDeleteButton,
@@ -41,23 +42,23 @@ export default class Users extends React.Component {
     }
 
     afterSaveCell(row, cellName, cellValue) {
-        let editedUserdata = this.state.data;
-        let usersArray = [];
+        let editedSurveydata = this.state.data;
+        let surveysArray = [];
         for (let props in row) {
             if (props == "id") {
-                for (let user in editedUserdata) {
-                    if (user.id === row[props]) {
-                        user[cellName] = cellValue;
+                for (let survey in editedSurveydata) {
+                    if (survey.id === row[props]) {
+                        survey[cellName] = cellValue;
                     }
                 }
             }
         }
-        for (let user of editedUserdata) {
-            usersArray.push(user)
+        for (let survey of editedSurveydata) {
+            surveysArray.push(survey)
         }
-        localStorage.setItem('users', JSON.stringify(usersArray));
+        localStorage.setItem('surveys', JSON.stringify(surveysArray));
         this.setState({
-            data: JSON.parse(localStorage.getItem('users')),
+            data: JSON.parse(localStorage.getItem('surveys')),
         })
     }
 
@@ -78,17 +79,17 @@ export default class Users extends React.Component {
     }
 
     handleDeletedRow(row) {
-        let usersArray = [];
-        let editedUserdata = this.state.data.filter((user) => {
-            if (!row.includes(user.id))
-                return user.id;
+        let surveysArray = [];
+        let editedSurveydata = this.state.data.filter((survey) => {
+            if (!row.includes(survey.id))
+                return survey.id;
         });
-        for (let user of editedUserdata) {
-            usersArray.push(user)
+        for (let survey of editedSurveydata) {
+            surveysArray.push(survey)
         }
-        localStorage.setItem('users', JSON.stringify(usersArray));
+        localStorage.setItem('surveys', JSON.stringify(surveysArray));
         this.setState({
-            data: JSON.parse(localStorage.getItem('users')),
+            data: JSON.parse(localStorage.getItem('surveys')),
         });
         $(".delete-button").css("visibility", "hidden");
     }
@@ -96,9 +97,20 @@ export default class Users extends React.Component {
     renderTotal() {
         return (
             <span className="users-number">
-            Всего пользователей: { this.state.data.length }
+            Всего опросов: { this.state.data.length }
         </span>
         );
+    }
+
+    surveyLink(cell) {
+        return (
+            <Link to={`${cell}`}>
+                { cell.includes('results')
+                    ? 'результаты'
+                    : 'ссылка на опрос'
+                }
+            </Link>
+        )
     }
 
     render() {
@@ -112,6 +124,7 @@ export default class Users extends React.Component {
                            columnNames={ this.state.columnNames }
                            afterSaveCell = { this.afterSaveCell }
                            onRowSelect = { this.onRowSelect }
+                           surveyLink = { this.surveyLink }
                     />
                 </div>
             </main>

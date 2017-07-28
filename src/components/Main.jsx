@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import Login_Register from './Login_Register.jsx';
 import About from './About.jsx';
 import Users from './Users.jsx';
+import Surveys from './Surveys.jsx';
+import Templates from './Templates.jsx';
 import NoMatch from './ErrorPage.jsx'
 
 export default class Main extends React.Component {
@@ -28,6 +30,20 @@ export default class Main extends React.Component {
                         ) : (
                             <Users/>
                         )
+                )}/>
+                <Route path="/surveys" render={() => (
+                    !this.props.isAuthorized ? (
+                        <Redirect to="/"/>
+                    ) : (
+                        <Surveys/>
+                    )
+                )}/>
+                <Route path="/templates" render={() => (
+                    !this.props.isAuthorized ? (
+                        <Redirect to="/"/>
+                    ) : (
+                        <Templates/>
+                    )
                 )}/>
                 <Route component={() => <NoMatch
                         isRegistered={this.props.isRegistered}

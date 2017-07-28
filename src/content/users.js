@@ -1,5 +1,4 @@
-export default {
-    users : [
+let users = [
         { id: 0, name: "Админ", role: "Администратор", registered: '01.01.2017', surveys: 12},
         { id: 1, name: "Юзер1", role: "Пользователь", registered: '02.01.2017', surveys: 0},
         { id: 2, name: "Юзер2", role: "Пользователь", registered: '03.01.2017', surveys: 0},
@@ -11,5 +10,9 @@ export default {
         { id: 8, name: "Юзер8", role: "Пользователь", registered: '09.01.2017', surveys: 0},
         { id: 9, name: "Юзер9", role: "Пользователь", registered: '10.01.2017', surveys: 0},
         { id: 10, name: "Юзер10", role: "Пользователь", registered: '11.01.2017', surveys: 0}
-    ]
-};
+    ];
+
+if (!localStorage.getItem('users')) {
+    localStorage.setItem('users', JSON.stringify(users));
+}
+
