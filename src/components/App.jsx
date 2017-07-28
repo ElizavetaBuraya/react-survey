@@ -13,7 +13,6 @@ export default class App extends React.Component {
         this.state = {
             isRegistered: JSON.parse(sessionStorage.getItem('isRegistered')),
             isAuthorized: JSON.parse(sessionStorage.getItem('isAuthorized')),
-            location: null
         };
     }
     handleRegisteredClick() {
@@ -51,7 +50,6 @@ export default class App extends React.Component {
                 <Main
                     isRegistered={this.state.isRegistered}
                     isAuthorized={this.state.isAuthorized}
-                    location={this.state.location}
                     handleLogInClick = {this.handleLogInClick}
                     handleLogOutClick = {this.handleLogOutClick}
                     handleNotRegisteredClick = {this.handleNotRegisteredClick}
