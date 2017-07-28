@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from './Sidebar.jsx';
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import Table from './Table.jsx';
 
 class MySearchPanel extends React.Component {
     render() {
@@ -15,12 +15,6 @@ class MySearchPanel extends React.Component {
     }
 }
 
-function getCaret(direction) {
-    return direction === 'desc'
-    ?  <span className="sort-up"/>
-    :  <span className="sort-down"/>;
-}
-
 export default class Users extends React.Component {
     constructor(props) {
         super(props);
@@ -29,19 +23,21 @@ export default class Users extends React.Component {
         this.handleDeletedRow = this.handleDeletedRow.bind(this);
         this.renderTotal = this.renderTotal.bind(this);
         this.selectedRows = [];
-        this.selectRowProp = {
-            mode: 'checkbox',
-            onSelect: this.onRowSelect,
-        };
-        this.cellEditProp = {
-            mode: 'click',
-            blurToSave: true,
-            afterSaveCell: this.afterSaveCell
-        };
         this.state = {
             data: JSON.parse(localStorage.getItem('users')),
-            roles: ['Администратор', 'Пользователь']
+            roles: ['Администратор', 'Пользователь'],
+            columnNames: ['ID', 'Имя','Роль','Зарегистрироваен','Опросы'],
         }
+        this.options = {
+            deleteBtn: this.createCustomDeleteButton,
+            sizePerPage: 10,
+            hideSizePerPage: true,
+            paginationShowsTotal: this.renderTotal,
+            defaultSortName: 'name',  // default sort column name
+            defaultSortOrder: 'asc',  // default sort order
+            searchPanel: (props) => (<MySearchPanel { ...props }/>),
+            afterDeleteRow: this.handleDeletedRow,
+        };
     }
 
     afterSaveCell(row, cellName, cellValue) {
@@ -106,74 +102,17 @@ export default class Users extends React.Component {
     }
 
     render() {
-        const options = {
-            deleteBtn: this.createCustomDeleteButton,
-            sizePerPage: 10,
-            hideSizePerPage: true,
-            paginationShowsTotal: this.renderTotal,
-            defaultSortName: 'name',  // default sort column name
-            defaultSortOrder: 'asc',  // default sort order
-            searchPanel: (props) => (<MySearchPanel { ...props }/>),
-            afterDeleteRow: this.handleDeletedRow,
-        };
         return (
             <main className="d-flex flex-row justify-content-start">
                 <Sidebar/>
                 <div className="main-content d-flex flex-column">
-                    <BootstrapTable data={this.state.data}
-                                    options={ options }
-                                    ref='table'
-                                    searchPlaceholder={'Поиск'}
-                                    cellEdit={ this.cellEditProp }
-                                    selectRow={ this.selectRowProp }
-                                    deleteRow={ true }
-                                    search
-                                    hover
-                                    pagination
-                    >
-                        <TableHeaderColumn
-                            isKey
-                            dataField='id'
-                            hidden
-                        >
-                            User ID
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                            dataField='name'
-                            thStyle={ { 'text-align': 'center' } }
-                            width='120'
-                            dataSort
-                            caretRender={ getCaret }
-                        >
-                            Имя
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                            dataField='role'
-                            thStyle={ { 'text-align': 'center' } }
-                            width='120'
-                            editable={ { type: 'select', options: { values: this.state.roles } } }
-                        >
-                            Роль
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                            dataField='registered'
-                            thStyle={ { 'text-align': 'center' } }
-                            tdStyle={ { 'text-align': 'center' } }
-                            width='120'
-                            editable={ false }
-                        >
-                            Зарегистрирован
-                        </TableHeaderColumn>
-                        <TableHeaderColumn
-                            dataField='surveys'
-                            thStyle={ { 'text-align': 'center' } }
-                            tdStyle={ { 'text-align': 'center' } }
-                            width='120'
-                            editable={ false }
-                        >
-                            Опросы
-                        </TableHeaderColumn>
-                    </BootstrapTable>
+                    <Table data={this.state.data}
+                           roles={this.state.roles}
+                           options={ this.options }
+                           columnNames={ this.state.columnNames }
+                           afterSaveCell = { this.afterSaveCell }
+                           onRowSelect = { this.onRowSelect }
+                    />
                 </div>
             </main>
         )
