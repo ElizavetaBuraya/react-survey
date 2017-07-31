@@ -15,21 +15,30 @@ class MySearchPanel extends React.Component {
     }
 }
 
+function createCustomDeleteButton(onBtnClick) {
+    return (
+        <button className="delete-button" onClick={ onBtnClick }>Delete selected</button>
+    );
+}
+
 export default class Users extends React.Component {
     constructor(props) {
         super(props);
         this.afterSaveCell = this.afterSaveCell.bind(this);
         this.onRowSelect = this.onRowSelect.bind(this);
+        this.onSelectAll = this.onSelectAll.bind(this);
         this.handleDeletedRow = this.handleDeletedRow.bind(this);
         this.renderTotal = this.renderTotal.bind(this);
+        this.loadData = this.loadData.bind(this);
         this.selectedRows = [];
         this.state = {
-            data: JSON.parse(localStorage.getItem('users')),
+            data: [{"id":"нет данных","name":"нет данных","role":"нет данных","registered":"нет данных","surveys":"нет данных"}],
             roles: ['Администратор', 'Пользователь'],
-            columnNames: ['ID', 'Имя','Роль','Зарегистрироваен','Опросы'],
-        }
+            columnNames: ['id', 'Имя','Роль','Зарегистрирован','Опросы'],
+        },
         this.options = {
-            deleteBtn: this.createCustomDeleteButton,
+            noDataText: 'Все записи удалены',
+            deleteBtn: createCustomDeleteButton,
             sizePerPage: 10,
             hideSizePerPage: true,
             paginationShowsTotal: this.renderTotal,
@@ -40,25 +49,38 @@ export default class Users extends React.Component {
         };
     }
 
-    afterSaveCell(row, cellName, cellValue) {
-        let editedUserdata = this.state.data;
-        let usersArray = [];
-        for (let props in row) {
-            if (props == "id") {
-                for (let user in editedUserdata) {
-                    if (user.id === row[props]) {
-                        user[cellName] = cellValue;
-                    }
-                }
-            }
-        }
-        for (let user of editedUserdata) {
-            usersArray.push(user)
-        }
-        localStorage.setItem('users', JSON.stringify(usersArray));
-        this.setState({
-            data: JSON.parse(localStorage.getItem('users')),
-        })
+    componentDidMount() {
+        this.loadData();
+    }
+
+    componentDidUpdate() {
+        this.loadData();
+    }
+
+    loadData() {
+        $.ajax({
+            url: 'http://localhost:3000/users',
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            success: function(data) {
+                this.setState({data: data});
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+    }
+
+    afterSaveCell(row) {
+        $.ajax({
+            url: 'http://localhost:3000/users/' + row.id,
+            method: 'PUT',
+            data: JSON.stringify(row),
+            headers: { 'Content-Type': 'application/json' },
+            success: function(data) {
+                console.log(data);
+            }.bind(this)
+        });
     }
 
     onRowSelect(row, isSelected) {
@@ -71,25 +93,21 @@ export default class Users extends React.Component {
         $(".delete-button").css("visibility", visibility);
     }
 
-    createCustomDeleteButton(onBtnClick) {
-        return (
-            <button className="delete-button" onClick={ onBtnClick }>Delete selected</button>
-        );
+    onSelectAll(isSelected) {
+        let visibility = (isSelected)
+            ? "visible"
+            : "hidden";
+        $(".delete-button").css("visibility", visibility);
     }
 
     handleDeletedRow(row) {
-        let usersArray = [];
-        let editedUserdata = this.state.data.filter((user) => {
-            if (!row.includes(user.id))
-                return user.id;
-        });
-        for (let user of editedUserdata) {
-            usersArray.push(user)
+        for (let index in row) {
+            $.ajax({
+                url: 'http://localhost:3000/users/' + row[index],
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' }
+            });
         }
-        localStorage.setItem('users', JSON.stringify(usersArray));
-        this.setState({
-            data: JSON.parse(localStorage.getItem('users')),
-        });
         $(".delete-button").css("visibility", "hidden");
     }
 
@@ -111,7 +129,9 @@ export default class Users extends React.Component {
                            options={ this.options }
                            columnNames={ this.state.columnNames }
                            afterSaveCell = { this.afterSaveCell }
+                           handleDeletedRow = { this.handleDeletedRow }
                            onRowSelect = { this.onRowSelect }
+                           onSelectAll = { this.onSelectAll }
                     />
                 </div>
             </main>
