@@ -1,7 +1,6 @@
 import React from 'react';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
-
 function getCaret(direction) {
     return direction === 'desc'
         ?  <span className="sort-up"/>
@@ -10,11 +9,15 @@ function getCaret(direction) {
 
 export default class Table extends React.Component {
     render() {
-        const columns = Object.keys(this.props.data[0]);
+        let columns = null;
+        if (this.props.data[0]) {
+            columns = Object.keys(this.props.data[0]);
+        }
 
         const selectRowProp = {
             mode: 'checkbox',
             onSelect: this.props.onRowSelect,
+            onSelectAll: this.props.onSelectAll
         };
 
         const cellEditProp = {
@@ -51,7 +54,7 @@ export default class Table extends React.Component {
                                 : false }
                         dataSort = {(key === 'name')}
                         caretRender={ (key === 'name') ? getCaret : null }
-                        hidden = {(key === 'id')}
+                        hidden = {(key === 'id') || (key === 'template')}
                     >{this.props.columnNames[index]}</TableHeaderColumn>
                 )}
             </BootstrapTable>
