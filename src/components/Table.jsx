@@ -10,8 +10,10 @@ function getCaret(direction) {
 export default class Table extends React.Component {
     render() {
         let columns = null;
-        if (this.props.data[0]) {
+        if (this.props.data.length > 0) {
             columns = Object.keys(this.props.data[0]);
+        } else {
+            columns = this.props.columnNames;
         }
 
         const selectRowProp = {
@@ -32,7 +34,9 @@ export default class Table extends React.Component {
                             ref='table'
                             searchPlaceholder={'Поиск'}
                             cellEdit={ cellEditProp }
-                            selectRow={ selectRowProp }
+                            selectRow={(this.props.data.length > 0)
+                                ? selectRowProp
+                                : false}
                             deleteRow={ true }
                             search
                             hover

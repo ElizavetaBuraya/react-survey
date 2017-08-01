@@ -29,6 +29,7 @@ export default class Users extends React.Component {
         this.onSelectAll = this.onSelectAll.bind(this);
         this.handleDeletedRow = this.handleDeletedRow.bind(this);
         this.renderTotal = this.renderTotal.bind(this);
+        this.onLoad = this.onLoad.bind(this);
         this.selectedRows = [];
         this.state = {
             data: [{"id":"нет данных","name":"нет данных","role":"нет данных","registered":"нет данных","surveys":"нет данных"}],
@@ -49,6 +50,14 @@ export default class Users extends React.Component {
     }
 
     componentDidMount() {
+        this.onLoad();
+        if (this.props.currentPage !== '/users')
+        {
+            this.props.handleChangePage('/users');
+        }
+    }
+
+    onLoad() {
         $.ajax({
             url: 'http://localhost:3000/users',
             method: 'GET',
@@ -68,8 +77,8 @@ export default class Users extends React.Component {
             method: 'PUT',
             data: JSON.stringify(row),
             headers: { 'Content-Type': 'application/json' },
-            success: function(data) {
-                console.log(data);
+            success: function() {
+                this.onLoad();
             }.bind(this)
         });
     }
@@ -98,9 +107,7 @@ export default class Users extends React.Component {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 success: function() {
-                    $.get( "http://localhost:3000/surveys", function( data ) {
-                        this.setState({data: data});
-                    }.bind(this));
+                    this.onLoad();
                 }.bind(this)
             });
         }
@@ -110,15 +117,17 @@ export default class Users extends React.Component {
     renderTotal() {
         return (
             <span className="users-number">
-            Всего пользователей: { this.state.data.length }
-        </span>
+                Всего пользователей: { this.state.data.length }
+            </span>
         );
     }
 
     render() {
         return (
             <main className="d-flex flex-row justify-content-start">
-                <Sidebar/>
+                <Sidebar
+                    currentPage = {this.props.currentPage}
+                />
                 <div className="main-content d-flex flex-column">
                     <Table data={this.state.data}
                            roles={this.state.roles}
