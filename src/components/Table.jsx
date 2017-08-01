@@ -54,7 +54,11 @@ export default class Table extends React.Component {
                                 : false }
                         dataSort = {(key === 'name')}
                         caretRender={ (key === 'name') ? getCaret : null }
-                        hidden = {(key === 'id') || (key === 'template')}
+                        hidden = {(key === 'id')
+                        || (key === 'template')
+                        || (key === 'pages')
+                        || (key === 'questions')
+                        || (key === 'description')}
                     >{this.props.columnNames[index]}</TableHeaderColumn>
                 )}
             </BootstrapTable>

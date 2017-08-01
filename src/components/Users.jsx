@@ -29,7 +29,6 @@ export default class Users extends React.Component {
         this.onSelectAll = this.onSelectAll.bind(this);
         this.handleDeletedRow = this.handleDeletedRow.bind(this);
         this.renderTotal = this.renderTotal.bind(this);
-        this.loadData = this.loadData.bind(this);
         this.selectedRows = [];
         this.state = {
             data: [{"id":"нет данных","name":"нет данных","role":"нет данных","registered":"нет данных","surveys":"нет данных"}],
@@ -50,14 +49,6 @@ export default class Users extends React.Component {
     }
 
     componentDidMount() {
-        this.loadData();
-    }
-
-    componentDidUpdate() {
-        this.loadData();
-    }
-
-    loadData() {
         $.ajax({
             url: 'http://localhost:3000/users',
             method: 'GET',
@@ -105,7 +96,12 @@ export default class Users extends React.Component {
             $.ajax({
                 url: 'http://localhost:3000/users/' + row[index],
                 method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
+                success: function() {
+                    $.get( "http://localhost:3000/surveys", function( data ) {
+                        this.setState({data: data});
+                    }.bind(this));
+                }.bind(this)
             });
         }
         $(".delete-button").css("visibility", "hidden");

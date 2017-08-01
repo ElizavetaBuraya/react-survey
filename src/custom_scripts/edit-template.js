@@ -1,13 +1,21 @@
 $(document).ready(function(){
-    $(".template").click(function(event) {
+    $(document).on('click', '.template', (function(event) {
         event.stopPropagation();
         $(".template").css("box-shadow", "none");
-        $("#active-template").show();
-        $(this).css("box-shadow","inset 0em 0em 0em .4em #e6e6e6").prepend($("#active-template")[0]);
-    });
-});
+        $(this).find(".active-template").show();
+        $(this).css("box-shadow","inset 0em 0em 0em .4em #e6e6e6");
+    })
+)});
 
-$(document).on("click", function () {
+function hideTemplate() {
     $(".template").css("box-shadow", "none");
-    $("#active-template").hide();
-});
+    $(".active-template").hide();
+}
+
+$(document).on('click', (function() {
+    hideTemplate();
+}));
+
+$(document).on('click', '.template', (function() {
+    hideTemplate();
+}));

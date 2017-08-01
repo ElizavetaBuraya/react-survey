@@ -550,7 +550,7 @@ th {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
   @media screen and (max-width: 1000px) {
     flex-direction: column;
     flex-wrap: nowrap;
@@ -574,17 +574,31 @@ th {
     margin: 1em auto 0em;
   }
   &:hover {
-    box-shadow:inset 0em 0em 0em .4em @gray;
+    box-shadow:inset 0em 0em 0em .4em @gray !important;
     cursor: pointer;
   }
 }
 
-#active-template {
+.active-template {
+  display: none;
   float: right;
-  & i {
+  & > * {
+    color: @dark-gray;
     &:hover {
      color: @gray;
     }
+  }
+}
+
+.edit-template {
+  &::before {
+    .icon('\f14b',0rem,0rem,2rem);
+  }
+}
+
+.delete-template {
+  &::before {
+    .icon('\f1f8',0rem,0rem,2rem);
   }
 }
 

@@ -1,5 +1,3 @@
-import './content/users.js';
-import './content/surveys.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
