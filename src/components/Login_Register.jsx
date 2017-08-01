@@ -5,11 +5,17 @@ export default class Login_Register extends React.Component {
     constructor () {
         super();
     }
+
     componentDidMount() {
         if(this.props.isAuthorized) {
             this.props.handleLogOutClick();
         }
+        if (this.props.currentPage !== '/')
+        {
+            this.props.handleChangePage('/');
+        }
     }
+
     render() {
         const isRegistered = this.props.isRegistered;
         return (

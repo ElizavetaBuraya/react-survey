@@ -3,6 +3,14 @@ import Sidebar from './Sidebar.jsx';
 import Tabs from './Tabs.jsx';
 
 export default class About extends React.Component {
+
+    componentDidMount() {
+        if (this.props.currentPage !== '/about')
+        {
+            this.props.handleChangePage('/about');
+        }
+    }
+
     render() {
         const isAuthorized = this.props.isAuthorized;
         return (

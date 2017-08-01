@@ -18,36 +18,52 @@ export default class Main extends React.Component {
                            handleNotRegisteredClick = {this.props.handleNotRegisteredClick}
                            handleLogInClick = {this.props.handleLogInClick}
                            handleLogOutClick = {this.props.handleLogOutClick}
+                           handleChangePage = {this.props.handleChangePage}
+                           currentPage = {this.props.currentPage}
                        />}
+
                 />
                 <Route path='/about' component={() => <About
-                    isAuthorized={this.props.isAuthorized}
+                        isAuthorized={this.props.isAuthorized}
+                        handleChangePage = {this.props.handleChangePage}
+                        currentPage = {this.props.currentPage}
                     />}
                 />
                 <Route path="/users" render={() => (
                         !this.props.isAuthorized ? (
                             <Redirect to="/"/>
                         ) : (
-                            <Users/>
+                            <Users
+                                handleChangePage = {this.props.handleChangePage}
+                                currentPage = {this.props.currentPage}
+                            />
                         )
                 )}/>
                 <Route path="/surveys" render={() => (
                     !this.props.isAuthorized ? (
                         <Redirect to="/"/>
                     ) : (
-                        <Surveys/>
+                        <Surveys
+                            handleChangePage = {this.props.handleChangePage}
+                            currentPage = {this.props.currentPage}
+                        />
                     )
                 )}/>
                 <Route path="/templates" render={() => (
                     !this.props.isAuthorized ? (
                         <Redirect to="/"/>
                     ) : (
-                        <Templates/>
+                        <Templates
+                            handleChangePage = {this.props.handleChangePage}
+                            currentPage = {this.props.currentPage}
+                        />
                     )
                 )}/>
                 <Route component={() => <NoMatch
                         isRegistered={this.props.isRegistered}
                         isAuthorized={this.props.isAuthorized}
+                        handleChangePage = {this.props.handleChangePage}
+                        currentPage = {this.props.currentPage}
                     />}
                 />
             </Switch>

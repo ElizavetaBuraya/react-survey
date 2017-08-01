@@ -11,7 +11,12 @@ const navlinks = [
 
 function NavlinkItem(props) {
     return <li className="nav-item">
-            <Link to={props.href} className="nav-link hidden-md-up">{props.name}<span className="sr-only">(current)</span></Link>
+            <Link to={props.href}
+                  className={props.currentPage === props.href
+                      ? "nav-link active"
+                      : "nav-link"}>{props.name}
+                  <span className="sr-only">(current)</span>
+            </Link>
         </li>
 }
 
@@ -23,6 +28,7 @@ function NavlinksList(props) {
                 <NavlinkItem key={index}
                          href={navlink.href}
                          name={navlink.name}
+                         currentPage={props.currentPage}
                 />
             )}
         </div>
@@ -73,7 +79,12 @@ export default class Header extends React.Component {
                     <div className="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <Link to='/about' className="nav-link">О компании <span className="sr-only">(current)</span></Link>
+                                <Link to='/about'
+                                      className={this.props.currentPage === '/about'
+                                      ? "nav-link active"
+                                      : "nav-link"}>О компании
+                                    <span className="sr-only">(current)</span>
+                                </Link>
                             </li>
                             {isAuthorized &&
                                 <li className="nav-item invisible-sm-item" id="logout">
@@ -88,7 +99,10 @@ export default class Header extends React.Component {
                             {isAuthorized &&
                                 <div className="hidden-md-up">
                                     <div className="dropdown-divider"/>
-                                    <NavlinksList navlinks={navlinks}/>
+                                    <NavlinksList
+                                        navlinks={navlinks}
+                                        currentPage={this.props.currentPage}
+                                    />
                                     <div className="dropdown-divider" />
                                     <li className="nav-item">
                                         <Link to="/" className="nav-link hidden-md-up">Выйти<span className="sr-only">(current)</span></Link>
