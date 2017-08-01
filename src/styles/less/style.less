@@ -142,6 +142,7 @@ nav {
 
 .logicon {
   visibility: visible;
+  color: @dark-gray;
   .login-collapse;
   padding: 0.2rem;
   &::before {
@@ -173,6 +174,11 @@ nav {
     border-top: 1px solid @gray;
     transform: rotate(45deg);
   }
+}
+
+.active {
+  cursor: default;
+  pointer-events: none;
 }
 
 /* --MAIN CONTENT-- */
