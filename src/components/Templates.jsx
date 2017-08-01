@@ -2,26 +2,91 @@ import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import { Link } from 'react-router-dom';
 
-const templates = [
-    { name:'Шаблон 1', pages: 3, questions: 12 },
-    { name:'Шаблон 2', pages: 2, questions: 10 },
-    { name:'Шаблон 3', pages: 1, questions: 12 },
-    { name:'Шаблон 4', pages: 3, questions: 10 },
-    { name:'Шаблон 5', pages: 2, questions: 12 },
-    { name:'Шаблон 6', pages: 1, questions: 10 },
-]
-
-function activeTemplate() {
-    return (
-        <span id="active-template">
-            <i className="fa fa-pencil-square fa-2x" aria-hidden="true" />
-            <i className="fa fa-trash fa-2x" aria-hidden="true" />
-        </span>
-    )
-}
-
 export default class Templates extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [{"name":"нет данных","pages":"нет данных","questions":"нет данных", "description":"нет данных"}],
+            filterText: '',
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleDeleteTemplate = this.handleDeleteTemplate.bind(this);
+    }
+
+    componentDidMount() {
+        $.ajax({
+            url: 'http://localhost:3000/surveys',
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            success: function(data) {
+                let templates = data.filter((obj) => obj.template === true);
+                this.setState({data: templates});
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+    }
+
+    handleChange(event) {
+        this.setState({
+            filterText: event.target.value,
+        })
+    }
+
+    handleDeleteTemplate(id) {
+        let deleteTemplate = confirm("Вы уверены, что хотите удалить шаблон?");
+        if (deleteTemplate) {
+            $.ajax({
+                url: 'http://localhost:3000/surveys/' + id ,
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body:JSON.stringify({
+                    "template":false
+                }),
+                success: function() {
+                    $.get( "http://localhost:3000/surveys", function( data ) {
+                        let templates = data.filter((obj) => obj.template === true);
+                        this.setState({data: templates});
+                    }.bind(this));
+                }.bind(this),
+                error: function(xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                }.bind(this)
+            });
+        }
+    }
+
     render() {
+        let that = this;
+        let templates = this.state.data.map(function(obj, index) {
+            return <div className="template" key={index}>
+                    <span className="active-template">
+                        <Link to={`${obj.link}`} className="edit-template"/>
+                        <span className="delete-template" onClick={() => that.handleDeleteTemplate(obj.id)}/>
+                    </span>
+                    <h2>{ obj.name }</h2>
+                    <p>{ obj.description }</p>
+                    <p className="question-number">Вопросов: <span>{ obj.pages }&nbsp;</span></p>
+                    <p className="page-number">Страниц: <span>{ obj.questions }</span></p>
+                    <Link to="/new_survey" className="create-survey">Создать опрос</Link>
+                </div>
+        });
+        let filteredTemplates = this.state.data.map(function(obj, index) {
+            if ((that.state.filterText) && obj.name.includes(that.state.filterText)) {
+                return <div className="template" key={index}>
+                    <span className="active-template">
+                        <Link to={`${obj.link}`} className="edit-template"/>
+                        <span className="delete-template" onClick={() => that.handleDeleteTemplate(obj.id)}/>
+                    </span>
+                    <h2>{ obj.name }</h2>
+                    <p>{ obj.description }</p>
+                    <p className="question-number">Вопросов: <span>{ obj.pages }&nbsp;</span></p>
+                    <p className="page-number">Страниц: <span>{ obj.questions }</span></p>
+                    <Link to="/new_survey" className="create-survey">Создать опрос</Link>
+                </div>
+            }
+        });
         return (
             <main className="d-flex flex-row justify-content-start">
                 <Sidebar />
@@ -29,21 +94,12 @@ export default class Templates extends React.Component {
                     <div className="page-head d-flex justify-content-between align-items-center">
                         <h1>Шаблоны <Link to="/new_survey" className="create-survey">Новый шаблон</Link></h1>
                         <div className="search-form">
-                            <input className="search" type="text" placeholder="Search..." />
+                            <input className="search" type="text" placeholder="Search..." value={this.state.filterText} onChange={event => this.handleChange(event)} />
                         </div>
                     </div>
                     <div className="available-templates">
-                        {templates.map((obj, index) =>
-                        <div className="template">
-                            <h2>{obj.name}</h2>
-                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper
-                                elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.
-                                Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius.
-                            </p>
-                            <p className="question-number">Вопросов: <span>{obj.pages }&nbsp;</span></p>
-                            <p className="page-number">Страниц: <span>{obj.questions}</span></p>
-                            <a className="create-survey" href="#">Создать опрос</a>
-                        </div> )}
+                        {!this.state.filterText && templates}
+                        {this.state.filterText && filteredTemplates}
                     </div>
                 </div>
             </main>
