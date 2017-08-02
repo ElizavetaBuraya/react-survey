@@ -51,7 +51,7 @@
 
 .answer-icon-params(@cont) {
   &::before {
-    .icon(@cont, -.6em, 0em, 1.25em);
+    .icon(@cont, -.6em, 0em, 1.05em);
   }
 }
 
@@ -189,6 +189,7 @@ main {
   justify-content: center;
   padding-top: 0em;
   flex: 1 0 auto;
+  transition: all 0.3s;
 }
 
 .main-content {
@@ -609,19 +610,14 @@ th {
 }
 
 /* Survey styles */
+
 .survey {
-  min-width: 65%;
   margin: 0 auto;
   padding: 4em 1.5em;
-  @media screen and (max-width: 1200px) {
-    min-width: 55%;
-  }
-  @media screen and (max-width: 991px) {
-    min-width: 81%;
-  }
+  min-width: 80%;
   @media screen and (max-width: 767px) {
     min-width: 100%;
-    padding: 2em 1.5em 1.5em;
+    padding: 2em .3em 1.5em;
   }
   & label, input[type="checkbox"], input[type="radio"] {
     cursor: pointer;
@@ -775,74 +771,79 @@ th {
 
 /* Survey settings styles */
 
-.survey-params {
-  position: sticky;
-  padding: 3em .4em 0em 0em;
-  height: 60%;
-  top: 3rem;
-  min-width: 20%;
-  background-color: @light-gray;
-  @media screen and (max-width: 1200px) {
-    min-width: 26%;
+.survey-sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 58px;
+  right: -250px;
+  z-index: 5;
+  background: @red;
+  color: @white;
+  transition: all 0.3s;
+  overflow-y: scroll;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  padding:1rem;
+  &.active-bar {
+    right: 0;
   }
+}
+
+.survey-sidebar-collapse {
+  position: fixed;
+  top:64px;
+  right:0px;
+  width: 35px;
+  height: 30px;
+  background-color: @red;
+  border-bottom-left-radius: 30%;
+  cursor: pointer;
+  transition: all 0.3s;
+  &::before {
+    color: @white;
+    .icon("\f104", 7px, 5px, 2.3rem)
+  }
+  z-index: 10;
+  &.active-bar {
+    right: 250px;
+    &::before {
+      color: @white;
+      .icon("\f105", 7px, 5px, 2.3rem)
+    }
+  }
+  @media screen and (max-width: 767px) {
+    top:59px;
+  }
+}
+
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 4;
+  display: none;
 }
 
 .params {
-  background-color: @gray;
-  border: 1px solid @gray;
-  width: 100%;
-  padding: .5em;
-  margin-bottom: 1em;
   & p {
-    background-color: @light-gray;
+    color: @white;
+    font-weight: bold;
     text-align: center;
-    font-size: 1.4em;
-    padding: .4em;
-    margin: -.3em -.3em .8em -.3em;
+    padding: .5rem 0rem;
+    border-bottom: 1px solid @gray;
   }
 }
 
-.toggle-question-params {
-  position: fixed;
-  bottom: 5em;
-  right: -1em;
-  z-index: 4;
-  &::before {
-    .icon("\f059", -1em, 0em, 1.25em);
-  }
-}
-
-.question-params-toggle-panel {
-  .params;
-  visibility: hidden;
-  width: 200px;
-  position: fixed;
-  bottom: 7.8em;
-  right: 1.5em;
-  z-index: 3;
-  font-size: .7em;
-}
-
-.toggle-survey-params {
-  position: fixed;
-  bottom: 3em;
-  right: -1em;
-  z-index: 4;
-  &::before {
-    .icon("\f013", -1em, 0em, 1.25em);
-  }
-}
-
-.survey-params-toggle-panel {
-  .question-params-toggle-panel;
-  bottom: 4.8em;
-}
-
-ul {
+.question-type-list, .survey-params-list {
   list-style: none;
   padding: 0em;
   & li {
     margin-bottom: .9em;
+    cursor: pointer;
+  }
+  & label {
+    display: inline;
   }
 }
 
@@ -933,8 +934,9 @@ footer {
   width: 100%;
   color: @light-gray;
   text-align: center;
-  flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+  flex-shrink: 0;
   padding: .7em;
   background-color: @dark-gray;
+  z-index: 6;
 }
 
