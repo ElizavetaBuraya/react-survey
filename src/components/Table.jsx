@@ -62,7 +62,8 @@ export default class Table extends React.Component {
                         || (key === 'template')
                         || (key === 'pages')
                         || (key === 'questions')
-                        || (key === 'description')}
+                        || (key === 'description')
+                        || (key === 'questions_list')}
                     >{this.props.columnNames[index]}</TableHeaderColumn>
                 )}
             </BootstrapTable>
