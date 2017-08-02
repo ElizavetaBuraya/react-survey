@@ -89,6 +89,56 @@
       "template": true,
       "pages": 2,
       "questions": 15,
+      "questions_list": [
+        {
+          "page_1": [
+            {
+              "index": 0,
+              "title": "Вопрос с несколькими вариантами ответа",
+              "type": "multi-choice",
+              "answers": [
+                "Ответ 1",
+                "Ответ 2",
+                "Ответ 3"
+              ]
+            },
+            {
+              "index": 1,
+              "title": "Вопрос с одним ответом",
+              "type": "single-choice",
+              "answers": [
+                "Ответ 1",
+                "Ответ 2",
+                "Ответ 3"
+              ]
+            },
+            {
+              "index": 2,
+              "title": "Вопрос с текстовым ответом",
+              "type": "text",
+              "answers": []
+            },
+            {
+              "index": 3,
+              "title": "Вопрос-файл",
+              "type": "file",
+              "answers": []
+            },
+            {
+              "index": 4,
+              "title": "Вопрос-рейтинг",
+              "type": "rating",
+              "answers": []
+            },
+            {
+              "index": 5,
+              "title": "Вопрос-шкала",
+              "type": "scale",
+              "answers": []
+            }
+          ]
+        }
+      ],
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Phasellus ullamcorper elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius."
     },
     {
@@ -101,6 +151,7 @@
       "template": true,
       "pages": 3,
       "questions": 12,
+      "questions_list": [],
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Phasellus ullamcorper elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius."
     },
     {
@@ -113,6 +164,7 @@
       "template": true,
       "pages": 3,
       "questions": 12,
+      "questions_list": [],
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Phasellus ullamcorper elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius."
     },
     {
@@ -125,6 +177,7 @@
       "template": true,
       "pages": 3,
       "questions": 12,
+      "questions_list": [],
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Phasellus ullamcorper elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius."
     },
     {
@@ -137,6 +190,7 @@
       "template": true,
       "pages": 3,
       "questions": 12,
+      "questions_list": [],
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Phasellus ullamcorper elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius."
     },
     {
@@ -149,6 +203,7 @@
       "template": true,
       "pages": 3,
       "questions": 12,
+      "questions_list": [],
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Phasellus ullamcorper elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius."
     },
     {
@@ -161,6 +216,7 @@
       "template": false,
       "pages": 3,
       "questions": 12,
+      "questions_list": [],
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Phasellus ullamcorper elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius."
     },
     {
@@ -173,6 +229,7 @@
       "template": false,
       "pages": 3,
       "questions": 12,
+      "questions_list": [],
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Phasellus ullamcorper elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius."
     },
     {
@@ -185,6 +242,7 @@
       "template": false,
       "pages": 3,
       "questions": 12,
+      "questions_list": [],
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Phasellus ullamcorper elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius."
     },
     {
@@ -197,6 +255,7 @@
       "template": false,
       "pages": 3,
       "questions": 12,
+      "questions_list": [],
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Phasellus ullamcorper elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius."
     },
     {
@@ -209,6 +268,7 @@
       "template": false,
       "pages": 3,
       "questions": 12,
+      "questions_list": [],
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Phasellus ullamcorper elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius."
     }
   ]
