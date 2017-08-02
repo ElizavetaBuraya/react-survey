@@ -5,41 +5,7 @@ $("#file").change(function(event) {
         $(".filepath").html(fileName);
 });
 
-$(".toggle-question-params").click(function() {
-    let quest_visibility =  $(".question-params-toggle-panel").css("visibility");
-    let survey_visibility =  $(".survey-params-toggle-panel").css("visibility");
-    if (quest_visibility == "hidden") {
-        $(".question-params-toggle-panel").css("visibility", "visible");
-        $(".survey-params-toggle-panel").css("visibility", "hidden");
-    }
-    else {
-        $(".question-params-toggle-panel").css("visibility", "hidden");
-    }
-})
-
-$(".toggle-survey-params").click(function() {
-    let survey_visibility =  $(".survey-params-toggle-panel").css("visibility");
-    let quest_visibility =  $(".question-params-toggle-panel").css("visibility");
-    if (survey_visibility == "hidden") {
-        $(".survey-params-toggle-panel").css("visibility", "visible");
-        $(".question-params-toggle-panel").css("visibility", "hidden");
-    }
-    else {
-        $(".survey-params-toggle-panel").css("visibility", "hidden");
-    }
-})
-
 document.addEventListener("DOMContentLoaded", function(event) {
-    (function () {
-        var el = document.querySelector("#star-rating");
-        var currentRating = 0;
-        var maxRating= 5;
-
-        if (el) {
-            var myRating = rating(el, currentRating, maxRating);
-            myRating.setRating(1);
-        }
-    })();
     (function () {
         var data_1 = {
             labels: ["Ответ 1", "Ответ 2", "Ответ 3"],

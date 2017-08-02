@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default class Login_Register extends React.Component {
+export default class LoginRegister extends React.Component {
     constructor () {
         super();
     }

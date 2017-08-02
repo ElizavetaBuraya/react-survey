@@ -1,10 +1,11 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
-import Login_Register from './Login_Register.jsx';
+import LoginRegister from './LoginRegister.jsx';
 import About from './About.jsx';
 import Users from './Users.jsx';
 import Surveys from './Surveys.jsx';
 import Templates from './Templates.jsx';
+import NewSurvey from './NewSurvey.jsx';
 import NoMatch from './ErrorPage.jsx'
 
 export default class Main extends React.Component {
@@ -12,7 +13,7 @@ export default class Main extends React.Component {
         return (
             <Switch>
                 <Route exact path='/'
-                       component={() => <Login_Register
+                       component={() => <LoginRegister
                            isRegistered={this.props.isRegistered}
                            isAuthorized={this.props.isAuthorized}
                            handleNotRegisteredClick = {this.props.handleNotRegisteredClick}
@@ -54,6 +55,16 @@ export default class Main extends React.Component {
                         <Redirect to="/"/>
                     ) : (
                         <Templates
+                            handleChangePage = {this.props.handleChangePage}
+                            currentPage = {this.props.currentPage}
+                        />
+                    )
+                )}/>
+                <Route path="/new_survey" render={() => (
+                    !this.props.isAuthorized ? (
+                        <Redirect to="/"/>
+                    ) : (
+                        <NewSurvey
                             handleChangePage = {this.props.handleChangePage}
                             currentPage = {this.props.currentPage}
                         />
