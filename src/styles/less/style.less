@@ -633,7 +633,7 @@ th {
   border: 1px solid @gray;
   position: relative;
   z-index: 1;
-  & i {
+  & i, .delete-question {
     .embedded-icon;
     right: .3em;
   }
@@ -681,7 +681,10 @@ th {
 .question {
   position: relative;
   padding: .5em;
-  & i {
+  & .edit-question {
+    &::after {
+      .icon("\f14b",0rem,0rem,1.2rem)
+    }
     .embedded-icon;
   }
 }
@@ -710,16 +713,13 @@ th {
 .edited {
   border:2px solid @gray;
   padding: 1rem;
-  & >  * {
+  & > * {
     margin-bottom: 1em;
-  }
-  & i {
-    right: .3em;
   }
 }
 
 .edit-question-params {
-  display: flex;
+  display: none;
   flex-direction: row;
   justify-content: space-between;
   & p {
@@ -727,6 +727,11 @@ th {
     margin: 0em 1em 0em 0em;
     & input {
       margin-right: .7em;
+    }
+  }
+  & .delete-question {
+    &::before {
+      .icon("\f1f8",0rem,0rem,1.4rem);
     }
   }
   @media screen and (max-width:390px) {
@@ -737,13 +742,14 @@ th {
 .move {
   &::before {
     .icon("\f0b2", -.2em, 0em, 1.2em);
+    cursor:move;
   }
 }
 
-.save-edited {
-  display: flex;
+.stop-edit-question {
+  display: none;
   justify-content: flex-end;
-  & > * {
+  & > a {
     .custom-control-btn;
   }
   @media screen and (max-width: 430px) {
