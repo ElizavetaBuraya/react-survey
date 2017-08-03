@@ -93,7 +93,7 @@
         {
           "page_1": [
             {
-              "index": 0,
+              "id": 0,
               "title": "Вопрос с несколькими вариантами ответа",
               "type": "multi-choice",
               "answers": [
@@ -103,7 +103,7 @@
               ]
             },
             {
-              "index": 1,
+              "id": 1,
               "title": "Вопрос с одним ответом",
               "type": "single-choice",
               "answers": [
@@ -113,25 +113,25 @@
               ]
             },
             {
-              "index": 2,
+              "id": 2,
               "title": "Вопрос с текстовым ответом",
               "type": "text",
               "answers": []
             },
             {
-              "index": 3,
+              "id": 3,
               "title": "Вопрос-файл",
               "type": "file",
               "answers": []
             },
             {
-              "index": 4,
+              "id": 4,
               "title": "Вопрос-рейтинг",
               "type": "rating",
               "answers": []
             },
             {
-              "index": 5,
+              "id": 5,
               "title": "Вопрос-шкала",
               "type": "scale",
               "answers": []
