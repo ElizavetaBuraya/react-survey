@@ -13,6 +13,7 @@ export default class Templates extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.onLoad = this.onLoad.bind(this);
         this.handleDeleteTemplate = this.handleDeleteTemplate.bind(this);
+        this.handleEditTemplate = this.handleEditTemplate.bind(this);
     }
 
     onLoad() {
@@ -64,6 +65,26 @@ export default class Templates extends React.Component {
         }
     }
 
+    handleEditTemplate(event, target, display) {
+        function show() {
+            $(target).parent(".template-wrapper").find(".active-template").show();
+            $(".template").css("box-shadow", "none");
+            $(target).parent(".template-wrapper").find(".template")
+                .css("box-shadow","inset 0em 0em 0em .4em #e6e6e6");
+        }
+
+        function hide() {
+            $(".template").css("box-shadow", "none");
+            $(".active-template").hide();
+        }
+
+        if (display) {
+            setTimeout(hide, 100);
+        } else {
+            setTimeout(show, 110);
+        }
+    }
+
     render() {
         return (
             <main className="d-flex flex-row justify-content-start">
@@ -74,11 +95,12 @@ export default class Templates extends React.Component {
                     <div className="page-head d-flex justify-content-between align-items-center">
                         <h1>Шаблоны <Link to="/new_survey" className="create-survey">Новый шаблон</Link></h1>
                         <div className="search-form">
-                            <input className="search" type="text" placeholder="Поиск" value={this.state.filterText} onChange={event => this.handleChange(event)} />
+                            <input className="search" type="text" placeholder="Поиск" value={this.state.filterText} onChange={() => this.handleChange(this)} />
                         </div>
                     </div>
                     <RenderTemplate
                         handleDeleteTemplate={this.handleDeleteTemplate}
+                        handleEditTemplate={this.handleEditTemplate}
                         filterText={this.state.filterText}
                         data={this.state.data}
                     />
