@@ -8,16 +8,16 @@ class Checkbox extends React.Component {
             <div>
                 {this.props.isEdited &&
                     <p>
-                        <input type="checkbox" id={this.props.id} name="checkbox-question"/>
+                        <input type='checkbox' id={this.props.id} name='checkbox-question'/>
                         <label>
-                            <input type="text" defaultValue={this.props.answer}
+                            <input type='text' defaultValue={this.props.answer}
                                    onChange={(e) => this.props.handleEditAnswer(e.target.value, this.props.index) } />
                         </label>
                     </p>
                 }
                 {!this.props.isEdited &&
                     <p>
-                        <input type="checkbox" id={this.props.id} name="checkbox-question" />
+                        <input type='checkbox' id={this.props.id} name='checkbox-question' />
                         <label htmlFor={this.props.id}>{this.props.answer}</label>
                     </p>
                 }
@@ -32,16 +32,16 @@ class Radio extends React.Component {
             <div>
                 {this.props.isEdited &&
                     <p>
-                        <input type="radio" id={this.props.id} name="radio-question"/>
+                        <input type='radio' id={this.props.id} name='radio-question'/>
                         <label>
-                            <input type="text" defaultValue={this.props.answer}
+                            <input type='text' defaultValue={this.props.answer}
                                    onChange={(e) => this.props.handleEditAnswer(e.target.value, this.props.index) } />
                         </label>
                     </p>
                 }
                 {!this.props.isEdited &&
                     <p>
-                        <input type="radio" id={this.props.id} name="radio-question" />
+                        <input type='radio' id={this.props.id} name='radio-question' />
                         <label htmlFor={this.props.id}>{this.props.answer}</label>
                     </p>
                 }
@@ -115,9 +115,9 @@ const questionTarget = {
 /* Drag and Drop logic end */
 
 function hideQuestionControls() {
-    $(".question").removeClass("edited");
-    $(".edit-question-params, .stop-edit-question").hide();
-    $(".edit-question").show();
+    $('.question').removeClass('edited');
+    $('.edit-question-params, .stop-edit-question').hide();
+    $('.edit-question').show();
 }
 
 @DropTarget(ItemTypes.QUESTION, questionTarget, connect => ({
@@ -147,15 +147,16 @@ export default class Question extends React.Component {
     }
 
     handleEditedQuestion(val, target) {
+        console.log('called');
         this.setState({
             isEdited: val,
         });
 
         if (val) {
-            let editedQuestion = $(target).parent(".question");
-            $(".edit-question").hide();
-            editedQuestion.addClass("edited");
-            editedQuestion.find(".edit-question-params, .stop-edit-question").css("display", "flex");
+            let editedQuestion = $(target).parent('.question');
+            $('.edit-question').hide();
+            editedQuestion.addClass('edited');
+            editedQuestion.find('.edit-question-params, .stop-edit-question').css('display', 'flex');
         } else {
             hideQuestionControls();
         }
@@ -199,93 +200,93 @@ export default class Question extends React.Component {
     render() {
         const { connectDragSource, connectDropTarget } = this.props;
         let question = null;
-        if (this.props.type === "multi-choice") {
+        if (this.props.type === 'multi-choice') {
             question = <div>
                             <Checkbox index = {0}
                                       answer = {this.props.answers[0]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {"check-one" + this.props.index}
+                                      id = {'check-one' + this.props.index}
                             />
                             <Checkbox index = {1}
                                       answer = {this.props.answers[1]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {"check-two" + this.props.index}
+                                      id = {'check-two' + this.props.index}
                             />
                             <Checkbox index = {2}
                                       answer = {this.props.answers[2]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {"check-three" + this.props.index}
+                                      id = {'check-three' + this.props.index}
                             />
                         </div>
         }
-        if (this.props.type === "single-choice") {
+        if (this.props.type === 'single-choice') {
             question = <div>
                             <Radio    index = {0}
                                       answer = {this.props.answers[0]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {"radio-one" + this.props.index}
+                                      id = {'radio-one' + this.props.index}
                             />
                             <Radio    index = {1}
                                       answer = {this.props.answers[1]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {"radio-two" + this.props.index}
+                                      id = {'radio-two' + this.props.index}
                             />
                             <Radio    index = {2}
                                       answer = {this.props.answers[2]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {"radio-three" + this.props.index}
+                                      id = {'radio-three' + this.props.index}
                             />
                         </div>
         }
-        if (this.props.type === "text") {
+        if (this.props.type === 'text') {
             question = <div>
-                            <textarea name="text-area" id="text-area" style={{width: 300, height: 100}} />
+                            <textarea name='text-area' id='text-area' style={{width: 300, height: 100}} />
                         </div>
         }
-        if (this.props.type === "file") {
+        if (this.props.type === 'file') {
             question = <div>
-                            <input type="file" className="input-file" name="file" id="file" />
-                            <label htmlFor="file">Файл</label><span className="filepath">Ничего не выбрано</span>
+                            <input type='file' className='input-file' name='file' id='file' />
+                            <label htmlFor='file'>Файл</label><span className='filepath'>Ничего не выбрано</span>
                         </div>
         }
-        if (this.props.type === "rating") {
+        if (this.props.type === 'rating') {
             question = <div>
-                            <ul className="c-rating"/>
+                            <ul className='c-rating'/>
                         </div>;
         }
-        if (this.props.type === "scale") {
+        if (this.props.type === 'scale') {
             question = <div>
                 <input
-                    id="rangeInput"
-                    type="range"
-                    min="0" max="100"
+                    id='rangeInput'
+                    type='range'
+                    min='0' max='100'
                     value={this.state.rangeValue}
                     onChange={(event) => this.handleChange(event)}
-                    step="1"/>
-                <output name="amount" id="amount" htmlFor="rangeInput">{this.state.rangeValue}</output>
+                    step='1'/>
+                <output name='amount' id='amount' htmlFor='rangeInput'>{this.state.rangeValue}</output>
             </div>
         }
         return connectDropTarget(
-            <div className="question">
-                <span className="edit-question" onClick={(e) => this.handleEditedQuestion(true, e.currentTarget)}/>
-                <div className="edit-question-params">
+            <div className='question'>
+                <span className='edit-question' onClick={(e) => this.handleEditedQuestion(true, e.currentTarget)}/>
+                <div className='edit-question-params'>
                     {connectDragSource(
-                        <p className="move">Переместить</p>
+                        <p className='move'>Переместить</p>
                     )}
-                    <p><input className="required-question" type="checkbox" name="required" defaultChecked={true} />Обязательный</p>
-                    <span className="delete-question" onClick={() => this.props.handleDeleteQuestion(this.props.id)}/>
+                    <p><input className='required-question' type='checkbox' name='required' defaultChecked={true} />Обязательный</p>
+                    <span className='delete-question' onClick={() => this.props.handleDeleteQuestion(this.props.id)}/>
                 </div>
-                <p className="question-title">
-                    <span className="question-number">{this.props.index + 1}.</span>
+                <p className='question-title'>
+                    <span className='question-number'>{this.props.index + 1}.</span>
                     {this.state.isEdited &&
-                        <input type="text"
-                               name="question-title"
+                        <input type='text'
+                               name='question-title'
                                defaultValue={this.props.title}
                                onChange={(event) => this.title = event.target.value }
                         />
@@ -297,11 +298,11 @@ export default class Question extends React.Component {
                     }
                 </p>
                 { question }
-                <div className="stop-edit-question">
-                    <a className="save-edited" href="#"
+                <div className='stop-edit-question'>
+                    <a className='save-edited' href='#'
                        onClick={() => this.handleSaveEdited(this.props.id)}>Сохранить
                     </a>
-                    <a className="quit-edited" href="#" onClick={() => this.handleEditedQuestion(false)}>Отмена</a>
+                    <a className='quit-edited' href='#' onClick={() => this.handleEditedQuestion(false)}>Отмена</a>
                 </div>
             </div>
         );

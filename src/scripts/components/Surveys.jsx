@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 class MySearchPanel extends React.Component {
     render() {
         return (
-            <div className="page-head d-flex justify-content-between align-items-center">
-                <h1>Мои опросы <Link to='/new_survey' className="create-survey" >Создать опрос</Link></h1>
-                <div className="search-form">
+            <div className='page-head d-flex justify-content-between align-items-center'>
+                <h1>Мои опросы <Link to='/new_survey' className='create-survey' >Создать опрос</Link></h1>
+                <div className='search-form'>
                     { this.props.searchField }
                 </div>
             </div>
@@ -18,7 +18,7 @@ class MySearchPanel extends React.Component {
 
 function createCustomDeleteButton(onBtnClick) {
     return (
-        <button className="delete-button" onClick={ onBtnClick }>Delete selected</button>
+        <button className='delete-button' onClick={ onBtnClick }>Delete selected</button>
     );
 }
 
@@ -34,7 +34,7 @@ export default class Surveys extends React.Component {
         this.onLoad = this.onLoad.bind(this);
         this.selectedRows = [];
         this.state = {
-            data: [{"id":"нет данных","name":"нет данных","changed":"нет данных","answers":"нет данных","link":"null", "results":"null"}],
+            data: [{'id':'нет данных','name':'нет данных','changed':'нет данных','answers':'нет данных','link':'null', 'results':'null'}],
             columnNames: ['id', 'Название','Изменен','Ответы','Ссылка','Результаты'],
         },
         this.options = {
@@ -88,16 +88,16 @@ export default class Surveys extends React.Component {
             ? this.selectedRows.push(row)
             : this.selectedRows.pop();
         let visibility = (this.selectedRows.length > 0)
-            ? "visible"
-            : "hidden";
-        $(".delete-button").css("visibility", visibility);
+            ? 'visible'
+            : 'hidden';
+        $('.delete-button').css('visibility', visibility);
     }
 
     onSelectAll(isSelected) {
         let visibility = (isSelected)
-            ? "visible"
-            : "hidden";
-        $(".delete-button").css("visibility", visibility);
+            ? 'visible'
+            : 'hidden';
+        $('.delete-button').css('visibility', visibility);
     }
 
     handleDeletedRow(row) {
@@ -111,12 +111,12 @@ export default class Surveys extends React.Component {
                 }.bind(this)
             });
         }
-        $(".delete-button").css("visibility", "hidden");
+        $('.delete-button').css('visibility', 'hidden');
     }
 
     renderTotal() {
         return (
-            <span className="users-number">
+            <span className='users-number'>
                 Всего опросов: { this.state.data.length }
             </span>
         );
@@ -135,11 +135,11 @@ export default class Surveys extends React.Component {
 
     render() {
         return (
-            <main className="d-flex flex-row justify-content-start">
+            <main className='d-flex flex-row justify-content-start'>
                 <Sidebar
                     currentPage = {this.props.currentPage}
                 />
-                <div className="main-content d-flex flex-column">
+                <div className='main-content d-flex flex-column'>
                     <Table data={this.state.data}
                            roles={this.state.roles}
                            options={ this.options }

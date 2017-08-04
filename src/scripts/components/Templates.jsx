@@ -7,7 +7,7 @@ export default class Templates extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [{"name":"Нет данных","pages":"нет данных","questions":"нет данных", "description":"нет данных"}],
+            data: [{'name':'Нет данных','pages':'нет данных','questions':'нет данных', 'description':'нет данных'}],
             filterText: '',
         };
         this.handleChange = this.handleChange.bind(this);
@@ -46,14 +46,14 @@ export default class Templates extends React.Component {
     }
 
     handleDeleteTemplate(id) {
-        let deleteTemplate = confirm("Вы уверены, что хотите удалить шаблон?");
+        let deleteTemplate = confirm('Вы уверены, что хотите удалить шаблон?');
         if (deleteTemplate) {
             $.ajax({
                 url: 'http://localhost:3000/surveys/' + id ,
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 data: JSON.stringify({
-                    "template":false
+                    'template':false
                 }),
                 success: function() {
                     this.onLoad();
@@ -67,15 +67,15 @@ export default class Templates extends React.Component {
 
     handleEditTemplate(event, target, display) {
         function show() {
-            $(target).parent(".template-wrapper").find(".active-template").show();
-            $(".template").css("box-shadow", "none");
-            $(target).parent(".template-wrapper").find(".template")
-                .css("box-shadow","inset 0em 0em 0em .4em #e6e6e6");
+            $(target).parent('.template-wrapper').find('.active-template').show();
+            $('.template').css('box-shadow', 'none');
+            $(target).parent('.template-wrapper').find('.template')
+                .css('box-shadow','inset 0em 0em 0em .4em #e6e6e6');
         }
 
         function hide() {
-            $(".template").css("box-shadow", "none");
-            $(".active-template").hide();
+            $('.template').css('box-shadow', 'none');
+            $('.active-template').hide();
         }
 
         if (display) {
@@ -87,15 +87,15 @@ export default class Templates extends React.Component {
 
     render() {
         return (
-            <main className="d-flex flex-row justify-content-start">
+            <main className='d-flex flex-row justify-content-start'>
                 <Sidebar
                     currentPage = {this.props.currentPage}
                 />
-                <div className="main-content">
-                    <div className="page-head d-flex justify-content-between align-items-center">
-                        <h1>Шаблоны <Link to="/new_survey" className="create-survey">Новый шаблон</Link></h1>
-                        <div className="search-form">
-                            <input className="search" type="text" placeholder="Поиск" value={this.state.filterText} onChange={() => this.handleChange(this)} />
+                <div className='main-content'>
+                    <div className='page-head d-flex justify-content-between align-items-center'>
+                        <h1>Шаблоны <Link to='/new_survey' className='create-survey'>Новый шаблон</Link></h1>
+                        <div className='search-form'>
+                            <input className='search' type='text' placeholder='Поиск' value={this.state.filterText} onChange={() => this.handleChange(this)} />
                         </div>
                     </div>
                     <RenderTemplate

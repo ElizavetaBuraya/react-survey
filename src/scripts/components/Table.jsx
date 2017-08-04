@@ -3,8 +3,8 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
 function getCaret(direction) {
     return direction === 'desc'
-        ?  <span className="sort-up"/>
-        :  <span className="sort-down"/>;
+        ?  <span className='sort-up'/>
+        :  <span className='sort-down'/>;
 }
 
 export default class Table extends React.Component {
