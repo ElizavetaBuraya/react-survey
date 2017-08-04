@@ -2,30 +2,13 @@ import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import GenerateQuestions from './GenerateQuestions.jsx'
 import update from 'react/lib/update'
-
-function toggleSurveyPanel() {
-    $('.overlay').on('click', function () {
-        $('#sidebar, #sidebarCollapse').removeClass('active-bar');
-        $('.overlay').fadeOut();
-    });
-
-    $('#sidebarCollapse').on('click', function () {
-        if ($('#sidebarCollapse').hasClass('active-bar')) {
-            $('#sidebar, #sidebarCollapse').removeClass('active-bar');
-            $('.overlay').fadeOut();
-        } else {
-            $('#sidebar, #sidebarCollapse').addClass('active-bar');
-            $('.overlay').fadeIn();
-        }
-    });
-}
-
 export default class NewSurvey extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             questions: null,
         };
+        this.handleTogglePanel = this.handleTogglePanel.bind(this);
         this.handleAddQuestion = this.handleAddQuestion.bind(this);
         this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
         this.handleDragQuestion = this.handleDragQuestion.bind(this);
@@ -37,7 +20,16 @@ export default class NewSurvey extends React.Component {
         {
             this.props.handleChangePage('/new_survey');
         }
-        toggleSurveyPanel();
+    }
+
+    handleTogglePanel() {
+        if ($('#sidebarCollapse').hasClass('active-bar')) {
+            $('#sidebar, #sidebarCollapse').removeClass('active-bar');
+            $('.overlay').fadeOut();
+        } else {
+            $('#sidebar, #sidebarCollapse').addClass('active-bar');
+            $('.overlay').fadeIn();
+        }
     }
 
     handleAddQuestion(questionType) {
@@ -127,7 +119,7 @@ export default class NewSurvey extends React.Component {
                         </div>
                     </div>
                     <aside className="survey-sidebar" id="sidebar">
-                        <a className="survey-sidebar-collapse" id="sidebarCollapse" />
+                        <a className="survey-sidebar-collapse" id="sidebarCollapse" onClick={this.handleTogglePanel}/>
                         <div className="params">
                             <p>Тип вопроса</p>
                             <ul className="question-type-list">
@@ -159,7 +151,7 @@ export default class NewSurvey extends React.Component {
                         <span className="percent">100%</span>
                     </div>
                 </div>
-                <div className="overlay" />
+                <div className="overlay" onClick={this.handleTogglePanel}/>
             </main>
         )
     }
