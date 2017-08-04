@@ -30,9 +30,9 @@ export default class Main extends React.Component {
                         currentPage = {this.props.currentPage}
                     />}
                 />
-                <Route path="/users" render={() => (
+                <Route path='/users' render={() => (
                         !this.props.isAuthorized ? (
-                            <Redirect to="/"/>
+                            <Redirect to='/'/>
                         ) : (
                             <Users
                                 handleChangePage = {this.props.handleChangePage}
@@ -40,9 +40,9 @@ export default class Main extends React.Component {
                             />
                         )
                 )}/>
-                <Route path="/surveys" render={() => (
+                <Route path='/surveys' render={() => (
                     !this.props.isAuthorized ? (
-                        <Redirect to="/"/>
+                        <Redirect to='/'/>
                     ) : (
                         <Surveys
                             handleChangePage = {this.props.handleChangePage}
@@ -50,9 +50,9 @@ export default class Main extends React.Component {
                         />
                     )
                 )}/>
-                <Route path="/templates" render={() => (
+                <Route path='/templates' render={() => (
                     !this.props.isAuthorized ? (
-                        <Redirect to="/"/>
+                        <Redirect to='/'/>
                     ) : (
                         <Templates
                             handleChangePage = {this.props.handleChangePage}
@@ -60,9 +60,9 @@ export default class Main extends React.Component {
                         />
                     )
                 )}/>
-                <Route path="/new_survey" render={() => (
+                <Route path='/new_survey' render={() => (
                     !this.props.isAuthorized ? (
-                        <Redirect to="/"/>
+                        <Redirect to='/'/>
                     ) : (
                         <NewSurvey
                             handleChangePage = {this.props.handleChangePage}

@@ -15,7 +15,7 @@ export default class GenerateQuestions extends React.Component {
 
     componentDidUpdate() {
         (function () {
-            let starArray = document.querySelectorAll(".c-rating");
+            let starArray = document.querySelectorAll('.c-rating');
             let currentRating = 0;
             let maxRating= 5;
 
