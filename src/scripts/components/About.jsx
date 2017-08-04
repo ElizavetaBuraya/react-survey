@@ -3,6 +3,20 @@ import Sidebar from './Sidebar.jsx';
 import Tabs from './Tabs.jsx';
 
 export default class About extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            navtabs : [
+                { 'href':'#about', 'id': 'about', 'name':'О нас', 'active':'active' },
+                { 'href':'#training', 'id': 'training', 'name':'Обучение', 'active':''},
+                { 'href':'#benefits', 'id': 'benefits', 'name':'Бенефиты', 'active':''},
+                { 'href':'#students', 'id': 'students', 'name':'Для студентов', 'active':''},
+                { 'href':'#pros', 'id': 'pros', 'name':'Наши преимущества', 'active':''},
+                { 'href':'#vacancies', 'id': 'vacancies', 'name':'Вакансии', 'active':''},
+                { 'href':'#contacts', 'id': 'contacts', 'name':'Контакты', 'active':''},
+            ]
+        }
+    }
 
     componentDidMount() {
         if (this.props.currentPage !== '/about')
@@ -24,7 +38,9 @@ export default class About extends React.Component {
                         <img src="img/placeholder.jpg" alt="splaceholder" height="200" width="500" />
                     </div>
                     <div className="tab-content-panel d-flex flex-column">
-                        <Tabs />
+                        <Tabs currentPage = '/about'
+                              navtabs={this.state.navtabs}
+                        />
                     </div>
                 </div>
             </main>
