@@ -54,7 +54,7 @@
   "scripts": {
     "build": "webpack -p",
     "dev": "webpack-dev-server",
-    "jserv": "json-server --watch src/content/db.json"
+    "jserv": "json-server --watch src/scripts/content/db.json"
   },
   "repository": {
     "type": "git",

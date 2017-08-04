@@ -10,7 +10,11 @@ export default class RenderTemplate extends React.Component {
                             <Link to={`${obj.link}`} className="edit-template"/>
                             <span className="delete-template" onClick={() => that.props.handleDeleteTemplate(obj.id)}/>
                         </p>
-                        <div className="template">
+                        <div className="template"
+                             tabIndex="0"
+                             onClick={(e) => that.props.handleEditTemplate(e, e.currentTarget)}
+                             onBlur={(e) => that.props.handleEditTemplate(e, e.currentTarget, "hide")}
+                        >
                             <h2>{ obj.name }</h2>
                             <p>{ obj.description }</p>
                             <p className="question-number">Вопросов: <span>{ obj.questions }&nbsp;</span></p>
@@ -31,7 +35,11 @@ export default class RenderTemplate extends React.Component {
                                 <Link to={`${obj.link}`} className="edit-template"/>
                                 <span className="delete-template" onClick={() => that.props.handleDeleteTemplate(obj.id)}/>
                             </p>
-                            <div className="template">
+                            <div className="template"
+                                 tabIndex="0"
+                                 onClick={(e) => that.props.handleEditTemplate(e, e.currentTarget)}
+                                 onBlur={(e) => that.props.handleEditTemplate(e, e.currentTarget, "hide")}
+                            >
                                 <h2>{ obj.name }</h2>
                                 <p>{ obj.description }</p>
                                 <p className="question-number">Вопросов: <span>{ obj.questions }&nbsp;</span></p>

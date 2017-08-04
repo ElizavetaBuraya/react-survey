@@ -50,6 +50,8 @@ class Radio extends React.Component {
     }
 }
 
+/* Drag and Drop logic start */
+
 const ItemTypes = {
     QUESTION: 'question',
 };
@@ -110,14 +112,21 @@ const questionTarget = {
     },
 };
 
+/* Drag and Drop logic end */
+
+function hideQuestionControls() {
+    $(".question").removeClass("edited");
+    $(".edit-question-params, .stop-edit-question").hide();
+    $(".edit-question").show();
+}
+
 @DropTarget(ItemTypes.QUESTION, questionTarget, connect => ({
-        connectDropTarget: connect.dropTarget(),
+    connectDropTarget: connect.dropTarget(),
 }))
 @DragSource(ItemTypes.QUESTION, questionSource, (connect, monitor) => ({
-        connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging(),
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
 }))
-
 export default class Question extends React.Component {
     constructor(props) {
         super(props);
@@ -137,13 +146,23 @@ export default class Question extends React.Component {
         this.setState({rangeValue: event.target.value});
     }
 
-    handleEditedQuestion(val) {
+    handleEditedQuestion(val, target) {
         this.setState({
             isEdited: val,
-        })
+        });
+
+        if (val) {
+            let editedQuestion = $(target).parent(".question");
+            $(".edit-question").hide();
+            editedQuestion.addClass("edited");
+            editedQuestion.find(".edit-question-params, .stop-edit-question").css("display", "flex");
+        } else {
+            hideQuestionControls();
+        }
     }
 
     handleSaveEdited(editedIndex) {
+        hideQuestionControls();
         let newArray = this.props.questions;
 
         this.setState({
@@ -254,7 +273,7 @@ export default class Question extends React.Component {
         }
         return connectDropTarget(
             <div className="question">
-                <span className="edit-question" onClick={() => this.handleEditedQuestion(true)}/>
+                <span className="edit-question" onClick={(e) => this.handleEditedQuestion(true, e.currentTarget)}/>
                 <div className="edit-question-params">
                     {connectDragSource(
                         <p className="move">Переместить</p>

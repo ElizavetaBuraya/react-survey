@@ -14,7 +14,7 @@ export default class NoMatch extends React.Component {
                 )}/>
                 <h1>404</h1>
                 <p>Ничего не найдено. Вернуться обратно?</p>
-                <Link to='starter_page'>Стартовая страница</Link>
+                <Link to='/starter_page'>Стартовая страница</Link>
             </main>
         )
     }
