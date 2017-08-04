@@ -553,6 +553,10 @@ th {
 
 /* Templates styles */
 
+.template-wrapper {
+  margin: 0 auto 2em;
+}
+
 .available-templates {
   display: flex;
   flex-direction: row;
@@ -569,7 +573,6 @@ th {
   background-color: @white;
   padding: 1rem;
   max-width: 450px;
-  margin: 0 auto 2em;
   & h2 {
     width: 100%;
     text-align: center;
@@ -588,7 +591,8 @@ th {
 
 .active-template {
   display: none;
-  float: right;
+  text-align: right;
+  margin-bottom: .1rem;
   & > * {
     color: @dark-gray;
     &:hover {
@@ -619,11 +623,34 @@ th {
     min-width: 100%;
     padding: 2em .3em 1.5em;
   }
-  & label, input[type="checkbox"], input[type="radio"] {
-    cursor: pointer;
-  }
   & input[type="text"] {
     .text-input(.3em);
+  }
+}
+
+label {
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  display:none;
+  & + label::before {
+    .icon("\f096", -.5rem, 0rem, 1.2rem)
+  }
+  &:checked + label::before {
+    color: @red;
+    .icon("\f046", -.5rem, 0rem, 1.2rem)
+  }
+}
+
+input[type="radio"] {
+  display:none;
+  & + label::before {
+    .icon("\f10c", -.5rem, 0rem, 1.2rem)
+  }
+  &:checked + label::before {
+    color: @red;
+    .icon("\f192", -.5rem, 0rem, 1.2rem)
   }
 }
 
@@ -858,10 +885,11 @@ th {
 }
 
 .survey-params-list {
-  & input {
-    margin-right: 1em;
+  input[type="checkbox"]:checked + label::before {
+    color: @dark-gray;
   }
 }
+
 
 .single-answer {
   .answer-icon-params("\f03a");

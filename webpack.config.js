@@ -10,10 +10,10 @@ const extractLess = new ExtractTextPlugin('./css/style.css');
 module.exports = {
     entry: [
         'babel-polyfill',
-        './src/index.js',
+        './src/scripts/index.js',
         'font-awesome/scss/font-awesome.scss',
-        './src/styles/sass/style.scss',
-        './src/styles/less/style.less'
+        './src/assets/styles/sass/style.scss',
+        './src/assets/styles/less/style.less'
     ],
     output: {
         filename: 'bundle.js',

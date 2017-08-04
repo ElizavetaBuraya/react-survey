@@ -1,3 +1,5 @@
+import Chart from 'chart.js';
+
 $("#file").change(function(event) {
     let fileName = '';
     fileName = event.target.value.split('\\').pop();
