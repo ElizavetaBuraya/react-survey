@@ -205,19 +205,19 @@ export default class Question extends React.Component {
                                       answer = {this.props.answers[0]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {"check-one"}
+                                      id = {"check-one" + this.props.index}
                             />
                             <Checkbox index = {1}
                                       answer = {this.props.answers[1]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {"check-two"}
+                                      id = {"check-two" + this.props.index}
                             />
                             <Checkbox index = {2}
                                       answer = {this.props.answers[2]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {"check-three"}
+                                      id = {"check-three" + this.props.index}
                             />
                         </div>
         }
@@ -227,19 +227,19 @@ export default class Question extends React.Component {
                                       answer = {this.props.answers[0]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {"radio-one"}
+                                      id = {"radio-one" + this.props.index}
                             />
                             <Radio    index = {1}
                                       answer = {this.props.answers[1]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {"radio-two"}
+                                      id = {"radio-two" + this.props.index}
                             />
                             <Radio    index = {2}
                                       answer = {this.props.answers[2]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {"radio-three"}
+                                      id = {"radio-three" + this.props.index}
                             />
                         </div>
         }
