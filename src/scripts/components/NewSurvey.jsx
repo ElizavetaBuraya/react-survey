@@ -9,7 +9,7 @@ export default class NewSurvey extends React.Component {
         this.state = {
             questions: null,
             navtabs: [
-                { 'href':'#page-one', 'id':'page-one', 'name':'Страница 1', 'active':'active' },
+                { 'href':'#page-one', 'id':'page-one', 'name':'Страница 1', 'active':true },
             ]
         };
         this.handleTogglePanel = this.handleTogglePanel.bind(this);
