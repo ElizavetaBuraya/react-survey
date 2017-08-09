@@ -139,6 +139,7 @@ export default class Question extends React.Component {
             isEdited: false,
         };
         this.title = null;
+        this.required = true;
         this.answersArray = [];
     }
 
@@ -147,7 +148,6 @@ export default class Question extends React.Component {
     }
 
     handleEditedQuestion(val, target) {
-        console.log('called');
         this.setState({
             isEdited: val,
         });
@@ -164,7 +164,7 @@ export default class Question extends React.Component {
 
     handleSaveEdited(editedIndex) {
         hideQuestionControls();
-        let newArray = this.props.questions;
+        let newArray = this.props.questions_list[this.props.survey_page];
 
         this.setState({
             isEdited: false,
@@ -175,6 +175,8 @@ export default class Question extends React.Component {
                 question.title = (this.title)
                     ? this.title
                     : question.title;
+
+                question.required = this.required;
 
                 if (question.answers) {
                     question.answers[0] = (this.answersArray[0])
@@ -206,19 +208,19 @@ export default class Question extends React.Component {
                                       answer = {this.props.answers[0]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {'check-one' + this.props.index}
+                                      id = {'check-one' + this.props.id}
                             />
                             <Checkbox index = {1}
                                       answer = {this.props.answers[1]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {'check-two' + this.props.index}
+                                      id = {'check-two' + this.props.id}
                             />
                             <Checkbox index = {2}
                                       answer = {this.props.answers[2]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {'check-three' + this.props.index}
+                                      id = {'check-three' + this.props.id}
                             />
                         </div>
         }
@@ -228,19 +230,19 @@ export default class Question extends React.Component {
                                       answer = {this.props.answers[0]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {'radio-one' + this.props.index}
+                                      id = {'radio-one' + this.props.id}
                             />
                             <Radio    index = {1}
                                       answer = {this.props.answers[1]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {'radio-two' + this.props.index}
+                                      id = {'radio-two' + this.props.id}
                             />
                             <Radio    index = {2}
                                       answer = {this.props.answers[2]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {'radio-three' + this.props.index}
+                                      id = {'radio-three' + this.props.id}
                             />
                         </div>
         }
@@ -279,7 +281,16 @@ export default class Question extends React.Component {
                     {connectDragSource(
                         <p className='move'>Переместить</p>
                     )}
-                    <p><input className='required-question' type='checkbox' name='required' defaultChecked={true} />Обязательный</p>
+                    <p>
+                        <input
+                            className='required-question'
+                            type='checkbox'
+                            id={'required' + this.props.id}
+                            defaultChecked={true}
+                            onChange={(e) => this.required = e.target.checked}
+                        />
+                        <label htmlFor={'required' + this.props.id}>Обязательный</label>
+                    </p>
                     <span className='delete-question' onClick={() => this.props.handleDeleteQuestion(this.props.id)}/>
                 </div>
                 <p className='question-title'>
