@@ -672,7 +672,7 @@ label {
   border: 1px solid @gray;
   position: relative;
   z-index: 1;
-  & i, .delete-question {
+  & .delete-question {
     .embedded-icon;
     right: .3em;
   }
@@ -694,6 +694,14 @@ label {
 .survey-content input, .survey-content textarea {
   margin-right: .2em;
   max-width: 100%;
+}
+
+.delete-page{
+  &::before {
+    .icon("\f1f8", 0rem, 0rem, 1.5rem)
+  }
+  .embedded-icon;
+  right: .5em;
 }
 
 .question {
