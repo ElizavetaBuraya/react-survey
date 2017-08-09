@@ -477,6 +477,10 @@ main {
   }
 }
 
+.nav-link {
+  min-height: 45px;
+}
+
 .about-pane {
   padding: 1.5rem;
   & div > * {
@@ -616,6 +620,15 @@ th {
 
 /* Survey styles */
 
+.survey-page {
+  & .nav-tabs {
+    flex-direction: row;
+    @media screen and (max-width: 915px) {
+      flex-direction: column;
+    }
+  }
+}
+
 .survey {
   margin: 0 auto;
   padding: 4em 1.5em;
@@ -627,32 +640,30 @@ th {
   & input[type="text"] {
     .text-input(.3em);
   }
+  & input[type="checkbox"] {
+    display:none;
+    & + label::before {
+      .icon("\f096", -.5rem, 0rem, 1.2rem)
+    }
+    &:checked + label::before {
+      color: @red;
+      .icon("\f046", -.5rem, 0rem, 1.2rem)
+    }
+  }
+  & input[type="radio"] {
+    display:none;
+    & + label::before {
+      .icon("\f10c", -.5rem, 0rem, 1.2rem)
+    }
+    &:checked + label::before {
+      color: @red;
+      .icon("\f192", -.5rem, 0rem, 1.2rem)
+    }
+  }
 }
 
 label {
   cursor: pointer;
-}
-
-input[type="checkbox"] {
-  display:none;
-  & + label::before {
-    .icon("\f096", -.5rem, 0rem, 1.2rem)
-  }
-  &:checked + label::before {
-    color: @red;
-    .icon("\f046", -.5rem, 0rem, 1.2rem)
-  }
-}
-
-input[type="radio"] {
-  display:none;
-  & + label::before {
-    .icon("\f10c", -.5rem, 0rem, 1.2rem)
-  }
-  &:checked + label::before {
-    color: @red;
-    .icon("\f192", -.5rem, 0rem, 1.2rem)
-  }
 }
 
 .survey-content {
@@ -664,6 +675,10 @@ input[type="radio"] {
   & i, .delete-question {
     .embedded-icon;
     right: .3em;
+  }
+  & .inactive-delete {
+    color: @light-gray;
+    pointer-events: none;
   }
   & >  * {
     margin-bottom: 1em;
@@ -679,31 +694,6 @@ input[type="radio"] {
 .survey-content input, .survey-content textarea {
   margin-right: .2em;
   max-width: 100%;
-}
-
-.tab {
-  overflow: hidden;
-  position: relative;
-  bottom: -.1em;
-  z-index: 2;
-}
-
-.tablinks {
-  .custom-btn(.5rem, .5rem, @gray, @gray);
-  float: left;
-  border: 1px solid @gray;
-  border-bottom: 1px solid @white !important;
-  outline: none;
-  @media screen and (max-width: 381px) {
-    font-size: .7em;
-  }
-}
-
-.active-tab {
-  background-color: @white !important;
-  position: relative;
-  border-bottom: none;
-  border-top: 1px solid @white;
 }
 
 .question {
