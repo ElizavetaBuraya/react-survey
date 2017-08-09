@@ -9,7 +9,7 @@ export default class GenerateQuestions extends React.Component {
         super(props);
         this.moveQuestion = this.moveQuestion.bind(this);
         this.state = {
-            questions: this.props.questions,
+            questions: this.props.questions_list,
         }
     }
 
@@ -32,25 +32,32 @@ export default class GenerateQuestions extends React.Component {
 
 
     moveQuestion(dragIndex, hoverIndex) {
-        const questions = this.props.questions;
-        const dragQuestion = questions[dragIndex];
+        const questionsList = this.props.questions_list;
+        const survey_page = this.props.survey_page;
+        const newQuestionsList = questionsList[survey_page];
+
+        const dragQuestion = newQuestionsList[dragIndex];
 
         this.props.handleDragQuestion(dragIndex, hoverIndex, dragQuestion);
     }
 
     render() {
-        const questions = this.props.questions;
+        const questions_list = this.props.questions_list;
+        const survey_page = this.props.survey_page;
+
         return (
             <div>
-                {questions.map((question, index) =>
+                {questions_list[survey_page].map((question, index) =>
                     <Question
                         key={question.id}
                         index={index}
                         id={question.id}
                         title={question.title}
                         type={question.type}
+                        required={question.required}
                         answers={question.answers}
-                        questions = {this.props.questions}
+                        questions_list = {this.props.questions_list}
+                        survey_page = {this.props.survey_page}
                         handleUpdateQuestion = {this.props.handleUpdateQuestion}
                         handleDeleteQuestion = {this.props.handleDeleteQuestion}
                         moveQuestion={this.moveQuestion}

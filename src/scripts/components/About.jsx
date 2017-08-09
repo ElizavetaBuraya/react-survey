@@ -7,13 +7,13 @@ export default class About extends React.Component {
         super(props);
         this.state = {
             navtabs : [
-                { 'href':'#about', 'id': 'about', 'name':'О нас', 'active':'active' },
-                { 'href':'#training', 'id': 'training', 'name':'Обучение', 'active':''},
-                { 'href':'#benefits', 'id': 'benefits', 'name':'Бенефиты', 'active':''},
-                { 'href':'#students', 'id': 'students', 'name':'Для студентов', 'active':''},
-                { 'href':'#pros', 'id': 'pros', 'name':'Наши преимущества', 'active':''},
-                { 'href':'#vacancies', 'id': 'vacancies', 'name':'Вакансии', 'active':''},
-                { 'href':'#contacts', 'id': 'contacts', 'name':'Контакты', 'active':''},
+                { 'href':'#about', 'id': 'about', 'name':'О нас', 'active':true },
+                { 'href':'#training', 'id': 'training', 'name':'Обучение', 'active':false},
+                { 'href':'#benefits', 'id': 'benefits', 'name':'Бенефиты', 'active':false},
+                { 'href':'#students', 'id': 'students', 'name':'Для студентов', 'active':false},
+                { 'href':'#pros', 'id': 'pros', 'name':'Наши преимущества', 'active':false},
+                { 'href':'#vacancies', 'id': 'vacancies', 'name':'Вакансии', 'active':false},
+                { 'href':'#contacts', 'id': 'contacts', 'name':'Контакты', 'active':false},
             ]
         }
     }
