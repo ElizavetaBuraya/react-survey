@@ -47,7 +47,7 @@ export default class Table extends React.Component {
                         key={index}
                         isKey={(key === 'id')}
                         dataField = {key}
-                        dataFormat = {(key == 'link' || key == 'results') ? this.props.surveyLink : undefined}
+                        dataFormat = {(key === 'link' || key === 'results') ? this.props.surveyLink : undefined}
                         thStyle={ { 'text-align': 'center' } }
                         tdStyle={ { 'text-align': 'center' } }
                         width='120'
@@ -63,7 +63,13 @@ export default class Table extends React.Component {
                         || (key === 'pages')
                         || (key === 'questions')
                         || (key === 'description')
-                        || (key === 'questions_list')}
+                        || (key === 'is_anonymous')
+                        || (key === 'questions_are_numbered')
+                        || (key === 'pages_are_numbered')
+                        || (key === 'randomized')
+                        || (key === 'required_fields')
+                        || (key === 'progress_bar')
+                        || (key.includes('page_'))}
                     >{this.props.columnNames[index]}</TableHeaderColumn>
                 )}
             </BootstrapTable>
