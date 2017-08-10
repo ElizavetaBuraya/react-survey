@@ -95,7 +95,7 @@ export default class Templates extends React.Component {
                     <div className='page-head d-flex justify-content-between align-items-center'>
                         <h1>Шаблоны <Link to='/new_survey' className='create-survey'>Новый шаблон</Link></h1>
                         <div className='search-form'>
-                            <input className='search' type='text' placeholder='Поиск' value={this.state.filterText} onChange={() => this.handleChange(this)} />
+                            <input className='form-control' type='text' placeholder='Поиск' value={this.state.filterText} onChange={() => this.handleChange(this)} />
                         </div>
                     </div>
                     <RenderTemplate
