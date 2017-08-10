@@ -1,54 +1,8 @@
 import React from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
 import { findDOMNode } from 'react-dom';
-
-class Checkbox extends React.Component {
-    render() {
-        return(
-            <div>
-                {this.props.isEdited &&
-                    <p>
-                        <input type='checkbox' id={this.props.id} name='checkbox-question'/>
-                        <label>
-                            <input type='text' defaultValue={this.props.answer}
-                                   onChange={(e) => this.props.handleEditAnswer(e.target.value, this.props.index) } />
-                        </label>
-                    </p>
-                }
-                {!this.props.isEdited &&
-                    <p>
-                        <input type='checkbox' id={this.props.id} name='checkbox-question' />
-                        <label htmlFor={this.props.id}>{this.props.answer}</label>
-                    </p>
-                }
-            </div>
-        )
-    }
-}
-
-class Radio extends React.Component {
-    render() {
-        return(
-            <div>
-                {this.props.isEdited &&
-                    <p>
-                        <input type='radio' id={this.props.id} name='radio-question'/>
-                        <label>
-                            <input type='text' defaultValue={this.props.answer}
-                                   onChange={(e) => this.props.handleEditAnswer(e.target.value, this.props.index) } />
-                        </label>
-                    </p>
-                }
-                {!this.props.isEdited &&
-                    <p>
-                        <input type='radio' id={this.props.id} name='radio-question' />
-                        <label htmlFor={this.props.id}>{this.props.answer}</label>
-                    </p>
-                }
-            </div>
-        )
-    }
-}
+import Checkbox from './Checkbox.jsx'
+import Radio from './Radio.jsx'
 
 /* Drag and Drop logic start */
 
@@ -141,6 +95,20 @@ export default class Question extends React.Component {
         this.title = null;
         this.required = true;
         this.answersArray = [];
+    }
+
+    componentDidMount() {
+        this.handleEditedQuestion(true, this.editButton);
+    }
+
+    componentWillReceiveProps() {
+        this.handleEditedQuestion(false);
+    }
+
+    componentDidUpdate(nextProps) {
+        if ((nextProps.isDragging || this.props.isDragging) && !this.state.isEdited) {
+            this.handleEditedQuestion(true, this.editButton);
+        }
     }
 
     handleChange(event) {
@@ -276,7 +244,9 @@ export default class Question extends React.Component {
         }
         return connectDropTarget(
             <div className='question'>
-                <span className='edit-question' onClick={(e) => this.handleEditedQuestion(true, e.currentTarget)}/>
+                <span className='edit-question'
+                      ref={(span) => this.editButton = span}
+                      onClick={(e) => this.handleEditedQuestion(true, e.currentTarget)}/>
                 <div className='edit-question-params'>
                     {connectDragSource(
                         <p className='move'>Переместить</p>
