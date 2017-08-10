@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import Tabs from './Tabs.jsx';
+import Checkbox from './Checkbox.jsx'
 import { Link } from 'react-router-dom';
 
 export default class NewSurvey extends React.Component {
@@ -312,49 +313,61 @@ export default class NewSurvey extends React.Component {
                             </ul>
                         </div>
                         <div className='params'>
-                            <p>Параметры опроса</p>
+                            <p className='params-list'>Параметры опроса</p>
                             <ul className='survey-params-list'>
                                 <li>
-                                    <input type='checkbox' id='anonymous'
-                                           onChange={(e) => this.setState({
-                                               is_anonymous: e.target.checked
-                                           })} />
-                                    <label htmlFor='anonymous'>Анонимный опрос</label>
+                                    <Checkbox answer = 'Анонимный опрос'
+                                              handleEditAnswer = {this.handleEditAnswer}
+                                              id = 'anonymous'
+                                              onChange={(e) => this.setState({
+                                                  is_anonymous: e.target.checked
+                                              })}
+                                    />
                                 </li>
                                 <li>
-                                    <input type='checkbox' id='questions-are-numbered'
-                                           onChange={(e) => this.setState({
-                                               questions_are_numbered: e.target.checked
-                                           })} />
-                                    <label htmlFor='questions-are-numbered'>Номера вопросов</label>
+                                    <Checkbox answer = 'Номера вопросов'
+                                              handleEditAnswer = {this.handleEditAnswer}
+                                              id = 'questions-are-numbered'
+                                              onChange={(e) => this.setState({
+                                                  questions_are_numbered: e.target.checked
+                                              })}
+                                    />
                                 </li>
                                 <li>
-                                    <input type='checkbox' id='pages-are-numbered'
-                                           onChange={(e) => this.setState({
-                                               pages_are_numbered: e.target.checked
-                                           })} />
-                                    <label htmlFor='pages-are-numbered'>Номера страниц</label>
+                                    <Checkbox answer = 'Номера страниц'
+                                              handleEditAnswer = {this.handleEditAnswer}
+                                              id = 'pages-are-numbered'
+                                              onChange={(e) => this.setState({
+                                                  pages_are_numbered: e.target.checked
+                                              })}
+                                    />
                                 </li>
                                 <li>
-                                    <input type='checkbox' id='random-order'
-                                           onChange={(e) => this.setState({
-                                               randomized: e.target.checked
-                                           })} />
-                                    <label htmlFor='random-order'>Случайный порядок вопросов</label>
+                                    <Checkbox answer = 'Случайный порядок вопросов'
+                                              handleEditAnswer = {this.handleEditAnswer}
+                                              id = 'random-order'
+                                              onChange={(e) => this.setState({
+                                                  randomized: e.target.checked
+                                              })}
+                                    />
                                 </li>
                                 <li>
-                                    <input type='checkbox' id='compulsory'
-                                           onChange={(e) => this.setState({
-                                               required_fields: e.target.checked
-                                           })} />
-                                    <label htmlFor='compulsory'>Звездочки обязательных полей</label>
+                                    <Checkbox answer = 'Звездочки обязательных полей'
+                                              handleEditAnswer = {this.handleEditAnswer}
+                                              id = 'compulsory'
+                                              onChange={(e) => this.setState({
+                                                  required_fields: e.target.checked
+                                              })}
+                                    />
                                 </li>
                                 <li>
-                                    <input type='checkbox' id='progress'
-                                          onChange={(e) => this.setState({
-                                               progress_bar: e.target.checked
-                                           })} />
-                                    <label htmlFor='progress'>Индикатор выполнения</label>
+                                    <Checkbox answer = 'Индикатор выполнения'
+                                              handleEditAnswer = {this.handleEditAnswer}
+                                              id = 'progress'
+                                              onChange={(e) => this.setState({
+                                                  progress_bar: e.target.checked
+                                              })}
+                                    />
                                 </li>
                             </ul>
                         </div>
