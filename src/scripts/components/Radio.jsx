@@ -4,17 +4,21 @@ export default class Radio extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: null,
+            isChecked: false
         };
         this.handleChecked = this.handleChecked.bind(this);
     }
 
     handleChecked(event) {
-        console.log(event.target.id);
-        console.log(this.state.selected);
-        this.setState({
-            selected: event.target.id
-        })
+        if (this.props.id === event.target.id) {
+           this.setState({
+               isChecked: true
+           })
+        } else {
+            this.setState({
+                isChecked: false
+            })
+        }
     }
 
     render() {
@@ -25,7 +29,7 @@ export default class Radio extends React.Component {
                     <input type='radio' id={this.props.id} name='radio-question'/>
                     <label>
                         <input type='text' defaultValue={this.props.answer}
-                               onChange={(e) => this.props.handleEditAnswer(e.target.value, this.props.index) } />
+                               onChange={(e) => this.props.handleEditAnswer(e.target.value, this.props.index)} />
                     </label>
                 </p>
                 }
@@ -33,10 +37,10 @@ export default class Radio extends React.Component {
                 <p>
                     <input type='radio'
                            id={this.props.id}
-                           name='radio-question'
-                           value={this.props.value}
-                           checked={this.props.id === this.state.selected}
-                           onChange={this.handleChecked}/>
+                           name={this.props.name}
+                           value={this.props.answer}
+                           checked={this.state.isChecked}
+                           onClick={this.handleChecked}/>
                     <label htmlFor={this.props.id}>{this.props.answer}</label>
                 </p>
                 }
