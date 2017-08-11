@@ -15,7 +15,11 @@ export default class Checkbox extends React.Component {
                 }
                 {!this.props.isEdited &&
                 <p>
-                    <input type='checkbox' id={this.props.id} name='checkbox-question' />
+                    <input
+                        type='checkbox'
+                        id={this.props.id}
+                        checked={this.props.isChecked}
+                        name='checkbox-question' />
                     <label htmlFor={this.props.id}>{this.props.answer}</label>
                 </p>
                 }
