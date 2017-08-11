@@ -60,7 +60,7 @@ export default class Main extends React.Component {
                         />
                     )
                 )}/>
-                <Route path='/new_survey' render={() => (
+                <Route exact path='/new_survey' render={() => (
                     !this.props.isAuthorized ? (
                         <Redirect to='/'/>
                     ) : (
@@ -70,6 +70,7 @@ export default class Main extends React.Component {
                         />
                     )
                 )}/>
+                <Route path='/new_survey/:link' component={NewSurvey} />
                 <Route component={() => <NoMatch
                         isRegistered={this.props.isRegistered}
                         isAuthorized={this.props.isAuthorized}
