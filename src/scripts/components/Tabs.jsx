@@ -54,7 +54,7 @@ class GenerateContent extends React.Component {
                                 <span className={deleteClass} aria-hidden='true' onClick={() => this.props.handleDeletePage(tab.id)}/>
                                 <input type='text'
                                        name='page-head'
-                                       placeholder={tab.name}
+                                       value={tab.name}
                                        maxLength="12"
                                        onChange={(e) => this.props.handleChangePageName(e.target.value, tab.id)}
                                 /><br/>

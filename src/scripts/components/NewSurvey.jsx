@@ -2,12 +2,15 @@ import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import Tabs from './Tabs.jsx';
 import Checkbox from './Checkbox.jsx'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 export default class NewSurvey extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            survey_id:null,
+            editingTemplate:false,
+            redirectToTemplates: false,
             survey_title:"",
             questions_list:{"page_1" : null},
             survey_page:"page_1",
@@ -23,6 +26,7 @@ export default class NewSurvey extends React.Component {
                 { 'href':'#page_1', 'id':'page_1', 'name':'Страница 1', 'active':true }
             ]
         };
+        this.onLoad = this.onLoad.bind(this);
         this.handleTogglePanel = this.handleTogglePanel.bind(this);
         this.handleAddQuestion = this.handleAddQuestion.bind(this);
         this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
@@ -36,10 +40,40 @@ export default class NewSurvey extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.currentPage !== '/new_survey')
-        {
-            this.props.handleChangePage('/new_survey');
-        }
+        this.props.handleChangePage
+        ? this.props.handleChangePage('/new_survey')
+        : this.onLoad(this.props.location.pathname);
+    }
+
+    onLoad(path) {
+        let pathId = path.split("/");
+        $.ajax({
+            url: 'http://localhost:3000/surveys?link=survey/' + pathId[pathId.length-1],
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            success: function(data) {
+                let template = data[0];
+                this.setState({
+                    editingTemplate: (!path.includes("create")),
+                    survey_id:(path.includes("create")) ? null : template.id,
+                    survey_title:template.name,
+                    survey_page:'page_1',
+                    numberOfPages: template.pages,
+                    numberOfQuestions: template.questions,
+                    is_anonymous: template.is_anonymous,
+                    questions_are_numbered: template.questions_are_numbered,
+                    pages_are_numbered: template.pages_are_numbered,
+                    randomized: template.randomized,
+                    required_fields: template.required_fields,
+                    progress_bar: template.progress_bar,
+                    questions_list: template.questions_list,
+                    navtabs: template.navtabs
+                });
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
     }
 
     handleTogglePanel() {
@@ -231,7 +265,9 @@ export default class NewSurvey extends React.Component {
         month = (month < 10) ? '0' + month : month;
         dateChanged = day + '.' + month + '.' + year;
 
-        let surveyId = (new Date).getTime();
+        let surveyId = (this.state.survey_id)
+            ? this.state.survey_id
+            : (new Date).getTime();
 
         let isTemplate = !!(template);
 
@@ -240,8 +276,8 @@ export default class NewSurvey extends React.Component {
             "name": this.state.survey_title,
             "changed": dateChanged,
             "answers": 0,
-            "link": "/survey/" + surveyId,
-            "results": "/survey/" + surveyId + "/results",
+            "link": "survey/" + surveyId,
+            "results": "survey/" + surveyId + "/results",
             "template": isTemplate,
             "pages": this.state.numberOfPages,
             "questions": this.state.numberOfQuestions,
@@ -252,22 +288,45 @@ export default class NewSurvey extends React.Component {
             "required_fields": this.state.required_fields,
             "progress_bar": this.state.progress_bar,
             "description": description,
+            "navtabs": this.state.navtabs,
+            "questions_list":this.state.questions_list
         };
 
-        Object.assign(newSurvey, this.state.questions_list);
-
-        $.ajax({
-            url: 'http://localhost:3000/surveys',
-            method: 'POST',
-            data: JSON.stringify(newSurvey),
-            headers: { 'Content-Type': 'application/json' },
-            success: function() {
-                alert("Опрос создан успешно");
-            }.bind(this)
-        });
+        if (!this.state.survey_id) {
+            $.ajax({
+                url: 'http://localhost:3000/surveys',
+                method: 'POST',
+                data: JSON.stringify(newSurvey),
+                headers: { 'Content-Type': 'application/json' },
+                success: function() {
+                    alert("Опрос создан успешно");
+                }.bind(this)
+            });
+        } else {
+            $.ajax({
+                url: 'http://localhost:3000/surveys/' + surveyId,
+                method: 'PUT',
+                data: JSON.stringify(newSurvey),
+                headers: { 'Content-Type': 'application/json' },
+                success: function() {
+                    alert("Шаблон обновлен успешно");
+                    this.setState({
+                        redirectToTemplates: true,
+                    })
+                }.bind(this)
+            });
+        }
     }
 
     render() {
+        const redirectToTemplates = this.state.redirectToTemplates;
+
+        if (redirectToTemplates) {
+            return (
+                <Redirect to="/templates"/>
+            )
+        }
+
         return (
             <main className='d-flex flex-row'>
                 <Sidebar
@@ -276,15 +335,19 @@ export default class NewSurvey extends React.Component {
                 <div className='main-content survey d-flex flex-column'>
                     <div className='page-head'>
                         <label htmlFor='new_survey'><p className='survey-title'>Новый опрос:</p></label>
-                        <input type='text' name='new-survey' id='new_survey' onChange={(e) => {this.setState({survey_title:e.target.value})}}/><br/>
+                        <input type='text'
+                               name='new-survey'
+                               id='new_survey'
+                               value={this.state.survey_title}
+                               onChange={(e) => {this.setState({survey_title:e.target.value})}}/><br/>
                         <div className='survey-stats'>
                             <p className='question-number'>Вопросов: <span>{this.state.numberOfQuestions}</span>,</p>
                             <p className='page-number'>cтраниц: <span>{this.state.numberOfPages}</span></p>
                         </div>
                         <div className='survey-command-panel'>
-                            <a href='#' onClick = {this.handleSaveSurvey}>Сохранить</a>
+                            {!this.state.editingTemplate && <a href='#' onClick = {this.handleSaveSurvey}>Сохранить</a> }
                             <a href='#' onClick = {() => this.handleSaveSurvey("template")}>Сохранить как шаблон</a>
-                            <Link to="/about">Отмена</Link>
+                            <Link to={(this.state.editingTemplate) ? '/templates' : '/about'}>Отмена</Link>
                             <a href='#' onClick = {this.handleAddPage}>Новая страница</a>
                         </div>
                     </div>
@@ -319,6 +382,7 @@ export default class NewSurvey extends React.Component {
                                     <Checkbox answer = 'Анонимный опрос'
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'anonymous'
+                                              isChecked = {this.state.is_anonymous}
                                               onChange={(e) => this.setState({
                                                   is_anonymous: e.target.checked
                                               })}
@@ -328,6 +392,7 @@ export default class NewSurvey extends React.Component {
                                     <Checkbox answer = 'Номера вопросов'
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'questions-are-numbered'
+                                              isChecked = {this.state.questions_are_numbered}
                                               onChange={(e) => this.setState({
                                                   questions_are_numbered: e.target.checked
                                               })}
@@ -337,6 +402,7 @@ export default class NewSurvey extends React.Component {
                                     <Checkbox answer = 'Номера страниц'
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'pages-are-numbered'
+                                              isChecked = {this.state.pages_are_numbered}
                                               onChange={(e) => this.setState({
                                                   pages_are_numbered: e.target.checked
                                               })}
@@ -346,6 +412,7 @@ export default class NewSurvey extends React.Component {
                                     <Checkbox answer = 'Случайный порядок вопросов'
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'random-order'
+                                              isChecked = {this.state.randomized}
                                               onChange={(e) => this.setState({
                                                   randomized: e.target.checked
                                               })}
@@ -355,6 +422,7 @@ export default class NewSurvey extends React.Component {
                                     <Checkbox answer = 'Звездочки обязательных полей'
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'compulsory'
+                                              isChecked = {this.state.required_fields}
                                               onChange={(e) => this.setState({
                                                   required_fields: e.target.checked
                                               })}
@@ -364,6 +432,7 @@ export default class NewSurvey extends React.Component {
                                     <Checkbox answer = 'Индикатор выполнения'
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'progress'
+                                              isChecked = {this.state.progress_bar}
                                               onChange={(e) => this.setState({
                                                   progress_bar: e.target.checked
                                               })}

@@ -7,7 +7,7 @@ export default class RenderTemplate extends React.Component {
         let templates = this.props.data.map(function(obj, index) {
             return <div className='template-wrapper' key={index}>
                         <p className='active-template'>
-                            <Link to={`${obj.link}`} className='edit-template'/>
+                            <Link to={`/new_survey/${obj.link}`} className='edit-template'/>
                             <span className='delete-template' onClick={() => that.props.handleDeleteTemplate(obj.id)}/>
                         </p>
                         <div className='template'
@@ -19,7 +19,7 @@ export default class RenderTemplate extends React.Component {
                             <p>{ obj.description }</p>
                             <p className='question-number'>Вопросов: <span>{ obj.questions }&nbsp;</span></p>
                             <p className='page-number'>Страниц: <span>{ obj.pages }</span></p>
-                            <Link to='/new_survey' className='create-survey'>Создать опрос</Link>
+                            <Link to={`/new_survey/create/${obj.link}`} className='create-survey'>Создать опрос</Link>
                         </div>
                    </div>
         });
@@ -32,7 +32,7 @@ export default class RenderTemplate extends React.Component {
             ) {
                 return <div className='template-wrapper' key={index}>
                             <p className='active-template'>
-                                <Link to={`${obj.link}`} className='edit-template'/>
+                                <Link to={`/new_survey/${obj.link}`} className='edit-template'/>
                                 <span className='delete-template' onClick={() => that.props.handleDeleteTemplate(obj.id)}/>
                             </p>
                             <div className='template'
@@ -44,7 +44,7 @@ export default class RenderTemplate extends React.Component {
                                 <p>{ obj.description }</p>
                                 <p className='question-number'>Вопросов: <span>{ obj.questions }&nbsp;</span></p>
                                 <p className='page-number'>Страниц: <span>{ obj.pages }</span></p>
-                                <Link to='/new_survey' className='create-survey'>Создать опрос</Link>
+                                <Link to={`/new_survey/create/${obj.link}`} className='create-survey'>Создать опрос</Link>
                             </div>
                         </div>
             }

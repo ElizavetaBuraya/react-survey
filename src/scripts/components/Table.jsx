@@ -69,7 +69,8 @@ export default class Table extends React.Component {
                         || (key === 'randomized')
                         || (key === 'required_fields')
                         || (key === 'progress_bar')
-                        || (key.includes('page_'))}
+                        || (key === 'questions_list')
+                        || (key === 'navtabs')}
                     >{this.props.columnNames[index]}</TableHeaderColumn>
                 )}
             </BootstrapTable>
