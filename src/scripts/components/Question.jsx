@@ -90,25 +90,11 @@ export default class Question extends React.Component {
         this.handleEditAnswer = this.handleEditAnswer.bind(this);
         this.state = {
             rangeValue: 0,
-            isEdited: false,
+            isEdited: false
         };
         this.title = null;
         this.required = true;
         this.answersArray = [];
-    }
-
-    componentDidMount() {
-        this.handleEditedQuestion(true, this.editButton);
-    }
-
-    componentWillReceiveProps() {
-        this.handleEditedQuestion(false);
-    }
-
-    componentDidUpdate(nextProps) {
-        if ((nextProps.isDragging || this.props.isDragging) && !this.state.isEdited) {
-            this.handleEditedQuestion(true, this.editButton);
-        }
     }
 
     handleChange(event) {
@@ -199,18 +185,21 @@ export default class Question extends React.Component {
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
                                       id = {'radio-one' + this.props.id}
+                                      name = {'radio-question' + this.props.id}
                             />
                             <Radio    index = {1}
                                       answer = {this.props.answers[1]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
                                       id = {'radio-two' + this.props.id}
+                                      name = {'radio-question' + this.props.id}
                             />
                             <Radio    index = {2}
                                       answer = {this.props.answers[2]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
                                       id = {'radio-three' + this.props.id}
+                                      name = {'radio-question' + this.props.id}
                             />
                         </div>
         }
@@ -245,7 +234,6 @@ export default class Question extends React.Component {
         return connectDropTarget(
             <div className='question'>
                 <span className='edit-question'
-                      ref={(span) => this.editButton = span}
                       onClick={(e) => this.handleEditedQuestion(true, e.currentTarget)}/>
                 <div className='edit-question-params'>
                     {connectDragSource(
