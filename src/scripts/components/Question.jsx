@@ -205,12 +205,13 @@ export default class Question extends React.Component {
         }
         if (this.props.type === 'text') {
             question = <div>
-                            <textarea name='text-area' id='text-area' style={{width: 300, height: 100}} />
+                            <textarea name='text-area' id='text-area' style={{width: 300, height: 100}}
+                                      onChange={(e) => this.props.handleSaveAnswer(this.props.id, e.target.value)}/>
                         </div>
         }
         if (this.props.type === 'file') {
             question = <div>
-                            <input type='file' className='input-file' name='file' id='file' />
+                            <input type='file' className='input-file' name='file' id='file'/>
                             <label htmlFor='file'>Файл</label><span className='filepath'>Ничего не выбрано</span>
                         </div>
         }
@@ -233,8 +234,9 @@ export default class Question extends React.Component {
         }
         return connectDropTarget(
             <div className='question'>
-                <span className='edit-question'
-                      onClick={(e) => this.handleEditedQuestion(true, e.currentTarget)}/>
+                {(this.props.currentPage !== '/survey') &&
+                    <span className='edit-question'
+                          onClick={(e) => this.handleEditedQuestion(true, e.currentTarget)}/>}
                 <div className='edit-question-params'>
                     {connectDragSource(
                         <p className='move'>Переместить</p>
