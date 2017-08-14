@@ -6,6 +6,7 @@ import Users from './Users.jsx';
 import Surveys from './Surveys.jsx';
 import Templates from './Templates.jsx';
 import NewSurvey from './NewSurvey.jsx';
+import GenerateSurvey from './GenerateSurvey.jsx';
 import NoMatch from './ErrorPage.jsx'
 
 export default class Main extends React.Component {
@@ -71,6 +72,7 @@ export default class Main extends React.Component {
                     )
                 )}/>
                 <Route path='/new_survey/:link' component={NewSurvey} />
+                <Route path='/survey/:link' component={GenerateSurvey} />
                 <Route component={() => <NoMatch
                         isRegistered={this.props.isRegistered}
                         isAuthorized={this.props.isAuthorized}

@@ -203,15 +203,10 @@ export default class NewSurvey extends React.Component {
 
     handleChangePageName(value, tabId) {
         let navTabs = this.state.navtabs;
-        let defaultName = null;
 
-        navTabs.map((tab) => {
+        navTabs.map((tab, index) => {
             if (tab.id === tabId) {
-                defaultName = tab.name;
                 tab.name = value;
-                if (value.length === 0) {
-                    tab.name = defaultName;
-                }
             }
         });
 
@@ -269,8 +264,6 @@ export default class NewSurvey extends React.Component {
             ? this.state.survey_id
             : (new Date).getTime();
 
-        let isTemplate = !!(template);
-
         let newSurvey = {
             "id": surveyId,
             "name": this.state.survey_title,
@@ -278,7 +271,7 @@ export default class NewSurvey extends React.Component {
             "answers": 0,
             "link": "survey/" + surveyId,
             "results": "survey/" + surveyId + "/results",
-            "template": isTemplate,
+            "template": template,
             "pages": this.state.numberOfPages,
             "questions": this.state.numberOfQuestions,
             "is_anonymous": this.state.is_anonymous,
@@ -345,8 +338,8 @@ export default class NewSurvey extends React.Component {
                             <p className='page-number'>cтраниц: <span>{this.state.numberOfPages}</span></p>
                         </div>
                         <div className='survey-command-panel'>
-                            {!this.state.editingTemplate && <a href='#' onClick = {this.handleSaveSurvey}>Сохранить</a> }
-                            <a href='#' onClick = {() => this.handleSaveSurvey("template")}>Сохранить как шаблон</a>
+                            {!this.state.editingTemplate && <a href='#' onClick = {() => this.handleSaveSurvey(false)}>Сохранить</a> }
+                            <a href='#' onClick = {() => this.handleSaveSurvey(true)}>Сохранить как шаблон</a>
                             <Link to={(this.state.editingTemplate) ? '/templates' : '/about'}>Отмена</Link>
                             <a href='#' onClick = {this.handleAddPage}>Новая страница</a>
                         </div>

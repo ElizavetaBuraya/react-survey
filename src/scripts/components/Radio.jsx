@@ -39,7 +39,6 @@ export default class Radio extends React.Component {
                            id={this.props.id}
                            name={this.props.name}
                            value={this.props.answer}
-                           checked={this.state.isChecked}
                            onClick={this.handleChecked}/>
                     <label htmlFor={this.props.id}>{this.props.answer}</label>
                 </p>
