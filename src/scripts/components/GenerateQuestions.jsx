@@ -58,8 +58,10 @@ export default class GenerateQuestions extends React.Component {
                         answers={question.answers}
                         questions_list = {this.props.questions_list}
                         survey_page = {this.props.survey_page}
+                        currentPage = {this.props.currentPage}
                         handleUpdateQuestion = {this.props.handleUpdateQuestion}
                         handleDeleteQuestion = {this.props.handleDeleteQuestion}
+                        handleSaveAnswer = {this.props.handleSaveAnswer}
                         moveQuestion={this.moveQuestion}
                     />
                 )}
