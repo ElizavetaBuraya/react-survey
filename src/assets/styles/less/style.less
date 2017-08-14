@@ -128,7 +128,7 @@ nav {
 }
 
 .login {
-  .custom-btn(0.5rem, 2.5rem, @red, @red);
+  .custom-btn(0.5rem, 2.5rem, @red, @red) !important;
   margin-left: 2rem;
   &:active {
     color: @red;
@@ -289,9 +289,9 @@ main {
 }
 
 .active-nav {
-  background-color: @white;
-  border-color: @red;
-  color: @red;
+  background-color: @white !important;
+  border-color: @red !important;
+  color: @red !important;
   cursor: default;
   pointer-events: none;
 }
@@ -949,6 +949,7 @@ label {
 
 .bar {
   height: 30px;
+  width: 0%;
   background-color: @red;
 }
 
@@ -957,6 +958,13 @@ label {
   & a {
     .custom-control-btn;
     font-size: 1em;
+    color: @white !important;
+    &:hover {
+      color: @red !important;
+    }
+  }
+  & .active-nav {
+    color: @red !important;
   }
 }
 
