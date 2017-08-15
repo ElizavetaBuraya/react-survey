@@ -90,6 +90,7 @@ export default class Question extends React.Component {
         this.handleEditAnswer = this.handleEditAnswer.bind(this);
         this.state = {
             rangeValue: 0,
+            textboxValue:"",
             isEdited: false
         };
         this.title = null;
@@ -97,8 +98,19 @@ export default class Question extends React.Component {
         this.answersArray = [];
     }
 
-    handleChange(event) {
-        this.setState({rangeValue: event.target.value});
+    handleChange(type, id, event) {
+        let value;
+        switch(type) {
+            case "text" : let val = this.state.textboxValue + event.target.value;
+                          this.setState({
+                              textboxValue: val
+                          });
+                          value = this.state.textboxValue;
+            case "scale": this.setState({rangeValue: event.target.value});
+            default:null;
+        }
+
+        this.props.handleSaveAnswer(id, value);
     }
 
     handleEditedQuestion(val, target) {
@@ -205,13 +217,16 @@ export default class Question extends React.Component {
         }
         if (this.props.type === 'text') {
             question = <div>
-                            <textarea name='text-area' id='text-area' style={{width: 300, height: 100}}
-                                      onChange={(e) => this.props.handleSaveAnswer(this.props.id, e.target.value)}/>
+                            <textarea name='text-area'
+                                      id='text-area'
+                                      style={{width: 300, height: 100}}
+                                      onChange={(event) => this.handleChange(this.props.type, this.props.id, event)}/>
                         </div>
         }
         if (this.props.type === 'file') {
             question = <div>
-                            <input type='file' className='input-file' name='file' id='file'/>
+                            <input name="file" className='input-file' id='file' type="file"
+                                   onChange={(e) => this.props.handleSaveAnswer(this.props.id, e.target.value)} />
                             <label htmlFor='file'>Файл</label><span className='filepath'>Ничего не выбрано</span>
                         </div>
         }
@@ -227,7 +242,7 @@ export default class Question extends React.Component {
                     type='range'
                     min='0' max='100'
                     value={this.state.rangeValue}
-                    onChange={(event) => this.handleChange(event)}
+                    onChange={(event) => this.handleChange(this.props.type, this.props.id, event)}
                     step='1'/>
                 <output name='amount' id='amount' htmlFor='rangeInput'>{this.state.rangeValue}</output>
             </div>

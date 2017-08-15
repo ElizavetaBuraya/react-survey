@@ -6,7 +6,7 @@ import Users from './Users.jsx';
 import Surveys from './Surveys.jsx';
 import Templates from './Templates.jsx';
 import NewSurvey from './NewSurvey.jsx';
-import GenerateSurvey from './GenerateSurvey.jsx';
+import GenerateSurvey from './RenderSurvey.jsx';
 import NoMatch from './ErrorPage.jsx'
 
 export default class Main extends React.Component {
@@ -23,7 +23,6 @@ export default class Main extends React.Component {
                            handleChangePage = {this.props.handleChangePage}
                            currentPage = {this.props.currentPage}
                        />}
-
                 />
                 <Route path='/about' component={() => <About
                         isAuthorized={this.props.isAuthorized}

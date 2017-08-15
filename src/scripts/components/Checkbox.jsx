@@ -19,7 +19,9 @@ export default class Checkbox extends React.Component {
                         type='checkbox'
                         id={this.props.id}
                         checked={this.props.isChecked}
-                        name='checkbox-question' />
+                        name='checkbox-question'
+                        onChange={this.props.onChange}
+                    />
                     <label htmlFor={this.props.id}>{this.props.answer}</label>
                 </p>
                 }
