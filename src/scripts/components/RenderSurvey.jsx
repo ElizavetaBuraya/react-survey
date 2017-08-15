@@ -1,7 +1,6 @@
 import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import GenerateQuestions from './GenerateQuestions.jsx';
-import { Redirect } from 'react-router-dom';
 
 export default class GenerateSurvey extends React.Component {
     constructor(props) {
@@ -27,6 +26,7 @@ export default class GenerateSurvey extends React.Component {
         this.onLoad = this.onLoad.bind(this);
         this.handleChangePage = this.handleChangePage.bind(this);
         this.handleSubmitSurvey = this.handleSubmitSurvey.bind(this);
+        this.handleSaveAnswer = this.handleSaveAnswer.bind(this);
     }
 
     componentDidMount() {
@@ -66,6 +66,29 @@ export default class GenerateSurvey extends React.Component {
     handleChangePage(page) {
         this.setState({
             survey_page: page,
+        })
+    }
+
+    handleSaveAnswer(id, value) {
+        let surveyPage = this.state.survey_page;
+        let answersList = this.state.answers_list;
+
+        let answersArray = (answersList[surveyPage])
+            ? answersList[surveyPage]
+            : [];
+
+        let newAnswer = {
+            'id': id,
+            'answer': value
+        };
+
+        answersArray.push(newAnswer);
+        answersList[surveyPage] = answersArray;
+
+        console.log(answersList[surveyPage]);
+
+        this.setState({
+            answers_list:answersArray
         })
     }
 
@@ -129,11 +152,12 @@ export default class GenerateSurvey extends React.Component {
         const navs = this.state.navtabs;
 
         this.state.navtabs.map((tab, index) => {
-                if (tab.id === this.state.survey_page) {
-                    pageName = tab.name;
-                    pageIndex = index;
-                }
-            });
+            if (tab.id === this.state.survey_page) {
+                pageName = tab.name;
+                pageIndex = index;
+            }
+        });
+
         return (
             <main className='d-flex flex-row'>
                 <Sidebar
@@ -147,13 +171,13 @@ export default class GenerateSurvey extends React.Component {
                         <div className="survey-content">
                             <h2>{pageName}</h2>
                             {this.state.questions_list[this.state.survey_page] &&
-                                <GenerateQuestions questions_list = {this.state.questions_list}
-                                      survey_page = {this.state.survey_page}
-                                      currentPage = '/survey'
-                                      navtabs={this.state.navtabs}
-                                      handleChangePage = {this.handleChangePage}
-                                      handleSaveAnswer = {this.handleSaveAnswer}
-                                />}
+                            <GenerateQuestions questions_list = {this.state.questions_list}
+                                               survey_page = {this.state.survey_page}
+                                               currentPage = '/survey'
+                                               navtabs={this.state.navtabs}
+                                               handleChangePage = {this.handleChangePage}
+                                               handleSaveAnswer = {this.handleSaveAnswer}
+                            />}
                         </div>
                     </div>
                     <div className="progress d-flex justify-content-center">
@@ -167,15 +191,15 @@ export default class GenerateSurvey extends React.Component {
                         <a className={(this.state.survey_page === 'page_1')
                             ? 'active-nav'
                             : ''}
-                            onClick={() => this.handleChangePage(navs.length > 1
-                                ? navs[pageIndex - 1].id
-                                : navs[0])}>Предыдущая страница</a>
+                           onClick={() => this.handleChangePage(navs.length > 1
+                               ? navs[pageIndex - 1].id
+                               : navs[0])}>Предыдущая страница</a>
                         <a className={(this.state.survey_page === navs[navs.length - 1].id)
                             ? 'active-nav'
                             : ''}
-                            onClick={() => this.handleChangePage(navs.length > 1
-                                ? navs[pageIndex + 1].id
-                                : navs[0])}>Следующая страница</a>
+                           onClick={() => this.handleChangePage(navs.length > 1
+                               ? navs[pageIndex + 1].id
+                               : navs[0])}>Следующая страница</a>
                     </div>
                 </div>
             </main>
