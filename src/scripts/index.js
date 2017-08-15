@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import App from './components/App.jsx';
 import './custom_scripts/forms-script.js';
 import './libraries/rating.min.js';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import AppContainer from './containers/AppContainer';
+import rootReducer from './reducers';
+
+const store = createStore(rootReducer);
 
 ReactDOM.render((
-    <BrowserRouter basename={'/'}>
-        <App />
-    </BrowserRouter>
-), document.getElementById('page-content'))
+    <Provider store={store}>
+        <AppContainer />
+    </Provider>
+), document.getElementById('page-content'));
