@@ -17,10 +17,10 @@ export default class NewSurvey extends React.Component {
             numberOfPages: 1,
             numberOfQuestions: 0,
             is_anonymous: false,
-            questions_are_numbered: true,
-            pages_are_numbered: true,
+            questions_are_numbered: false,
+            pages_are_numbered: false,
             randomized: false,
-            required_fields: true,
+            required_fields: false,
             progress_bar: false,
             navtabs: [
                 { 'href':'#page_1', 'id':'page_1', 'name':'Страница 1', 'active':true }
