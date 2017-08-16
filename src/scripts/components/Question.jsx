@@ -99,10 +99,11 @@ export default class Question extends React.Component {
         this.answersArray = [];
     }
 
-    handleChange(event) {
+    handleChange(id, event) {
         this.setState({
             rangeValue: event.target.value
         });
+        this.props.handleSaveAnswer(id, event.target.value);
     }
 
     handleEditedQuestion(val, target) {
@@ -255,10 +256,17 @@ export default class Question extends React.Component {
                     id='rangeInput'
                     type='range'
                     min='0' max='100'
-                    value={this.state.rangeValue}
-                    onChange={(event) => this.handleChange(event)}
+                    value={(this.props.result) ? this.props.result : this.state.rangeValue}
+                    onChange={(event) => this.handleChange(this.props.id, event)}
                     step='1'/>
-                <output name='amount' id='amount' htmlFor='rangeInput'>{this.state.rangeValue}</output>
+                <output name='amount'
+                        id='amount'
+                        htmlFor='rangeInput'>
+                    {(this.props.result)
+                        ? this.props.result
+                        : this.state.rangeValue
+                    }
+                </output>
             </div>
         }
         return connectDropTarget(
