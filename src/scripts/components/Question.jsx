@@ -165,19 +165,19 @@ export default class Question extends React.Component {
                                       answer = {this.props.answers[0]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {'check-one' + this.props.id}
+                                      name = {'checkbox-question' + this.props.id}
                             />
                             <Checkbox index = {1}
                                       answer = {this.props.answers[1]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {'check-two' + this.props.id}
+                                      name = {'checkbox-question' + this.props.id}
                             />
                             <Checkbox index = {2}
                                       answer = {this.props.answers[2]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {'check-three' + this.props.id}
+                                      name = {'checkbox-question' + this.props.id}
                             />
                         </div>
         }
@@ -187,21 +187,18 @@ export default class Question extends React.Component {
                                       answer = {this.props.answers[0]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {'radio-one' + this.props.id}
                                       name = {'radio-question' + this.props.id}
                             />
                             <Radio    index = {1}
                                       answer = {this.props.answers[1]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {'radio-two' + this.props.id}
                                       name = {'radio-question' + this.props.id}
                             />
                             <Radio    index = {2}
                                       answer = {this.props.answers[2]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      id = {'radio-three' + this.props.id}
                                       name = {'radio-question' + this.props.id}
                             />
                         </div>
@@ -242,7 +239,8 @@ export default class Question extends React.Component {
             <div className='question'>
                 {(this.props.currentPage !== '/survey') &&
                     <span className='edit-question'
-                          onClick={(e) => this.handleEditedQuestion(true, e.currentTarget)}/>}
+                          onClick={(e) => this.handleEditedQuestion(true, e.currentTarget)}/>
+                }
                 <div className='edit-question-params'>
                     {connectDragSource(
                         <p className='move'>Переместить</p>
