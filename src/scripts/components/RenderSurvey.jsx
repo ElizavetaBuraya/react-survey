@@ -94,8 +94,33 @@ export default class GenerateSurvey extends React.Component {
         });
 
          this.setState({
-            questions_list: newQuestionsList })
+            questions_list: newQuestionsList });
 
+        this.updateProgressBar();
+
+    }
+
+    updateProgressBar() {
+        let questionsList = this.state.questions_list;
+        let questionNumber = this.state.numberOfQuestions;
+        let answeredQuestions = 0;
+
+         for (let page in questionsList){
+             questionsList[page].forEach((question) => {
+                 if (Number.isInteger(question.result)) {
+                     (question.result > 0)
+                         ? answeredQuestions += 1
+                             : answeredQuestions += 0;
+                 } else if (question.result && question.result.length > 0) {
+                     answeredQuestions += 1;
+                 }
+             })
+         }
+
+         let percent = Math.round((answeredQuestions * 100)/questionNumber);
+
+        $('.bar').css('width', percent + '%');
+        $('.percent').html(percent + '%');
     }
 
     handleSubmitSurvey(template) {
@@ -125,7 +150,9 @@ export default class GenerateSurvey extends React.Component {
                     </div>
                     <div className="survey-page">
                         <div className="survey-content">
-                            <h2>{pageName}</h2>
+                            {this.state.pages_are_numbered &&
+                                <h2>{pageName}</h2>
+                            }
                             {this.state.questions_list[this.state.survey_page] &&
                             <GenerateQuestions questions_list = {this.state.questions_list}
                                                survey_page = {this.state.survey_page}
