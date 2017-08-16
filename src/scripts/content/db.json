@@ -763,7 +763,7 @@
             "id": 1502456984166,
             "title": "Новый вопрос",
             "type": "multi-choice",
-            "required": false,
+            "required": true,
             "answers": [
               "Ответ 1",
               "Ответ 2",

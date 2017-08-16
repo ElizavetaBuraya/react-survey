@@ -17,8 +17,8 @@ export default class NewSurvey extends React.Component {
             numberOfPages: 1,
             numberOfQuestions: 0,
             is_anonymous: false,
-            questions_are_numbered: false,
-            pages_are_numbered: false,
+            questions_are_numbered: true,
+            pages_are_numbered: true,
             randomized: false,
             required_fields: false,
             progress_bar: false,
@@ -354,6 +354,8 @@ export default class NewSurvey extends React.Component {
                           handleChangePage = {this.handleChangePage}
                           handleChangePageName = {this.handleChangePageName}
                           handleDeletePage = {this.handleDeletePage}
+                          questions_are_numbered = {this.state.questions_are_numbered}
+                          required_fields = {this.state.required_fields}
                     />
                     <aside className='survey-sidebar' id='sidebar'>
                         <a className='survey-sidebar-collapse' id='sidebarCollapse' onClick={this.handleTogglePanel}/>
@@ -376,8 +378,8 @@ export default class NewSurvey extends React.Component {
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'anonymous'
                                               isChecked = {this.state.is_anonymous}
-                                              onChange={(e) => this.setState({
-                                                  is_anonymous: e.target.checked
+                                              onChange={(val) => this.setState({
+                                                  is_anonymous: val
                                               })}
                                     />
                                 </li>
@@ -386,8 +388,8 @@ export default class NewSurvey extends React.Component {
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'questions-are-numbered'
                                               isChecked = {this.state.questions_are_numbered}
-                                              onChange={(e) => this.setState({
-                                                  questions_are_numbered: e.target.checked
+                                              onChange={(val) => this.setState({
+                                                  questions_are_numbered: val
                                               })}
                                     />
                                 </li>
@@ -396,8 +398,8 @@ export default class NewSurvey extends React.Component {
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'pages-are-numbered'
                                               isChecked = {this.state.pages_are_numbered}
-                                              onChange={(e) => this.setState({
-                                                  pages_are_numbered: e.target.checked
+                                              onChange={(val) => this.setState({
+                                                  pages_are_numbered: val
                                               })}
                                     />
                                 </li>
@@ -406,8 +408,8 @@ export default class NewSurvey extends React.Component {
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'random-order'
                                               isChecked = {this.state.randomized}
-                                              onChange={(e) => this.setState({
-                                                  randomized: e.target.checked
+                                              onChange={(val) => this.setState({
+                                                  randomized: val
                                               })}
                                     />
                                 </li>
@@ -416,8 +418,8 @@ export default class NewSurvey extends React.Component {
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'compulsory'
                                               isChecked = {this.state.required_fields}
-                                              onChange={(e) => this.setState({
-                                                  required_fields: e.target.checked
+                                              onChange={(val) => this.setState({
+                                                  required_fields: val
                                               })}
                                     />
                                 </li>
@@ -426,8 +428,8 @@ export default class NewSurvey extends React.Component {
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'progress'
                                               isChecked = {this.state.progress_bar}
-                                              onChange={(e) => this.setState({
-                                                  progress_bar: e.target.checked
+                                              onChange={(val) => this.setState({
+                                                  progress_bar: val
                                               })}
                                     />
                                 </li>

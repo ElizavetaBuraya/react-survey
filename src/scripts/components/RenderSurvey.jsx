@@ -9,7 +9,6 @@ export default class GenerateSurvey extends React.Component {
             survey_id:null,
             survey_title:"",
             questions_list:{"page_1" : null},
-            answers_list:{"page_1" : null},
             survey_page:"page_1",
             numberOfPages: 1,
             numberOfQuestions: 0,
@@ -69,25 +68,59 @@ export default class GenerateSurvey extends React.Component {
         })
     }
 
-    handleSaveAnswer(id, value) {
+    handleSaveAnswer(id, value, checked) {
+        let newQuestionsList = this.state.questions_list;
         let surveyPage = this.state.survey_page;
-        let answersList = this.state.answers_list;
+        let index = 0;
+        let results = null;
 
-        let answersArray = (answersList[surveyPage])
-            ? answersList[surveyPage]
-            : [];
+        newQuestionsList[surveyPage].map((question) => {
+           if (question.id == id) {
+               if (question.type === "single-choice" || question.type === "multi-choice") {
+                   results = (question.result) ? (question.result) : [];
+                   if (checked) {
+                       results.push(value)
+                   } else {
+                       index = results.indexOf(value);
+                       results.splice(index, 1);
+                   }
+                   question.result = results;
+               } else {
+                   results = value;
+               }
 
-        let newAnswer = {
-            'id': id,
-            'answer': value
-        };
+               question.result = results;
+            }
+        });
 
-        answersArray.push(newAnswer);
-        answersList[surveyPage] = answersArray;
+         this.setState({
+            questions_list: newQuestionsList });
 
-        this.setState({
-            answers_list:answersArray
-        })
+        this.updateProgressBar();
+
+    }
+
+    updateProgressBar() {
+        let questionsList = this.state.questions_list;
+        let questionNumber = this.state.numberOfQuestions;
+        let answeredQuestions = 0;
+
+         for (let page in questionsList){
+             questionsList[page].forEach((question) => {
+                 if (Number.isInteger(question.result)) {
+                     (question.result > 0)
+                         ? answeredQuestions += 1
+                             : answeredQuestions += 0;
+                 } else if (question.result && question.result.length > 0) {
+                     answeredQuestions += 1;
+                 }
+             })
+         }
+
+         let percent = Math.round((answeredQuestions * 100)/questionNumber);
+
+        $('.bar').css('width', percent + '%');
+        $('.percent').html(percent + '%');
     }
 
     handleSubmitSurvey(template) {
@@ -117,7 +150,9 @@ export default class GenerateSurvey extends React.Component {
                     </div>
                     <div className="survey-page">
                         <div className="survey-content">
-                            <h2>{pageName}</h2>
+                            {this.state.pages_are_numbered &&
+                                <h2>{pageName}</h2>
+                            }
                             {this.state.questions_list[this.state.survey_page] &&
                             <GenerateQuestions questions_list = {this.state.questions_list}
                                                survey_page = {this.state.survey_page}
@@ -125,6 +160,11 @@ export default class GenerateSurvey extends React.Component {
                                                navtabs={this.state.navtabs}
                                                handleChangePage = {this.handleChangePage}
                                                handleSaveAnswer = {this.handleSaveAnswer}
+                                               is_anonymous = {this.state.is_anonymous}
+                                               questions_are_numbered = {this.state.questions_are_numbered}
+                                               randomized = {this.state.randomized}
+                                               required_fields = {this.state.required_fields}
+                                               progress_bar = {this.state.progress_bar}
                             />}
                         </div>
                     </div>

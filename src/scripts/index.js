@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './custom_scripts/forms-script.js';
-import './libraries/rating.min.js';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import AppContainer from './containers/AppContainer';
