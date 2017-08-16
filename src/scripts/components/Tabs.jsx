@@ -64,6 +64,8 @@ class GenerateContent extends React.Component {
                                                        handleUpdateQuestion = {this.props.handleUpdateQuestion}
                                                        handleDragQuestion = {this.props.handleDragQuestion}
                                                        handleDeleteQuestion = {this.props.handleDeleteQuestion}
+                                                       questions_are_numbered = {this.props.questions_are_numbered}
+                                                       required_fields = {this.props.required_fields}
                                     />
                                 }
                                 {!this.props.questions_list[this.props.survey_page] &&
@@ -110,6 +112,8 @@ export default class Tabs extends React.Component {
                                      handleDeleteQuestion = {this.props.handleDeleteQuestion}
                                      handleChangePageName = {this.props.handleChangePageName}
                                      handleDeletePage = {this.props.handleDeletePage}
+                                     questions_are_numbered = {this.props.questions_are_numbered}
+                                     required_fields = {this.props.required_fields}
                     />
                 </div>
             </div>

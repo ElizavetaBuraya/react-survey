@@ -17,8 +17,8 @@ export default class NewSurvey extends React.Component {
             numberOfPages: 1,
             numberOfQuestions: 0,
             is_anonymous: false,
-            questions_are_numbered: false,
-            pages_are_numbered: false,
+            questions_are_numbered: true,
+            pages_are_numbered: true,
             randomized: false,
             required_fields: false,
             progress_bar: false,
@@ -354,6 +354,8 @@ export default class NewSurvey extends React.Component {
                           handleChangePage = {this.handleChangePage}
                           handleChangePageName = {this.handleChangePageName}
                           handleDeletePage = {this.handleDeletePage}
+                          questions_are_numbered = {this.state.questions_are_numbered}
+                          required_fields = {this.state.required_fields}
                     />
                     <aside className='survey-sidebar' id='sidebar'>
                         <a className='survey-sidebar-collapse' id='sidebarCollapse' onClick={this.handleTogglePanel}/>

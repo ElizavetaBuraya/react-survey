@@ -133,6 +133,11 @@ export default class GenerateSurvey extends React.Component {
                                                navtabs={this.state.navtabs}
                                                handleChangePage = {this.handleChangePage}
                                                handleSaveAnswer = {this.handleSaveAnswer}
+                                               is_anonymous = {this.state.is_anonymous}
+                                               questions_are_numbered = {this.state.questions_are_numbered}
+                                               randomized = {this.state.randomized}
+                                               required_fields = {this.state.required_fields}
+                                               progress_bar = {this.state.progress_bar}
                             />}
                         </div>
                     </div>

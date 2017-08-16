@@ -64,6 +64,10 @@ export default class GenerateQuestions extends React.Component {
                         handleDeleteQuestion = {this.props.handleDeleteQuestion}
                         handleSaveAnswer = {this.props.handleSaveAnswer}
                         moveQuestion={this.moveQuestion}
+                        is_anonymous = {this.props.is_anonymous}
+                        questions_are_numbered = {this.props.questions_are_numbered}
+                        required_fields = {this.props.required_fields}
+                        progress_bar = {this.props.progress_bar}
                     />
                 )}
             </div>
