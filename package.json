@@ -48,6 +48,7 @@
     "react-redux": "^5.0.6",
     "react-redux-form": "^1.14.0",
     "react-router-dom": "^4.1.2",
+    "react-stars": "^2.2.3",
     "redux": "^3.7.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
