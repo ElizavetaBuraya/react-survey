@@ -88,6 +88,7 @@ export default class Question extends React.Component {
         this.handleEditedQuestion = this.handleEditedQuestion.bind(this);
         this.handleSaveEdited = this.handleSaveEdited.bind(this);
         this.handleEditAnswer = this.handleEditAnswer.bind(this);
+        this.handleUploadFile = this.handleUploadFile.bind(this);
         this.state = {
             rangeValue: 0,
             textboxValue:"",
@@ -154,6 +155,16 @@ export default class Question extends React.Component {
 
     handleEditAnswer(newValue, index) {
         this.answersArray[index] = newValue;
+    }
+
+    handleUploadFile(id, event) {
+        let chosenFile = $(event.target).parent('div');
+
+        let fileName = event.target.value;
+        if(fileName) {
+            $(chosenFile).find('.filepath').html(fileName);
+            this.props.handleSaveAnswer(id, fileName);
+        }
     }
 
     render() {
@@ -228,6 +239,9 @@ export default class Question extends React.Component {
                             <input name="file" className='input-file' id='file' type="file"
                                    onChange={(e) => this.props.handleSaveAnswer(this.props.id, e.target.value)} />
                             <label htmlFor='file'>Файл</label><span className='filepath'>Ничего не выбрано</span>
+                                   onChange={(event) => this.handleUploadFile(this.props.id, event)} />
+                            <label htmlFor='file'>Файл</label>
+                            <span className='filepath'>{(this.props.result) ? this.props.result : "Ничего не выбрано"}</span>
                         </div>
         }
         if (this.props.type === 'rating') {
