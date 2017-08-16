@@ -98,19 +98,10 @@ export default class Question extends React.Component {
         this.answersArray = [];
     }
 
-    handleChange(type, id, event) {
-        let value;
-        switch(type) {
-            case "text" : let val = this.state.textboxValue + event.target.value;
-                          this.setState({
-                              textboxValue: val
-                          });
-                          value = this.state.textboxValue;
-            case "scale": this.setState({rangeValue: event.target.value});
-            default:null;
-        }
-
-        this.props.handleSaveAnswer(id, value);
+    handleChange(event) {
+        this.setState({
+            rangeValue: event.target.value
+        });
     }
 
     handleEditedQuestion(val, target) {
@@ -220,7 +211,7 @@ export default class Question extends React.Component {
                             <textarea name='text-area'
                                       id='text-area'
                                       style={{width: 300, height: 100}}
-                                      onChange={(event) => this.handleChange(this.props.type, this.props.id, event)}/>
+                            />
                         </div>
         }
         if (this.props.type === 'file') {
