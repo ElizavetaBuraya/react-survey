@@ -1,6 +1,6 @@
 
 const rootReducer = combineReducers({
-    renderApp,
+    renderApp, 
 });
 
 export default rootReducer 
