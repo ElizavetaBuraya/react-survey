@@ -11,18 +11,26 @@ export default class Checkbox extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.isChecked)
-            {
+        if (this.props.isChecked) {
                 this.setState({
                     isChecked: this.props.isChecked
-                })
-            }
+                });
+        } else if (this.props.result && this.props.result.includes(this.props.index)) {
+            this.setState({
+                isChecked: true
+            })
+        }
     }
 
-    toggleCheckboxChange = () => {
+
+    toggleCheckboxChange = (e) => {
         this.setState({
             isChecked: !this.state.isChecked,
         });
+
+        if (this.props.handleSaveAnswer) {
+            this.props.handleSaveAnswer(e.target.name, this.props.index, e.target.checked)
+        }
 
         if (this.props.onChange) {
             this.props.onChange(!this.state.isChecked);

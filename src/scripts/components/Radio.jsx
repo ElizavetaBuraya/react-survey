@@ -10,10 +10,22 @@ export default class Radio extends React.Component {
         };
     }
 
-    toggleRadioChange = () => {
+    componentDidMount() {
+        if (this.props.result && this.props.result.includes(this.props.index)) {
+            this.setState({
+                isChecked: true
+            })
+        }
+    }
+
+    toggleRadioChange = (e) => {
         this.setState({
             isChecked: !this.state.isChecked,
         });
+
+        if (this.props.handleSaveAnswer) {
+            this.props.handleSaveAnswer(e.target.name, this.props.index, e.target.checked)
+        }
     };
 
     render() {
@@ -31,10 +43,10 @@ export default class Radio extends React.Component {
                 {!this.props.isEdited &&
                 <p>
                     <input type='radio'
-                           id={this.id}
-                           name={this.props.name}
-                           checked={this.state.isChecked}
-                           onChange={this.toggleRadioChange}
+                        id={this.id}
+                        name={this.props.name}
+                        checked={this.state.isChecked}
+                        onChange={this.toggleRadioChange}
                     />
                     <label htmlFor={this.id}>{this.props.answer}</label>
                 </p>
