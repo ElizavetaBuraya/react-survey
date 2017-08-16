@@ -9,7 +9,6 @@ export default class GenerateSurvey extends React.Component {
             survey_id:null,
             survey_title:"",
             questions_list:{"page_1" : null},
-            answers_list:{"page_1" : null},
             survey_page:"page_1",
             numberOfPages: 1,
             numberOfQuestions: 0,
@@ -69,25 +68,29 @@ export default class GenerateSurvey extends React.Component {
         })
     }
 
-    handleSaveAnswer(id, value) {
+    handleSaveAnswer(id, indexValue, checked) {
+        let newQuestionsList = this.state.questions_list;
         let surveyPage = this.state.survey_page;
-        let answersList = this.state.answers_list;
+        let results = [];
+        let index = 0;
 
-        let answersArray = (answersList[surveyPage])
-            ? answersList[surveyPage]
-            : [];
+        newQuestionsList[surveyPage].map((question) => {
+           if (question.id == id) {
+               results = (question.result) ? (question.result) : [];
+               if (checked) {
+                   results.push(indexValue)
+               } else {
+                   index = results.indexOf(indexValue);
+                   results.splice(index, 1);
+               }
 
-        let newAnswer = {
-            'id': id,
-            'answer': value
-        };
+               question.result = results;
+            }
+        });
 
-        answersArray.push(newAnswer);
-        answersList[surveyPage] = answersArray;
+         this.setState({
+            questions_list: newQuestionsList })
 
-        this.setState({
-            answers_list:answersArray
-        })
     }
 
     handleSubmitSurvey(template) {
