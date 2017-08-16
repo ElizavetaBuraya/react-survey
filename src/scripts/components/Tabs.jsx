@@ -34,8 +34,8 @@ class TabsList extends React.Component {
 
 class GenerateContent extends React.Component {
     render() {
-            const tabClass = classNames({'tab-pane': true,
-                'about-pane': this.props.currentPage === '/about',
+        const tabClass = classNames({'tab-pane': true,
+            'about-pane': this.props.currentPage === '/about',
         });
 
         const deleteClass = classNames({'delete-page': true,

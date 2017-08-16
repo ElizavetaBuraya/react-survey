@@ -85,65 +85,13 @@ export default class GenerateSurvey extends React.Component {
         answersArray.push(newAnswer);
         answersList[surveyPage] = answersArray;
 
-        console.log(answersList[surveyPage]);
-
         this.setState({
             answers_list:answersArray
         })
     }
 
     handleSubmitSurvey(template) {
-        if (this.state.survey_title.length === 0) {
-            alert("Введите название опроса!");
-            return;
-        }
 
-        let description = prompt("Введите описание опроса");
-
-        let dateChanged = new Date();
-        let day = dateChanged.getDate();
-        let month = dateChanged.getMonth()+1;
-        let year = dateChanged.getFullYear();
-        day = (day < 10) ? '0' + day : day;
-        month = (month < 10) ? '0' + month : month;
-        dateChanged = day + '.' + month + '.' + year;
-
-        let surveyId = (this.state.survey_id)
-            ? this.state.survey_id
-            : (new Date).getTime();
-
-        let isTemplate = !!(template);
-
-        let newSurvey = {
-            "id": surveyId,
-            "name": this.state.survey_title,
-            "changed": dateChanged,
-            "answers": 0,
-            "link": "survey/" + surveyId,
-            "results": "survey/" + surveyId + "/results",
-            "template": isTemplate,
-            "pages": this.state.numberOfPages,
-            "questions": this.state.numberOfQuestions,
-            "is_anonymous": this.state.is_anonymous,
-            "questions_are_numbered": this.state.questions_are_numbered,
-            "pages_are_numbered": this.state.pages_are_numbered,
-            "randomized": this.state.randomized,
-            "required_fields": this.state.required_fields,
-            "progress_bar": this.state.progress_bar,
-            "description": description,
-            "navtabs": this.state.navtabs,
-            "questions_list":this.state.questions_list
-        };
-
-        $.ajax({
-            url: 'http://localhost:3000/surveys',
-            method: 'POST',
-            data: JSON.stringify(newSurvey),
-            headers: { 'Content-Type': 'application/json' },
-            success: function() {
-                alert("Опрос создан успешно");
-            }.bind(this)
-        });
     }
 
     render() {

@@ -204,7 +204,7 @@ export default class NewSurvey extends React.Component {
     handleChangePageName(value, tabId) {
         let navTabs = this.state.navtabs;
 
-        navTabs.map((tab, index) => {
+        navTabs.map((tab) => {
             if (tab.id === tabId) {
                 tab.name = value;
             }
