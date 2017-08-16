@@ -376,8 +376,8 @@ export default class NewSurvey extends React.Component {
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'anonymous'
                                               isChecked = {this.state.is_anonymous}
-                                              onChange={(e) => this.setState({
-                                                  is_anonymous: e.target.checked
+                                              onChange={(val) => this.setState({
+                                                  is_anonymous: val
                                               })}
                                     />
                                 </li>
@@ -386,8 +386,8 @@ export default class NewSurvey extends React.Component {
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'questions-are-numbered'
                                               isChecked = {this.state.questions_are_numbered}
-                                              onChange={(e) => this.setState({
-                                                  questions_are_numbered: e.target.checked
+                                              onChange={(val) => this.setState({
+                                                  questions_are_numbered: val
                                               })}
                                     />
                                 </li>
@@ -396,8 +396,8 @@ export default class NewSurvey extends React.Component {
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'pages-are-numbered'
                                               isChecked = {this.state.pages_are_numbered}
-                                              onChange={(e) => this.setState({
-                                                  pages_are_numbered: e.target.checked
+                                              onChange={(val) => this.setState({
+                                                  pages_are_numbered: val
                                               })}
                                     />
                                 </li>
@@ -406,8 +406,8 @@ export default class NewSurvey extends React.Component {
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'random-order'
                                               isChecked = {this.state.randomized}
-                                              onChange={(e) => this.setState({
-                                                  randomized: e.target.checked
+                                              onChange={(val) => this.setState({
+                                                  randomized: val
                                               })}
                                     />
                                 </li>
@@ -416,8 +416,8 @@ export default class NewSurvey extends React.Component {
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'compulsory'
                                               isChecked = {this.state.required_fields}
-                                              onChange={(e) => this.setState({
-                                                  required_fields: e.target.checked
+                                              onChange={(val) => this.setState({
+                                                  required_fields: val
                                               })}
                                     />
                                 </li>
@@ -426,8 +426,8 @@ export default class NewSurvey extends React.Component {
                                               handleEditAnswer = {this.handleEditAnswer}
                                               id = 'progress'
                                               isChecked = {this.state.progress_bar}
-                                              onChange={(e) => this.setState({
-                                                  progress_bar: e.target.checked
+                                              onChange={(val) => this.setState({
+                                                  progress_bar: val
                                               })}
                                     />
                                 </li>
