@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactStars from 'react-stars'
 import { DragSource, DropTarget } from 'react-dnd';
 import { findDOMNode } from 'react-dom';
 import Checkbox from './Checkbox.jsx'
@@ -84,19 +85,22 @@ function hideQuestionControls() {
 export default class Question extends React.Component {
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleEditedQuestion = this.handleEditedQuestion.bind(this);
-        this.handleSaveEdited = this.handleSaveEdited.bind(this);
-        this.handleEditAnswer = this.handleEditAnswer.bind(this);
-        this.handleUploadFile = this.handleUploadFile.bind(this);
         this.state = {
             rangeValue: 0,
             textboxValue:"",
             isEdited: false
         };
+
         this.title = null;
         this.required = this.props.required;
         this.answersArray = [];
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleEditedQuestion = this.handleEditedQuestion.bind(this);
+        this.handleSaveEdited = this.handleSaveEdited.bind(this);
+        this.handleEditAnswer = this.handleEditAnswer.bind(this);
+        this.handleUploadFile = this.handleUploadFile.bind(this);
+        this.handleChangeRating = this.handleChangeRating.bind(this);
     }
 
     handleChange(id, event) {
@@ -167,6 +171,11 @@ export default class Question extends React.Component {
             this.props.handleSaveAnswer(id, fileName);
         }
     }
+
+    handleChangeRating(newRating) {
+        this.props.handleSaveAnswer(this.props.id, newRating);
+    }
+
 
     render() {
         const { connectDragSource, connectDropTarget } = this.props;
@@ -246,9 +255,14 @@ export default class Question extends React.Component {
                         </div>
         }
         if (this.props.type === 'rating') {
-            question = <div>
-                            <ul className='c-rating'/>
-                        </div>;
+            question = <ReactStars
+                            value={(this.props.result) ? this.props.result : 1}
+                            count={5}
+                            size={34}
+                            half={false}
+                            onChange={this.handleChangeRating}
+                            color1={'#f4f4f4'}
+                            color2={'#ffd700'} />
         }
         if (this.props.type === 'scale') {
             question = <div>
