@@ -256,7 +256,7 @@ export default class Question extends React.Component {
         }
         if (this.props.type === 'rating') {
             question = <ReactStars
-                            value={(this.props.result) ? this.props.result : 1}
+                            value={(this.props.result) ? this.props.result : 0}
                             count={5}
                             size={34}
                             half={false}
@@ -302,7 +302,12 @@ export default class Question extends React.Component {
                     <span className='delete-question' onClick={() => this.props.handleDeleteQuestion(this.props.id)}/>
                 </div>
                 <p className='question-title'>
-                    <span className='question-number'>{this.props.index + 1}.</span>
+                    {this.props.questions_are_numbered &&
+                        <span className='question-number'>{this.props.index + 1}.</span>
+                    }
+                    {this.props.required_fields &&
+                        <span className="required-field">{(this.props.required) ? " * " : ""}</span>
+                    }
                     {this.state.isEdited &&
                         <input type='text'
                                name='question-title'
