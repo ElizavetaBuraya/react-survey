@@ -68,20 +68,25 @@ export default class GenerateSurvey extends React.Component {
         })
     }
 
-    handleSaveAnswer(id, indexValue, checked) {
+    handleSaveAnswer(id, value, checked) {
         let newQuestionsList = this.state.questions_list;
         let surveyPage = this.state.survey_page;
-        let results = [];
         let index = 0;
+        let results = null;
 
         newQuestionsList[surveyPage].map((question) => {
            if (question.id == id) {
-               results = (question.result) ? (question.result) : [];
-               if (checked) {
-                   results.push(indexValue)
+               if (question.type === "single-choice" || question.type === "multi-choice") {
+                   results = (question.result) ? (question.result) : [];
+                   if (checked) {
+                       results.push(value)
+                   } else {
+                       index = results.indexOf(value);
+                       results.splice(index, 1);
+                   }
+                   question.result = results;
                } else {
-                   index = results.indexOf(indexValue);
-                   results.splice(index, 1);
+                   results = value;
                }
 
                question.result = results;
