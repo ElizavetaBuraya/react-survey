@@ -231,14 +231,14 @@ export default class Question extends React.Component {
                             <textarea name='text-area'
                                       id='text-area'
                                       style={{width: 300, height: 100}}
+                                      defaultValue={(this.props.result) ? this.props.result : ""}
+                                      onChange={(event) => this.props.handleSaveAnswer(this.props.id, event.target.value)}
                             />
                         </div>
         }
         if (this.props.type === 'file') {
             question = <div>
                             <input name="file" className='input-file' id='file' type="file"
-                                   onChange={(e) => this.props.handleSaveAnswer(this.props.id, e.target.value)} />
-                            <label htmlFor='file'>Файл</label><span className='filepath'>Ничего не выбрано</span>
                                    onChange={(event) => this.handleUploadFile(this.props.id, event)} />
                             <label htmlFor='file'>Файл</label>
                             <span className='filepath'>{(this.props.result) ? this.props.result : "Ничего не выбрано"}</span>
@@ -256,7 +256,7 @@ export default class Question extends React.Component {
                     type='range'
                     min='0' max='100'
                     value={this.state.rangeValue}
-                    onChange={(event) => this.handleChange(this.props.type, this.props.id, event)}
+                    onChange={(event) => this.handleChange(event)}
                     step='1'/>
                 <output name='amount' id='amount' htmlFor='rangeInput'>{this.state.rangeValue}</output>
             </div>
