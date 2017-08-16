@@ -13,24 +13,6 @@ export default class GenerateQuestions extends React.Component {
         }
     }
 
-    componentDidUpdate() {
-        (function () {
-            let starArray = document.querySelectorAll('.c-rating');
-            let currentRating = 0;
-            let maxRating= 5;
-
-            [...starArray].forEach(function(el) {
-                if (el) {
-                    if (!el.hasChildNodes()) {
-                        let myRating = rating(el, currentRating, maxRating);
-                        myRating.setRating(1);
-                    }
-                }
-            });
-        })();
-    }
-
-
     moveQuestion(dragIndex, hoverIndex) {
         const questionsList = this.props.questions_list;
         const survey_page = this.props.survey_page;
@@ -41,9 +23,23 @@ export default class GenerateQuestions extends React.Component {
         this.props.handleDragQuestion(dragIndex, hoverIndex, dragQuestion);
     }
 
+    shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            let temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        return array;
+    }
+
     render() {
         const questions_list = this.props.questions_list;
         const survey_page = this.props.survey_page;
+
+        if (this.props.randomized) {
+            questions_list[survey_page] = this.shuffleArray(questions_list[survey_page]);
+        }
 
         return (
             <div>
