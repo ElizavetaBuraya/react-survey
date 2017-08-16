@@ -56,6 +56,7 @@ export default class GenerateQuestions extends React.Component {
                         type={question.type}
                         required={question.required}
                         answers={question.answers}
+                        result={question.result}
                         questions_list = {this.props.questions_list}
                         survey_page = {this.props.survey_page}
                         currentPage = {this.props.currentPage}
