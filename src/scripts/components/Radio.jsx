@@ -24,7 +24,7 @@ export default class Radio extends React.Component {
         });
 
         if (this.props.handleSaveAnswer) {
-            this.props.handleSaveAnswer(e.target.name, this.props.index, e.target.checked)
+            this.props.handleSaveAnswer(parseInt(e.target.name), this.props.index, e.target.checked)
         }
     };
 
