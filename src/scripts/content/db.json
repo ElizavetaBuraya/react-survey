@@ -5,77 +5,77 @@
       "name": "Админ",
       "role": "Администратор",
       "registered": "1.01.2017",
-      "surveys": 12
+      "completed_surveys": 12
     },
     {
       "id": 1,
       "name": "Юзер1",
       "role": "Пользователь",
       "registered": "2.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 2,
       "name": "Юзер2",
       "role": "Пользователь",
       "registered": "3.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 3,
       "name": "Юзер3",
       "role": "Пользователь",
       "registered": "4.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 4,
       "name": "Юзер4",
       "role": "Пользователь",
       "registered": "5.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 5,
       "name": "Юзер5",
       "role": "Пользователь",
       "registered": "6.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 6,
       "name": "Юзер6",
       "role": "Пользователь",
       "registered": "7.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 7,
       "name": "Юзер7",
       "role": "Пользователь",
       "registered": "8.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 8,
       "name": "Юзер8",
       "role": "Пользователь",
       "registered": "9.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 9,
       "name": "Юзер9",
       "role": "Пользователь",
       "registered": "0.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 10,
       "name": "Юзер10",
       "role": "Пользователь",
       "registered": "1.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     }
   ],
   "surveys": [
