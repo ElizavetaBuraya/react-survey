@@ -302,6 +302,7 @@ main {
 .page-head {
   & h1 {
     margin-right: 1rem;
+    text-align: center;
   }
   margin-bottom: 2rem;
   @media screen and (max-width: 1000px) {
@@ -801,6 +802,27 @@ label {
   & + label {
     .custom-control-btn;
     padding: .5em 1.5em;
+  }
+}
+
+.submit-survey {
+  & a {
+    .custom-control-btn;
+    border-color: green;
+    background-color: green;
+    font-size: 1em;
+    color: @white !important;
+    margin-top: 1rem;
+    &:hover {
+      color: green !important;
+    }
+  }
+  & .disabled {
+    cursor: default;
+    background-color: @white;
+    border-color: @red;
+    color: @red !important;
+    pointer-events: none;
   }
 }
 
