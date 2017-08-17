@@ -7,6 +7,9 @@ function getCaret(direction) {
         :  <span className='sort-down'/>;
 }
 
+const hiddenColumns = ['id','template', 'pages','questions', 'description', 'is_anonymous', 'questions_are_numbered',
+    'pages_are_numbered', 'randomized', 'required_fields', 'progress_bar', 'questions_list', 'navtabs', 'surveys'];
+
 export default class Table extends React.Component {
     render() {
         let columns = null;
@@ -58,19 +61,7 @@ export default class Table extends React.Component {
                                 : false }
                         dataSort = {(key === 'name')}
                         caretRender={ (key === 'name') ? getCaret : null }
-                        hidden = {(key === 'id')
-                        || (key === 'template')
-                        || (key === 'pages')
-                        || (key === 'questions')
-                        || (key === 'description')
-                        || (key === 'is_anonymous')
-                        || (key === 'questions_are_numbered')
-                        || (key === 'pages_are_numbered')
-                        || (key === 'randomized')
-                        || (key === 'required_fields')
-                        || (key === 'progress_bar')
-                        || (key === 'questions_list')
-                        || (key === 'navtabs')}
+                        hidden = {hiddenColumns.includes(key)}
                     >{this.props.columnNames[index]}</TableHeaderColumn>
                 )}
             </BootstrapTable>
