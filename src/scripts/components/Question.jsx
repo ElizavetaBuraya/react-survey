@@ -164,12 +164,20 @@ export default class Question extends React.Component {
 
     handleUploadFile(id, event) {
         let chosenFile = $(event.target).parent('div');
-
         let fileName = event.target.value;
         if(fileName) {
             $(chosenFile).find('.filepath').html(fileName);
-            this.props.handleSaveAnswer(id, fileName);
         }
+
+        let that = this;
+        let file = event.target.files[0];
+        let reader = new FileReader();
+
+        reader.onloadend = function() {
+            let fileObject = {'name': fileName, 'url': reader.result, 'type': file.type};
+            that.props.handleSaveAnswer(id, fileObject);
+        };
+        reader.readAsDataURL(file);
     }
 
     handleChangeRating(newRating) {
@@ -251,7 +259,10 @@ export default class Question extends React.Component {
                             <input name="file" className='input-file' id='file' type="file"
                                    onChange={(event) => this.handleUploadFile(this.props.id, event)} />
                             <label htmlFor='file'>Файл</label>
-                            <span className='filepath'>{(this.props.result) ? this.props.result : "Ничего не выбрано"}</span>
+                            <span className='filepath'>{(this.props.result)
+                                ? this.props.result.name
+                                : "Ничего не выбрано"}
+                            </span>
                         </div>
         }
         if (this.props.type === 'rating') {
