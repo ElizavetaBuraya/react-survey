@@ -103,24 +103,49 @@ export default class GenerateSurvey extends React.Component {
     updateProgressBar() {
         let questionsList = this.state.questions_list;
         let questionNumber = this.state.numberOfQuestions;
+        let requiredQuestionNumber = 0;
         let answeredQuestions = 0;
 
-         for (let page in questionsList){
-             questionsList[page].forEach((question) => {
-                 if (Number.isInteger(question.result)) {
-                     (question.result > 0)
-                         ? answeredQuestions += 1
-                             : answeredQuestions += 0;
-                 } else if (question.result && question.result.length > 0) {
-                     answeredQuestions += 1;
-                 }
-             })
-         }
+        for (let page in questionsList){
+            questionsList[page].forEach((question) => {
+                if (question.required) {
+                    requiredQuestionNumber++;
+                }
+            })}
 
-         let percent = Math.round((answeredQuestions * 100)/questionNumber);
+        for (let page in questionsList){
+            questionsList[page].forEach((question) => {
+                if (Number.isInteger(question.result)) {
+                    if (question.result > 0) {
+                        answeredQuestions++;
 
-        $('.bar').css('width', percent + '%');
+                        (question.required)
+                        ? requiredQuestionNumber--
+                            : requiredQuestionNumber;
+                    }
+                } else if (question.result && question.result.length > 0) {
+                    answeredQuestions++;
+
+                    (question.required)
+                        ? requiredQuestionNumber--
+                        : requiredQuestionNumber;
+                }
+            })
+        }
+
+        let percent = Math.round((answeredQuestions * 100)/questionNumber);
+        let progressBar = $('.bar');
+
+        progressBar.css('width', percent + '%');
         $('.percent').html(percent + '%');
+
+        if (requiredQuestionNumber === 0) {
+            progressBar.css('background-color', 'green');
+            $('.submit-button').removeClass('disabled');
+        } else {
+            progressBar.css('background-color', 'red');
+            $('.submit-button').addClass('disabled');
+        }
     }
 
     handleSubmitSurvey(template) {
@@ -148,8 +173,8 @@ export default class GenerateSurvey extends React.Component {
                     <div className='page-head d-flex justify-content-center'>
                         <h1>{this.state.survey_title}</h1>
                     </div>
-                    <div className="survey-page">
-                        <div className="survey-content">
+                    <div className='survey-page'>
+                        <div className='survey-content'>
                             {this.state.pages_are_numbered &&
                                 <h2>{pageName}</h2>
                             }
@@ -168,14 +193,17 @@ export default class GenerateSurvey extends React.Component {
                             />}
                         </div>
                     </div>
-                    <div className="progress d-flex justify-content-center">
-                        <span className="done">{pageIndex + 1}</span>/<span className="todo">{this.state.numberOfPages}</span>
-                        <div className="progress-bar">
-                            <div className="bar completing-survey-bar" />
-                        </div>
-                        <span className="percent">0%</span>
+                    <div className='submit-survey d-flex justify-content-center'>
+                        <a className='submit-button disabled'>Завершить опрос</a>
                     </div>
-                    <div className="page-navigation d-flex justify-content-center">
+                    <div className='progress d-flex justify-content-center'>
+                        <span className='done'>{pageIndex + 1}</span>/<span className="todo">{this.state.numberOfPages}</span>
+                        <div className='progress-bar'>
+                            <div className='bar completing-survey-bar' />
+                        </div>
+                        <span className='percent'>0%</span>
+                    </div>
+                    <div className='page-navigation d-flex justify-content-center'>
                         <a className={(this.state.survey_page === 'page_1')
                             ? 'active-nav'
                             : ''}
