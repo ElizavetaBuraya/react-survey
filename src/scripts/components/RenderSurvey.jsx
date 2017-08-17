@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import GenerateQuestions from './GenerateQuestions.jsx';
+import { Link, Redirect } from 'react-router-dom';
 
 export default class GenerateSurvey extends React.Component {
     constructor(props) {
@@ -18,6 +19,7 @@ export default class GenerateSurvey extends React.Component {
             randomized: false,
             required_fields: true,
             progress_bar: false,
+            redirectToAbout:false,
             navtabs: [
                 { 'href':'#page_1', 'id':'page_1', 'name':'Страница 1', 'active':true }
             ]
@@ -153,6 +155,14 @@ export default class GenerateSurvey extends React.Component {
     }
 
     render() {
+        const redirectToAbout = this.state.redirectToAbout;
+
+        if (redirectToAbout) {
+            return (
+                <Redirect to="/about"/>
+            )
+        }
+
         let pageName = null;
         let pageIndex = null;
         const navs = this.state.navtabs;
