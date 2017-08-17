@@ -41,21 +41,21 @@ export default class GenerateSurvey extends React.Component {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             success: function(data) {
-                let template = data[0];
+                let survey = data[0];
                 this.setState({
-                    survey_id:(path.includes("create")) ? null : template.id,
-                    survey_title:template.name,
+                    survey_id:survey.id,
+                    survey_title:survey.name,
                     survey_page:'page_1',
-                    numberOfPages: template.pages,
-                    numberOfQuestions: template.questions,
-                    is_anonymous: template.is_anonymous,
-                    questions_are_numbered: template.questions_are_numbered,
-                    pages_are_numbered: template.pages_are_numbered,
-                    randomized: template.randomized,
-                    required_fields: template.required_fields,
-                    progress_bar: template.progress_bar,
-                    questions_list: template.questions_list,
-                    navtabs: template.navtabs
+                    numberOfPages: survey.pages,
+                    numberOfQuestions: survey.questions,
+                    is_anonymous: survey.is_anonymous,
+                    questions_are_numbered: survey.questions_are_numbered,
+                    pages_are_numbered: survey.pages_are_numbered,
+                    randomized: survey.randomized,
+                    required_fields: survey.required_fields,
+                    progress_bar: survey.progress_bar,
+                    questions_list: survey.questions_list,
+                    navtabs: survey.navtabs
                 });
             }.bind(this),
             error: function(xhr, status, err) {
@@ -150,8 +150,48 @@ export default class GenerateSurvey extends React.Component {
         }
     }
 
-    handleSubmitSurvey(template) {
+    handleSubmitSurvey() {
+        let submitSurvey = confirm('Вы уверены, что хотите завершить опрос?');
 
+        if (submitSurvey) {
+            let completedSurveys = 0;
+
+            let newSurvey = {
+                "id": this.state.survey_id,
+                "results": this.state.questions_list,
+            };
+
+            $.ajax({
+                url: 'http://localhost:3000/users/' + 1 +'/completed_surveys' ,
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                success: function() {
+                    completedSurveys = data;
+                }.bind(this),
+                error: function(xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                }.bind(this)
+            });
+
+            $.ajax({
+                url: 'http://localhost:3000/users/' + 1 ,
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                data: JSON.stringify({
+                    'completed_surveys':++completedSurveys,
+                    'surveys': newSurvey
+                }),
+                success: function() {
+                    alert('Опрос отправлен успешно!');
+                    this.setState({
+                        redirectToAbout: true,
+                    })
+                }.bind(this),
+                error: function(xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                }.bind(this)
+            });
+        }
     }
 
     render() {
@@ -204,7 +244,9 @@ export default class GenerateSurvey extends React.Component {
                         </div>
                     </div>
                     <div className='submit-survey d-flex justify-content-center'>
-                        <a className='submit-button disabled'>Завершить опрос</a>
+                        <a className='submit-button disabled'
+                           onClick={this.handleSubmitSurvey}>Завершить опрос
+                        </a>
                     </div>
                     <div className='progress d-flex justify-content-center'>
                         <span className='done'>{pageIndex + 1}</span>/<span className="todo">{this.state.numberOfPages}</span>
