@@ -3,7 +3,8 @@ import classNames from 'classnames';
 import GenerateQuestions from './GenerateQuestions.jsx'
 
 function TabItem(props) {
-    return  <li className='nav-item nav-tab-item' onClick={() => props.handleChangePage(props.id)}>
+    return  <li className='nav-item nav-tab-item'
+                onClick={() => {(props.handleChangePage) ? props.handleChangePage(props.id) : ""}}>
                 <a className={(props.active ? 'active ' : '') + 'nav-link nav-tab-link'}
                    data-toggle='tab'
                    href={props.href}
