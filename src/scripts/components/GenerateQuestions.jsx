@@ -13,6 +13,15 @@ export default class GenerateQuestions extends React.Component {
         }
     }
 
+    componentWillMount() {
+        const questions_list = this.props.questions_list;
+        const survey_page = this.props.survey_page;
+
+        if (this.props.randomized) {
+            questions_list[survey_page] = this.shuffleArray(questions_list[survey_page]);
+        }
+    }
+
     moveQuestion(dragIndex, hoverIndex) {
         const questionsList = this.props.questions_list;
         const survey_page = this.props.survey_page;
@@ -37,10 +46,6 @@ export default class GenerateQuestions extends React.Component {
         const questions_list = this.props.questions_list;
         const survey_page = this.props.survey_page;
 
-        if (this.props.randomized) {
-            questions_list[survey_page] = this.shuffleArray(questions_list[survey_page]);
-        }
-
         return (
             <div>
                 {questions_list[survey_page].map((question, index) =>
@@ -63,7 +68,6 @@ export default class GenerateQuestions extends React.Component {
                         is_anonymous = {this.props.is_anonymous}
                         questions_are_numbered = {this.props.questions_are_numbered}
                         required_fields = {this.props.required_fields}
-                        progress_bar = {this.props.progress_bar}
                     />
                 )}
             </div>
