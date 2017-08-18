@@ -5,7 +5,9 @@
       "name": "Админ",
       "role": "Администратор",
       "registered": "1.01.2017",
-      "completed_surveys": 12
+      "completed_surveys": 12,
+      "login": "admin@example.com",
+      "password": "123admin"
     },
     {
       "id": 1,
@@ -13,6 +15,8 @@
       "role": "Пользователь",
       "registered": "2.01.2017",
       "completed_surveys": 13,
+      "login": "user1@example.com",
+      "password": "123user",
       "surveys": {
         "id": 1502712058559,
         "results": {
@@ -56,7 +60,7 @@
                 null,
                 null
               ],
-              "result": "This is an answer"
+              "result": "Done"
             }
           ],
           "page_1502711981506": [
@@ -92,7 +96,7 @@
               "type": "rating",
               "required": true,
               "answers": [],
-              "result": 2
+              "result": 3
             },
             {
               "id": 1502713136041,
@@ -121,7 +125,7 @@
                 null,
                 null
               ],
-              "result": "64"
+              "result": "49"
             },
             {
               "id": 1502713139591,
