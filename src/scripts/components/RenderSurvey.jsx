@@ -249,7 +249,6 @@ export default class GenerateSurvey extends React.Component {
                                                    questions_are_numbered = {this.state.questions_are_numbered}
                                                    randomized = {this.state.randomized}
                                                    required_fields = {this.state.required_fields}
-                                                   progress_bar = {this.state.progress_bar}
                                 />
                            }
                         </div>
@@ -259,13 +258,15 @@ export default class GenerateSurvey extends React.Component {
                            onClick={this.handleSubmitSurvey}>Завершить опрос
                         </a>
                     </div>
-                    <div className='progress d-flex justify-content-center'>
-                        <span className='done'>{pageIndex + 1}</span>/<span className="todo">{this.state.numberOfPages}</span>
-                        <div className='progress-bar'>
-                            <div className='bar completing-survey-bar' />
+                    {this.state.progress_bar &&
+                        <div className='progress d-flex justify-content-center'>
+                            <span className='done'>{pageIndex + 1}</span>/<span className="todo">{this.state.numberOfPages}</span>
+                            <div className='progress-bar'>
+                                <div className='bar completing-survey-bar' />
+                            </div>
+                            <span className='percent'>0%</span>
                         </div>
-                        <span className='percent'>0%</span>
-                    </div>
+                    }
                     <div className='page-navigation d-flex justify-content-center'>
                         <a className={(this.state.survey_page === 'page_1')
                             ? 'active-nav'
