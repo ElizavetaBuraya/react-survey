@@ -77,7 +77,7 @@ export default class GenerateSurvey extends React.Component {
         let results = null;
 
         newQuestionsList[surveyPage].map((question) => {
-           if (question.id == id) {
+           if (question.id === id) {
                if (question.type === "single-choice" || question.type === "multi-choice") {
                    results = (question.result) ? (question.result) : [];
                    if (checked) {
@@ -113,7 +113,8 @@ export default class GenerateSurvey extends React.Component {
                 if (question.required) {
                     requiredQuestionNumber++;
                 }
-            })}
+            })
+        }
 
         for (let page in questionsList){
             questionsList[page].forEach((question) => {
@@ -122,10 +123,10 @@ export default class GenerateSurvey extends React.Component {
                         answeredQuestions++;
 
                         (question.required)
-                        ? requiredQuestionNumber--
+                            ? requiredQuestionNumber--
                             : requiredQuestionNumber;
                     }
-                } else if (question.result && question.result.length > 0) {
+                } else if (question.result && (question.result.length > 0 || question.result.name)) {
                     answeredQuestions++;
 
                     (question.required)
@@ -151,47 +152,56 @@ export default class GenerateSurvey extends React.Component {
     }
 
     handleSubmitSurvey() {
+        let questionsList = this.state.questions_list;
+        let textAreaLength = 100;
+
+        for (let page in questionsList){
+            questionsList[page].forEach((question) => {
+                if (question.result && question.type === 'text' && question.required) {
+                    if (question.result.length < 100)
+                        textAreaLength = 0;
+                }
+            })
+        }
+
+        if (textAreaLength === 0) {
+            alert('Текстовый ответ не может содержать менее 100 символов');
+            return;
+        }
+
         let submitSurvey = confirm('Вы уверены, что хотите завершить опрос?');
 
         if (submitSurvey) {
             let completedSurveys = 0;
+            let that = this;
 
             let newSurvey = {
                 "id": this.state.survey_id,
                 "results": this.state.questions_list,
             };
 
-            $.ajax({
-                url: 'http://localhost:3000/users/' + 1 +'/completed_surveys' ,
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                success: function() {
-                    completedSurveys = data;
-                }.bind(this),
-                error: function(xhr, status, err) {
-                    console.error(this.props.url, status, err.toString());
-                }.bind(this)
-            });
+            fetch('http://localhost:3000/users/' + 0)
+                .then((resp) => resp.json())
+                .then(function (data) {
+                    completedSurveys = data.completed_surveys;
 
-            $.ajax({
-                url: 'http://localhost:3000/users/' + 1 ,
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                data: JSON.stringify({
-                    'completed_surveys':++completedSurveys,
-                    'surveys': newSurvey
-                }),
-                success: function() {
-                    alert('Опрос отправлен успешно!');
-                    this.setState({
-                        redirectToAbout: true,
+                    $.ajax({
+                        url: 'http://localhost:3000/users/' + 1 ,
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        data: JSON.stringify({
+                            'completed_surveys':++completedSurveys,
+                            'surveys': newSurvey
+                        }),
+                        success: function() {
+                            alert('Опрос отправлен успешно!');
+                            that.setState({
+                                redirectToAbout: true,
+                            });
+                        }
                     })
-                }.bind(this),
-                error: function(xhr, status, err) {
-                    console.error(this.props.url, status, err.toString());
-                }.bind(this)
-            });
-        }
+                });
+            }
     }
 
     render() {
@@ -229,18 +239,19 @@ export default class GenerateSurvey extends React.Component {
                                 <h2>{pageName}</h2>
                             }
                             {this.state.questions_list[this.state.survey_page] &&
-                            <GenerateQuestions questions_list = {this.state.questions_list}
-                                               survey_page = {this.state.survey_page}
-                                               currentPage = '/survey'
-                                               navtabs={this.state.navtabs}
-                                               handleChangePage = {this.handleChangePage}
-                                               handleSaveAnswer = {this.handleSaveAnswer}
-                                               is_anonymous = {this.state.is_anonymous}
-                                               questions_are_numbered = {this.state.questions_are_numbered}
-                                               randomized = {this.state.randomized}
-                                               required_fields = {this.state.required_fields}
-                                               progress_bar = {this.state.progress_bar}
-                            />}
+                                <GenerateQuestions questions_list = {this.state.questions_list}
+                                                   survey_page = {this.state.survey_page}
+                                                   currentPage = '/survey'
+                                                   navtabs={this.state.navtabs}
+                                                   handleChangePage = {this.handleChangePage}
+                                                   handleSaveAnswer = {this.handleSaveAnswer}
+                                                   is_anonymous = {this.state.is_anonymous}
+                                                   questions_are_numbered = {this.state.questions_are_numbered}
+                                                   randomized = {this.state.randomized}
+                                                   required_fields = {this.state.required_fields}
+                                                   progress_bar = {this.state.progress_bar}
+                                />
+                           }
                         </div>
                     </div>
                     <div className='submit-survey d-flex justify-content-center'>
