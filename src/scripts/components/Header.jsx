@@ -61,6 +61,7 @@ export default class Header extends React.Component {
         });
 
         const isAuthorized = this.props.isAuthorized;
+        const userName = (this.props.loggedInAs) ? this.props.loggedInAs.username : null;
 
         return (
             <header className="d-flex flex-row">
@@ -70,31 +71,33 @@ export default class Header extends React.Component {
                     </a>
                     {isAuthorized &&
                         <div className='login-collapse ml-auto hidden-md-up'>
-                            <div><span className="username"> Привет, admin</span></div>
+                            <div><span className="username"> Привет, {userName}</span></div>
                         </div>
                     }
                     {!isAuthorized &&
-                        <a className={logiconBtnClass} href="#" onClick={this.props.handleRegisteredClick}/>
+                        <a className={logiconBtnClass} onClick={this.props.handleRegisteredClick}/>
                     }
                     <div className="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
                         <ul className="navbar-nav ml-auto">
-                            <li className="nav-item">
-                                <Link to='/about'
-                                      className={this.props.currentPage === '/about'
-                                      ? "nav-link active"
-                                      : "nav-link"}>О компании
-                                    <span className="sr-only">(current)</span>
-                                </Link>
-                            </li>
                             {isAuthorized &&
-                                <li className="nav-item invisible-sm-item" id="logout">
-                                    <a href="#" className="nav-link hidden-sm-down"
-                                       onFocus={this.toggleLogOut}
-                                       onBlur={this.toggleLogOut}>
-                                        <span className="username"> Привет, admin</span>
-                                    </a>
-                                    <Link to="/" className='logout-popup'>Выйти</Link>
-                                </li>
+                                <div className="navbar-nav ml-auto">
+                                    <li className="nav-item">
+                                        <Link to='/about'
+                                              className={this.props.currentPage === '/about'
+                                                  ? "nav-link active"
+                                                  : "nav-link"}>О компании
+                                            <span className="sr-only">(current)</span>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item invisible-sm-item" id="logout">
+                                        <a href="#" className="nav-link hidden-sm-down"
+                                           onFocus={this.toggleLogOut}
+                                           onBlur={this.toggleLogOut}>
+                                            <span className="username"> Привет, {userName}</span>
+                                        </a>
+                                        <a href="#" className='logout-popup' onClick={this.props.handleLogOutClick}>Выйти</a>
+                                    </li>
+                                </div>
                             }
                             {isAuthorized &&
                                 <div className="hidden-md-up">
@@ -105,7 +108,9 @@ export default class Header extends React.Component {
                                     />
                                     <div className="dropdown-divider" />
                                     <li className="nav-item">
-                                        <Link to="/" className="nav-link hidden-md-up">Выйти<span className="sr-only">(current)</span></Link>
+                                        <a href="#" className="nav-link hidden-md-up"
+                                           onClick={this.props.handleLogOutClick}>Выйти<span className="sr-only">(current)</span>
+                                        </a>
                                     </li>
                                 </div>
                             }
