@@ -10,31 +10,17 @@ export default class App extends React.Component {
         this.handleLogOutClick = this.handleLogOutClick.bind(this);
         this.handleRegisteredClick = this.handleRegisteredClick.bind(this);
         this.handleNotRegisteredClick = this.handleNotRegisteredClick.bind(this);
-        this.currentPage = '',
-        this.state = {
-            isRegistered: JSON.parse(sessionStorage.getItem('isRegistered')),
-            isAuthorized: JSON.parse(sessionStorage.getItem('isAuthorized')),
-            currentPage:'',
         this.handleCreateUserClick = this.handleCreateUserClick.bind(this);
         this.handleChangePage = this.handleChangePage.bind(this);
     }
+
     handleRegisteredClick() {
-        sessionStorage.setItem('isRegistered', true);
-        this.setState({
-            isRegistered: true
-        });
+        this.props.handleRegisteredClick(true);
     }
+
     handleNotRegisteredClick() {
-        sessionStorage.setItem('isRegistered', false);
-        this.setState({
-            isRegistered: false
-        });
+        this.props.handleRegisteredClick(false);
     }
-    handleLogInClick() {
-        sessionStorage.setItem('isAuthorized', true);
-        this.setState({
-            isAuthorized: true
-        });
 
     handleLogInClick(data) {
         let that = this;
@@ -57,11 +43,9 @@ export default class App extends React.Component {
                 }
             });
     }
+
     handleLogOutClick() {
-        sessionStorage.setItem('isAuthorized', false);
-        this.setState({
-            isAuthorized: false
-        });
+        this.props.handleLogInOutClick(false, null);
     }
 
     handleCreateUserClick(values) {
@@ -108,9 +92,7 @@ export default class App extends React.Component {
     }
 
     handleChangePage(value) {
-        this.setState({
-            currentPage: value,
-        })
+        this.props.handleUpdatePage(value);
     }
 
     render() {
@@ -118,20 +100,22 @@ export default class App extends React.Component {
             <div>
                 <Header
                     handleRegisteredClick = {this.handleRegisteredClick}
-                    isRegistered = {this.state.isRegistered}
-                    isAuthorized = {this.state.isAuthorized}
-                    currentPage = {this.state.currentPage}
                     handleLogOutClick = {this.handleLogOutClick}
+                    isRegistered = {this.props.isRegistered}
+                    isAuthorized = {this.props.isAuthorized}
+                    currentPage = {this.props.currentPage}
+                    loggedInAs = {this.props.loggedInAs}
                 />
                 <Main
-                    isRegistered = {this.state.isRegistered}
-                    isAuthorized = {this.state.isAuthorized}
+                    isRegistered = {this.props.isRegistered}
+                    isAuthorized = {this.props.isAuthorized}
                     handleLogInClick = {this.handleLogInClick}
                     handleLogOutClick = {this.handleLogOutClick}
                     handleCreateUserClick = {this.handleCreateUserClick}
                     handleNotRegisteredClick = {this.handleNotRegisteredClick}
                     handleChangePage = {this.handleChangePage}
-                    currentPage = {this.state.currentPage}
+                    currentPage = {this.props.currentPage}
+                    loggedInAs = {this.props.loggedInAs}
                 />
                 <Footer />
             </div>
