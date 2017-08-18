@@ -8,7 +8,8 @@ function getCaret(direction) {
 }
 
 const hiddenColumns = ['id','template', 'pages','questions', 'description', 'is_anonymous', 'questions_are_numbered',
-    'pages_are_numbered', 'randomized', 'required_fields', 'progress_bar', 'questions_list', 'navtabs', 'surveys'];
+    'pages_are_numbered', 'randomized', 'required_fields', 'progress_bar', 'questions_list', 'navtabs', 'surveys',
+    'login', 'password'];
 
 export default class Table extends React.Component {
     render() {
