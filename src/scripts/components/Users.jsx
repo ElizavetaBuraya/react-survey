@@ -32,7 +32,8 @@ export default class Users extends React.Component {
         this.onLoad = this.onLoad.bind(this);
         this.selectedRows = [];
         this.state = {
-            data: [{"id":"нет данных","name":"нет данных","role":"нет данных","registered":"нет данных","completed_surveys":"нет данных"}],
+            data: [{"id":"нет данных","name":"нет данных","role":"нет данных",
+                "registered":"нет данных","completed_surveys":"нет данных"}],
             roles: ['Администратор', 'Пользователь'],
             columnNames: ['id', 'Имя','Роль','Зарегистрирован','Опросы'],
         },
