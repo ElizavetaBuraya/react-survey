@@ -15,21 +15,28 @@ export default class Main extends React.Component {
             <Switch>
                 <Route exact path='/'
                        component={() => <LoginRegister
-                           isRegistered={this.props.isRegistered}
-                           isAuthorized={this.props.isAuthorized}
+                           isRegistered = {this.props.isRegistered}
+                           isAuthorized = {this.props.isAuthorized}
                            handleNotRegisteredClick = {this.props.handleNotRegisteredClick}
+                           handleCreateUserClick = {this.props.handleCreateUserClick}
                            handleLogInClick = {this.props.handleLogInClick}
                            handleLogOutClick = {this.props.handleLogOutClick}
                            handleChangePage = {this.props.handleChangePage}
                            currentPage = {this.props.currentPage}
+                           loggedInAs = {this.props.loggedInAs}
                        />}
                 />
-                <Route path='/about' component={() => <About
-                        isAuthorized={this.props.isAuthorized}
-                        handleChangePage = {this.props.handleChangePage}
-                        currentPage = {this.props.currentPage}
-                    />}
-                />
+                <Route path='/about' render={() => (
+                    !this.props.isAuthorized ? (
+                        <Redirect to='/'/>
+                    ) : (
+                        <About
+                            isAuthorized={this.props.isAuthorized}
+                            handleChangePage = {this.props.handleChangePage}
+                            currentPage = {this.props.currentPage}
+                        />
+                    )
+                )}/>
                 <Route path='/users' render={() => (
                         !this.props.isAuthorized ? (
                             <Redirect to='/'/>
@@ -72,13 +79,18 @@ export default class Main extends React.Component {
                 )}/>
                 <Route path='/new_survey/:link' component={NewSurvey} />
                 <Route path='/survey/:link' component={GenerateSurvey} />
-                <Route component={() => <NoMatch
-                        isRegistered={this.props.isRegistered}
-                        isAuthorized={this.props.isAuthorized}
-                        handleChangePage = {this.props.handleChangePage}
-                        currentPage = {this.props.currentPage}
-                    />}
-                />
+                <Route render={() => (
+                    !this.props.isAuthorized ? (
+                        <Redirect to='/'/>
+                    ) : (
+                        <NoMatch
+                            isRegistered={this.props.isRegistered}
+                            isAuthorized={this.props.isAuthorized}
+                            handleChangePage = {this.props.handleChangePage}
+                            currentPage = {this.props.currentPage}
+                        />
+                    )
+                )}/>
             </Switch>
         )
     }
