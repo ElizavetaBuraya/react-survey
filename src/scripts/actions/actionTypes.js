@@ -1,3 +1,5 @@
 export const actionTypes = {
-
+    LOG_IN: 'LOG_IN',
+    TOGGLE_REGISTERED: 'TOGGLE_REGISTERED',
+    UPDATE_CURRENT_PAGE: 'UPDATE_CURRENT_PAGE'
 };
