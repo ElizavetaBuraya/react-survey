@@ -13,6 +13,7 @@ const hiddenColumns = ['id','template', 'pages','questions', 'description', 'is_
 
 export default class Table extends React.Component {
     render() {
+        let isAdmin = (this.props.loggedInAs.role === 'Администратор');
         let columns = null;
         if (this.props.data.length > 0) {
             columns = Object.keys(this.props.data[0]);
@@ -42,8 +43,8 @@ export default class Table extends React.Component {
                             cellEdit={ cellEditProp }
                             selectRow={(data.length > 0 && isAdmin)
                                 ? selectRowProp
-                                : false}
-                            deleteRow={ true }
+                                : undefined}
+                            deleteRow={(isAdmin)}
                             search
                             hover
                             pagination
