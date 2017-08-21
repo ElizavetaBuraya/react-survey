@@ -1,4 +1,5 @@
 import React from 'react';
+import Spinner from 'react-spinner-material';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
 function getCaret(direction) {
@@ -33,42 +34,54 @@ export default class Table extends React.Component {
             afterSaveCell: this.props.afterSaveCell
         };
 
-        const {data, options, surveyLink, roles, columnNames} = this.props;
+        const {data, options, surveyLink, roles, columnNames, isFetching} = this.props;
 
-        return (
-            <BootstrapTable data={data}
-                            options={ options }
-                            ref='table'
-                            searchPlaceholder={'Поиск'}
-                            cellEdit={ cellEditProp }
-                            selectRow={(data.length > 0 && isAdmin)
-                                ? selectRowProp
-                                : undefined}
-                            deleteRow={(isAdmin)}
-                            search
-                            hover
-                            pagination
-            >
-                {columns.map((key, index) =>
-                    <TableHeaderColumn
-                        key={index}
-                        isKey={(key === 'id')}
-                        dataField = {key}
-                        dataFormat = {(key === 'link' || key === 'results') ? surveyLink : undefined}
-                        thStyle={ { 'text-align': 'center' } }
-                        tdStyle={ { 'text-align': 'center' } }
-                        width='120'
-                        editable={(key === 'name')
-                            ? true
-                            : (key === 'role')
-                                ? { type: 'select', options: { values: roles }}
-                                : false }
-                        dataSort = {(key === 'name')}
-                        caretRender={ (key === 'name') ? getCaret : null }
-                        hidden = {hiddenColumns.includes(key)}
-                    >{columnNames[index]}</TableHeaderColumn>
-                )}
-            </BootstrapTable>
-        )
+        if (isFetching) {
+            return (
+                    <div className='spinner'>
+                        <Spinner
+                            size={120}
+                            spinnerColor={"#FF0000"}
+                            spinnerWidth={2}
+                            visible={true} />
+                    </div>
+                )
+        } else {
+            return (
+                <BootstrapTable data={data}
+                                options={ options }
+                                ref='table'
+                                searchPlaceholder={'Поиск'}
+                                cellEdit={ cellEditProp }
+                                selectRow={(data.length > 0 && isAdmin)
+                                    ? selectRowProp
+                                    : undefined}
+                                deleteRow={(isAdmin)}
+                                search
+                                hover
+                                pagination
+                >
+                    {columns.map((key, index) =>
+                        <TableHeaderColumn
+                            key={index}
+                            isKey={(key === 'id')}
+                            dataField = {key}
+                            dataFormat = {(key === 'link' || key === 'results') ? surveyLink : undefined}
+                            thStyle={ { 'text-align': 'center' } }
+                            tdStyle={ { 'text-align': 'center' } }
+                            width='120'
+                            editable={(key === 'name')
+                                ? true
+                                : (key === 'role')
+                                    ? { type: 'select', options: { values: roles }}
+                                    : false }
+                            dataSort = {(key === 'name')}
+                            caretRender={ (key === 'name') ? getCaret : null }
+                            hidden = {hiddenColumns.includes(key)}
+                        >{columnNames[index]}</TableHeaderColumn>
+                    )}
+                </BootstrapTable>
+            )
+        }
     }
 }
