@@ -18,15 +18,9 @@ export default class LoginRegister extends React.Component {
             handleCreateUserClick } = this.props;
 
         if (isAuthorized) {
-            if (userRole === 'Администратор') {
-                return (
-                    <Redirect to="/surveys"/>
-                )
-            } else {
-                return (
-                    <Redirect to="/about"/>
-                )
-            }
+            return (
+                <Redirect to="/surveys"/>
+            )
         }
 
         return (
