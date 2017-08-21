@@ -1,6 +1,7 @@
-import { setUserData, toggleRegistered } from './actionCreators.js';
+import { setUserData, toggleRegistered, getUsers, getSurveys, requestData } from './actionCreators.js';
 
 const fetchUsers = 'http://localhost:3000/users/';
+const fetchSurveys = 'http://localhost:3000/surveys/';
 
 export function logIn(userData){
     return (dispatch) => {
@@ -81,5 +82,41 @@ export function createUser(values) {
                     return null;
                 }
             })
+    }
+}
+
+export function getUserdata() {
+    return (dispatch) => {
+        dispatch(requestData());
+        fetch(fetchUsers)
+            .then((resp) => resp.json())
+            .then(function (data) {
+                let userData = data.filter((user) => user.role !== 'Администратор');
+                dispatch(getUsers(userData));
+            });
+    }
+}
+
+export function getSurveydata() {
+    return (dispatch, getState) => {
+        dispatch(requestData());
+        fetch(fetchSurveys)
+            .then((resp) => resp.json())
+            .then(function (data) {
+                let userSurveysArray = [];
+
+                data.forEach((survey) => {
+                    let userSurvey = {
+                        "id": survey.id,
+                        "name": survey.name,
+                        "link": survey.link
+                    };
+                    userSurveysArray.push(userSurvey);
+                });
+
+                (getState().renderApp.loggedInAs.role === 'Администратор')
+                    ? dispatch(getSurveys(data))
+                    : dispatch(getSurveys(userSurveysArray));
+            });
     }
 }
