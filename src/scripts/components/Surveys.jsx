@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 
 class MySearchPanel extends React.Component {
     render() {
+        let isAdmin = (this.props.loggedInAs.role === 'Администратор');
         return (
             <div className='page-head d-flex justify-content-between align-items-center'>
-                <h1>Мои опросы <Link to='/new_survey' className='create-survey' >Создать опрос</Link></h1>
+                <h1>Мои опросы {isAdmin && <Link to='/new_survey' className='create-survey'>Создать опрос</Link>}</h1>
                 <div className='search-form'>
                     { this.props.searchField }
                 </div>
@@ -44,7 +45,7 @@ export default class Surveys extends React.Component {
             paginationShowsTotal: this.renderTotal,
             defaultSortName: 'name',  // default sort column name
             defaultSortOrder: 'asc',  // default sort order
-            searchPanel: (props) => (<MySearchPanel { ...props }/>),
+            searchPanel: (props) => (<MySearchPanel { ...props } loggedInAs = {this.props.loggedInAs} />),
             afterDeleteRow: this.handleDeletedRow,
         };
     }
