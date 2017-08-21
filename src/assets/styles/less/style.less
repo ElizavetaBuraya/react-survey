@@ -266,10 +266,9 @@ main {
 /* Sidebar styles */
 
 .sidebar {
-  position: sticky;
   background-color: @gray;
   padding: 3em 1em;
-  height: 70%;
+  min-height: 100%;
   min-width: 15%;
   @media screen and (max-width: 1200px) {
     padding: 3em .5em 1em;
@@ -277,9 +276,15 @@ main {
   }
 }
 
+.sidebar-navigation {
+  position: sticky;
+  top: 3em;
+}
+
 .sidebar-nav {
   .custom-btn(2rem, .5rem, @dark-gray, @dark-gray);
   margin-bottom: 1rem;
+  word-wrap: break-word;
 }
 
 .active-nav {
