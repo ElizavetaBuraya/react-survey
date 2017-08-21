@@ -43,8 +43,15 @@ export default class GenerateQuestions extends React.Component {
     }
 
     render() {
-        const questions_list = this.props.questions_list;
-        const survey_page = this.props.survey_page;
+        const { questions_list,
+            survey_page,
+            currentPage,
+            handleUpdateQuestion,
+            handleDeleteQuestion,
+            handleSaveAnswer,
+            is_anonymous,
+            questions_are_numbered,
+            required_fields } = this.props;
 
         return (
             <div>
@@ -58,16 +65,16 @@ export default class GenerateQuestions extends React.Component {
                         required={question.required}
                         answers={question.answers}
                         result={question.result}
-                        questions_list = {this.props.questions_list}
-                        survey_page = {this.props.survey_page}
-                        currentPage = {this.props.currentPage}
-                        handleUpdateQuestion = {this.props.handleUpdateQuestion}
-                        handleDeleteQuestion = {this.props.handleDeleteQuestion}
-                        handleSaveAnswer = {this.props.handleSaveAnswer}
+                        questions_list = {questions_list}
+                        survey_page = {survey_page}
+                        currentPage = {currentPage}
+                        handleUpdateQuestion = {handleUpdateQuestion}
+                        handleDeleteQuestion = {handleDeleteQuestion}
+                        handleSaveAnswer = {handleSaveAnswer}
                         moveQuestion={this.moveQuestion}
-                        is_anonymous = {this.props.is_anonymous}
-                        questions_are_numbered = {this.props.questions_are_numbered}
-                        required_fields = {this.props.required_fields}
+                        is_anonymous = {is_anonymous}
+                        questions_are_numbered = {questions_are_numbered}
+                        required_fields = {required_fields}
                     />
                 )}
             </div>

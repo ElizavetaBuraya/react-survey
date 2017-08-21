@@ -206,6 +206,7 @@ export default class GenerateSurvey extends React.Component {
 
     render() {
         const redirectToAbout = this.state.redirectToAbout;
+        const { currentPage, loggedInAs } = this.props;
 
         if (redirectToAbout) {
             return (
@@ -227,7 +228,8 @@ export default class GenerateSurvey extends React.Component {
         return (
             <main className='d-flex flex-row'>
                 <Sidebar
-                    currentPage = {this.props.currentPage}
+                    currentPage = {currentPage}
+                    loggedInAs = {loggedInAs}
                 />
                 <div className='main-content survey d-flex flex-column'>
                     <div className='page-head d-flex justify-content-center'>

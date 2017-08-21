@@ -124,10 +124,11 @@ export default class Users extends React.Component {
     }
 
     render() {
+        const { currentPage, loggedInAs } = this.props;
         return (
             <main className="d-flex flex-row justify-content-start">
                 <Sidebar
-                    currentPage = {this.props.currentPage}
+                    currentPage = {currentPage}
                 />
                 <div className="main-content d-flex flex-column">
                     <Table data={this.state.data}
@@ -138,6 +139,7 @@ export default class Users extends React.Component {
                            handleDeletedRow = { this.handleDeletedRow }
                            onRowSelect = { this.onRowSelect }
                            onSelectAll = { this.onSelectAll }
+                           loggedInAs = {loggedInAs}
                     />
                 </div>
             </main>

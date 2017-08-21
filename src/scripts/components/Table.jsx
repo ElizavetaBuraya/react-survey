@@ -32,13 +32,15 @@ export default class Table extends React.Component {
             afterSaveCell: this.props.afterSaveCell
         };
 
+        const {data, options, surveyLink, roles, columnNames} = this.props;
+
         return (
-            <BootstrapTable data={this.props.data}
-                            options={ this.props.options }
+            <BootstrapTable data={data}
+                            options={ options }
                             ref='table'
                             searchPlaceholder={'Поиск'}
                             cellEdit={ cellEditProp }
-                            selectRow={(this.props.data.length > 0)
+                            selectRow={(data.length > 0 && isAdmin)
                                 ? selectRowProp
                                 : false}
                             deleteRow={ true }
@@ -51,19 +53,19 @@ export default class Table extends React.Component {
                         key={index}
                         isKey={(key === 'id')}
                         dataField = {key}
-                        dataFormat = {(key === 'link' || key === 'results') ? this.props.surveyLink : undefined}
+                        dataFormat = {(key === 'link' || key === 'results') ? surveyLink : undefined}
                         thStyle={ { 'text-align': 'center' } }
                         tdStyle={ { 'text-align': 'center' } }
                         width='120'
                         editable={(key === 'name')
                             ? true
                             : (key === 'role')
-                                ? { type: 'select', options: { values: this.props.roles }}
+                                ? { type: 'select', options: { values: roles }}
                                 : false }
                         dataSort = {(key === 'name')}
                         caretRender={ (key === 'name') ? getCaret : null }
                         hidden = {hiddenColumns.includes(key)}
-                    >{this.props.columnNames[index]}</TableHeaderColumn>
+                    >{columnNames[index]}</TableHeaderColumn>
                 )}
             </BootstrapTable>
         )

@@ -27,5 +27,7 @@ export default class Sidebar extends React.Component {
                 </Link>
             </div>
         )
+        const { loggedInAs, currentPage } = this.props;
+        const asUser = (loggedInAs && loggedInAs.role === 'Пользователь');
     }
 }

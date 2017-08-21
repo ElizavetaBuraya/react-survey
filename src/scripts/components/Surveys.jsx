@@ -134,20 +134,24 @@ export default class Surveys extends React.Component {
     }
 
     render() {
+        let userRole = this.props.loggedInAs.role;
+        const { currentPage, loggedInAs } = this.props;
+
         return (
             <main className='d-flex flex-row justify-content-start'>
                 <Sidebar
-                    currentPage = {this.props.currentPage}
+                    currentPage = {currentPage}
+                    loggedInAs = {loggedInAs}
                 />
                 <div className='main-content d-flex flex-column'>
                     <Table data={this.state.data}
-                           roles={this.state.roles}
                            options={ this.options }
                            columnNames={ this.state.columnNames }
-                           afterSaveCell = { this.afterSaveCell }
-                           onRowSelect = { this.onRowSelect }
-                           onSelectAll = { this.onSelectAll }
+                           afterSaveCell = {(userRole === 'Администратор') ? this.afterSaveCell : undefined}
+                           onRowSelect = {(userRole === 'Администратор') ? this.onRowSelect : undefined }
+                           onSelectAll = {(userRole === 'Администратор') ? this.onSelectAll : undefined }
                            surveyLink = { this.surveyLink }
+                           loggedInAs = {loggedInAs}
                     />
                 </div>
             </main>

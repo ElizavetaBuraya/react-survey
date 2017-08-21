@@ -26,11 +26,12 @@ export default class About extends React.Component {
     }
 
     render() {
-        const isAuthorized = this.props.isAuthorized;
+        const { isAuthorized, loggedInAs } = this.props;
+
         return (
             <main className="d-flex flex-row justify-content-start">
                 {
-                    isAuthorized && <Sidebar />
+                    isAuthorized && <Sidebar loggedInAs = {loggedInAs} />
                 }
                 <div className="main-content d-flex flex-column">
                     <div className="page-head about-page-head d-flex justify-content-start align-items-center">

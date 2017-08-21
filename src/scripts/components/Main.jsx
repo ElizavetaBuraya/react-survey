@@ -11,83 +11,103 @@ import NoMatch from './ErrorPage.jsx'
 
 export default class Main extends React.Component {
     render() {
+        const { isAuthorized,
+            isRegistered,
+            loggedInAs,
+            currentPage,
+            handleRegisteredClick,
+            handleLogInClick,
+            handleChangePage,
+            handleCreateUserClick } = this.props;
+
         return (
             <Switch>
                 <Route exact path='/'
                        component={() => <LoginRegister
-                           isRegistered = {this.props.isRegistered}
-                           isAuthorized = {this.props.isAuthorized}
-                           handleNotRegisteredClick = {this.props.handleNotRegisteredClick}
-                           handleCreateUserClick = {this.props.handleCreateUserClick}
-                           handleLogInClick = {this.props.handleLogInClick}
-                           handleLogOutClick = {this.props.handleLogOutClick}
-                           handleChangePage = {this.props.handleChangePage}
-                           currentPage = {this.props.currentPage}
-                           loggedInAs = {this.props.loggedInAs}
+                           isRegistered = {isRegistered}
+                           isAuthorized = {isAuthorized}
+                           handleRegisteredClick = {handleRegisteredClick}
+                           handleCreateUserClick = {handleCreateUserClick}
+                           handleLogInClick = {handleLogInClick}
+                           handleChangePage = {handleChangePage}
+                           currentPage = {currentPage}
                        />}
                 />
                 <Route path='/about' render={() => (
-                    !this.props.isAuthorized ? (
+                    !isAuthorized ? (
                         <Redirect to='/'/>
                     ) : (
                         <About
-                            isAuthorized={this.props.isAuthorized}
-                            handleChangePage = {this.props.handleChangePage}
-                            currentPage = {this.props.currentPage}
+                            isAuthorized={isAuthorized}
+                            handleChangePage = {handleChangePage}
+                            currentPage = {currentPage}
+                            loggedInAs = {loggedInAs}
                         />
                     )
                 )}/>
                 <Route path='/users' render={() => (
-                        !this.props.isAuthorized ? (
+                        !isAuthorized || (loggedInAs.role === 'Пользователь') ? (
                             <Redirect to='/'/>
                         ) : (
                             <Users
-                                handleChangePage = {this.props.handleChangePage}
-                                currentPage = {this.props.currentPage}
+                                handleChangePage = {handleChangePage}
+                                currentPage = {currentPage}
+                                loggedInAs = {loggedInAs}
                             />
                         )
                 )}/>
                 <Route path='/surveys' render={() => (
-                    !this.props.isAuthorized ? (
+                    !isAuthorized ? (
                         <Redirect to='/'/>
                     ) : (
                         <Surveys
-                            handleChangePage = {this.props.handleChangePage}
-                            currentPage = {this.props.currentPage}
+                            handleChangePage = {handleChangePage}
+                            currentPage = {currentPage}
+                            loggedInAs = {loggedInAs}
                         />
                     )
                 )}/>
                 <Route path='/templates' render={() => (
-                    !this.props.isAuthorized ? (
+                    !isAuthorized  || (loggedInAs.role === 'Пользователь') ? (
                         <Redirect to='/'/>
                     ) : (
                         <Templates
-                            handleChangePage = {this.props.handleChangePage}
-                            currentPage = {this.props.currentPage}
+                            handleChangePage = {handleChangePage}
+                            currentPage = {currentPage}
                         />
                     )
                 )}/>
                 <Route exact path='/new_survey' render={() => (
-                    !this.props.isAuthorized ? (
+                    !isAuthorized  || (loggedInAs.role === 'Пользователь') ? (
                         <Redirect to='/'/>
                     ) : (
                         <NewSurvey
-                            handleChangePage = {this.props.handleChangePage}
-                            currentPage = {this.props.currentPage}
+                            handleChangePage = {handleChangePage}
+                            currentPage = {currentPage}
                         />
                     )
                 )}/>
-                <Route path='/new_survey/:link' component={NewSurvey} />
-                <Route path='/survey/:link' component={GenerateSurvey} />
+                <Route path='/new_survey/:link'
+                       render={(props) =>
+                           <NewSurvey {...props}
+                                      currentPage='new_survey/:link'
+                           />}
+                />
+                <Route path='/survey/:link'
+                       render={(props) =>
+                           <GenerateSurvey {...props}
+                                           loggedInAs = {loggedInAs}
+                           />}
+                />
                 <Route render={() => (
-                    !this.props.isAuthorized ? (
+                    !isAuthorized ? (
                         <Redirect to='/'/>
                     ) : (
                         <NoMatch
-                            isRegistered={this.props.isRegistered}
-                            isAuthorized={this.props.isAuthorized}
-                            handleChangePage = {this.props.handleChangePage}
-                            currentPage = {this.props.currentPage}
+                            isRegistered={isRegistered}
+                            isAuthorized={isAuthorized}
+                            handleChangePage = {handleChangePage}
+                            currentPage = {currentPage}
                         />
                     )
                 )}/>

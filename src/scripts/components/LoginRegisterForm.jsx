@@ -2,7 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 let Form = props => {
-    const { handleSubmit, handleNotRegisteredClick, isRegistered } = props;
+    const { handleSubmit, handleRegisteredClick, isRegistered } = props;
     return (
         <form className='login-form' onSubmit={handleSubmit}>
             <h2 className='login-form-heading'>{isRegistered ? 'Вход' : 'Регистрация'}</h2>

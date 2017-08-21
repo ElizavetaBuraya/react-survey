@@ -35,41 +35,52 @@ class TabsList extends React.Component {
 
 class GenerateContent extends React.Component {
     render() {
+        const { navtabs,
+            currentPage,
+            questions_list,
+            survey_page,
+            handleDeletePage,
+            handleUpdateQuestion,
+            handleDragQuestion,
+            handleDeleteQuestion,
+            handleChangePageName,
+            questions_are_numbered,
+            required_fields } = this.props;
+
         const tabClass = classNames({'tab-pane': true,
-            'about-pane': this.props.currentPage === '/about',
+            'about-pane': currentPage === '/about',
         });
 
         const deleteClass = classNames({'delete-page': true,
-            'inactive-delete': this.props.survey_page === 'page_1',
+            'inactive-delete': survey_page === 'page_1',
         });
 
-        const tabs = this.props.navtabs;
-        const isAboutPage = (this.props.currentPage === '/about');
-        const isSurveyPage = (this.props.currentPage === '/new_survey');
+        const isAboutPage = (currentPage === '/about');
+        const isSurveyPage = (currentPage === '/new_survey');
         return (
             <div className='tab-content'>
-                {tabs.map((tab, index) =>
+                {navtabs.map((tab, index) =>
                     <div className={(tab.active ? 'active ' : '') + tabClass} id={tab.id} role='tabpanel' key={index}>
                         {isSurveyPage &&
                             <div className='survey-content'>
-                                <span className={deleteClass} aria-hidden='true' onClick={() => this.props.handleDeletePage(tab.id)}/>
+                                <span className={deleteClass} aria-hidden='true' onClick={() => handleDeletePage(tab.id)}/>
                                 <input type='text'
                                        name='page-head'
                                        value={tab.name}
                                        maxLength="12"
-                                       onChange={(e) => this.props.handleChangePageName(e.target.value, tab.id)}
+                                       onChange={(e) => handleChangePageName(e.target.value, tab.id)}
                                 /><br/>
-                                {this.props.questions_list[this.props.survey_page] &&
-                                    <GenerateQuestions questions_list = {this.props.questions_list}
-                                                       survey_page = {this.props.survey_page}
-                                                       handleUpdateQuestion = {this.props.handleUpdateQuestion}
-                                                       handleDragQuestion = {this.props.handleDragQuestion}
-                                                       handleDeleteQuestion = {this.props.handleDeleteQuestion}
-                                                       questions_are_numbered = {this.props.questions_are_numbered}
-                                                       required_fields = {this.props.required_fields}
+                                {questions_list[survey_page] &&
+                                    <GenerateQuestions questions_list = {questions_list}
+                                                       survey_page = {survey_page}
+                                                       handleUpdateQuestion = {handleUpdateQuestion}
+                                                       handleDragQuestion = {handleDragQuestion}
+                                                       handleDeleteQuestion = {handleDeleteQuestion}
+                                                       questions_are_numbered = {questions_are_numbered}
+                                                       required_fields = {required_fields}
                                     />
                                 }
-                                {!this.props.questions_list[this.props.survey_page] &&
+                                {!questions_list[survey_page] &&
                                     <em>Добавьте вопрос, выбрав нужный тип вопроса в меню опроса</em>
                                 }
                             </div>
@@ -97,24 +108,37 @@ class GenerateContent extends React.Component {
 
 export default class Tabs extends React.Component {
     render() {
-        let isSurveyPage = (this.props.currentPage === '/new_survey');
+        const { navtabs,
+            currentPage,
+            questions_list,
+            survey_page,
+            handleDeletePage,
+            handleUpdateQuestion,
+            handleDragQuestion,
+            handleDeleteQuestion,
+            handleChangePage,
+            handleChangePageName,
+            questions_are_numbered,
+            required_fields } = this.props;
+
+        let isSurveyPage = (currentPage === '/new_survey');
 
         return(
             <div className={isSurveyPage ? 'survey-page' : ''}>
-                <TabsList navtabs={this.props.navtabs}
-                          handleChangePage = {this.props.handleChangePage}/>
+                <TabsList navtabs={navtabs}
+                          handleChangePage = {handleChangePage}/>
                 <div className='tab-content'>
-                    <GenerateContent navtabs={this.props.navtabs}
-                                     currentPage={this.props.currentPage}
-                                     questions_list = {this.props.questions_list}
-                                     survey_page = {this.props.survey_page}
-                                     handleUpdateQuestion = {this.props.handleUpdateQuestion}
-                                     handleDragQuestion = {this.props.handleDragQuestion}
-                                     handleDeleteQuestion = {this.props.handleDeleteQuestion}
-                                     handleChangePageName = {this.props.handleChangePageName}
-                                     handleDeletePage = {this.props.handleDeletePage}
-                                     questions_are_numbered = {this.props.questions_are_numbered}
-                                     required_fields = {this.props.required_fields}
+                    <GenerateContent navtabs={navtabs}
+                                     currentPage={currentPage}
+                                     questions_list = {questions_list}
+                                     survey_page = {survey_page}
+                                     handleUpdateQuestion = {handleUpdateQuestion}
+                                     handleDragQuestion = {handleDragQuestion}
+                                     handleDeleteQuestion = {handleDeleteQuestion}
+                                     handleChangePageName = {handleChangePageName}
+                                     handleDeletePage = {handleDeletePage}
+                                     questions_are_numbered = {questions_are_numbered}
+                                     required_fields = {required_fields}
                     />
                 </div>
             </div>

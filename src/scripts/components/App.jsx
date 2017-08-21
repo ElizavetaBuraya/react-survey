@@ -96,6 +96,15 @@ export default class App extends React.Component {
     }
 
     render() {
+        const { isAuthorized,
+            isRegistered,
+            loggedInAs,
+            currentPage,
+            handleRegisteredClick,
+            handleLogInClick,
+            handleCreateUserClick,
+            handleUpdatePage } = this.props;
+
         return (
             <div>
                 <Header

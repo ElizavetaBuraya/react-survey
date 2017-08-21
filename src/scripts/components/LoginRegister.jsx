@@ -11,9 +11,11 @@ export default class LoginRegister extends React.Component {
     }
 
     render() {
-        const isAuthorized = this.props.isAuthorized;
-        const isRegistered = this.props.isRegistered;
-        const userRole = (this.props.loggedInAs) ? this.props.loggedInAs.role : null;
+        const { isAuthorized,
+            isRegistered,
+            handleRegisteredClick,
+            handleLogInClick,
+            handleCreateUserClick } = this.props;
 
         if (isAuthorized) {
             if (userRole === 'Администратор') {
@@ -29,9 +31,9 @@ export default class LoginRegister extends React.Component {
 
         return (
             <main className='d-flex flex-row justify-content-center align-items-center'>
-                <Form onSubmit={(isRegistered) ? this.props.handleLogInClick : this.props.handleCreateUserClick}
-                      isRegistered = {this.props.isRegistered}
-                      handleNotRegisteredClick = {this.props.handleNotRegisteredClick}
+                <Form onSubmit={(isRegistered) ? handleLogInClick : handleCreateUserClick}
+                      isRegistered = {isRegistered}
+                      handleRegisteredClick = {handleRegisteredClick}
                 />
             </main>
         )
