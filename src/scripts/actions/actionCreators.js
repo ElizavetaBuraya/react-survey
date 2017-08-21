@@ -7,6 +7,29 @@ export function setUserData(loggedInAs) {
     };
 }
 
+export function requestData() {
+    return {
+        type: actionTypes.REQUEST_DATA,
+        isFetching: true
+    }
+}
+
+export function getUsers(userData) {
+    return {
+        type: actionTypes.GET_USERS,
+        payload: userData,
+        isFetching: false
+    }
+}
+
+export function getSurveys(surveyData) {
+    return {
+        type: actionTypes.GET_SURVEYS,
+        payload: surveyData,
+        isFetching: false
+    }
+}
+
 export function toggleRegistered(){
     return {
         type: actionTypes.TOGGLE_REGISTERED
