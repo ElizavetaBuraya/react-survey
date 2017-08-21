@@ -64,7 +64,8 @@ export default class Users extends React.Component {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             success: function(data) {
-                this.setState({data: data});
+                let userData = data.filter((user) => user.role !== 'Администратор');
+                this.setState({data: userData});
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
