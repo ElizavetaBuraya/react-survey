@@ -7,8 +7,8 @@ export default class NoMatch extends React.Component {
         return (
             <main className='d-flex flex-column justify-content-center error-page'>
                 <Route exact path='/starter_page' render={() => (
-                    this.props.isAuthorized ? (
-                        <Redirect to='/about'/>
+                    isAuthorized ? (
+                        <Redirect to='/surveys'/>
                     ) : (
                         <Redirect to='/'/>
                     )
