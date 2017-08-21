@@ -32,7 +32,6 @@ export default class Surveys extends React.Component {
         this.handleDeletedRow = this.handleDeletedRow.bind(this);
         this.renderTotal = this.renderTotal.bind(this);
         this.surveyLink = this.surveyLink.bind(this);
-        this.onLoad = this.onLoad.bind(this);
         this.selectedRows = [];
         this.state = {
             data: [{'id':'нет данных','name':'нет данных','changed':'нет данных','answers':'нет данных','link':'null', 'results':'null'}],
@@ -51,38 +50,11 @@ export default class Surveys extends React.Component {
     }
 
     componentDidMount() {
-        this.onLoad();
+        this.props.handleLoadSurveyData();
         if (this.props.currentPage !== '/surveys')
         {
             this.props.handleChangePage('/surveys');
         }
-    }
-
-    onLoad() {
-        $.ajax({
-            url: 'http://localhost:3000/surveys',
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-            success: function(data) {
-                let userSurveysArray = [];
-
-                data.forEach((survey) => {
-                    let userSurvey = {
-                        "id": survey.id,
-                        "name": survey.name,
-                        "link": survey.link
-                    };
-                    userSurveysArray.push(userSurvey);
-                });
-
-                (this.props.loggedInAs.role === 'Администратор')
-                    ? this.setState({data: data})
-                    : this.setState({data: userSurveysArray});
-            }.bind(this),
-            error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
     }
 
     afterSaveCell(row) {
@@ -92,7 +64,7 @@ export default class Surveys extends React.Component {
             data: JSON.stringify(row),
             headers: { 'Content-Type': 'application/json' },
             success: function() {
-                this.onLoad();
+                this.props.handleLoadSurveyData();
             }.bind(this)
         });
     }
@@ -121,7 +93,7 @@ export default class Surveys extends React.Component {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 success: function() {
-                  this.onLoad();
+                    this.props.handleLoadSurveyData();
                 }.bind(this)
             });
         }
@@ -131,7 +103,7 @@ export default class Surveys extends React.Component {
     renderTotal() {
         return (
             <span className='users-number'>
-                Всего опросов: { this.state.data.length }
+                Всего опросов: { this.props.surveyData.length }
             </span>
         );
     }
@@ -149,7 +121,7 @@ export default class Surveys extends React.Component {
 
     render() {
         let userRole = this.props.loggedInAs.role;
-        const { currentPage, loggedInAs } = this.props;
+        const { currentPage, loggedInAs, surveyData, isFetching } = this.props;
 
         return (
             <main className='d-flex flex-row justify-content-start'>
@@ -158,7 +130,7 @@ export default class Surveys extends React.Component {
                     loggedInAs = {loggedInAs}
                 />
                 <div className='main-content d-flex flex-column'>
-                    <Table data={this.state.data}
+                    <Table data={surveyData}
                            options={ this.options }
                            columnNames={ this.state.columnNames }
                            afterSaveCell = {(userRole === 'Администратор') ? this.afterSaveCell : undefined}
@@ -166,6 +138,7 @@ export default class Surveys extends React.Component {
                            onSelectAll = {(userRole === 'Администратор') ? this.onSelectAll : undefined }
                            surveyLink = { this.surveyLink }
                            loggedInAs = {loggedInAs}
+                           isFetching = {isFetching}
                     />
                 </div>
             </main>

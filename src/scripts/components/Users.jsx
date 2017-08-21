@@ -29,11 +29,8 @@ export default class Users extends React.Component {
         this.onSelectAll = this.onSelectAll.bind(this);
         this.handleDeletedRow = this.handleDeletedRow.bind(this);
         this.renderTotal = this.renderTotal.bind(this);
-        this.onLoad = this.onLoad.bind(this);
         this.selectedRows = [];
         this.state = {
-            data: [{"id":"нет данных","name":"нет данных","role":"нет данных",
-                "registered":"нет данных","completed_surveys":"нет данных"}],
             roles: ['Администратор', 'Пользователь'],
             columnNames: ['id', 'Имя','Роль','Зарегистрирован','Опросы'],
         },
@@ -51,26 +48,11 @@ export default class Users extends React.Component {
     }
 
     componentDidMount() {
-        this.onLoad();
+        this.props.handleLoadUserData();
         if (this.props.currentPage !== '/users')
         {
             this.props.handleChangePage('/users');
         }
-    }
-
-    onLoad() {
-        $.ajax({
-            url: 'http://localhost:3000/users',
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-            success: function(data) {
-                let userData = data.filter((user) => user.role !== 'Администратор');
-                this.setState({data: userData});
-            }.bind(this),
-            error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
     }
 
     afterSaveCell(row) {
@@ -80,7 +62,7 @@ export default class Users extends React.Component {
             data: JSON.stringify(row),
             headers: { 'Content-Type': 'application/json' },
             success: function() {
-                this.onLoad();
+                this.props.handleLoadUserData();
             }.bind(this)
         });
     }
@@ -109,7 +91,7 @@ export default class Users extends React.Component {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 success: function() {
-                    this.onLoad();
+                    this.props.handleLoadUserData();
                 }.bind(this)
             });
         }
@@ -119,20 +101,20 @@ export default class Users extends React.Component {
     renderTotal() {
         return (
             <span className="users-number">
-                Всего пользователей: { this.state.data.length }
+                Всего пользователей: { this.props.userData.length }
             </span>
         );
     }
 
     render() {
-        const { currentPage, loggedInAs } = this.props;
+        const { currentPage, loggedInAs, userData, isFetching } = this.props;
         return (
             <main className="d-flex flex-row justify-content-start">
                 <Sidebar
                     currentPage = {currentPage}
                 />
                 <div className="main-content d-flex flex-column">
-                    <Table data={this.state.data}
+                    <Table data={userData}
                            roles={this.state.roles}
                            options={ this.options }
                            columnNames={ this.state.columnNames }
@@ -141,6 +123,7 @@ export default class Users extends React.Component {
                            onRowSelect = { this.onRowSelect }
                            onSelectAll = { this.onSelectAll }
                            loggedInAs = {loggedInAs}
+                           isFetching = {isFetching}
                     />
                 </div>
             </main>
