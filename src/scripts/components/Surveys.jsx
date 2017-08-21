@@ -64,7 +64,20 @@ export default class Surveys extends React.Component {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             success: function(data) {
-                this.setState({data: data});
+                let userSurveysArray = [];
+
+                data.forEach((survey) => {
+                    let userSurvey = {
+                        "id": survey.id,
+                        "name": survey.name,
+                        "link": survey.link
+                    };
+                    userSurveysArray.push(userSurvey);
+                });
+
+                (this.props.loggedInAs.role === 'Администратор')
+                    ? this.setState({data: data})
+                    : this.setState({data: userSurveysArray});
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
