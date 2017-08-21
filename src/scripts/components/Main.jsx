@@ -11,14 +11,19 @@ import NoMatch from './ErrorPage.jsx'
 
 export default class Main extends React.Component {
     render() {
-        const { isAuthorized,
+        const { isFetching,
+            isAuthorized,
             isRegistered,
             loggedInAs,
+            userData,
+            surveyData,
             currentPage,
             handleRegisteredClick,
             handleLogInClick,
             handleChangePage,
-            handleCreateUserClick } = this.props;
+            handleCreateUserClick,
+            handleLoadUserData,
+            handleLoadSurveyData } = this.props;
 
         return (
             <Switch>
@@ -51,8 +56,11 @@ export default class Main extends React.Component {
                         ) : (
                             <Users
                                 handleChangePage = {handleChangePage}
+                                handleLoadUserData = {handleLoadUserData}
                                 currentPage = {currentPage}
                                 loggedInAs = {loggedInAs}
+                                userData = {userData}
+                                isFetching = {isFetching}
                             />
                         )
                 )}/>
@@ -62,8 +70,11 @@ export default class Main extends React.Component {
                     ) : (
                         <Surveys
                             handleChangePage = {handleChangePage}
+                            handleLoadSurveyData = {handleLoadSurveyData}
                             currentPage = {currentPage}
                             loggedInAs = {loggedInAs}
+                            surveyData = {surveyData}
+                            isFetching = {isFetching}
                         />
                     )
                 )}/>

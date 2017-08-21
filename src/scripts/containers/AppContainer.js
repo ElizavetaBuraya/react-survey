@@ -1,16 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { logIn, createUser } from '../actions/actions';
+import { logIn, createUser, getUserdata, getSurveydata } from '../actions/actions';
 import { toggleRegistered, updateCurrentPage } from '../actions/actionCreators';
 import App from '../components/App.jsx';
 
 const mapStateToProps = (state) => {
     return {
+        isFetching: state.renderApp.isFetching,
         isAuthorized: state.renderApp.isAuthorized,
         loggedInAs: state.renderApp.loggedInAs,
         isRegistered: state.renderApp.isRegistered,
-        currentPage: state.renderApp.currentPage
+        currentPage: state.renderApp.currentPage,
+        userData: state.renderApp.userData,
+        surveyData: state.renderApp.surveyData
     }
 };
 
@@ -20,6 +23,10 @@ const mapDispatchToProps = (dispatch) => {
             bindActionCreators(logIn, dispatch),
         handleCreateUserClick:
             bindActionCreators(createUser, dispatch),
+        handleLoadUserData:
+            bindActionCreators(getUserdata, dispatch),
+        handleLoadSurveyData:
+            bindActionCreators(getSurveydata, dispatch),
         handleRegisteredClick:
             bindActionCreators(toggleRegistered, dispatch),
         handleUpdatePage:
