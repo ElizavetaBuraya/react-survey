@@ -20,6 +20,7 @@
     "react-edit": "^6.3.0",
     "react-history": "^0.18.2",
     "react-router-redux": "^4.0.8",
+    "react-spinner-material": "^1.0.15",
     "redux-form": "^7.0.3",
     "uglify-js": "^3.0.24"
   },
@@ -50,6 +51,7 @@
     "react-router-dom": "^4.1.2",
     "react-stars": "^2.2.3",
     "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "^0.4.6",

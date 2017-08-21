@@ -1,74 +1,54 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import Header from './Header.jsx';
 import Main from './Main.jsx';
 import Footer from './Footer.jsx';
 
 export default class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleLogInClick = this.handleLogInClick.bind(this);
-        this.handleLogOutClick = this.handleLogOutClick.bind(this);
-        this.handleRegisteredClick = this.handleRegisteredClick.bind(this);
-        this.handleNotRegisteredClick = this.handleNotRegisteredClick.bind(this);
-        this.handleChangePage = this.handleChangePage.bind(this)
-        this.currentPage = '',
-        this.state = {
-            isRegistered: JSON.parse(sessionStorage.getItem('isRegistered')),
-            isAuthorized: JSON.parse(sessionStorage.getItem('isAuthorized')),
-            currentPage:'',
-        };
-    }
-    handleRegisteredClick() {
-        sessionStorage.setItem('isRegistered', true);
-        this.setState({
-            isRegistered: true
-        });
-    }
-    handleNotRegisteredClick() {
-        sessionStorage.setItem('isRegistered', false);
-        this.setState({
-            isRegistered: false
-        });
-    }
-    handleLogInClick() {
-        sessionStorage.setItem('isAuthorized', true);
-        this.setState({
-            isAuthorized: true
-        });
-    }
-    handleLogOutClick() {
-        sessionStorage.setItem('isAuthorized', false);
-        this.setState({
-            isAuthorized: false
-        });
-    }
-
-    handleChangePage(value) {
-        this.setState({
-            currentPage: value,
-        })
-    }
-
     render() {
+        const { isFetching,
+            isAuthorized,
+            isRegistered,
+            loggedInAs,
+            userData,
+            surveyData,
+            currentPage,
+            handleRegisteredClick,
+            handleLogInClick,
+            handleCreateUserClick,
+            handleUpdatePage,
+            handleLoadUserData,
+            handleLoadSurveyData} = this.props;
+
         return (
-            <div>
-                <Header
-                    handleRegisteredClick = {this.handleRegisteredClick}
-                    isRegistered = {this.state.isRegistered}
-                    isAuthorized = {this.state.isAuthorized}
-                    currentPage = {this.state.currentPage}
-                />
-                <Main
-                    isRegistered = {this.state.isRegistered}
-                    isAuthorized = {this.state.isAuthorized}
-                    handleLogInClick = {this.handleLogInClick}
-                    handleLogOutClick = {this.handleLogOutClick}
-                    handleNotRegisteredClick = {this.handleNotRegisteredClick}
-                    handleChangePage = {this.handleChangePage}
-                    currentPage = {this.state.currentPage}
-                />
-                <Footer />
-            </div>
+            <BrowserRouter basename={'/'}>
+                <div>
+                    <Header
+                        handleRegisteredClick = {handleRegisteredClick}
+                        handleLogOutClick = {handleLogInClick}
+                        isRegistered = {isRegistered}
+                        isAuthorized = {isAuthorized}
+                        currentPage = {currentPage}
+                        loggedInAs = {loggedInAs}
+                    />
+                    <Main
+                        handleLogInClick = {handleLogInClick}
+                        handleCreateUserClick = {handleCreateUserClick}
+                        handleRegisteredClick = {handleRegisteredClick}
+                        handleChangePage = {handleUpdatePage}
+                        handleLoadUserData = {handleLoadUserData}
+                        handleLoadSurveyData = {handleLoadSurveyData}
+                        isRegistered = {isRegistered}
+                        isAuthorized = {isAuthorized}
+                        isFetching = {isFetching}
+                        currentPage = {currentPage}
+                        loggedInAs = {loggedInAs}
+                        userData = {userData}
+                        surveyData = {surveyData}
+                    />
+                    <Footer />
+                </div>
+            </BrowserRouter>
         )
     }
 }

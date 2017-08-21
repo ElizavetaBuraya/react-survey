@@ -313,6 +313,7 @@ export default class NewSurvey extends React.Component {
 
     render() {
         const redirectToTemplates = this.state.redirectToTemplates;
+        const { currentPage } = this.props;
 
         if (redirectToTemplates) {
             return (
@@ -323,7 +324,7 @@ export default class NewSurvey extends React.Component {
         return (
             <main className='d-flex flex-row'>
                 <Sidebar
-                    currentPage = {this.props.currentPage}
+                    currentPage = {currentPage}
                 />
                 <div className='main-content survey d-flex flex-column'>
                     <div className='page-head'>

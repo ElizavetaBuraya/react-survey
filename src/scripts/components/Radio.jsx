@@ -24,19 +24,20 @@ export default class Radio extends React.Component {
         });
 
         if (this.props.handleSaveAnswer) {
-            this.props.handleSaveAnswer(e.target.name, this.props.index, e.target.checked)
+            this.props.handleSaveAnswer(parseInt(e.target.name), this.props.index, e.target.checked)
         }
     };
 
     render() {
-        return(
+        const { isEdited, name, index, answer, handleEditAnswer } = this.props;
+        return (
             <div>
-                {this.props.isEdited &&
+                {isEdited &&
                 <p>
                     <input type='radio' id={this.id} name='radio-question'/>
                     <label>
-                        <input type='text' defaultValue={this.props.answer}
-                               onChange={(e) => this.props.handleEditAnswer(e.target.value, this.props.index)} />
+                        <input type='text' defaultValue={answer}
+                               onChange={(e) => handleEditAnswer(e.target.value, index)} />
                     </label>
                 </p>
                 }
@@ -44,11 +45,11 @@ export default class Radio extends React.Component {
                 <p>
                     <input type='radio'
                         id={this.id}
-                        name={this.props.name}
+                        name={name}
                         checked={this.state.isChecked}
                         onChange={this.toggleRadioChange}
                     />
-                    <label htmlFor={this.id}>{this.props.answer}</label>
+                    <label htmlFor={this.id}>{answer}</label>
                 </p>
                 }
             </div>

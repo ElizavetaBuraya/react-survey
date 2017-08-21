@@ -164,12 +164,20 @@ export default class Question extends React.Component {
 
     handleUploadFile(id, event) {
         let chosenFile = $(event.target).parent('div');
-
         let fileName = event.target.value;
         if(fileName) {
             $(chosenFile).find('.filepath').html(fileName);
-            this.props.handleSaveAnswer(id, fileName);
         }
+
+        let that = this;
+        let file = event.target.files[0];
+        let reader = new FileReader();
+
+        reader.onloadend = function() {
+            let fileObject = {'name': fileName, 'url': reader.result, 'type': file.type};
+            that.props.handleSaveAnswer(id, fileObject);
+        };
+        reader.readAsDataURL(file);
     }
 
     handleChangeRating(newRating) {
@@ -178,85 +186,102 @@ export default class Question extends React.Component {
 
 
     render() {
-        const { connectDragSource, connectDropTarget } = this.props;
+        const { connectDragSource,
+            connectDropTarget,
+            currentPage,
+            answers,
+            id,
+            result,
+            required,
+            title,
+            index,
+            type,
+            handleSaveAnswer,
+            handleDeleteQuestion,
+            questions_are_numbered,
+            required_fields } = this.props;
+
         let question = null;
-        if (this.props.type === 'multi-choice') {
+        if (type === 'multi-choice') {
             question = <div>
                             <Checkbox index = {0}
-                                      answer = {this.props.answers[0]}
+                                      answer = {answers[0]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      name = {this.props.id}
-                                      result={this.props.result}
-                                      handleSaveAnswer = {this.props.handleSaveAnswer}
+                                      name = {id}
+                                      result={result}
+                                      handleSaveAnswer = {handleSaveAnswer}
                             />
                             <Checkbox index = {1}
-                                      answer = {this.props.answers[1]}
+                                      answer = {answers[1]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      name = {this.props.id}
-                                      result={this.props.result}
-                                      handleSaveAnswer = {this.props.handleSaveAnswer}
+                                      name = {id}
+                                      result={result}
+                                      handleSaveAnswer = {handleSaveAnswer}
                             />
                             <Checkbox index = {2}
-                                      answer = {this.props.answers[2]}
+                                      answer = {answers[2]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      name = {this.props.id}
-                                      result={this.props.result}
-                                      handleSaveAnswer = {this.props.handleSaveAnswer}
+                                      name = {id}
+                                      result={result}
+                                      handleSaveAnswer = {handleSaveAnswer}
                             />
                         </div>
         }
-        if (this.props.type === 'single-choice') {
+        if (type === 'single-choice') {
             question = <div>
                             <Radio    index = {0}
-                                      answer = {this.props.answers[0]}
+                                      answer = {answers[0]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      name = {this.props.id}
-                                      result={this.props.result}
-                                      handleSaveAnswer = {this.props.handleSaveAnswer}
+                                      name = {id}
+                                      result={result}
+                                      handleSaveAnswer = {handleSaveAnswer}
                             />
                             <Radio    index = {1}
-                                      answer = {this.props.answers[1]}
+                                      answer = {answers[1]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      name = {this.props.id}
-                                      result={this.props.result}
-                                      handleSaveAnswer = {this.props.handleSaveAnswer}
+                                      name = {id}
+                                      result={result}
+                                      handleSaveAnswer = {handleSaveAnswer}
                             />
                             <Radio    index = {2}
-                                      answer = {this.props.answers[2]}
+                                      answer = {answers[2]}
                                       handleEditAnswer = {this.handleEditAnswer}
                                       isEdited = {this.state.isEdited}
-                                      name = {this.props.id}
-                                      result={this.props.result}
-                                      handleSaveAnswer = {this.props.handleSaveAnswer}
+                                      name = {id}
+                                      result={result}
+                                      handleSaveAnswer = {handleSaveAnswer}
                             />
                         </div>
         }
-        if (this.props.type === 'text') {
+        if (type === 'text') {
             question = <div>
                             <textarea name='text-area'
                                       id='text-area'
                                       style={{width: 300, height: 100}}
-                                      defaultValue={(this.props.result) ? this.props.result : ""}
-                                      onChange={(event) => this.props.handleSaveAnswer(this.props.id, event.target.value)}
+                                      defaultValue={(result) ? result : ""}
+                                      onChange={(event) => handleSaveAnswer(id, event.target.value)}
                             />
                         </div>
         }
-        if (this.props.type === 'file') {
+        if (type === 'file') {
             question = <div>
                             <input name="file" className='input-file' id='file' type="file"
-                                   onChange={(event) => this.handleUploadFile(this.props.id, event)} />
+                                   onChange={(event) => this.handleUploadFile(id, event)} />
                             <label htmlFor='file'>Файл</label>
-                            <span className='filepath'>{(this.props.result) ? this.props.result : "Ничего не выбрано"}</span>
+                            <span className='filepath'>{(result)
+                                ? result.name
+                                : "Ничего не выбрано"}
+                            </span>
                         </div>
         }
-        if (this.props.type === 'rating') {
+        if (type === 'rating') {
             question = <ReactStars
-                            value={(this.props.result) ? this.props.result : 0}
+                            value={(result) ? result : 0}
                             count={5}
                             size={34}
                             half={false}
@@ -264,20 +289,20 @@ export default class Question extends React.Component {
                             color1={'#f4f4f4'}
                             color2={'#ffd700'} />
         }
-        if (this.props.type === 'scale') {
+        if (type === 'scale') {
             question = <div>
                 <input
                     id='rangeInput'
                     type='range'
                     min='0' max='100'
-                    value={(this.props.result) ? this.props.result : this.state.rangeValue}
-                    onChange={(event) => this.handleChange(this.props.id, event)}
+                    value={(result) ? result : this.state.rangeValue}
+                    onChange={(event) => this.handleChange(id, event)}
                     step='1'/>
                 <output name='amount'
                         id='amount'
                         htmlFor='rangeInput'>
-                    {(this.props.result)
-                        ? this.props.result
+                    {(result)
+                        ? result
                         : this.state.rangeValue
                     }
                 </output>
@@ -285,7 +310,7 @@ export default class Question extends React.Component {
         }
         return connectDropTarget(
             <div className='question'>
-                {(this.props.currentPage !== '/survey') &&
+                {(currentPage !== '/survey') &&
                     <span className='edit-question'
                           onClick={(e) => this.handleEditedQuestion(true, e.currentTarget)}/>
                 }
@@ -295,36 +320,36 @@ export default class Question extends React.Component {
                     )}
                     <Checkbox className='required-question'
                                   answer = 'Обязательный'
-                                  id = {'required' + this.props.id}
-                                  isChecked = {this.props.required}
+                                  id = {'required' + id}
+                                  isChecked = {required}
                                   onChange={(val) => this.required = val}
                     />
-                    <span className='delete-question' onClick={() => this.props.handleDeleteQuestion(this.props.id)}/>
+                    <span className='delete-question' onClick={() => handleDeleteQuestion(id)}/>
                 </div>
                 <p className='question-title'>
-                    {this.props.questions_are_numbered &&
-                        <span className='question-number'>{this.props.index + 1}.</span>
+                    {questions_are_numbered &&
+                        <span className='question-number'>{index + 1}.</span>
                     }
-                    {this.props.required_fields &&
-                        <span className="required-field">{(this.props.required) ? " * " : ""}</span>
+                    {required_fields &&
+                        <span className="required-field">{(required) ? " * " : ""}</span>
                     }
                     {this.state.isEdited &&
                         <input type='text'
                                name='question-title'
-                               defaultValue={this.props.title}
+                               defaultValue={title}
                                onChange={(event) => this.title = event.target.value }
                         />
                     }
                     {!this.state.isEdited &&
                         <span>
-                           {this.props.title}
+                           {title}
                         </span>
                     }
                 </p>
                 { question }
                 <div className='stop-edit-question'>
                     <a className='save-edited' href='#'
-                       onClick={() => this.handleSaveEdited(this.props.id)}>Сохранить
+                       onClick={() => this.handleSaveEdited(id)}>Сохранить
                     </a>
                     <a className='quit-edited' href='#' onClick={() => this.handleEditedQuestion(false)}>Отмена</a>
                 </div>

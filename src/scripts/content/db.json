@@ -5,77 +5,327 @@
       "name": "Админ",
       "role": "Администратор",
       "registered": "1.01.2017",
-      "surveys": 12
+      "completed_surveys": 12,
+      "login": "admin@example.com",
+      "password": "123admin"
     },
     {
       "id": 1,
       "name": "Юзер1",
       "role": "Пользователь",
       "registered": "2.01.2017",
-      "surveys": 0
+      "completed_surveys": 3,
+      "login": "user1@example.com",
+      "password": "123user",
+      "surveys": [
+        {
+          "id": 1502712058559,
+          "results": {
+            "page_1": [
+              {
+                "id": 1502456983871,
+                "title": "Новый вопрос",
+                "type": "single-choice",
+                "required": false,
+                "answers": [
+                  "Ответ 1",
+                  "Ответ 2",
+                  "Ответ 3"
+                ],
+                "result": [
+                  0
+                ]
+              },
+              {
+                "id": 1502456984166,
+                "title": "Новый вопрос",
+                "type": "multi-choice",
+                "required": true,
+                "answers": [
+                  "Ответ 1",
+                  "Ответ 2",
+                  "Ответ 3"
+                ],
+                "result": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "id": 1502456984486,
+                "title": "Новый вопрос",
+                "type": "text",
+                "required": false,
+                "answers": [
+                  null,
+                  null,
+                  null
+                ],
+                "result": "Done"
+              }
+            ],
+            "page_1502711981506": [
+              {
+                "id": 1502711983586,
+                "title": "Новый вопрос",
+                "type": "single-choice",
+                "required": true,
+                "answers": [
+                  "Ответ 1",
+                  "Ответ 2",
+                  "Ответ 3"
+                ],
+                "result": [
+                  0
+                ]
+              },
+              {
+                "id": 1502711984505,
+                "title": "Новый вопрос",
+                "type": "file",
+                "required": true,
+                "answers": [],
+                "result": {
+                  "name": "C:\\fakepath\\BCNE88S7UT.txt",
+                  "url": "data:text/plain;base64,QkNORTg4UzdVVC1leUpzYVdObGJuTmxTV1FpT2lKQ1EwNUZPRGhUTjFWVUlpd2liR2xqWlc1elpXVk9ZVzFsSWpvaVJXeHBlbUYyWlhSaElFSjFjbUY1WVNJc0ltRnpjMmxuYm1WbFRtRnRaU0k2SWlJc0ltRnpjMmxuYm1WbFJXMWhhV3dpT2lJaUxDSnNhV05sYm5ObFVtVnpkSEpwWTNScGIyNGlPaUpHYjNJZ1pXUjFZMkYwYVc5dVlXd2dkWE5sSUc5dWJIa2lMQ0pqYUdWamEwTnZibU4xY25KbGJuUlZjMlVpT21aaGJITmxMQ0p3Y205a2RXTjBjeUk2VzNzaVkyOWtaU0k2SWtGRElpd2ljR0ZwWkZWd1ZHOGlPaUl5TURFNExUQTNMVEF6SW4wc2V5SmpiMlJsSWpvaVJFMGlMQ0p3WVdsa1ZYQlVieUk2SWpJd01UZ3RNRGN0TURNaWZTeDdJbU52WkdVaU9pSkpTU0lzSW5CaGFXUlZjRlJ2SWpvaU1qQXhPQzB3Tnkwd015SjlMSHNpWTI5a1pTSTZJbEpUTUNJc0luQmhhV1JWY0ZSdklqb2lNakF4T0Mwd055MHdNeUo5TEhzaVkyOWtaU0k2SWxkVElpd2ljR0ZwWkZWd1ZHOGlPaUl5TURFNExUQTNMVEF6SW4wc2V5SmpiMlJsSWpvaVJGQk9JaXdpY0dGcFpGVndWRzhpT2lJeU1ERTRMVEEzTFRBekluMHNleUpqYjJSbElqb2lVa01pTENKd1lXbGtWWEJVYnlJNklqSXdNVGd0TURjdE1ETWlmU3g3SW1OdlpHVWlPaUpRVXlJc0luQmhhV1JWY0ZSdklqb2lNakF4T0Mwd055MHdNeUo5TEhzaVkyOWtaU0k2SWtSRElpd2ljR0ZwWkZWd1ZHOGlPaUl5TURFNExUQTNMVEF6SW4wc2V5SmpiMlJsSWpvaVJFSWlMQ0p3WVdsa1ZYQlVieUk2SWpJd01UZ3RNRGN0TURNaWZTeDdJbU52WkdVaU9pSlNUU0lzSW5CaGFXUlZjRlJ2SWpvaU1qQXhPQzB3Tnkwd015SjlMSHNpWTI5a1pTSTZJbEJESWl3aWNHRnBaRlZ3Vkc4aU9pSXlNREU0TFRBM0xUQXpJbjBzZXlKamIyUmxJam9pUTB3aUxDSndZV2xrVlhCVWJ5STZJakl3TVRndE1EY3RNRE1pZlYwc0ltaGhjMmdpT2lJMk1qRXdNVFU1THpBaUxDSm5jbUZqWlZCbGNtbHZaRVJoZVhNaU9qQXNJbUYxZEc5UWNtOXNiMjVuWVhSbFpDSTZabUZzYzJVc0ltbHpRWFYwYjFCeWIyeHZibWRoZEdWa0lqcG1ZV3h6WlgwPS1tK2JzMWEreUs2MVhnOFJFVDZxTHhhL3FxcTAxVzZWdm9VN09RS25iY1N6UnVYeE1hSDRXWTZOQm1YU0dsdGhEbVZIVlZTK1RSUExuem1veUp0bDc5clpOK01CVHNmQy9IN2xnM0FXNlNENWl2ZDFFUU8zOXQ0aUxadGZyejBCaVNZaXZqVEVxR2FISUZOQmlxTEliWVd2djZtQXcwUHh2LzZpT1VzVEVGdzUwclYvaUJyaFZwS3lZYUoxVlpza3UwVms3QlFIQ3huWlU3MWdNVW1XVWhjdUs3OGVybFAzVlgrVkdpeDBibC9GcWExZXRCM0hnK1hIc3o5c2Rvb3pnSzZ5RWFycmpXYndqT2QzQ1pEVGNoK3pKNGRoQmpkeDFEZ0k2MmM3VWZydUUwNVIvbENhNHdQQnluNG5ta0loZldjeUdXNjZ2ODdsMVdiWFRFN0F6a3c9PS1NSUlFUGpDQ0FpYWdBd0lCQWdJQkJUQU5CZ2txaGtpRzl3MEJBUXNGQURBWU1SWXdGQVlEVlFRRERBMUtaWFJRY205bWFXeGxJRU5CTUI0WERURTFNVEV3TWpBNE1qRTBPRm9YRFRFNE1URXdNVEE0TWpFME9Gb3dFVEVQTUEwR0ExVUVBd3dHY0hKdlpETjVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQXhjUWtxK3pkeGxSMm1tUllCUHpHYlVOZE1ONk9hWGlYenhJV3RNRWtySk1PLzVvVWZRSmJMTHVNU01LMFFIRm1hSTM3V1NoeXhaY2ZSQ2lkd1hqb3Q0em1OQktubHlIb2REaWovNzhUbVZxRmw4bk9lRDUrMDdCOFZFYUl1N2MzRTFOK2UxZG9DNndodDRJNCtJRW10c1BBZG9hajVXQ1FWUWJySThLZVQ4TTlWY0JJV1g3ZkQwZmhleGZnM1pSdDB4cXdNY1hHTnAzRGRKSGlPMHJDZFUrSXR2N0VtdG5TVnE5akJHMXVzTVNGdk1vd1IyNW1qdTJKY1BGcDErSTRaSStGcWdSOGd5RzhvaU5EeU5Fb0Fic1IzbE9wSTdnclVZU3ZrQi94VnkvVm9rbFBDSzJoMGYwR0p4RmpueWU4TlQxUEF5d295bDdSbWlBVlJFL0VLd0lEQVFBQm80R1pNSUdXTUFrR0ExVWRFd1FDTUFBd0hRWURWUjBPQkJZRUZHRXBHOW9aR2NmTE1HTkJrWTdTZ0hpTUdnVGNNRWdHQTFVZEl3UkJNRCtBRktPZXRraG5RaEkyUWIxdDRMbTBvRktMbC9Hem9SeWtHakFZTVJZd0ZBWURWUVFEREExS1pYUlFjbTltYVd4bElFTkJnZ2tBMG15eGc3S0RlZUV3RXdZRFZSMGxCQXd3Q2dZSUt3WUJCUVVIQXdFd0N3WURWUjBQQkFRREFnV2dNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUNBUUM5V1p1WWdRZWRTdU9jNVRPVVNyUmlnTXc0Lyt3dUM1RXRaQmZ2ZGw0SFQvOHZ6TVcvb1VsSVA0WUN2QTBYS3lCYUNKMmlYK1pDREtvUGZpWVhpYVNpSCtIeEFQVjZKNzl2dm91eEtyV2cyWFY2U2hGdFBMUCswZ1BkR3EzeDlSMytrSmJtQW04dytGT2RsV3FBZkpyTHZwek1HTmVEVTE0WUdYaVo5YlZ6bUlRYndyQkErYy9GNHRsSy9EVjA3ZHNORXhpaHFGb2libnFEaVZOVEdvbWJhVTJkRHVwMmd3S2RMODF1YThFSWNHTkV4SGU4MmtqRjR6d2ZhZEhrM2JRVnZiZmRBd3hjRHk0eEJqczNMNHJhUExVM3llblN6ci9PRXVyMStqZk94blFTbUVjTVhLWGdyQVE5VTU1Z3dqY09GS3JnT3hFZGVrL1NrMVZmT2p2UytudU00ZXlFcnVGTWZhWkh6b1FpdXc0SXFnR2M0NW9oRkgwVVV5alljdUZ4eERTVTlsTUN2OHFkSEttK3duUFJiMGw5bDV2WHNDQkR1aEFHWUQ2c3MrR2ErYURZNmYvcVhadVVDRVVPSDNRVU5iYkNVbHZpU3o2K0dpUm50MWtBOU4yUWFjaGwrMnlCZmFxVXFyOGg3WjJnc3g1TGNJZjVrWU5zcUowR2F2WFRWeVdoN1BZaUtYNGJzMzU0WlFMVXd3YS9jRysrMit3TldQK0h0QmhWeE1STlRkVmhTbTM4QWtuWmxEK1BUQXNXR3U5R3lMbWh0aTJFblZ3R3liU0QyRHhtaHhrM0lQQ2toS0FLK3BsMGVXWUdaV0czdEo5bVo3U293Y1hMV0RGQWswbFJKbktHRk1UZ2dyV2pWOEdZcHc1YnEyM1ZtSXFxRExna056dW9vZz09",
+                  "type": "text/plain"
+                }
+              },
+              {
+                "id": 1502711985081,
+                "title": "Новый вопрос",
+                "type": "rating",
+                "required": true,
+                "answers": [],
+                "result": 3
+              },
+              {
+                "id": 1502713136041,
+                "title": "Новый вопрос",
+                "type": "multi-choice",
+                "required": true,
+                "answers": [
+                  "Ответ 1",
+                  "Ответ 2",
+                  "Ответ 3"
+                ],
+                "result": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "page_1502712000281": [
+              {
+                "id": 1502712006749,
+                "title": "Вопрос-шкала",
+                "type": "scale",
+                "required": true,
+                "answers": [
+                  null,
+                  null,
+                  null
+                ],
+                "result": "49"
+              },
+              {
+                "id": 1502713139591,
+                "title": "Новый вопрос",
+                "type": "single-choice",
+                "required": true,
+                "answers": [
+                  "Ответ 1",
+                  "Ответ 2",
+                  "Ответ 3"
+                ],
+                "result": [
+                  0
+                ]
+              },
+              {
+                "id": 1502713139874,
+                "title": "Новый вопрос",
+                "type": "multi-choice",
+                "required": true,
+                "answers": [
+                  "Ответ 1",
+                  "Ответ 2",
+                  "Ответ 3"
+                ],
+                "result": [
+                  0
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 8,
+          "results": {
+            "page_1": [
+              {
+                "id": 1502456983871,
+                "title": "Новый вопрос",
+                "type": "single-choice",
+                "required": true,
+                "answers": [
+                  "Ответ 1",
+                  "Ответ 2",
+                  "Ответ 3"
+                ],
+                "result": [
+                  0
+                ]
+              },
+              {
+                "id": 1502456984166,
+                "title": "Новый вопрос",
+                "type": "multi-choice",
+                "required": true,
+                "answers": [
+                  "Ответ 1",
+                  "Ответ 2",
+                  "Ответ 3"
+                ],
+                "result": [
+                  0
+                ]
+              },
+              {
+                "id": 1502456984486,
+                "title": "Новый вопрос",
+                "type": "text",
+                "required": false,
+                "answers": [
+                  null,
+                  null,
+                  null
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 9,
+          "results": {
+            "page_1": [
+              {
+                "id": 1502456983871,
+                "title": "Новый вопрос",
+                "type": "single-choice",
+                "required": true,
+                "answers": [
+                  "Ответ 1",
+                  "Ответ 2",
+                  "Ответ 3"
+                ],
+                "result": [
+                  0
+                ]
+              },
+              {
+                "id": 1502456984166,
+                "title": "Новый вопрос",
+                "type": "multi-choice",
+                "required": true,
+                "answers": [
+                  "Ответ 1",
+                  "Ответ 2",
+                  "Ответ 3"
+                ],
+                "result": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "id": 1502456984486,
+                "title": "Новый вопрос",
+                "type": "text",
+                "required": false,
+                "answers": [
+                  null,
+                  null,
+                  null
+                ],
+                "result": "Hi! Bye!"
+              }
+            ]
+          }
+        }
+      ]
     },
     {
       "id": 2,
       "name": "Юзер2",
       "role": "Пользователь",
       "registered": "3.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 3,
       "name": "Юзер3",
       "role": "Пользователь",
       "registered": "4.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 4,
       "name": "Юзер4",
       "role": "Пользователь",
       "registered": "5.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 5,
       "name": "Юзер5",
       "role": "Пользователь",
       "registered": "6.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 6,
       "name": "Юзер6",
       "role": "Пользователь",
       "registered": "7.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 7,
       "name": "Юзер7",
       "role": "Пользователь",
       "registered": "8.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 8,
       "name": "Юзер8",
       "role": "Пользователь",
       "registered": "9.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 9,
       "name": "Юзер9",
       "role": "Пользователь",
       "registered": "0.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
     },
     {
       "id": 10,
       "name": "Юзер10",
       "role": "Пользователь",
       "registered": "1.01.2017",
-      "surveys": 0
+      "completed_surveys": 0
+    },
+    {
+      "id": 1503067776935,
+      "name": "Елизавета",
+      "role": "Пользователь",
+      "registered": "18.08.2017",
+      "completed_surveys": 0,
+      "login": "lizaburaya@gmail.com",
+      "password": "123"
     }
   ],
   "surveys": [
@@ -384,7 +634,7 @@
             "id": 1502456984486,
             "title": "Новый вопрос",
             "type": "text",
-            "required": false,
+            "required": true,
             "answers": [
               null,
               null,
@@ -472,7 +722,7 @@
       "pages_are_numbered": true,
       "randomized": false,
       "required_fields": true,
-      "progress_bar": false,
+      "progress_bar": true,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Phasellus ullamcorper elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius.",
       "navtabs": [
         {
@@ -853,6 +1103,144 @@
               "Ответ 2",
               "Ответ 3"
             ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 1503068043069,
+      "name": "MySurvey",
+      "changed": "18.08.2017",
+      "answers": 0,
+      "link": "survey/1503068043069",
+      "results": "survey/1503068043069/results",
+      "template": false,
+      "pages": 2,
+      "questions": 12,
+      "is_anonymous": false,
+      "questions_are_numbered": true,
+      "pages_are_numbered": true,
+      "randomized": true,
+      "required_fields": false,
+      "progress_bar": false,
+      "description": "This is a survey",
+      "navtabs": [
+        {
+          "href": "#page_1",
+          "id": "page_1",
+          "name": "Страница 1",
+          "active": true
+        },
+        {
+          "href": "#page_1503068000456",
+          "id": "page_1503068000456",
+          "name": "Страница 2",
+          "active": false
+        }
+      ],
+      "questions_list": {
+        "page_1": [
+          {
+            "id": 1503067995608,
+            "title": "Новый вопрос",
+            "type": "single-choice",
+            "required": true,
+            "answers": [
+              "Ответ 1",
+              "Ответ 2",
+              "Ответ 3"
+            ]
+          },
+          {
+            "id": 1503067995952,
+            "title": "Новый вопрос",
+            "type": "multi-choice",
+            "required": true,
+            "answers": [
+              "Ответ 1",
+              "Ответ 2",
+              "Ответ 3"
+            ]
+          },
+          {
+            "id": 1503067996304,
+            "title": "Новый вопрос",
+            "type": "text",
+            "required": true,
+            "answers": []
+          },
+          {
+            "id": 1503067996632,
+            "title": "Новый вопрос",
+            "type": "file",
+            "required": true,
+            "answers": []
+          },
+          {
+            "id": 1503067996944,
+            "title": "Новый вопрос",
+            "type": "rating",
+            "required": true,
+            "answers": []
+          },
+          {
+            "id": 1503067997279,
+            "title": "Новый вопрос",
+            "type": "scale",
+            "required": true,
+            "answers": []
+          }
+        ],
+        "page_1503068000456": [
+          {
+            "id": 1503068003823,
+            "title": "Новый вопрос",
+            "type": "single-choice",
+            "required": true,
+            "answers": [
+              "Ответ 1",
+              "Ответ 2",
+              "Ответ 3"
+            ]
+          },
+          {
+            "id": 1503068004104,
+            "title": "Новый вопрос",
+            "type": "multi-choice",
+            "required": true,
+            "answers": [
+              "Ответ 1",
+              "Ответ 2",
+              "Ответ 3"
+            ]
+          },
+          {
+            "id": 1503068004840,
+            "title": "Новый вопрос",
+            "type": "text",
+            "required": true,
+            "answers": []
+          },
+          {
+            "id": 1503068005175,
+            "title": "Новый вопрос",
+            "type": "file",
+            "required": true,
+            "answers": []
+          },
+          {
+            "id": 1503068005511,
+            "title": "Новый вопрос",
+            "type": "rating",
+            "required": true,
+            "answers": []
+          },
+          {
+            "id": 1503068005864,
+            "title": "Новый вопрос",
+            "type": "scale",
+            "required": true,
+            "answers": []
           }
         ]
       }

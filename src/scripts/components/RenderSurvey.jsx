@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import GenerateQuestions from './GenerateQuestions.jsx';
+import { Link, Redirect } from 'react-router-dom';
 
 export default class GenerateSurvey extends React.Component {
     constructor(props) {
@@ -18,6 +19,7 @@ export default class GenerateSurvey extends React.Component {
             randomized: false,
             required_fields: true,
             progress_bar: false,
+            redirectToAbout:false,
             navtabs: [
                 { 'href':'#page_1', 'id':'page_1', 'name':'Страница 1', 'active':true }
             ]
@@ -39,21 +41,21 @@ export default class GenerateSurvey extends React.Component {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             success: function(data) {
-                let template = data[0];
+                let survey = data[0];
                 this.setState({
-                    survey_id:(path.includes("create")) ? null : template.id,
-                    survey_title:template.name,
+                    survey_id:survey.id,
+                    survey_title:survey.name,
                     survey_page:'page_1',
-                    numberOfPages: template.pages,
-                    numberOfQuestions: template.questions,
-                    is_anonymous: template.is_anonymous,
-                    questions_are_numbered: template.questions_are_numbered,
-                    pages_are_numbered: template.pages_are_numbered,
-                    randomized: template.randomized,
-                    required_fields: template.required_fields,
-                    progress_bar: template.progress_bar,
-                    questions_list: template.questions_list,
-                    navtabs: template.navtabs
+                    numberOfPages: survey.pages,
+                    numberOfQuestions: survey.questions,
+                    is_anonymous: survey.is_anonymous,
+                    questions_are_numbered: survey.questions_are_numbered,
+                    pages_are_numbered: survey.pages_are_numbered,
+                    randomized: survey.randomized,
+                    required_fields: survey.required_fields,
+                    progress_bar: survey.progress_bar,
+                    questions_list: survey.questions_list,
+                    navtabs: survey.navtabs
                 });
             }.bind(this),
             error: function(xhr, status, err) {
@@ -75,7 +77,7 @@ export default class GenerateSurvey extends React.Component {
         let results = null;
 
         newQuestionsList[surveyPage].map((question) => {
-           if (question.id == id) {
+           if (question.id === id) {
                if (question.type === "single-choice" || question.type === "multi-choice") {
                    results = (question.result) ? (question.result) : [];
                    if (checked) {
@@ -103,31 +105,118 @@ export default class GenerateSurvey extends React.Component {
     updateProgressBar() {
         let questionsList = this.state.questions_list;
         let questionNumber = this.state.numberOfQuestions;
+        let requiredQuestionNumber = 0;
         let answeredQuestions = 0;
 
-         for (let page in questionsList){
-             questionsList[page].forEach((question) => {
-                 if (Number.isInteger(question.result)) {
-                     (question.result > 0)
-                         ? answeredQuestions += 1
-                             : answeredQuestions += 0;
-                 } else if (question.result && question.result.length > 0) {
-                     answeredQuestions += 1;
-                 }
-             })
-         }
+        for (let page in questionsList){
+            questionsList[page].forEach((question) => {
+                if (question.required) {
+                    requiredQuestionNumber++;
+                }
+            })
+        }
 
-         let percent = Math.round((answeredQuestions * 100)/questionNumber);
+        for (let page in questionsList){
+            questionsList[page].forEach((question) => {
+                if (Number.isInteger(question.result)) {
+                    if (question.result > 0) {
+                        answeredQuestions++;
 
-        $('.bar').css('width', percent + '%');
+                        (question.required)
+                            ? requiredQuestionNumber--
+                            : requiredQuestionNumber;
+                    }
+                } else if (question.result && (question.result.length > 0 || question.result.name)) {
+                    answeredQuestions++;
+
+                    (question.required)
+                        ? requiredQuestionNumber--
+                        : requiredQuestionNumber;
+                }
+            })
+        }
+
+        let percent = Math.round((answeredQuestions * 100)/questionNumber);
+        let progressBar = $('.bar');
+
+        progressBar.css('width', percent + '%');
         $('.percent').html(percent + '%');
+
+        if (requiredQuestionNumber === 0) {
+            progressBar.css('background-color', 'green');
+            $('.submit-button').removeClass('disabled');
+        } else {
+            progressBar.css('background-color', 'red');
+            $('.submit-button').addClass('disabled');
+        }
     }
 
-    handleSubmitSurvey(template) {
+    handleSubmitSurvey() {
+        let questionsList = this.state.questions_list;
+        let textAreaLength = 100;
 
+        for (let page in questionsList){
+            questionsList[page].forEach((question) => {
+                if (question.result && question.type === 'text' && question.required) {
+                    if (question.result.length < 100)
+                        textAreaLength = 0;
+                }
+            })
+        }
+
+        if (textAreaLength === 0) {
+            alert('Текстовый ответ не может содержать менее 100 символов');
+            return;
+        }
+
+        let submitSurvey = confirm('Вы уверены, что хотите завершить опрос?');
+
+        if (submitSurvey) {
+            let completedSurveys = 0;
+            let surveys = [];
+            let that = this;
+
+            let newSurvey = {
+                "id": this.state.survey_id,
+                "results": this.state.questions_list,
+            };
+
+            fetch('http://localhost:3000/users/' + this.props.loggedInAs.id)
+                .then((resp) => resp.json())
+                .then(function (data) {
+                    completedSurveys = data.completed_surveys;
+                    surveys = data.surveys;
+                    surveys.push(newSurvey);
+
+                    $.ajax({
+                        url: 'http://localhost:3000/users/' + that.props.loggedInAs.id,
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        data: JSON.stringify({
+                            'completed_surveys':++completedSurveys,
+                            'surveys': surveys
+                        }),
+                        success: function() {
+                            alert('Опрос отправлен успешно!');
+                            that.setState({
+                                redirectToAbout: true,
+                            });
+                        }
+                    })
+                });
+            }
     }
 
     render() {
+        const redirectToAbout = this.state.redirectToAbout;
+        const { currentPage, loggedInAs } = this.props;
+
+        if (redirectToAbout) {
+            return (
+                <Redirect to="/about"/>
+            )
+        }
+
         let pageName = null;
         let pageIndex = null;
         const navs = this.state.navtabs;
@@ -142,40 +231,48 @@ export default class GenerateSurvey extends React.Component {
         return (
             <main className='d-flex flex-row'>
                 <Sidebar
-                    currentPage = {this.props.currentPage}
+                    currentPage = {currentPage}
+                    loggedInAs = {loggedInAs}
                 />
                 <div className='main-content survey d-flex flex-column'>
                     <div className='page-head d-flex justify-content-center'>
                         <h1>{this.state.survey_title}</h1>
                     </div>
-                    <div className="survey-page">
-                        <div className="survey-content">
+                    <div className='survey-page'>
+                        <div className='survey-content'>
                             {this.state.pages_are_numbered &&
                                 <h2>{pageName}</h2>
                             }
                             {this.state.questions_list[this.state.survey_page] &&
-                            <GenerateQuestions questions_list = {this.state.questions_list}
-                                               survey_page = {this.state.survey_page}
-                                               currentPage = '/survey'
-                                               navtabs={this.state.navtabs}
-                                               handleChangePage = {this.handleChangePage}
-                                               handleSaveAnswer = {this.handleSaveAnswer}
-                                               is_anonymous = {this.state.is_anonymous}
-                                               questions_are_numbered = {this.state.questions_are_numbered}
-                                               randomized = {this.state.randomized}
-                                               required_fields = {this.state.required_fields}
-                                               progress_bar = {this.state.progress_bar}
-                            />}
+                                <GenerateQuestions questions_list = {this.state.questions_list}
+                                                   survey_page = {this.state.survey_page}
+                                                   currentPage = '/survey'
+                                                   navtabs={this.state.navtabs}
+                                                   handleChangePage = {this.handleChangePage}
+                                                   handleSaveAnswer = {this.handleSaveAnswer}
+                                                   is_anonymous = {this.state.is_anonymous}
+                                                   questions_are_numbered = {this.state.questions_are_numbered}
+                                                   randomized = {this.state.randomized}
+                                                   required_fields = {this.state.required_fields}
+                                />
+                           }
                         </div>
                     </div>
-                    <div className="progress d-flex justify-content-center">
-                        <span className="done">{pageIndex + 1}</span>/<span className="todo">{this.state.numberOfPages}</span>
-                        <div className="progress-bar">
-                            <div className="bar completing-survey-bar" />
-                        </div>
-                        <span className="percent">0%</span>
+                    <div className='submit-survey d-flex justify-content-center'>
+                        <a className='submit-button disabled'
+                           onClick={this.handleSubmitSurvey}>Завершить опрос
+                        </a>
                     </div>
-                    <div className="page-navigation d-flex justify-content-center">
+                    {this.state.progress_bar &&
+                        <div className='progress d-flex justify-content-center'>
+                            <span className='done'>{pageIndex + 1}</span>/<span className="todo">{this.state.numberOfPages}</span>
+                            <div className='progress-bar'>
+                                <div className='bar completing-survey-bar' />
+                            </div>
+                            <span className='percent'>0%</span>
+                        </div>
+                    }
+                    <div className='page-navigation d-flex justify-content-center'>
                         <a className={(this.state.survey_page === 'page_1')
                             ? 'active-nav'
                             : ''}

@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 
 class MySearchPanel extends React.Component {
     render() {
+        let isAdmin = (this.props.loggedInAs.role === 'Администратор');
         return (
             <div className='page-head d-flex justify-content-between align-items-center'>
-                <h1>Мои опросы <Link to='/new_survey' className='create-survey' >Создать опрос</Link></h1>
+                <h1>Мои опросы {isAdmin && <Link to='/new_survey' className='create-survey'>Создать опрос</Link>}</h1>
                 <div className='search-form'>
                     { this.props.searchField }
                 </div>
@@ -31,7 +32,6 @@ export default class Surveys extends React.Component {
         this.handleDeletedRow = this.handleDeletedRow.bind(this);
         this.renderTotal = this.renderTotal.bind(this);
         this.surveyLink = this.surveyLink.bind(this);
-        this.onLoad = this.onLoad.bind(this);
         this.selectedRows = [];
         this.state = {
             data: [{'id':'нет данных','name':'нет данных','changed':'нет данных','answers':'нет данных','link':'null', 'results':'null'}],
@@ -44,31 +44,17 @@ export default class Surveys extends React.Component {
             paginationShowsTotal: this.renderTotal,
             defaultSortName: 'name',  // default sort column name
             defaultSortOrder: 'asc',  // default sort order
-            searchPanel: (props) => (<MySearchPanel { ...props }/>),
+            searchPanel: (props) => (<MySearchPanel { ...props } loggedInAs = {this.props.loggedInAs} />),
             afterDeleteRow: this.handleDeletedRow,
         };
     }
 
     componentDidMount() {
-        this.onLoad();
+        this.props.handleLoadSurveyData();
         if (this.props.currentPage !== '/surveys')
         {
             this.props.handleChangePage('/surveys');
         }
-    }
-
-    onLoad() {
-        $.ajax({
-            url: 'http://localhost:3000/surveys',
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-            success: function(data) {
-                this.setState({data: data});
-            }.bind(this),
-            error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
     }
 
     afterSaveCell(row) {
@@ -78,7 +64,7 @@ export default class Surveys extends React.Component {
             data: JSON.stringify(row),
             headers: { 'Content-Type': 'application/json' },
             success: function() {
-                this.onLoad();
+                this.props.handleLoadSurveyData();
             }.bind(this)
         });
     }
@@ -107,7 +93,7 @@ export default class Surveys extends React.Component {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 success: function() {
-                  this.onLoad();
+                    this.props.handleLoadSurveyData();
                 }.bind(this)
             });
         }
@@ -117,7 +103,7 @@ export default class Surveys extends React.Component {
     renderTotal() {
         return (
             <span className='users-number'>
-                Всего опросов: { this.state.data.length }
+                Всего опросов: { this.props.surveyData.length }
             </span>
         );
     }
@@ -134,20 +120,25 @@ export default class Surveys extends React.Component {
     }
 
     render() {
+        let userRole = this.props.loggedInAs.role;
+        const { currentPage, loggedInAs, surveyData, isFetching } = this.props;
+
         return (
             <main className='d-flex flex-row justify-content-start'>
                 <Sidebar
-                    currentPage = {this.props.currentPage}
+                    currentPage = {currentPage}
+                    loggedInAs = {loggedInAs}
                 />
                 <div className='main-content d-flex flex-column'>
-                    <Table data={this.state.data}
-                           roles={this.state.roles}
+                    <Table data={surveyData}
                            options={ this.options }
                            columnNames={ this.state.columnNames }
-                           afterSaveCell = { this.afterSaveCell }
-                           onRowSelect = { this.onRowSelect }
-                           onSelectAll = { this.onSelectAll }
+                           afterSaveCell = {(userRole === 'Администратор') ? this.afterSaveCell : undefined}
+                           onRowSelect = {(userRole === 'Администратор') ? this.onRowSelect : undefined }
+                           onSelectAll = {(userRole === 'Администратор') ? this.onSelectAll : undefined }
                            surveyLink = { this.surveyLink }
+                           loggedInAs = {loggedInAs}
+                           isFetching = {isFetching}
                     />
                 </div>
             </main>

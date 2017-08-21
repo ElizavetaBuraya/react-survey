@@ -6,7 +6,7 @@ export default class Checkbox extends React.Component {
         this.id = (new Date).getTime() * Math.random();
 
         this.state = {
-            isChecked :false,
+            isChecked:false,
         }
     }
 
@@ -29,7 +29,7 @@ export default class Checkbox extends React.Component {
         });
 
         if (this.props.handleSaveAnswer) {
-            this.props.handleSaveAnswer(e.target.name, this.props.index, e.target.checked)
+            this.props.handleSaveAnswer(parseInt(e.target.name), this.props.index, e.target.checked)
         }
 
         if (this.props.onChange) {
@@ -38,27 +38,28 @@ export default class Checkbox extends React.Component {
     };
 
     render() {
+        const { isEdited, name, index, answer, handleEditAnswer } = this.props;
         return(
             <div>
-                {this.props.isEdited &&
+                {isEdited &&
                 <p>
                     <input type='checkbox' id={this.id} name='checkbox-question'/>
                     <label>
-                        <input type='text' defaultValue={this.props.answer}
-                               onChange={(e) => this.props.handleEditAnswer(e.target.value, this.props.index) } />
+                        <input type='text' defaultValue={answer}
+                               onChange={(e) => handleEditAnswer(e.target.value, index) } />
                     </label>
                 </p>
                 }
-                {!this.props.isEdited &&
+                {!isEdited &&
                 <p>
                     <input
                         type='checkbox'
                         id={this.id}
                         checked={this.state.isChecked}
-                        name={this.props.name}
+                        name={name}
                         onChange={this.toggleCheckboxChange}
                     />
-                    <label htmlFor={this.id}>{this.props.answer}</label>
+                    <label htmlFor={this.id}>{answer}</label>
                 </p>
                 }
             </div>
