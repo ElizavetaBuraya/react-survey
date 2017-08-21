@@ -24,7 +24,7 @@ let Form = props => {
                            placeholder='******'
                            required />
                     <div className='d-flex justify-content-between'>
-                        <a className='signup' href='#' onClick={handleNotRegisteredClick}>Регистрация</a>
+                        <a className='signup' href='#' onClick={handleRegisteredClick}>Регистрация</a>
                         <a className='getpassword' href='#'>Забыли пароль?</a>
                     </div>
                     <button className='login-form-btn' type='submit'>
