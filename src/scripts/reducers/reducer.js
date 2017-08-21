@@ -10,12 +10,12 @@ const initialState = {
 export default function renderApp(state = initialState, action) {
     switch(action.type){
         case actionTypes.LOG_IN:
-            sessionStorage.setItem('isAuthorized', action.payload);
-            sessionStorage.setItem('loggedInAs', JSON.stringify(action.data));
-            return {...state, isAuthorized: action.payload, loggedInAs: action.data};
+            sessionStorage.setItem('isAuthorized', !state.isAuthorized);
+            sessionStorage.setItem('loggedInAs', JSON.stringify(action.payload));
+            return {...state, isAuthorized: !state.isAuthorized, loggedInAs: action.payload};
         case actionTypes.TOGGLE_REGISTERED:
-            sessionStorage.setItem('isRegistered', action.payload);
-            return {...state, isRegistered: action.payload};
+            sessionStorage.setItem('isRegistered', !state.isRegistered);
+            return {...state, isRegistered: !state.isRegistered};
         case actionTypes.UPDATE_CURRENT_PAGE:
             return {...state, currentPage: action.payload};
         default:
