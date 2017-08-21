@@ -5,6 +5,11 @@ const initialState = {
     isAuthorized: JSON.parse(sessionStorage.getItem('isAuthorized')),
     loggedInAs: JSON.parse(sessionStorage.getItem('loggedInAs')),
     currentPage: '',
+    isFetching: false,
+    userData: [{"id":"нет данных","name":"нет данных","role":"нет данных",
+        "registered":"нет данных","completed_surveys":"нет данных"}],
+    surveyData: [{'id':'нет данных','name':'нет данных','changed':'нет данных','answers':'нет данных',
+        'link':'null', 'results':'null'}],
 };
 
 export default function renderApp(state = initialState, action) {
@@ -18,6 +23,12 @@ export default function renderApp(state = initialState, action) {
             return {...state, isRegistered: !state.isRegistered};
         case actionTypes.UPDATE_CURRENT_PAGE:
             return {...state, currentPage: action.payload};
+        case actionTypes.REQUEST_DATA:
+            return {...state, isFetching: true};
+        case actionTypes.GET_USERS:
+            return {...state, isFetching: false, userData: action.payload};
+        case actionTypes.GET_SURVEYS:
+            return {...state, isFetching: false, surveyData: action.payload};
         default:
             return state
     }
