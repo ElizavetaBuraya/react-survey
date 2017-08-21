@@ -1,17 +1,15 @@
 import {actionTypes} from './actionTypes';
 
-export function logIn(isAuthorized, loggedInAs){
+export function setUserData(loggedInAs) {
     return {
         type: actionTypes.LOG_IN,
-        payload: isAuthorized,
-        data: loggedInAs
+        payload: loggedInAs
     };
 }
 
-export function toggleRegistered(isRegistered){
+export function toggleRegistered(){
     return {
-        type: actionTypes.TOGGLE_REGISTERED,
-        payload: isRegistered,
+        type: actionTypes.TOGGLE_REGISTERED
     };
 }
 
