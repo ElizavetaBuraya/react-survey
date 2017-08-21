@@ -173,6 +173,7 @@ export default class GenerateSurvey extends React.Component {
 
         if (submitSurvey) {
             let completedSurveys = 0;
+            let surveys = [];
             let that = this;
 
             let newSurvey = {
@@ -180,18 +181,20 @@ export default class GenerateSurvey extends React.Component {
                 "results": this.state.questions_list,
             };
 
-            fetch('http://localhost:3000/users/' + 0)
+            fetch('http://localhost:3000/users/' + this.props.loggedInAs.id)
                 .then((resp) => resp.json())
                 .then(function (data) {
                     completedSurveys = data.completed_surveys;
+                    surveys = data.surveys;
+                    surveys.push(newSurvey);
 
                     $.ajax({
-                        url: 'http://localhost:3000/users/' + 1 ,
+                        url: 'http://localhost:3000/users/' + that.props.loggedInAs.id,
                         method: 'PATCH',
                         headers: { 'Content-Type': 'application/json' },
                         data: JSON.stringify({
                             'completed_surveys':++completedSurveys,
-                            'surveys': newSurvey
+                            'surveys': surveys
                         }),
                         success: function() {
                             alert('Опрос отправлен успешно!');
