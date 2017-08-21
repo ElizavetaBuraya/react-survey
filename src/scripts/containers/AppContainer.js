@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { logIn, toggleRegistered, updateCurrentPage } from '../actions/actionCreators';
-import RenderApp from '../components/RenderApp.jsx';
+import { logIn, createUser } from '../actions/actions';
+import { toggleRegistered, updateCurrentPage } from '../actions/actionCreators';
+import App from '../components/App.jsx';
 
 const mapStateToProps = (state) => {
     return {
@@ -15,8 +16,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleLogInOutClick:
+        handleLogInClick:
             bindActionCreators(logIn, dispatch),
+        handleCreateUserClick:
+            bindActionCreators(createUser, dispatch),
         handleRegisteredClick:
             bindActionCreators(toggleRegistered, dispatch),
         handleUpdatePage:
@@ -25,4 +28,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default
-connect(mapStateToProps, mapDispatchToProps)(RenderApp)
+connect(mapStateToProps, mapDispatchToProps)(App)
