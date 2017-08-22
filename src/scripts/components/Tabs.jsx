@@ -86,12 +86,14 @@ class GenerateContent extends React.Component {
                         {isSurveyPage &&
                             <div className='survey-content'>
                                 <span className={deleteClass} aria-hidden='true' onClick={() => handleDeletePage(tab.id)}/>
-                                <input type='text'
-                                       name='page-head'
-                                       value={tab.name}
-                                       maxLength="12"
-                                       onChange={(e) => handleChangePageName(e.target.value, tab.id)}
-                                /><br/>
+                                <div>
+                                    <input type='text'
+                                           name='page-head'
+                                           value={tab.name}
+                                           maxLength="12"
+                                           onChange={(e) => handleChangePageName(e.target.value, tab.id)}
+                                    />
+                                </div>
                                 {questions_list[survey_page] &&
                                     <GenerateQuestions questions_list = {questions_list}
                                                        survey_page = {survey_page}
