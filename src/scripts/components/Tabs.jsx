@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import GenerateQuestions from './GenerateQuestions.jsx'
+import GenerateResults from './GenerateResults.jsx'
 
 function TabItem(props) {
     return  <li className='nav-item nav-tab-item'
@@ -57,10 +58,28 @@ class GenerateContent extends React.Component {
 
         const isAboutPage = (currentPage === '/about');
         const isSurveyPage = (currentPage === '/new_survey');
+        const isResultsPage = (currentPage === '/survey/results');
+
         return (
             <div className='tab-content'>
                 {navtabs.map((tab, index) =>
                     <div className={(tab.active ? 'active ' : '') + tabClass} id={tab.id} role='tabpanel' key={index}>
+                        {isResultsPage &&
+                            <div className='survey-content'>
+                                {pages_are_numbered &&
+                                    <h2>{tab.name}</h2>
+                                }
+                                {questions_list[survey_page] &&
+                                    <GenerateResults questions_list={questions_list}
+                                                     survey_page={survey_page}
+                                                     questions_are_numbered={questions_are_numbered}
+                                                     required_fields={required_fields}
+                                                     displayChart={displayChart}
+                                                     user_results = {user_results}
+                                    />
+                                }
+                            </div>
+                        }
                         {isSurveyPage &&
                             <div className='survey-content'>
                                 <span className={deleteClass} aria-hidden='true' onClick={() => handleDeletePage(tab.id)}/>
