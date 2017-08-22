@@ -114,9 +114,15 @@ export function getSurveydata() {
                     userSurveysArray.push(userSurvey);
                 });
 
-                (getState().renderApp.loggedInAs.role === 'Администратор')
-                    ? dispatch(getSurveys(data))
-                    : dispatch(getSurveys(userSurveysArray));
+                if (getState().renderApp.currentPage === '/templates') {
+                    let templates = data.filter((obj) => obj.template === true);
+
+                    dispatch(getSurveys(templates));
+                } else {
+                    (getState().renderApp.loggedInAs.role === 'Администратор')
+                        ? dispatch(getSurveys(data))
+                        : dispatch(getSurveys(userSurveysArray));
+                }
             });
     }
 }
