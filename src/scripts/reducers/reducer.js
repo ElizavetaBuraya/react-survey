@@ -9,7 +9,7 @@ const initialState = {
     userData: [{"id":"нет данных","name":"нет данных","role":"нет данных",
         "registered":"нет данных","completed_surveys":"нет данных"}],
     surveyData: [{'id':'нет данных','name':'нет данных','changed':'нет данных','answers':'нет данных',
-        'link':'null', 'results':'null'}],
+        'link':'null', 'results':'null', 'pages':'нет данных','questions':'нет данных', 'description':'нет данных'}],
 };
 
 export default function renderApp(state = initialState, action) {
