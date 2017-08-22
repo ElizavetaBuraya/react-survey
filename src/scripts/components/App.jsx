@@ -18,7 +18,7 @@ export default class App extends React.Component {
             handleCreateUserClick,
             handleUpdatePage,
             handleLoadUserData,
-            handleLoadSurveyData} = this.props;
+            handleLoadSurveyData } = this.props;
 
         return (
             <BrowserRouter basename={'/'}>
