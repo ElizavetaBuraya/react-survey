@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import GenerateQuestions from './GenerateQuestions.jsx';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 export default class GenerateSurvey extends React.Component {
     constructor(props) {
@@ -151,7 +151,8 @@ export default class GenerateSurvey extends React.Component {
         }
     }
 
-    handleSubmitSurvey() {
+    handleSubmitSurvey(path) {
+        let pathId = path.split("/");
         let questionsList = this.state.questions_list;
         let textAreaLength = 100;
 
@@ -188,20 +189,40 @@ export default class GenerateSurvey extends React.Component {
                     surveys = data.surveys;
                     surveys.push(newSurvey);
 
-                    $.ajax({
-                        url: 'http://localhost:3000/users/' + that.props.loggedInAs.id,
+                    return fetch('http://localhost:3000/users/' + that.props.loggedInAs.id, {
                         method: 'PATCH',
-                        headers: { 'Content-Type': 'application/json' },
-                        data: JSON.stringify({
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
                             'completed_surveys':++completedSurveys,
                             'surveys': surveys
-                        }),
-                        success: function() {
+                        })
+                    }).then((response) => {
+                        if (response.ok) {
                             alert('Опрос отправлен успешно!');
                             that.setState({
                                 redirectToAbout: true,
                             });
+                        } else {
+                            throw new Error('Ошибка при отправке опроса!');
                         }
+                    });
+                });
+
+            fetch('http://localhost:3000/surveys/' + pathId[pathId.length-1])
+                .then((resp) => resp.json())
+                .then(function (data) {
+                    let timesCompleted = data.answers;
+
+                    return fetch('http://localhost:3000/surveys/' + pathId[pathId.length-1], {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            'answers':++timesCompleted,
+                        })
                     })
                 });
             }
@@ -260,7 +281,7 @@ export default class GenerateSurvey extends React.Component {
                     </div>
                     <div className='submit-survey d-flex justify-content-center'>
                         <a className='submit-button disabled'
-                           onClick={this.handleSubmitSurvey}>Завершить опрос
+                           onClick={() => this.handleSubmitSurvey(this.props.location.pathname)}>Завершить опрос
                         </a>
                     </div>
                     {this.state.progress_bar &&
