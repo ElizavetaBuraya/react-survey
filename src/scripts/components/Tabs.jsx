@@ -165,7 +165,10 @@ export default class Tabs extends React.Component {
                                      handleChangePageName = {handleChangePageName}
                                      handleDeletePage = {handleDeletePage}
                                      questions_are_numbered = {questions_are_numbered}
+                                     pages_are_numbered = {pages_are_numbered}
                                      required_fields = {required_fields}
+                                     displayChart = {displayChart}
+                                     user_results = {user_results}
                     />
                 </div>
             </div>
