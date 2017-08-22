@@ -46,7 +46,10 @@ class GenerateContent extends React.Component {
             handleDeleteQuestion,
             handleChangePageName,
             questions_are_numbered,
-            required_fields } = this.props;
+            pages_are_numbered,
+            required_fields,
+            displayChart,
+            user_results } = this.props;
 
         const tabClass = classNames({'tab-pane': true,
             'about-pane': currentPage === '/about',
