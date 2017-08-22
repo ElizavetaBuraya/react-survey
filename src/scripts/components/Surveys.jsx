@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import Table from './Table.jsx';
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
 class MySearchPanel extends React.Component {
@@ -108,9 +109,14 @@ export default class Surveys extends React.Component {
         );
     }
 
-    surveyLink(cell) {
+    surveyLink(cell, row) {
+
+        const surveyLink = classNames({'survey-link': true,
+            'inactive': (row.answers === 0 && cell.includes('results'))
+        });
+
         return (
-            <Link to={`${cell}`}>
+            <Link className={surveyLink} to={`${cell}`}>
                 { cell.includes('results')
                     ? 'результаты'
                     : 'ссылка на опрос'

@@ -7,6 +7,7 @@ import Surveys from './Surveys.jsx';
 import Templates from './Templates.jsx';
 import NewSurvey from './NewSurvey.jsx';
 import GenerateSurvey from './RenderSurvey.jsx';
+import SurveyResults from './SurveyResults.jsx'
 import NoMatch from './ErrorPage.jsx'
 
 export default class Main extends React.Component {
@@ -84,7 +85,10 @@ export default class Main extends React.Component {
                     ) : (
                         <Templates
                             handleChangePage = {handleChangePage}
+                            handleLoadSurveyData = {handleLoadSurveyData}
                             currentPage = {currentPage}
+                            surveyData = {surveyData}
+                            isFetching = {isFetching}
                         />
                     )
                 )}/>
@@ -99,16 +103,37 @@ export default class Main extends React.Component {
                     )
                 )}/>
                 <Route path='/new_survey/:link'
-                       render={(props) =>
-                           <NewSurvey {...props}
-                                      currentPage='new_survey/:link'
-                           />}
+                       render={(props) => (
+                           !isAuthorized ? (
+                               <Redirect to='/'/>
+                           ) : (
+                               <NewSurvey {...props}
+                                          currentPage='new_survey/:link'
+                               />
+                           )
+                       )}
+                />
+                <Route path='/survey/:link/results'
+                       render={(props) => (
+                           !isAuthorized ? (
+                               <Redirect to='/'/>
+                           ) : (
+                               <SurveyResults {...props}
+                                              currentPage='survey/:link/results'
+                               />
+                           )
+                       )}
                 />
                 <Route path='/survey/:link'
-                       render={(props) =>
-                           <GenerateSurvey {...props}
-                                           loggedInAs = {loggedInAs}
-                           />}
+                       render={(props) => (
+                           !isAuthorized ? (
+                               <Redirect to='/'/>
+                           ) : (
+                               <GenerateSurvey {...props}
+                                               loggedInAs = {loggedInAs}
+                               />
+                           )
+                       )}
                 />
                 <Route render={() => (
                     !isAuthorized ? (

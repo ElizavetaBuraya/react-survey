@@ -12,8 +12,8 @@ export default class RenderTemplate extends React.Component {
                         </p>
                         <div className='template'
                              tabIndex='0'
-                             onClick={(e) => that.props.handleEditTemplate(e, e.currentTarget)}
-                             onBlur={(e) => that.props.handleEditTemplate(e, e.currentTarget, 'hide')}
+                             onClick={(e) => that.props.handleEditTemplate(e.currentTarget)}
+                             onBlur={(e) => that.props.handleEditTemplate(e.currentTarget, 'hide')}
                         >
                             <h2>{ obj.name }</h2>
                             <p>{ obj.description }</p>
@@ -37,8 +37,8 @@ export default class RenderTemplate extends React.Component {
                             </p>
                             <div className='template'
                                  tabIndex='0'
-                                 onClick={(e) => that.props.handleEditTemplate(e, e.currentTarget)}
-                                 onBlur={(e) => that.props.handleEditTemplate(e, e.currentTarget, 'hide')}
+                                 onClick={(e) => that.props.handleEditTemplate(e.currentTarget)}
+                                 onBlur={(e) => that.props.handleEditTemplate(e.currentTarget, 'hide')}
                             >
                                 <h2>{ obj.name }</h2>
                                 <p>{ obj.description }</p>
