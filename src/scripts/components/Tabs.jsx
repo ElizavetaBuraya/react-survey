@@ -143,7 +143,10 @@ export default class Tabs extends React.Component {
             handleChangePage,
             handleChangePageName,
             questions_are_numbered,
-            required_fields } = this.props;
+            pages_are_numbered,
+            required_fields,
+            displayChart,
+            user_results } = this.props;
 
         let isSurveyPage = (currentPage === '/new_survey');
 
