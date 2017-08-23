@@ -9,7 +9,6 @@ export default class NewSurvey extends React.Component {
         super(props);
         this.state = {
             survey_id:null,
-            editingTemplate:false,
             redirectToTemplates: false,
             survey_title:"",
             questions_list:{"page_1" : null},
@@ -54,7 +53,6 @@ export default class NewSurvey extends React.Component {
             success: function(data) {
                 let template = data[0];
                 this.setState({
-                    editingTemplate: (!path.includes("create")),
                     survey_id:(path.includes("create")) ? null : template.id,
                     survey_title:template.name,
                     survey_page:'page_1',
@@ -339,9 +337,9 @@ export default class NewSurvey extends React.Component {
                             <p className='page-number'>cтраниц: <span>{this.state.numberOfPages}</span></p>
                         </div>
                         <div className='survey-command-panel'>
-                            {!this.state.editingTemplate && <a href='#' onClick = {() => this.handleSaveSurvey(false)}>Сохранить</a> }
+                            <a href='#' onClick = {() => this.handleSaveSurvey(false)}>Сохранить</a>
                             <a href='#' onClick = {() => this.handleSaveSurvey(true)}>Сохранить как шаблон</a>
-                            <Link to={(this.state.editingTemplate) ? '/templates' : '/about'}>Отмена</Link>
+                            <Link to='/surveys'>Отмена</Link>
                             <a href='#' onClick = {this.handleAddPage}>Новая страница</a>
                         </div>
                     </div>
