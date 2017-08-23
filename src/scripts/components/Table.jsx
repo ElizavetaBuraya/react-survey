@@ -51,17 +51,17 @@ export default class Table extends React.Component {
         } else {
             return (
                 <BootstrapTable data={data}
-                                options={ options }
+                                options={options}
                                 ref='table'
                                 searchPlaceholder={'Поиск'}
-                                cellEdit={ cellEditProp }
+                                cellEdit={cellEditProp}
                                 selectRow={(data.length > 0 && isAdmin)
                                     ? selectRowProp
                                     : undefined}
                                 deleteRow={(isAdmin)}
-                                search
+                                search={search}
                                 hover
-                                pagination
+                                pagination={pagination}
                 >
                     {columns.map((key, index) =>
                         <TableHeaderColumn
@@ -78,7 +78,7 @@ export default class Table extends React.Component {
                             thStyle={ { 'text-align': 'center' } }
                             tdStyle={ { 'text-align': 'center' } }
                             width='120'
-                            editable={(key === 'name')
+                            editable={(key === 'name' && !type)
                                 ? true
                                 : (key === 'role')
                                     ? { type: 'select', options: { values: roles }}
