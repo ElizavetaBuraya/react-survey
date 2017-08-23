@@ -249,8 +249,6 @@ export default class NewSurvey extends React.Component {
             return;
         }
 
-        let description = prompt("Введите описание опроса");
-
         let dateChanged = new Date();
         let day = dateChanged.getDate();
         let month = dateChanged.getMonth()+1;
@@ -280,12 +278,12 @@ export default class NewSurvey extends React.Component {
             "randomized": this.state.randomized,
             "required_fields": this.state.required_fields,
             "progress_bar": this.state.progress_bar,
-            "description": description,
             "navtabs": this.state.navtabs,
             "questions_list":this.state.questions_list
         };
 
         if (!this.state.survey_id) {
+            newSurvey.description = prompt("Введите описание опроса");
             $.ajax({
                 url: 'http://localhost:3000/surveys',
                 method: 'POST',
