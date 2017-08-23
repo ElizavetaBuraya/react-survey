@@ -22,7 +22,7 @@ export default class Answer extends React.Component {
         }
         if (type === 'text') {
             question = <div>
-                {result}
+                <pre>{result}</pre>
             </div>
         }
         if (type === 'file') {
