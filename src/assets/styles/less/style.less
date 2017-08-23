@@ -438,9 +438,14 @@ main {
   align-items: center;
   & i {
     margin-right: .8em;
+  & div::before {
+    .icon('\f007', 0em, -.2em, 2rem);
+    margin-right: 1rem;
+    display: inline-block;
   }
   & select {
     font-size: 1.1em;
+    display: inline-block;
   }
   @media screen and (max-width: 430px) {
     flex-direction: column;
