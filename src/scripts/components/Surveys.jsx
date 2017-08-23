@@ -112,7 +112,8 @@ export default class Surveys extends React.Component {
     surveyLink(cell, row) {
 
         const surveyLink = classNames({'survey-link': true,
-            'inactive': (row.answers === 0 && cell.includes('results'))
+            'inactive': (row.answers === 0 && cell.includes('results')),
+            'edit-survey-link': cell.includes('new_survey')
         });
 
         return (
