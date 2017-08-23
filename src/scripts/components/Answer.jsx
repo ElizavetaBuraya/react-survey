@@ -62,6 +62,7 @@ export default class Answer extends React.Component {
                     </span>
                 </p>
                 { question }
+                {!lastQuestion && <hr/>}
             </div>
         );
     }
