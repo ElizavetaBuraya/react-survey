@@ -10,6 +10,7 @@ export default class NewSurvey extends React.Component {
             survey_title:"",
             times_completed:0,
             user_results:[],
+            selectedUser:0,
             displayChart:false,
             questions_list:{"page_1" : null},
             survey_page:"page_1",
