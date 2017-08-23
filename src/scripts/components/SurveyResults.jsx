@@ -165,6 +165,7 @@ export default class NewSurvey extends React.Component {
                           pages_are_numbered = {this.state.pages_are_numbered}
                           required_fields = {this.state.required_fields}
                           displayChart = {this.state.displayChart}
+                          handleToggleCharts = {this.handleToggleCharts}
                     />
                 </div>
             </main>
