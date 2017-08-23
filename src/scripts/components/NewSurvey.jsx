@@ -10,6 +10,7 @@ export default class NewSurvey extends React.Component {
         this.state = {
             survey_id:null,
             redirectToTemplates: false,
+            redirectToSurveys: false,
             survey_title:"",
             questions_list:{"page_1" : null},
             survey_page:"page_1",
@@ -291,6 +292,9 @@ export default class NewSurvey extends React.Component {
                 headers: { 'Content-Type': 'application/json' },
                 success: function() {
                     alert("Опрос создан успешно");
+                    this.setState({
+                        redirectToSurveys: true,
+                    })
                 }.bind(this)
             });
         } else {
@@ -311,11 +315,16 @@ export default class NewSurvey extends React.Component {
 
     render() {
         const redirectToTemplates = this.state.redirectToTemplates;
+        const redirectToSurveys = this.state.redirectToSurveys;
         const { currentPage } = this.props;
 
         if (redirectToTemplates) {
             return (
                 <Redirect to="/templates"/>
+            )
+        } else if (redirectToSurveys) {
+            return (
+                <Redirect to="/surveys"/>
             )
         }
 
