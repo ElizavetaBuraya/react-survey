@@ -715,6 +715,8 @@
       "role": "Пользователь",
       "registered": "5.01.2017",
       "completed_surveys": 0,
+      "login": "user4@example.com",
+      "password": "123user",
       "surveys": []
     },
     {
@@ -723,6 +725,8 @@
       "role": "Пользователь",
       "registered": "6.01.2017",
       "completed_surveys": 0,
+      "login": "user5@example.com",
+      "password": "123user",
       "surveys": []
     },
     {
@@ -731,6 +735,8 @@
       "role": "Пользователь",
       "registered": "7.01.2017",
       "completed_surveys": 0,
+      "login": "user6@example.com",
+      "password": "123user",
       "surveys": []
     },
     {
@@ -739,6 +745,8 @@
       "role": "Пользователь",
       "registered": "8.01.2017",
       "completed_surveys": 0,
+      "login": "user7@example.com",
+      "password": "123user",
       "surveys": []
     },
     {
@@ -747,6 +755,8 @@
       "role": "Пользователь",
       "registered": "9.01.2017",
       "completed_surveys": 0,
+      "login": "user8@example.com",
+      "password": "123user",
       "surveys": []
     },
     {
@@ -755,6 +765,8 @@
       "role": "Пользователь",
       "registered": "0.01.2017",
       "completed_surveys": 0,
+      "login": "user9@example.com",
+      "password": "123user",
       "surveys": []
     },
     {
@@ -763,6 +775,8 @@
       "role": "Пользователь",
       "registered": "1.01.2017",
       "completed_surveys": 0,
+      "login": "user10@example.com",
+      "password": "123user",
       "surveys": []
     },
     {
