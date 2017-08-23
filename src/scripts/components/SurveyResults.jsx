@@ -10,6 +10,7 @@ export default class NewSurvey extends React.Component {
             survey_title:"",
             times_completed:0,
             user_results:[],
+            selectedUser:0,
             displayChart:false,
             questions_list:{"page_1" : null},
             survey_page:"page_1",
@@ -103,16 +104,21 @@ export default class NewSurvey extends React.Component {
         })
     }
 
-    handleChangeUser(event) {
-        let index = event.target.value;
+    handleChangeUser(event, userIndex) {
+        let index = (userIndex !== undefined) ? userIndex : event.target.value;
         let userResults = this.state.user_results;
 
         this.setState({
-            questions_list: userResults[index].results
+            selectedUser: index,
+            questions_list:userResults[index].results
         })
     }
 
-    handleToggleCharts() {
+    handleToggleCharts(event, userIndex) {
+        if (userIndex !== undefined) {
+            this.handleChangeUser(event, userIndex)
+        }
+
         this.setState({
             displayChart:!this.state.displayChart
         })
@@ -120,7 +126,6 @@ export default class NewSurvey extends React.Component {
 
     render() {
         const { currentPage } = this.props;
-        let userResults = this.state.user_results;
 
         return (
             <main className='d-flex flex-row'>
@@ -136,21 +141,18 @@ export default class NewSurvey extends React.Component {
                         </div>
                         <div className="survey-command-panel result-panel">
                             <a href="#" className={(this.state.displayChart) ? 'active' : ''}
-                               onClick={this.handleToggleCharts}>Сводные данные по вопросам</a>
+                               onClick={() => this.handleToggleCharts(event)}>Сводные данные по вопросам</a>
                             <a href="#" className={(!this.state.displayChart) ? 'active' : ''}
-                               onClick={this.handleToggleCharts}>Отдельные ответы</a>
+                               onClick={() => this.handleToggleCharts(event)}>Отдельные ответы</a>
                             <span>Всего ответов: <span className="answers-count">{this.state.times_completed}</span></span>
                         </div>
-                        <div className="choose">
-                            <i className="fa fa-user fa-2x" aria-hidden="true" />
-                            <select className="choose-user" onChange={this.handleChangeUser}>
-                                {userResults.map((user, index) =>
-                                    <option value={index} key={index}>
-                                        {(this.state.is_anonymous) ? "Респондент " + ++index : user.name}
-                                        </option>)
-                                }
-                            </select>
-                        </div>
+                        {!this.state.displayChart &&
+                            <Select user_results={this.state.user_results}
+                                    selectedUser = {this.state.selectedUser}
+                                    handleChangeUser = {this.handleChangeUser}
+                                    is_anonymous = {this.state.is_anonymous}
+                            />
+                        }
                     </div>
                     <Tabs questions_list = {this.state.questions_list}
                           survey_page = {this.state.survey_page}
@@ -162,9 +164,30 @@ export default class NewSurvey extends React.Component {
                           pages_are_numbered = {this.state.pages_are_numbered}
                           required_fields = {this.state.required_fields}
                           displayChart = {this.state.displayChart}
+                          handleToggleCharts = {this.handleToggleCharts}
                     />
                 </div>
             </main>
         )
     }
 }
+
+const Select = React.createClass({
+    render(){
+        const userResults = this.props.user_results;
+
+        return (
+            <div className="choose">
+                <div>
+                    <select value={this.props.selectedUser} onChange={(e) => this.props.handleChangeUser(e)}>
+                        {userResults.map((user, index) =>
+                            <option value={index} key={index}>
+                                {(this.props.is_anonymous) ? "Респондент " + ++index : user.name}
+                            </option>)
+                        }
+                    </select>
+                </div>
+            </div>
+        );
+    }
+});

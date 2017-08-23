@@ -9,8 +9,8 @@ export default class NewSurvey extends React.Component {
         super(props);
         this.state = {
             survey_id:null,
-            editingTemplate:false,
             redirectToTemplates: false,
+            redirectToSurveys: false,
             survey_title:"",
             questions_list:{"page_1" : null},
             survey_page:"page_1",
@@ -54,7 +54,6 @@ export default class NewSurvey extends React.Component {
             success: function(data) {
                 let template = data[0];
                 this.setState({
-                    editingTemplate: (!path.includes("create")),
                     survey_id:(path.includes("create")) ? null : template.id,
                     survey_title:template.name,
                     survey_page:'page_1',
@@ -250,8 +249,6 @@ export default class NewSurvey extends React.Component {
             return;
         }
 
-        let description = prompt("Введите описание опроса");
-
         let dateChanged = new Date();
         let day = dateChanged.getDate();
         let month = dateChanged.getMonth()+1;
@@ -271,6 +268,7 @@ export default class NewSurvey extends React.Component {
             "answers": 0,
             "link": "survey/" + surveyId,
             "results": "survey/" + surveyId + "/results",
+            "edit_survey": "new_survey/survey/" + surveyId,
             "template": template,
             "pages": this.state.numberOfPages,
             "questions": this.state.numberOfQuestions,
@@ -280,12 +278,12 @@ export default class NewSurvey extends React.Component {
             "randomized": this.state.randomized,
             "required_fields": this.state.required_fields,
             "progress_bar": this.state.progress_bar,
-            "description": description,
             "navtabs": this.state.navtabs,
             "questions_list":this.state.questions_list
         };
 
         if (!this.state.survey_id) {
+            newSurvey.description = prompt("Введите описание опроса");
             $.ajax({
                 url: 'http://localhost:3000/surveys',
                 method: 'POST',
@@ -293,18 +291,24 @@ export default class NewSurvey extends React.Component {
                 headers: { 'Content-Type': 'application/json' },
                 success: function() {
                     alert("Опрос создан успешно");
+                    this.setState({
+                        redirectToSurveys: true,
+                    })
                 }.bind(this)
             });
         } else {
             $.ajax({
                 url: 'http://localhost:3000/surveys/' + surveyId,
-                method: 'PUT',
+                method: 'PATCH',
                 data: JSON.stringify(newSurvey),
                 headers: { 'Content-Type': 'application/json' },
                 success: function() {
-                    alert("Шаблон обновлен успешно");
+                    (template)
+                        ? alert("Шаблон обновлен успешно")
+                        : alert("Опрос обновлен успешно");
                     this.setState({
-                        redirectToTemplates: true,
+                        redirectToTemplates: (template),
+                        redirectToSurveys: (!template),
                     })
                 }.bind(this)
             });
@@ -313,11 +317,16 @@ export default class NewSurvey extends React.Component {
 
     render() {
         const redirectToTemplates = this.state.redirectToTemplates;
+        const redirectToSurveys = this.state.redirectToSurveys;
         const { currentPage } = this.props;
 
         if (redirectToTemplates) {
             return (
                 <Redirect to="/templates"/>
+            )
+        } else if (redirectToSurveys) {
+            return (
+                <Redirect to="/surveys"/>
             )
         }
 
@@ -339,9 +348,9 @@ export default class NewSurvey extends React.Component {
                             <p className='page-number'>cтраниц: <span>{this.state.numberOfPages}</span></p>
                         </div>
                         <div className='survey-command-panel'>
-                            {!this.state.editingTemplate && <a href='#' onClick = {() => this.handleSaveSurvey(false)}>Сохранить</a> }
+                            <a href='#' onClick = {() => this.handleSaveSurvey(false)}>Сохранить</a>
                             <a href='#' onClick = {() => this.handleSaveSurvey(true)}>Сохранить как шаблон</a>
-                            <Link to={(this.state.editingTemplate) ? '/templates' : '/about'}>Отмена</Link>
+                            <Link to='/surveys'>Отмена</Link>
                             <a href='#' onClick = {this.handleAddPage}>Новая страница</a>
                         </div>
                     </div>

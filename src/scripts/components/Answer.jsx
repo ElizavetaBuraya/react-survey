@@ -8,9 +8,13 @@ export default class Answer extends React.Component {
             required,
             title,
             index,
+            questions_list,
+            survey_page,
             type,
             questions_are_numbered,
             required_fields } = this.props;
+
+        const lastQuestion  = (questions_list[survey_page].length === index + 1);
 
         let question = null;
         if (type === 'multi-choice') {
@@ -22,12 +26,15 @@ export default class Answer extends React.Component {
         }
         if (type === 'text') {
             question = <div>
-                {result}
+                <pre>{result}</pre>
             </div>
         }
         if (type === 'file') {
             question = <div>
-                <a href={result.url} download={result.name.split('\\')[2]}>{result.name.split('\\')[2]}</a>
+                {(result !== undefined)
+                    ? <a href={result.url} download={result.name.split('\\')[2]}>{result.name.split('\\')[2]}</a>
+                    : ' '
+                }
             </div>
         }
         if (type === 'rating') {
@@ -59,6 +66,7 @@ export default class Answer extends React.Component {
                     </span>
                 </p>
                 { question }
+                {!lastQuestion && <hr/>}
             </div>
         );
     }

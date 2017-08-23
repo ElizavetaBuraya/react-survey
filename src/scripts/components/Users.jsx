@@ -116,14 +116,16 @@ export default class Users extends React.Component {
                 <div className="main-content d-flex flex-column">
                     <Table data={userData}
                            roles={this.state.roles}
-                           options={ this.options }
-                           columnNames={ this.state.columnNames }
-                           afterSaveCell = { this.afterSaveCell }
-                           handleDeletedRow = { this.handleDeletedRow }
-                           onRowSelect = { this.onRowSelect }
-                           onSelectAll = { this.onSelectAll }
+                           options={this.options}
+                           columnNames={this.state.columnNames}
+                           afterSaveCell = {this.afterSaveCell}
+                           handleDeletedRow = {this.handleDeletedRow}
+                           onRowSelect = {this.onRowSelect}
+                           onSelectAll = {this.onSelectAll}
                            loggedInAs = {loggedInAs}
                            isFetching = {isFetching}
+                           search = {true}
+                           pagination = {true}
                     />
                 </div>
             </main>

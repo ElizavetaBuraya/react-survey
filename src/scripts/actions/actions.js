@@ -91,8 +91,7 @@ export function getUserdata() {
         fetch(fetchUsers)
             .then((resp) => resp.json())
             .then(function (data) {
-                let userData = data.filter((user) => user.role !== 'Администратор');
-                dispatch(getUsers(userData));
+                dispatch(getUsers(data));
             });
     }
 }

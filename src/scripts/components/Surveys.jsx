@@ -36,7 +36,7 @@ export default class Surveys extends React.Component {
         this.selectedRows = [];
         this.state = {
             data: [{'id':'нет данных','name':'нет данных','changed':'нет данных','answers':'нет данных','link':'null', 'results':'null'}],
-            columnNames: ['id', 'Название','Изменен','Ответы','Ссылка','Результаты'],
+            columnNames: ['id', 'Название','Изменен','Ответы','Ссылка','Результаты', 'Редактировать'],
         },
         this.options = {
             deleteBtn: createCustomDeleteButton,
@@ -112,14 +112,17 @@ export default class Surveys extends React.Component {
     surveyLink(cell, row) {
 
         const surveyLink = classNames({'survey-link': true,
-            'inactive': (row.answers === 0 && cell.includes('results'))
+            'inactive': (row.answers === 0 && cell.includes('results')),
+            'edit-survey-link': cell.includes('new_survey')
         });
 
         return (
             <Link className={surveyLink} to={`${cell}`}>
                 { cell.includes('results')
                     ? 'результаты'
-                    : 'ссылка на опрос'
+                        : cell.includes('new_survey')
+                            ? <span className="edit-survey"/>
+                                : 'ссылка на опрос'
                 }
             </Link>
         )
@@ -145,6 +148,8 @@ export default class Surveys extends React.Component {
                            surveyLink = { this.surveyLink }
                            loggedInAs = {loggedInAs}
                            isFetching = {isFetching}
+                           search = {true}
+                           pagination = {true}
                     />
                 </div>
             </main>
