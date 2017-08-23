@@ -71,6 +71,10 @@ export default class Table extends React.Component {
                             dataFormat = {
                                 (linkColumns.includes(key))
                                     ? surveyLink
+                                    : (key === 'name' && type === 'file')
+                                        ? fileLink
+                                            : undefined
+                            }
                             thStyle={ { 'text-align': 'center' } }
                             tdStyle={ { 'text-align': 'center' } }
                             width='120'
