@@ -303,9 +303,12 @@ export default class NewSurvey extends React.Component {
                 data: JSON.stringify(newSurvey),
                 headers: { 'Content-Type': 'application/json' },
                 success: function() {
-                    alert("Шаблон обновлен успешно");
+                    (template)
+                        ? alert("Шаблон обновлен успешно")
+                        : alert("Опрос обновлен успешно");
                     this.setState({
-                        redirectToTemplates: true,
+                        redirectToTemplates: (template),
+                        redirectToSurveys: (!template),
                     })
                 }.bind(this)
             });
