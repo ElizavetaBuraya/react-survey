@@ -142,16 +142,13 @@ export default class NewSurvey extends React.Component {
                                onClick={this.handleToggleCharts}>Отдельные ответы</a>
                             <span>Всего ответов: <span className="answers-count">{this.state.times_completed}</span></span>
                         </div>
-                        <div className="choose">
-                            <i className="fa fa-user fa-2x" aria-hidden="true" />
-                            <select className="choose-user" onChange={this.handleChangeUser}>
-                                {userResults.map((user, index) =>
-                                    <option value={index} key={index}>
-                                        {(this.state.is_anonymous) ? "Респондент " + ++index : user.name}
-                                        </option>)
-                                }
-                            </select>
-                        </div>
+                        {!this.state.displayChart &&
+                            <Select user_results={this.state.user_results}
+                                    selectedUser = {this.state.selectedUser}
+                                    handleChangeUser = {this.handleChangeUser}
+                                    is_anonymous = {this.state.is_anonymous}
+                            />
+                        }
                     </div>
                     <Tabs questions_list = {this.state.questions_list}
                           survey_page = {this.state.survey_page}
@@ -169,3 +166,23 @@ export default class NewSurvey extends React.Component {
         )
     }
 }
+
+const Select = React.createClass({
+    render(){
+        const userResults = this.props.user_results;
+
+        return (
+            <div className="choose">
+                <div>
+                    <select value={this.props.selectedUser} onChange={(e) => this.props.handleChangeUser(e)}>
+                        {userResults.map((user, index) =>
+                            <option value={index} key={index}>
+                                {(this.props.is_anonymous) ? "Респондент " + ++index : user.name}
+                            </option>)
+                        }
+                    </select>
+                </div>
+            </div>
+        );
+    }
+});
