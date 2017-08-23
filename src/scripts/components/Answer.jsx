@@ -27,7 +27,10 @@ export default class Answer extends React.Component {
         }
         if (type === 'file') {
             question = <div>
-                <a href={result.url} download={result.name.split('\\')[2]}>{result.name.split('\\')[2]}</a>
+                {(result !== undefined)
+                    ? <a href={result.url} download={result.name.split('\\')[2]}>{result.name.split('\\')[2]}</a>
+                    : ' '
+                }
             </div>
         }
         if (type === 'rating') {
