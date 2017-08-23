@@ -36,7 +36,7 @@ export default class Surveys extends React.Component {
         this.selectedRows = [];
         this.state = {
             data: [{'id':'нет данных','name':'нет данных','changed':'нет данных','answers':'нет данных','link':'null', 'results':'null'}],
-            columnNames: ['id', 'Название','Изменен','Ответы','Ссылка','Результаты'],
+            columnNames: ['id', 'Название','Изменен','Ответы','Ссылка','Результаты', 'Редактировать'],
         },
         this.options = {
             deleteBtn: createCustomDeleteButton,
