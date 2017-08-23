@@ -5,7 +5,7 @@
       "name": "Админ",
       "role": "Администратор",
       "registered": "1.01.2017",
-      "completed_surveys": 12,
+      "completed_surveys": 0,
       "login": "admin@example.com",
       "password": "123admin",
       "surveys": []
@@ -15,7 +15,7 @@
       "name": "Юзер1",
       "role": "Пользователь",
       "registered": "2.01.2017",
-      "completed_surveys": 3,
+      "completed_surveys": 4,
       "login": "user1@example.com",
       "password": "123user",
       "surveys": [
