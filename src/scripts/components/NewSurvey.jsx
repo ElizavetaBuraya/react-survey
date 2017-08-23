@@ -270,6 +270,7 @@ export default class NewSurvey extends React.Component {
             "answers": 0,
             "link": "survey/" + surveyId,
             "results": "survey/" + surveyId + "/results",
+            "edit_survey": "new_survey/survey/" + surveyId,
             "template": template,
             "pages": this.state.numberOfPages,
             "questions": this.state.numberOfQuestions,
