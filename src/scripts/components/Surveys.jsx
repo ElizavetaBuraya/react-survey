@@ -145,6 +145,8 @@ export default class Surveys extends React.Component {
                            surveyLink = { this.surveyLink }
                            loggedInAs = {loggedInAs}
                            isFetching = {isFetching}
+                           search = {true}
+                           pagination = {true}
                     />
                 </div>
             </main>
