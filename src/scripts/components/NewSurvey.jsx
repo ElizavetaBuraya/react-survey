@@ -299,7 +299,7 @@ export default class NewSurvey extends React.Component {
         } else {
             $.ajax({
                 url: 'http://localhost:3000/surveys/' + surveyId,
-                method: 'PUT',
+                method: 'PATCH',
                 data: JSON.stringify(newSurvey),
                 headers: { 'Content-Type': 'application/json' },
                 success: function() {
