@@ -8,9 +8,13 @@ export default class Answer extends React.Component {
             required,
             title,
             index,
+            questions_list,
+            survey_page,
             type,
             questions_are_numbered,
             required_fields } = this.props;
+
+        const lastQuestion  = (questions_list[survey_page].length === index + 1);
 
         let question = null;
         if (type === 'multi-choice') {
