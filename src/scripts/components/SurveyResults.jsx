@@ -126,7 +126,6 @@ export default class NewSurvey extends React.Component {
 
     render() {
         const { currentPage } = this.props;
-        let userResults = this.state.user_results;
 
         return (
             <main className='d-flex flex-row'>
