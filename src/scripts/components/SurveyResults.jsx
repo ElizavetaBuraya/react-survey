@@ -142,9 +142,9 @@ export default class NewSurvey extends React.Component {
                         </div>
                         <div className="survey-command-panel result-panel">
                             <a href="#" className={(this.state.displayChart) ? 'active' : ''}
-                               onClick={this.handleToggleCharts}>Сводные данные по вопросам</a>
+                               onClick={() => this.handleToggleCharts(event)}>Сводные данные по вопросам</a>
                             <a href="#" className={(!this.state.displayChart) ? 'active' : ''}
-                               onClick={this.handleToggleCharts}>Отдельные ответы</a>
+                               onClick={() => this.handleToggleCharts(event)}>Отдельные ответы</a>
                             <span>Всего ответов: <span className="answers-count">{this.state.times_completed}</span></span>
                         </div>
                         {!this.state.displayChart &&
