@@ -1,6 +1,6 @@
 import React from 'react';
 import Answer from './Answer.jsx';
-import Chart from './Chart.jsx'
+import AnswerStats from './AnswerStats.jsx'
 
 export default class GenerateQuestions extends React.Component {
     constructor(props) {
@@ -11,7 +11,8 @@ export default class GenerateQuestions extends React.Component {
     }
 
     render() {
-        const { questions_list,
+        const { handleToggleCharts,
+            questions_list,
             survey_page,
             currentPage,
             questions_are_numbered,
@@ -44,7 +45,7 @@ export default class GenerateQuestions extends React.Component {
             return (
                 <div>
                     {questions_list[survey_page].map((question, index) =>
-                        <Chart
+                        <AnswerStats
                             key={question.id}
                             id={question.id}
                             index={index}
@@ -59,6 +60,7 @@ export default class GenerateQuestions extends React.Component {
                             currentPage = {currentPage}
                             questions_are_numbered = {questions_are_numbered}
                             required_fields = {required_fields}
+                            handleToggleCharts = {handleToggleCharts}
                         />
                     )}
                 </div>
