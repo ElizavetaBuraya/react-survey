@@ -119,7 +119,9 @@ export default class Surveys extends React.Component {
             <Link className={surveyLink} to={`${cell}`}>
                 { cell.includes('results')
                     ? 'результаты'
-                    : 'ссылка на опрос'
+                        : cell.includes('new_survey')
+                            ? <span className="edit-survey"/>
+                                : 'ссылка на опрос'
                 }
             </Link>
         )
