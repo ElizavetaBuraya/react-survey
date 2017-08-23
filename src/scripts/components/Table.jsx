@@ -12,6 +12,8 @@ const hiddenColumns = ['id','template', 'pages','questions', 'description', 'is_
     'pages_are_numbered', 'randomized', 'required_fields', 'progress_bar', 'questions_list', 'navtabs', 'surveys',
     'login', 'password'];
 
+const linkColumns = ['link', 'results', 'respondent', 'edit_survey'];
+
 export default class Table extends React.Component {
     render() {
         let isAdmin = (this.props.loggedInAs.role === 'Администратор');
@@ -66,7 +68,9 @@ export default class Table extends React.Component {
                             key={index}
                             isKey={(key === 'id')}
                             dataField = {key}
-                            dataFormat = {(key === 'link' || key === 'results') ? surveyLink : undefined}
+                            dataFormat = {
+                                (linkColumns.includes(key))
+                                    ? surveyLink
                             thStyle={ { 'text-align': 'center' } }
                             tdStyle={ { 'text-align': 'center' } }
                             width='120'
