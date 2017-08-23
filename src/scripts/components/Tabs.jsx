@@ -45,6 +45,7 @@ class GenerateContent extends React.Component {
             handleDragQuestion,
             handleDeleteQuestion,
             handleChangePageName,
+            handleToggleCharts,
             questions_are_numbered,
             pages_are_numbered,
             required_fields,
@@ -79,6 +80,7 @@ class GenerateContent extends React.Component {
                                                      required_fields={required_fields}
                                                      displayChart={displayChart}
                                                      user_results = {user_results}
+                                                     handleToggleCharts = {handleToggleCharts}
                                     />
                                 }
                             </div>
@@ -142,6 +144,7 @@ export default class Tabs extends React.Component {
             handleDeleteQuestion,
             handleChangePage,
             handleChangePageName,
+            handleToggleCharts,
             questions_are_numbered,
             pages_are_numbered,
             required_fields,
@@ -164,6 +167,7 @@ export default class Tabs extends React.Component {
                                      handleDeleteQuestion = {handleDeleteQuestion}
                                      handleChangePageName = {handleChangePageName}
                                      handleDeletePage = {handleDeletePage}
+                                     handleToggleCharts = {handleToggleCharts}
                                      questions_are_numbered = {questions_are_numbered}
                                      pages_are_numbered = {pages_are_numbered}
                                      required_fields = {required_fields}
