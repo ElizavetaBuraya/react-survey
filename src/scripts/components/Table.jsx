@@ -36,7 +36,16 @@ export default class Table extends React.Component {
             afterSaveCell: this.props.afterSaveCell
         };
 
-        const {data, options, surveyLink, roles, columnNames, isFetching} = this.props;
+        const {data,
+            options,
+            surveyLink,
+            fileLink,
+            roles,
+            columnNames,
+            isFetching,
+            search,
+            pagination,
+            type} = this.props;
 
         if (isFetching) {
             return (
