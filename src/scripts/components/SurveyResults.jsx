@@ -114,7 +114,11 @@ export default class NewSurvey extends React.Component {
         })
     }
 
-    handleToggleCharts() {
+    handleToggleCharts(event, userIndex) {
+        if (userIndex !== undefined) {
+            this.handleChangeUser(event, userIndex)
+        }
+
         this.setState({
             displayChart:!this.state.displayChart
         })
