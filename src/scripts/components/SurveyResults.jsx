@@ -104,12 +104,13 @@ export default class NewSurvey extends React.Component {
         })
     }
 
-    handleChangeUser(event) {
-        let index = event.target.value;
+    handleChangeUser(event, userIndex) {
+        let index = (userIndex !== undefined) ? userIndex : event.target.value;
         let userResults = this.state.user_results;
 
         this.setState({
-            questions_list: userResults[index].results
+            selectedUser: index,
+            questions_list:userResults[index].results
         })
     }
 
