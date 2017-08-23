@@ -579,6 +579,22 @@ th {
     max-width: 100%;
   }
 }
+.edit-survey-link {
+  &:hover {
+    text-decoration: none;
+    .edit-survey::before {
+      color: #0275d8;
+    }
+  }
+}
+
+.edit-survey {
+  &::before {
+    .icon('\f044', 0em, 0em, 2rem);
+    color: @dark-gray;
+  }
+}
+
 /* Templates styles */
 
 .template-wrapper {
