@@ -2,6 +2,8 @@ import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import Table from './Table.jsx';
 
+const selectedRows = [];
+
 class MySearchPanel extends React.Component {
     render() {
         return (
@@ -41,15 +43,15 @@ export default class Users extends React.Component {
         this.props.handleEditUserData(row);
     };
 
-    onRowSelect(row, isSelected) {
+    onRowSelect = (row, isSelected) => {
         (isSelected)
-            ? this.selectedRows.push(row)
-            : this.selectedRows.pop();
-        let visibility = (this.selectedRows.length > 0)
+            ? selectedRows.push(row)
+            : selectedRows.pop();
+        let visibility = (selectedRows.length > 0)
             ? "visible"
             : "hidden";
         $(".delete-button").css("visibility", visibility);
-    }
+    };
 
     onSelectAll(isSelected) {
         let visibility = (isSelected)
