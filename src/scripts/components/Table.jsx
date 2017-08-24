@@ -17,12 +17,10 @@ const linkColumns = ['link', 'results', 'respondent', 'edit_survey'];
 export default class Table extends React.Component {
     render() {
         let isAdmin = (this.props.loggedInAs.role === 'Администратор');
-        let columns = null;
-        if (this.props.data.length > 0) {
-            columns = Object.keys(this.props.data[0]);
-        } else {
-            columns = this.props.columnNames;
-        }
+
+        let columns = (this.props.data.length > 0)
+            ? Object.keys(this.props.data[0])
+                : this.props.columnNames;
 
         const selectRowProp = {
             mode: 'checkbox',
