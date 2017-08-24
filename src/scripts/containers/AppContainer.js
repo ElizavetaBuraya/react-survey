@@ -1,9 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { logIn, createUser, getUserdata, getSurveydata } from '../actions/actions';
+import { logIn,
+    createUser,
     getUserData,
     getSurveyData,
+    deleteUserData,
+    deleteSurveyData,
+    editUserData,
+    editSurveyData,
+    deleteTemplate } from '../actions/actions';
 import { toggleRegistered, updateCurrentPage } from '../actions/actionCreators';
 import App from '../components/App.jsx';
 
@@ -29,6 +35,16 @@ const mapDispatchToProps = (dispatch) => {
             bindActionCreators(getUserData, dispatch),
         handleLoadSurveyData:
             bindActionCreators(getSurveyData, dispatch),
+        handleDeleteUserData:
+            bindActionCreators(deleteUserData, dispatch),
+        handleDeleteSurveyData:
+            bindActionCreators(deleteSurveyData, dispatch),
+        handleDeleteTemplate:
+            bindActionCreators(deleteTemplate, dispatch),
+        handleEditUserData:
+            bindActionCreators(editUserData, dispatch),
+        handleEditSurveyData:
+            bindActionCreators(editSurveyData, dispatch),
         handleRegisteredClick:
             bindActionCreators(toggleRegistered, dispatch),
         handleUpdatePage:
