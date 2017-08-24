@@ -99,6 +99,17 @@ export default class Surveys extends React.Component {
     render() {
         let userRole = this.props.loggedInAs.role;
         const { currentPage, loggedInAs, surveyData, isFetching } = this.props;
+        const options = {
+            deleteBtn: createCustomDeleteButton,
+            sizePerPage: 10,
+            hideSizePerPage: true,
+            handleConfirmDeleteRow: customConfirm,
+            paginationShowsTotal: this.renderTotal,
+            defaultSortName: 'name',  // default sort column name
+            defaultSortOrder: 'asc',  // default sort order
+            searchPanel: (props) => (<MySearchPanel { ...props } loggedInAs = {this.props.loggedInAs} />),
+            afterDeleteRow: this.handleDeletedRow,
+        };
 
         return (
             <main className='d-flex flex-row justify-content-start'>
