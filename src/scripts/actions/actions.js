@@ -177,6 +177,21 @@ export function deleteSurveyData(id) {
     }
 }
 
+export function editSurveyData(survey) {
+    return (dispatch) => {
+        fetch(fetchSurveys + survey.id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(survey)})
+            .then((resp) => resp.json())
+            .then(function() {
+                dispatch(getSurveyData());
+            });
+    }
+}
+
 export function deleteTemplate(id) {
     return (dispatch) => {
         fetch(fetchSurveys + id, {
