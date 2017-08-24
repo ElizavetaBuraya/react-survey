@@ -119,12 +119,12 @@ export default class Surveys extends React.Component {
                 />
                 <div className='main-content d-flex flex-column'>
                     <Table data={surveyData}
-                           options={ this.options }
-                           columnNames={ this.state.columnNames }
+                           options={options}
+                           columnNames={['id', 'Название','Изменен','Ответы','Ссылка','Результаты', 'Редактировать']}
                            afterSaveCell = {(userRole === 'Администратор') ? this.afterSaveCell : undefined}
-                           onRowSelect = {(userRole === 'Администратор') ? this.onRowSelect : undefined }
-                           onSelectAll = {(userRole === 'Администратор') ? this.onSelectAll : undefined }
-                           surveyLink = { this.surveyLink }
+                           onRowSelect = {(userRole === 'Администратор') ? this.onRowSelect : undefined}
+                           onSelectAll = {(userRole === 'Администратор') ? this.onSelectAll : undefined}
+                           surveyLink = {this.surveyLink}
                            loggedInAs = {loggedInAs}
                            isFetching = {isFetching}
                            search = {true}
