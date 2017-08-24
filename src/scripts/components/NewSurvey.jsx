@@ -113,7 +113,7 @@ export default class NewSurvey extends React.Component {
         this.setState({
             questions_list:newQuestionsList,
             numberOfQuestions:newNumberOfQuestions
-        })
+        });
     }
 
     handleUpdateQuestion(newQuestions) {
