@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { logIn, createUser, getUserdata, getSurveydata } from '../actions/actions';
+    getUserData,
+    getSurveyData,
 import { toggleRegistered, updateCurrentPage } from '../actions/actionCreators';
 import App from '../components/App.jsx';
 
@@ -24,9 +26,9 @@ const mapDispatchToProps = (dispatch) => {
         handleCreateUserClick:
             bindActionCreators(createUser, dispatch),
         handleLoadUserData:
-            bindActionCreators(getUserdata, dispatch),
+            bindActionCreators(getUserData, dispatch),
         handleLoadSurveyData:
-            bindActionCreators(getSurveydata, dispatch),
+            bindActionCreators(getSurveyData, dispatch),
         handleRegisteredClick:
             bindActionCreators(toggleRegistered, dispatch),
         handleUpdatePage:

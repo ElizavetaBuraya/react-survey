@@ -85,7 +85,7 @@ export function createUser(values) {
     }
 }
 
-export function getUserdata() {
+export function getUserData() {
     return (dispatch) => {
         dispatch(requestData());
         fetch(fetchUsers)
@@ -96,7 +96,8 @@ export function getUserdata() {
     }
 }
 
-export function getSurveydata() {
+
+export function getSurveyData() {
     return (dispatch, getState) => {
         dispatch(requestData());
         fetch(fetchSurveys)
