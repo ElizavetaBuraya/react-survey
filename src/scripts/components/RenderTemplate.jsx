@@ -24,10 +24,10 @@ export default class RenderTemplate extends React.Component {
                              onClick={(e) => handleEditTemplate(e.currentTarget)}
                              onBlur={(e) => handleEditTemplate(e.currentTarget, 'hide')}
                         >
-                            <h2>{ obj.name }</h2>
-                            <p>{ obj.description }</p>
-                            <p className='question-number'>Вопросов: <span>{ obj.questions }&nbsp;</span></p>
-                            <p className='page-number'>Страниц: <span>{ obj.pages }</span></p>
+                            <h2>{obj.name}</h2>
+                            <p>{obj.description}</p>
+                            <p className='question-number'>Вопросов: <span>{obj.questions}&nbsp;</span></p>
+                            <p className='page-number'>Страниц: <span>{obj.pages}</span></p>
                             <Link to={`/new_survey/create/${obj.link}`} className='create-survey'>Создать опрос</Link>
                         </div>
                    </div>
