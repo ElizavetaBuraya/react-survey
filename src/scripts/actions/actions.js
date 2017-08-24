@@ -134,12 +134,15 @@ export function getSurveyData() {
                 let userSurveysArray = [];
 
                 data.forEach((survey) => {
-                    let userSurvey = {
-                        "id": survey.id,
-                        "name": survey.name,
-                        "link": survey.link
-                    };
-                    userSurveysArray.push(userSurvey);
+                    let userSurveys = getState().renderApp.loggedInAs.surveys;
+                    if (!userSurveys.includes(survey.id)) {
+                        let userSurvey = {
+                            "id": survey.id,
+                            "name": survey.name,
+                            "link": survey.link
+                        };
+                        userSurveysArray.push(userSurvey);
+                    }
                 });
 
                 if (getState().renderApp.currentPage === '/templates') {
