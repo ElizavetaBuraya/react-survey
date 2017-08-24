@@ -177,3 +177,19 @@ export function deleteSurveyData(id) {
     }
 }
 
+export function deleteTemplate(id) {
+    return (dispatch) => {
+        fetch(fetchSurveys + id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'template':false
+            })})
+            .then((resp) => resp.json())
+            .then(function() {
+                dispatch(getSurveyData());
+            });
+    }
+}
