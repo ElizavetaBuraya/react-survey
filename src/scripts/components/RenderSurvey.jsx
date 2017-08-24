@@ -131,24 +131,16 @@ export default class GenerateSurvey extends React.Component {
             })
         }
 
-        for (let page in questionsList){
+         for (let page in questionsList){
             questionsList[page].forEach((question) => {
-                if (Number.isInteger(question.result)) {
-                    if (question.result > 0) {
-                        answeredQuestions++;
-
-                        (question.required)
-                            ? requiredQuestionNumber--
-                            : requiredQuestionNumber;
-                    }
-                } else if (question.result && (question.result.length > 0 || question.result.name)) {
+                if (question.result) {
                     answeredQuestions++;
 
                     (question.required)
                         ? requiredQuestionNumber--
                         : requiredQuestionNumber;
-                }
-            })
+                    }
+                })
         }
 
         let percent = Math.round((answeredQuestions * 100)/questionNumber);
