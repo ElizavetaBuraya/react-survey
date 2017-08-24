@@ -162,3 +162,18 @@ export function getSurveyData() {
             });
     }
 }
+
+export function deleteSurveyData(id) {
+    return (dispatch) => {
+        fetch(fetchSurveys + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }})
+            .then((resp) => resp.json())
+            .then(function() {
+                dispatch(getSurveyData());
+            });
+    }
+}
+
