@@ -20,7 +20,12 @@ export function logIn(userData){
                     if (user === undefined) {
                         alert("Неверное имя пользователя или пароль");
                     } else {
-                        let userData = {"id": user.id, "username": user.name, "role": user.role, "surveys": user.surveys};
+                        let userData = {
+                            "id": user.id,
+                            "username": user.name,
+                            "role": user.role,
+                            "surveys": user.surveys.map((survey) => survey.id)
+                        };
 
                         alert("Вход успешен");
                         dispatch(setUserData(userData));
