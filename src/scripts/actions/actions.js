@@ -96,6 +96,19 @@ export function getUserData() {
     }
 }
 
+export function deleteUserData(id) {
+    return (dispatch) => {
+        fetch(fetchUsers + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }})
+            .then((resp) => resp.json())
+            .then(function() {
+                dispatch(getUserData());
+            });
+    }
+}
 
 export function getSurveyData() {
     return (dispatch, getState) => {
