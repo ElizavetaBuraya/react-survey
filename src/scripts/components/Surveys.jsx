@@ -40,17 +40,9 @@ export default class Surveys extends React.Component {
         }
     }
 
-    afterSaveCell(row) {
-        $.ajax({
-            url: 'http://localhost:3000/surveys/' + row.id,
-            method: 'PUT',
-            data: JSON.stringify(row),
-            headers: { 'Content-Type': 'application/json' },
-            success: function() {
-                this.props.handleLoadSurveyData();
-            }.bind(this)
-        });
-    }
+    afterSaveCell = (row) => {
+        this.props.handleEditSurveyData(row);
+    };
 
     onRowSelect(row, isSelected) {
         (isSelected)
@@ -69,19 +61,12 @@ export default class Surveys extends React.Component {
         $('.delete-button').css('visibility', visibility);
     }
 
-    handleDeletedRow(row) {
+    handleDeletedRow = (row) => {
         for (let index in row) {
-            $.ajax({
-                url: 'http://localhost:3000/surveys/' + row[index],
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                success: function() {
-                    this.props.handleLoadSurveyData();
-                }.bind(this)
-            });
+            this.props.handleDeleteSurveyData(row[index]);
         }
         $('.delete-button').css('visibility', 'hidden');
-    }
+    };
 
     renderTotal() {
         return (

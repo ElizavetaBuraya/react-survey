@@ -37,17 +37,9 @@ export default class Users extends React.Component {
         }
     }
 
-    afterSaveCell(row) {
-        $.ajax({
-            url: 'http://localhost:3000/users/' + row.id,
-            method: 'PUT',
-            data: JSON.stringify(row),
-            headers: { 'Content-Type': 'application/json' },
-            success: function() {
-                this.props.handleLoadUserData();
-            }.bind(this)
-        });
-    }
+    afterSaveCell = (row) => {
+        this.props.handleEditUserData(row);
+    };
 
     onRowSelect(row, isSelected) {
         (isSelected)
@@ -66,19 +58,12 @@ export default class Users extends React.Component {
         $(".delete-button").css("visibility", visibility);
     }
 
-    handleDeletedRow(row) {
+    handleDeletedRow = (row) => {
         for (let index in row) {
-            $.ajax({
-                url: 'http://localhost:3000/users/' + row[index],
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                success: function() {
-                    this.props.handleLoadUserData();
-                }.bind(this)
-            });
+            this.props.handleDeleteUserData(row[index]);
         }
         $(".delete-button").css("visibility", "hidden");
-    }
+    };
 
     renderTotal() {
         return (
