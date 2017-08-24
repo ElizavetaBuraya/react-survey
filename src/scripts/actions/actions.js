@@ -110,6 +110,21 @@ export function deleteUserData(id) {
     }
 }
 
+export function editUserData(user) {
+    return (dispatch) => {
+        fetch(fetchUsers + user.id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)})
+            .then((resp) => resp.json())
+            .then(function() {
+                dispatch(getUserData());
+            });
+    }
+}
+
 export function getSurveyData() {
     return (dispatch, getState) => {
         dispatch(requestData());
