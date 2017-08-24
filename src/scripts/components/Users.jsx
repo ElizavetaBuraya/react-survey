@@ -21,35 +21,13 @@ function createCustomDeleteButton(onBtnClick) {
     );
 }
 
-export default class Users extends React.Component {
-    constructor(props) {
-        super(props);
-        this.afterSaveCell = this.afterSaveCell.bind(this);
-        this.onRowSelect = this.onRowSelect.bind(this);
-        this.onSelectAll = this.onSelectAll.bind(this);
-        this.handleDeletedRow = this.handleDeletedRow.bind(this);
-        this.renderTotal = this.renderTotal.bind(this);
-        this.selectedRows = [];
-        this.state = {
-            roles: ['Администратор', 'Пользователь'],
-            columnNames: ['id', 'Имя','Роль','Зарегистрирован','Опросы'],
-        },
-        this.options = {
-            noDataText: 'Все записи удалены',
-            deleteBtn: createCustomDeleteButton,
-            sizePerPage: 10,
-            hideSizePerPage: true,
-            paginationShowsTotal: this.renderTotal,
-            defaultSortName: 'name',  // default sort column name
-            defaultSortOrder: 'asc',  // default sort order
-            searchPanel: (props) => (<MySearchPanel { ...props }/>),
-            afterDeleteRow: this.handleDeletedRow,
-        };
 function customConfirm(next) {
     if (confirm('Вы уверены, что хотите удалить выбранных пользователей?')) {
         next();
     }
 }
+
+export default class Users extends React.Component {
 
     componentDidMount() {
         this.props.handleLoadUserData();

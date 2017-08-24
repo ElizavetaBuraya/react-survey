@@ -24,35 +24,13 @@ function createCustomDeleteButton(onBtnClick) {
     );
 }
 
-export default class Surveys extends React.Component {
-    constructor(props) {
-        super(props);
-        this.afterSaveCell = this.afterSaveCell.bind(this);
-        this.onRowSelect = this.onRowSelect.bind(this);
-        this.onSelectAll = this.onSelectAll.bind(this);
-        this.handleDeletedRow = this.handleDeletedRow.bind(this);
-        this.renderTotal = this.renderTotal.bind(this);
-        this.surveyLink = this.surveyLink.bind(this);
-        this.selectedRows = [];
-        this.state = {
-            data: [{'id':'нет данных','name':'нет данных','changed':'нет данных','answers':'нет данных','link':'null', 'results':'null'}],
-            columnNames: ['id', 'Название','Изменен','Ответы','Ссылка','Результаты', 'Редактировать'],
-        },
-        this.options = {
-            deleteBtn: createCustomDeleteButton,
-            sizePerPage: 10,
-            hideSizePerPage: true,
-            paginationShowsTotal: this.renderTotal,
-            defaultSortName: 'name',  // default sort column name
-            defaultSortOrder: 'asc',  // default sort order
-            searchPanel: (props) => (<MySearchPanel { ...props } loggedInAs = {this.props.loggedInAs} />),
-            afterDeleteRow: this.handleDeletedRow,
-        };
 function customConfirm(next) {
     if (confirm('Вы уверены, что хотите удалить выбранные опросы?')) {
         next();
     }
 }
+
+export default class Surveys extends React.Component {
 
     componentDidMount() {
         this.props.handleLoadSurveyData();
