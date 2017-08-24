@@ -18,7 +18,12 @@ export default class App extends React.Component {
             handleCreateUserClick,
             handleUpdatePage,
             handleLoadUserData,
-            handleLoadSurveyData } = this.props;
+            handleLoadSurveyData,
+            handleDeleteUserData,
+            handleEditUserData,
+            handleDeleteSurveyData,
+            handleEditSurveyData,
+            handleDeleteTemplate } = this.props;
 
         return (
             <BrowserRouter basename={'/'}>
@@ -38,6 +43,11 @@ export default class App extends React.Component {
                         handleChangePage = {handleUpdatePage}
                         handleLoadUserData = {handleLoadUserData}
                         handleLoadSurveyData = {handleLoadSurveyData}
+                        handleDeleteUserData = {handleDeleteUserData}
+                        handleDeleteSurveyData = {handleDeleteSurveyData}
+                        handleDeleteTemplate = {handleDeleteTemplate}
+                        handleEditUserData = {handleEditUserData}
+                        handleEditSurveyData = {handleEditSurveyData}
                         isRegistered = {isRegistered}
                         isAuthorized = {isAuthorized}
                         isFetching = {isFetching}

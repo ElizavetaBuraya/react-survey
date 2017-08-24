@@ -24,7 +24,12 @@ export default class Main extends React.Component {
             handleChangePage,
             handleCreateUserClick,
             handleLoadUserData,
-            handleLoadSurveyData } = this.props;
+            handleLoadSurveyData,
+            handleDeleteUserData,
+            handleEditUserData,
+            handleDeleteSurveyData,
+            handleEditSurveyData,
+            handleDeleteTemplate } = this.props;
 
         return (
             <Switch>
@@ -58,6 +63,8 @@ export default class Main extends React.Component {
                             <Users
                                 handleChangePage = {handleChangePage}
                                 handleLoadUserData = {handleLoadUserData}
+                                handleDeleteUserData = {handleDeleteUserData}
+                                handleEditUserData = {handleEditUserData}
                                 currentPage = {currentPage}
                                 loggedInAs = {loggedInAs}
                                 userData = {userData}
@@ -72,6 +79,8 @@ export default class Main extends React.Component {
                         <Surveys
                             handleChangePage = {handleChangePage}
                             handleLoadSurveyData = {handleLoadSurveyData}
+                            handleDeleteSurveyData = {handleDeleteSurveyData}
+                            handleEditSurveyData = {handleEditSurveyData}
                             currentPage = {currentPage}
                             loggedInAs = {loggedInAs}
                             surveyData = {surveyData}
@@ -86,6 +95,7 @@ export default class Main extends React.Component {
                         <Templates
                             handleChangePage = {handleChangePage}
                             handleLoadSurveyData = {handleLoadSurveyData}
+                            handleDeleteTemplate = {handleDeleteTemplate}
                             currentPage = {currentPage}
                             surveyData = {surveyData}
                             isFetching = {isFetching}
