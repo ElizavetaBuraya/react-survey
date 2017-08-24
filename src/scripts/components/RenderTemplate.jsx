@@ -17,12 +17,12 @@ export default class RenderTemplate extends React.Component {
             return <div className='template-wrapper' key={index}>
                         <p className='active-template'>
                             <Link to={`/new_survey/${obj.link}`} className='edit-template'/>
-                            <span className='delete-template' onClick={() => that.props.handleDeleteTemplate(obj.id)}/>
+                            <span className='delete-template' onClick={() => handleDeleteTemplate(obj.id)}/>
                         </p>
                         <div className='template'
                              tabIndex='0'
-                             onClick={(e) => that.props.handleEditTemplate(e.currentTarget)}
-                             onBlur={(e) => that.props.handleEditTemplate(e.currentTarget, 'hide')}
+                             onClick={(e) => handleEditTemplate(e.currentTarget)}
+                             onBlur={(e) => handleEditTemplate(e.currentTarget, 'hide')}
                         >
                             <h2>{ obj.name }</h2>
                             <p>{ obj.description }</p>
