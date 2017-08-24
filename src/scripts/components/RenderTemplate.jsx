@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 export default class RenderTemplate extends React.Component {
     render() {
-        let that = this;
         let templates = this.props.data.map(function(obj, index) {
+        let { filterText, handleEditTemplate, handleDeleteTemplate, data } = this.props;
             return <div className='template-wrapper' key={index}>
                         <p className='active-template'>
                             <Link to={`/new_survey/${obj.link}`} className='edit-template'/>
