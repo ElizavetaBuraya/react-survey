@@ -10,7 +10,7 @@ class MySearchPanel extends React.Component {
             <div className="page-head d-flex justify-content-between align-items-center">
                 <h1>Пользователи</h1>
                 <div className="search-form">
-                    { this.props.searchField }
+                    {this.props.searchField}
                 </div>
             </div>
         );
@@ -19,7 +19,7 @@ class MySearchPanel extends React.Component {
 
 function createCustomDeleteButton(onBtnClick) {
     return (
-        <button className="delete-button" onClick={ onBtnClick }>Delete selected</button>
+        <button className="delete-button" onClick={onBtnClick}>Delete selected</button>
     );
 }
 
