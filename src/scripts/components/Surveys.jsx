@@ -56,12 +56,12 @@ export default class Surveys extends React.Component {
         $('.delete-button').css('visibility', visibility);
     };
 
-    onSelectAll(isSelected) {
+    onSelectAll = (isSelected) => {
         let visibility = (isSelected)
             ? 'visible'
             : 'hidden';
         $('.delete-button').css('visibility', visibility);
-    }
+    };
 
     handleDeletedRow = (row) => {
         for (let index in row) {
@@ -70,16 +70,15 @@ export default class Surveys extends React.Component {
         $('.delete-button').css('visibility', 'hidden');
     };
 
-    renderTotal() {
+    renderTotal = () => {
         return (
             <span className='users-number'>
                 Всего опросов: { this.props.surveyData.length }
             </span>
         );
-    }
+    };
 
-    surveyLink(cell, row) {
-
+    surveyLink = (cell, row) => {
         const surveyLink = classNames({'survey-link': true,
             'inactive': (row.answers === 0 && cell.includes('results')),
             'edit-survey-link': cell.includes('new_survey')
@@ -95,7 +94,7 @@ export default class Surveys extends React.Component {
                 }
             </Link>
         )
-    }
+    };
 
     render() {
         let userRole = this.props.loggedInAs.role;

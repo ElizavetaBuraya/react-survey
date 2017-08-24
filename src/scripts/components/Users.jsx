@@ -53,12 +53,12 @@ export default class Users extends React.Component {
         $(".delete-button").css("visibility", visibility);
     };
 
-    onSelectAll(isSelected) {
+    onSelectAll = (isSelected) => {
         let visibility = (isSelected)
             ? "visible"
             : "hidden";
         $(".delete-button").css("visibility", visibility);
-    }
+    };
 
     handleDeletedRow = (row) => {
         for (let index in row) {
@@ -67,13 +67,13 @@ export default class Users extends React.Component {
         $(".delete-button").css("visibility", "hidden");
     };
 
-    renderTotal() {
+    renderTotal = () => {
         return (
             <span className="users-number">
-                Всего пользователей: { this.props.userData.length }
+                Всего пользователей: {this.props.userData.length}
             </span>
         );
-    }
+    };
 
     render() {
         const { currentPage, loggedInAs, userData, isFetching } = this.props;
