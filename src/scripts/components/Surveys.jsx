@@ -4,6 +4,8 @@ import Table from './Table.jsx';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
+const selectedRows = [];
+
 class MySearchPanel extends React.Component {
     render() {
         let isAdmin = (this.props.loggedInAs.role === 'Администратор');
@@ -44,15 +46,15 @@ export default class Surveys extends React.Component {
         this.props.handleEditSurveyData(row);
     };
 
-    onRowSelect(row, isSelected) {
+    onRowSelect = (row, isSelected) => {
         (isSelected)
-            ? this.selectedRows.push(row)
-            : this.selectedRows.pop();
-        let visibility = (this.selectedRows.length > 0)
+            ? selectedRows.push(row)
+            : selectedRows.pop();
+        let visibility = (selectedRows.length > 0)
             ? 'visible'
             : 'hidden';
         $('.delete-button').css('visibility', visibility);
-    }
+    };
 
     onSelectAll(isSelected) {
         let visibility = (isSelected)
