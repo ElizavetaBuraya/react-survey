@@ -32,20 +32,7 @@ export default class Templates extends React.Component {
     handleDeleteTemplate(id) {
         let deleteTemplate = confirm('Вы уверены, что хотите удалить шаблон?');
         if (deleteTemplate) {
-            $.ajax({
-                url: 'http://localhost:3000/surveys/' + id ,
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                data: JSON.stringify({
-                    'template':false
-                }),
-                success: function() {
-                    this.props.handleLoadSurveyData();
-                }.bind(this),
-                error: function(xhr, status, err) {
-                    console.error(this.props.url, status, err.toString());
-                }.bind(this)
-            });
+            this.props.handleDeleteTemplate(id);
         }
     }
 
