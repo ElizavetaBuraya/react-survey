@@ -48,7 +48,11 @@ export default class Surveys extends React.Component {
             searchPanel: (props) => (<MySearchPanel { ...props } loggedInAs = {this.props.loggedInAs} />),
             afterDeleteRow: this.handleDeletedRow,
         };
+function customConfirm(next) {
+    if (confirm('Вы уверены, что хотите удалить выбранные опросы?')) {
+        next();
     }
+}
 
     componentDidMount() {
         this.props.handleLoadSurveyData();

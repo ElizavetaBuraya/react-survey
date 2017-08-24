@@ -45,7 +45,11 @@ export default class Users extends React.Component {
             searchPanel: (props) => (<MySearchPanel { ...props }/>),
             afterDeleteRow: this.handleDeletedRow,
         };
+function customConfirm(next) {
+    if (confirm('Вы уверены, что хотите удалить выбранных пользователей?')) {
+        next();
     }
+}
 
     componentDidMount() {
         this.props.handleLoadUserData();
