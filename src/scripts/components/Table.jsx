@@ -34,7 +34,7 @@ export default class Table extends React.Component {
             afterSaveCell: this.props.afterSaveCell
         };
 
-        const {data,
+        const { data,
             options,
             surveyLink,
             fileLink,
@@ -43,7 +43,7 @@ export default class Table extends React.Component {
             isFetching,
             search,
             pagination,
-            type} = this.props;
+            type } = this.props;
 
         if (isFetching) {
             return (
@@ -64,7 +64,7 @@ export default class Table extends React.Component {
                                 cellEdit={cellEditProp}
                                 selectRow={(data.length > 0 && isAdmin)
                                     ? selectRowProp
-                                    : undefined}
+                                        : undefined}
                                 deleteRow={(isAdmin)}
                                 search={search}
                                 hover
@@ -78,20 +78,20 @@ export default class Table extends React.Component {
                             dataFormat = {
                                 (linkColumns.includes(key))
                                     ? surveyLink
-                                    : (key === 'name' && type === 'file')
-                                        ? fileLink
-                                            : undefined
+                                        : (key === 'name' && type === 'file')
+                                            ? fileLink
+                                                : undefined
                             }
-                            thStyle={ { 'text-align': 'center' } }
-                            tdStyle={ { 'text-align': 'center' } }
+                            thStyle={{ 'textAlign': 'center' }}
+                            tdStyle={{ 'textAlign': 'center' }}
                             width='120'
                             editable={(key === 'name' && !type)
                                 ? true
-                                : (key === 'role')
-                                    ? { type: 'select', options: { values: roles }}
-                                    : false }
+                                    : (key === 'role')
+                                        ? {type: 'select', options: { values: roles }}
+                                            : false}
                             dataSort = {(key === 'name')}
-                            caretRender={ (key === 'name') ? getCaret : null }
+                            caretRender={(key === 'name') ? getCaret : null}
                             hidden = {hiddenColumns.includes(key)}
                         >{columnNames[index]}</TableHeaderColumn>
                     )}
