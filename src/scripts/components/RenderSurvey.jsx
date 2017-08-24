@@ -73,30 +73,45 @@ export default class GenerateSurvey extends React.Component {
     handleSaveAnswer(id, value, checked) {
         let newQuestionsList = this.state.questions_list;
         let surveyPage = this.state.survey_page;
-        let index = 0;
         let results = null;
 
         newQuestionsList[surveyPage].map((question) => {
            if (question.id === id) {
-               if (question.type === "single-choice" || question.type === "multi-choice") {
-                   results = (question.result) ? (question.result) : [];
-                   if (checked) {
-                       results.push(value)
-                   } else {
-                       index = results.indexOf(value);
-                       results.splice(index, 1);
-                   }
-                   question.result = results;
-               } else {
-                   results = value;
+               switch (question.type) {
+                   case 'multi-choice':
+                       results = (question.result) ? (question.result) : [];
+                       if (checked) {
+                           results.push(value);
+                           question.result = results;
+                       } else {
+                           results.splice(results.indexOf(value), 1);
+                           (results.length === 0)
+                               ? delete question.result
+                               : question.result = results;
+                       }
+                       break;
+                   case 'single-choice':
+                       results = (question.result) ? (question.result) : [];
+                       results.pop();
+                       results.push(value);
+                       question.result = results;
+                       break;
+                   case 'text' || 'scale':
+                       results = value;
+                       (results.replace(/\s/g,'') === '')
+                           ? delete question.result
+                           :  question.result = results;
+                       break;
+                   default:
+                       results = value;
+                       question.result = results;
                }
-
-               question.result = results;
             }
         });
 
-         this.setState({
-            questions_list: newQuestionsList });
+        this.setState({
+            questions_list: newQuestionsList
+        });
 
         this.updateProgressBar();
 
