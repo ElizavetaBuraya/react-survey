@@ -27,6 +27,13 @@ export function getSurveys(surveyData) {
     }
 }
 
+export function redirect(path) {
+    return {
+        type: actionTypes.REDIRECT,
+        payload: path
+    }
+}
+
 export function toggleRegistered(){
     return {
         type: actionTypes.TOGGLE_REGISTERED
