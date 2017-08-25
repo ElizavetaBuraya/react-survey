@@ -5,14 +5,6 @@ import HTML5Backend from 'react-dnd-html5-backend';
 
 @DragDropContext(HTML5Backend)
 export default class GenerateQuestions extends React.Component {
-    constructor(props) {
-        super(props);
-        this.moveQuestion = this.moveQuestion.bind(this);
-        this.state = {
-            questions: this.props.questions_list,
-        }
-    }
-
     componentWillMount() {
         const questions_list = this.props.questions_list;
         const survey_page = this.props.survey_page;
@@ -22,7 +14,7 @@ export default class GenerateQuestions extends React.Component {
         }
     }
 
-    moveQuestion(dragIndex, hoverIndex) {
+    moveQuestion = (dragIndex, hoverIndex) => {
         const questionsList = this.props.questions_list;
         const survey_page = this.props.survey_page;
         const newQuestionsList = questionsList[survey_page];

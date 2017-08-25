@@ -2,14 +2,7 @@ import React from 'react';
 import Answer from './Answer.jsx';
 import AnswerStats from './AnswerStats.jsx'
 
-export default class GenerateQuestions extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            questions: this.props.questions_list,
-        }
-    }
-
+export default class GenerateResults extends React.Component {
     render() {
         const { handleToggleCharts,
             questions_list,
