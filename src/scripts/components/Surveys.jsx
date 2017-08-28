@@ -31,11 +31,9 @@ function customConfirm(next) {
 }
 
 export default class Surveys extends React.Component {
-
     componentDidMount() {
         this.props.handleLoadSurveyData();
-        if (this.props.currentPage !== '/surveys')
-        {
+        if (this.props.currentPage !== '/surveys') {
             this.props.handleChangePage('/surveys');
         }
     }
