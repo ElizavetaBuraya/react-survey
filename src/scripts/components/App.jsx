@@ -4,62 +4,34 @@ import Header from './Header.jsx';
 import Main from './Main.jsx';
 import Footer from './Footer.jsx';
 
-export default class App extends React.Component {
-    render() {
-        const { isFetching,
-            isAuthorized,
-            isRegistered,
-            loggedInAs,
-            userData,
-            surveyData,
-            currentPage,
-            handleRegisteredClick,
-            handleLogInClick,
-            handleCreateUserClick,
-            handleUpdatePage,
-            handleLoadUserData,
-            handleLoadSurveyData,
-            handleDeleteUserData,
-            handleEditUserData,
-            handleDeleteSurveyData,
-            handleEditSurveyData,
-            handleDeleteTemplate } = this.props;
+const App = (props) =>  {
+    const {
+        isAuthorized,
+        isRegistered,
+        loggedInAs,
+        currentPage,
+        handleRegisteredClick,
+        handleLogInClick,
+    } = props;
 
-        return (
-            <BrowserRouter basename={'/'}>
-                <div>
-                    <Header
-                        handleRegisteredClick = {handleRegisteredClick}
-                        handleLogOutClick = {handleLogInClick}
-                        isRegistered = {isRegistered}
-                        isAuthorized = {isAuthorized}
-                        currentPage = {currentPage}
-                        loggedInAs = {loggedInAs}
-                    />
-                    <Main
-                        handleLogInClick = {handleLogInClick}
-                        handleCreateUserClick = {handleCreateUserClick}
-                        handleRegisteredClick = {handleRegisteredClick}
-                        handleChangePage = {handleUpdatePage}
-                        handleLoadUserData = {handleLoadUserData}
-                        handleLoadSurveyData = {handleLoadSurveyData}
-                        handleDeleteUserData = {handleDeleteUserData}
-                        handleDeleteSurveyData = {handleDeleteSurveyData}
-                        handleDeleteTemplate = {handleDeleteTemplate}
-                        handleEditUserData = {handleEditUserData}
-                        handleEditSurveyData = {handleEditSurveyData}
-                        isRegistered = {isRegistered}
-                        isAuthorized = {isAuthorized}
-                        isFetching = {isFetching}
-                        currentPage = {currentPage}
-                        loggedInAs = {loggedInAs}
-                        userData = {userData}
-                        surveyData = {surveyData}
-                    />
-                    <Footer />
-                </div>
-            </BrowserRouter>
-        )
-    }
-}
+    return (
+        <BrowserRouter basename={'/'}>
+            <div>
+                <Header
+                    handleRegisteredClick = {handleRegisteredClick}
+                    handleLogOutClick = {handleLogInClick}
+                    isRegistered = {isRegistered}
+                    isAuthorized = {isAuthorized}
+                    currentPage = {currentPage}
+                    loggedInAs = {loggedInAs}
+                />
+                <Main {...props}
+                />
+                <Footer />
+            </div>
+        </BrowserRouter>
+    )
+};
+
+export default App;
 
