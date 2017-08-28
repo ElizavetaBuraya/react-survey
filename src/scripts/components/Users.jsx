@@ -95,7 +95,7 @@ export default class Users extends React.Component {
                 <Sidebar
                     currentPage = {currentPage}
                 />
-                <div className="main-content d-flex flex-column">
+                <div className="main-content">
                     <Table data={userData}
                            roles={['Администратор', 'Пользователь']}
                            options={options}

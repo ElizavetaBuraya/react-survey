@@ -117,7 +117,7 @@ export default class Surveys extends React.Component {
                     currentPage = {currentPage}
                     loggedInAs = {loggedInAs}
                 />
-                <div className='main-content d-flex flex-column'>
+                <div className='main-content'>
                     <Table data={surveyData}
                            options={options}
                            columnNames={['id', 'Название','Изменен','Ответы','Ссылка','Результаты', 'Редактировать']}
