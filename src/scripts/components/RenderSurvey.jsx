@@ -184,44 +184,7 @@ export default class GenerateSurvey extends React.Component {
             this.props.handleLoadUser(this.props.loggedInAs.id, this.state.survey_id, newSurvey);
         }
 
-                    return fetch('http://localhost:3000/users/' + that.props.loggedInAs.id, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            'completed_surveys':++completedSurveys,
-                            'surveys': surveys
-                        })
-                    }).then((response) => {
-                        if (response.ok) {
-                            alert('Опрос отправлен успешно!');
-                            that.setState({
-                                redirectToAbout: true,
-                            });
-                        } else {
-                            throw new Error('Ошибка при отправке опроса!');
-                        }
-                    });
-                });
-
-            fetch('http://localhost:3000/surveys/' + pathId[pathId.length-1])
-                .then((resp) => resp.json())
-                .then(function (data) {
-                    let timesCompleted = data.answers;
-
-                    return fetch('http://localhost:3000/surveys/' + pathId[pathId.length-1], {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            'answers':++timesCompleted,
-                        })
-                    })
-                });
-            }
-    }
+    };
 
     render() {
         const { currentPage, loggedInAs, redirect, redirectPath } = this.props;
