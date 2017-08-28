@@ -6,6 +6,8 @@ const initialState = {
     loggedInAs: JSON.parse(sessionStorage.getItem('loggedInAs')),
     currentPage: '',
     isFetching: false,
+    redirect: false,
+    path: null,
     userData: [{"id":"нет данных","name":"нет данных","role":"нет данных",
         "registered":"нет данных","completed_surveys":"нет данных"}],
     surveyData: [{'id':'нет данных','name':'нет данных','changed':'нет данных','answers':'нет данных',
