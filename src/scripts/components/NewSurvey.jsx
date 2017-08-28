@@ -267,7 +267,13 @@ export default class NewSurvey extends React.Component {
                 survey_page: newNavs[newNavs.length - 1].id
             });
         }
-    }
+    };
+
+    handleChangeSurveySettings = (stateName, value) => {
+        this.setState({
+            [stateName]: value,
+        })
+    };
 
     handleSaveSurvey = (template) => {
         if (this.state.survey_title.length === 0) {
