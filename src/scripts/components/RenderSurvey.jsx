@@ -93,7 +93,7 @@ export default class GenerateSurvey extends React.Component {
                        break;
                    case 'text' || 'scale':
                        results = value;
-                       (results.replace(/\s/g,'') === '')
+                       (results.trim() === '')
                            ? delete question.result
                            :  question.result = results;
                        break;
