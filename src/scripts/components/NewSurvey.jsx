@@ -289,18 +289,7 @@ export default class NewSurvey extends React.Component {
 
         if (!this.state.survey_id) {
             newSurvey.description = prompt("Введите описание опроса");
-            $.ajax({
-                url: 'http://localhost:3000/surveys',
-                method: 'POST',
-                data: JSON.stringify(newSurvey),
-                headers: { 'Content-Type': 'application/json' },
-                success: function() {
-                    alert("Опрос создан успешно");
-                    this.setState({
-                        redirectToSurveys: true,
-                    })
-                }.bind(this)
-            });
+            this.props.handleCreateSurvey(newSurvey, '/surveys');
         } else {
             $.ajax({
                 url: 'http://localhost:3000/surveys/' + surveyId,
