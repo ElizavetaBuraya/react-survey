@@ -10,9 +10,6 @@ export default class Templates extends React.Component {
         this.state = {
             filterText: '',
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleDeleteTemplate = this.handleDeleteTemplate.bind(this);
-        this.handleEditTemplate = this.handleEditTemplate.bind(this);
     }
 
     componentDidMount() {
@@ -23,20 +20,20 @@ export default class Templates extends React.Component {
         this.props.handleLoadSurveyData();
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         this.setState({
             filterText: event.target.value,
         })
-    }
+    };
 
-    handleDeleteTemplate(id) {
+    handleDeleteTemplate = (id) => {
         let deleteTemplate = confirm('Вы уверены, что хотите удалить шаблон?');
         if (deleteTemplate) {
             this.props.handleDeleteTemplate(id);
         }
-    }
+    };
 
-    handleEditTemplate(target, display) {
+    handleEditTemplate = (target, display) => {
         function show() {
             $(target).parent('.template-wrapper').find('.active-template').show();
             $('.template').css('box-shadow', 'none');
@@ -54,7 +51,7 @@ export default class Templates extends React.Component {
         } else {
             setTimeout(show, 110);
         }
-    }
+    };
 
     render() {
         const { surveyData, isFetching } = this.props;

@@ -94,23 +94,16 @@ export default class Question extends React.Component {
         this.title = null;
         this.required = this.props.required;
         this.answersArray = [];
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleEditedQuestion = this.handleEditedQuestion.bind(this);
-        this.handleSaveEdited = this.handleSaveEdited.bind(this);
-        this.handleEditAnswer = this.handleEditAnswer.bind(this);
-        this.handleUploadFile = this.handleUploadFile.bind(this);
-        this.handleChangeRating = this.handleChangeRating.bind(this);
     }
 
-    handleChange(id, event) {
+    handleChange = (id, event) => {
         this.setState({
             rangeValue: event.target.value
         });
         this.props.handleSaveAnswer(id, event.target.value);
-    }
+    };
 
-    handleEditedQuestion(val, target) {
+    handleEditedQuestion = (val, target) => {
         this.setState({
             isEdited: val,
         });
@@ -123,9 +116,9 @@ export default class Question extends React.Component {
         } else {
             hideQuestionControls();
         }
-    }
+    };
 
-    handleSaveEdited(editedIndex) {
+    handleSaveEdited = (editedIndex) => {
         hideQuestionControls();
         let newArray = this.props.questions_list[this.props.survey_page];
 
@@ -156,13 +149,13 @@ export default class Question extends React.Component {
         });
 
         this.props.handleUpdateQuestion(newArray);
-    }
+    };
 
-    handleEditAnswer(newValue, index) {
+    handleEditAnswer = (newValue, index) => {
         this.answersArray[index] = newValue;
-    }
+    };
 
-    handleUploadFile(id, event) {
+    handleUploadFile = (id, event) => {
         let chosenFile = $(event.target).parent('div');
         let fileName = event.target.value;
         if(fileName) {
@@ -178,12 +171,11 @@ export default class Question extends React.Component {
             that.props.handleSaveAnswer(id, fileObject);
         };
         reader.readAsDataURL(file);
-    }
+    };
 
-    handleChangeRating(newRating) {
+    handleChangeRating = (newRating) => {
         this.props.handleSaveAnswer(this.props.id, newRating);
-    }
-
+    };
 
     render() {
         const { connectDragSource,
@@ -204,58 +196,30 @@ export default class Question extends React.Component {
         let question = null;
         if (type === 'multi-choice') {
             question = <div>
-                            <Checkbox index = {0}
-                                      answer = {answers[0]}
-                                      handleEditAnswer = {this.handleEditAnswer}
-                                      isEdited = {this.state.isEdited}
-                                      name = {id}
-                                      result={result}
-                                      handleSaveAnswer = {handleSaveAnswer}
-                            />
-                            <Checkbox index = {1}
-                                      answer = {answers[1]}
-                                      handleEditAnswer = {this.handleEditAnswer}
-                                      isEdited = {this.state.isEdited}
-                                      name = {id}
-                                      result={result}
-                                      handleSaveAnswer = {handleSaveAnswer}
-                            />
-                            <Checkbox index = {2}
-                                      answer = {answers[2]}
-                                      handleEditAnswer = {this.handleEditAnswer}
-                                      isEdited = {this.state.isEdited}
-                                      name = {id}
-                                      result={result}
-                                      handleSaveAnswer = {handleSaveAnswer}
-                            />
+                            {answers.map((answer, index) =>
+                                <Checkbox index = {index}
+                                          answer = {answer}
+                                          handleEditAnswer = {this.handleEditAnswer}
+                                          isEdited = {this.state.isEdited}
+                                          name = {id}
+                                          result={result}
+                                          handleSaveAnswer = {handleSaveAnswer}
+                                />)
+                            }
                         </div>
         }
         if (type === 'single-choice') {
             question = <div>
-                            <Radio    index = {0}
-                                      answer = {answers[0]}
-                                      handleEditAnswer = {this.handleEditAnswer}
-                                      isEdited = {this.state.isEdited}
-                                      name = {id}
-                                      result={result}
-                                      handleSaveAnswer = {handleSaveAnswer}
-                            />
-                            <Radio    index = {1}
-                                      answer = {answers[1]}
-                                      handleEditAnswer = {this.handleEditAnswer}
-                                      isEdited = {this.state.isEdited}
-                                      name = {id}
-                                      result={result}
-                                      handleSaveAnswer = {handleSaveAnswer}
-                            />
-                            <Radio    index = {2}
-                                      answer = {answers[2]}
-                                      handleEditAnswer = {this.handleEditAnswer}
-                                      isEdited = {this.state.isEdited}
-                                      name = {id}
-                                      result={result}
-                                      handleSaveAnswer = {handleSaveAnswer}
-                            />
+                            {answers.map((answer, index) =>
+                                <Radio    index = {index}
+                                          answer = {answer}
+                                          handleEditAnswer = {this.handleEditAnswer}
+                                          isEdited = {this.state.isEdited}
+                                          name = {id}
+                                          result={result}
+                                          handleSaveAnswer = {handleSaveAnswer}
+                                />)
+                            }
                         </div>
         }
         if (type === 'text') {

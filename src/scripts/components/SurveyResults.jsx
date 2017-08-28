@@ -25,10 +25,6 @@ export default class NewSurvey extends React.Component {
                 { 'href':'#page_1', 'id':'page_1', 'name':'Страница 1', 'active':true }
             ]
         };
-        this.handleToggleCharts = this.handleToggleCharts.bind(this);
-        this.onLoad = this.onLoad.bind(this);
-        this.handleChangePage = this.handleChangePage.bind(this);
-        this.handleChangeUser = this.handleChangeUser.bind(this);
     }
 
     componentDidMount() {
@@ -37,7 +33,7 @@ export default class NewSurvey extends React.Component {
             : this.onLoad(this.props.location.pathname);
     }
 
-    onLoad(path) {
+    onLoad = (path) => {
         let pathId = path.split("/");
         let surveyId = pathId[pathId.length-2];
 
@@ -98,13 +94,13 @@ export default class NewSurvey extends React.Component {
 
     }
 
-    handleChangePage(page) {
+    handleChangePage = (page) => {
         this.setState({
             survey_page: page,
         })
-    }
+    };
 
-    handleChangeUser(event, userIndex) {
+    handleChangeUser = (event, userIndex) => {
         let index = (userIndex !== undefined) ? userIndex : event.target.value;
         let userResults = this.state.user_results;
 
@@ -112,9 +108,9 @@ export default class NewSurvey extends React.Component {
             selectedUser: index,
             questions_list:userResults[index].results
         })
-    }
+    };
 
-    handleToggleCharts(event, userIndex) {
+    handleToggleCharts = (event, userIndex) => {
         if (userIndex !== undefined) {
             this.handleChangeUser(event, userIndex)
         }
@@ -122,7 +118,7 @@ export default class NewSurvey extends React.Component {
         this.setState({
             displayChart:!this.state.displayChart
         })
-    }
+    };
 
     render() {
         const { currentPage } = this.props;

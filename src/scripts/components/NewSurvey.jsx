@@ -26,17 +26,6 @@ export default class NewSurvey extends React.Component {
                 { 'href':'#page_1', 'id':'page_1', 'name':'Страница 1', 'active':true }
             ]
         };
-        this.onLoad = this.onLoad.bind(this);
-        this.handleTogglePanel = this.handleTogglePanel.bind(this);
-        this.handleAddQuestion = this.handleAddQuestion.bind(this);
-        this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
-        this.handleDragQuestion = this.handleDragQuestion.bind(this);
-        this.handleDeleteQuestion = this.handleDeleteQuestion.bind(this);
-        this.handleChangePage = this.handleChangePage.bind(this);
-        this.handleAddPage = this.handleAddPage.bind(this);
-        this.handleChangePageName = this.handleChangePageName.bind(this);
-        this.handleDeletePage = this.handleDeletePage.bind(this);
-        this.handleSaveSurvey = this.handleSaveSurvey.bind(this);
     }
 
     componentDidMount() {
@@ -75,7 +64,7 @@ export default class NewSurvey extends React.Component {
         });
     }
 
-    handleTogglePanel() {
+    handleTogglePanel = () => {
         if ($('#sidebarCollapse').hasClass('active-bar')) {
             $('#sidebar, #sidebarCollapse').removeClass('active-bar');
             $('.overlay').fadeOut();
@@ -83,9 +72,9 @@ export default class NewSurvey extends React.Component {
             $('#sidebar, #sidebarCollapse').addClass('active-bar');
             $('.overlay').fadeIn();
         }
-    }
+    };
 
-    handleAddQuestion(questionType) {
+    handleAddQuestion = (questionType) => {
         let newQuestionsList = this.state.questions_list;
         let surveyPage = this.state.survey_page;
         let newNumberOfQuestions = this.state.numberOfQuestions + 1;
@@ -114,9 +103,9 @@ export default class NewSurvey extends React.Component {
             questions_list:newQuestionsList,
             numberOfQuestions:newNumberOfQuestions
         });
-    }
+    };
 
-    handleUpdateQuestion(newQuestions) {
+    handleUpdateQuestion = (newQuestions) => {
         let newQuestionsList = this.state.questions_list;
         let surveyPage = this.state.survey_page;
         newQuestionsList[surveyPage] = newQuestions;
@@ -124,9 +113,9 @@ export default class NewSurvey extends React.Component {
         this.setState({
             questions_list: newQuestionsList,
         })
-    }
+    };
 
-    handleDragQuestion(dragIndex, hoverIndex, dragQuestion) {
+    handleDragQuestion = (dragIndex, hoverIndex, dragQuestion) => {
         let newQuestionsList = this.state.questions_list;
         let surveyPage = this.state.survey_page;
 
@@ -136,9 +125,9 @@ export default class NewSurvey extends React.Component {
         this.setState({
             questions_list: newQuestionsList
         });
-    }
+    };
 
-    handleDeleteQuestion(id) {
+    handleDeleteQuestion = (id) => {
         let deleteQuestion = confirm('Вы уверены, что хотите удалить вопрос?');
 
         if(deleteQuestion) {
@@ -156,15 +145,15 @@ export default class NewSurvey extends React.Component {
 
             $('.edit-question').show();
         }
-    }
+    };
 
-    handleChangePage(page) {
+    handleChangePage = (page) => {
         this.setState({
             survey_page: page,
         })
-    }
+    };
 
-    handleAddPage() {
+    handleAddPage = () => {
         if (this.state.numberOfPages === 5) {
             alert("В опросе не может быть более 5 страниц");
             return;
@@ -198,9 +187,9 @@ export default class NewSurvey extends React.Component {
             numberOfPages: newPageNumber,
             questions_list: newQuestionsList,
         });
-    }
+    };
 
-    handleChangePageName(value, tabId) {
+    handleChangePageName = (value, tabId) => {
         let navTabs = this.state.navtabs;
 
         navTabs.map((tab) => {
@@ -212,9 +201,9 @@ export default class NewSurvey extends React.Component {
         this.setState({
             navtabs: navTabs,
         })
-    }
+    };
 
-    handleDeletePage(tabId) {
+    handleDeletePage = (tabId) => {
         let deletePage = confirm('Вы уверены, что хотите удалить страницу?');
 
         if (deletePage) {
@@ -243,7 +232,7 @@ export default class NewSurvey extends React.Component {
         }
     }
 
-    handleSaveSurvey(template) {
+    handleSaveSurvey = (template) => {
         if (this.state.survey_title.length === 0) {
             alert("Введите название опроса!");
             return;

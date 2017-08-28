@@ -24,17 +24,13 @@ export default class GenerateSurvey extends React.Component {
                 { 'href':'#page_1', 'id':'page_1', 'name':'Страница 1', 'active':true }
             ]
         };
-        this.onLoad = this.onLoad.bind(this);
-        this.handleChangePage = this.handleChangePage.bind(this);
-        this.handleSubmitSurvey = this.handleSubmitSurvey.bind(this);
-        this.handleSaveAnswer = this.handleSaveAnswer.bind(this);
     }
 
     componentDidMount() {
         this.onLoad(this.props.location.pathname);
     }
 
-    onLoad(path) {
+    onLoad = (path) => {
         let pathId = path.split("/");
         $.ajax({
             url: 'http://localhost:3000/surveys?link=survey/' + pathId[pathId.length-1],
@@ -64,13 +60,13 @@ export default class GenerateSurvey extends React.Component {
         });
     }
 
-    handleChangePage(page) {
+    handleChangePage = (page) => {
         this.setState({
             survey_page: page,
         })
-    }
+    };
 
-    handleSaveAnswer(id, value, checked) {
+    handleSaveAnswer = (id, value, checked) => {
         let newQuestionsList = this.state.questions_list;
         let surveyPage = this.state.survey_page;
         let results = null;
@@ -115,9 +111,9 @@ export default class GenerateSurvey extends React.Component {
 
         this.updateProgressBar();
 
-    }
+    };
 
-    updateProgressBar() {
+    updateProgressBar = () => {
         let questionsList = this.state.questions_list;
         let questionNumber = this.state.numberOfQuestions;
         let requiredQuestionNumber = 0;
@@ -156,10 +152,9 @@ export default class GenerateSurvey extends React.Component {
             progressBar.css('background-color', 'red');
             $('.submit-button').addClass('disabled');
         }
-    }
+    };
 
-    handleSubmitSurvey(path) {
-        let pathId = path.split("/");
+    handleSubmitSurvey = () => {
         let questionsList = this.state.questions_list;
         let textAreaLength = 100;
 
