@@ -3,6 +3,13 @@ import Sidebar from './Sidebar.jsx';
 import GenerateQuestions from './GenerateQuestions.jsx';
 import { Redirect } from 'react-router-dom';
 
+async function getSurvey(pathId) {
+    const response = await fetch('http://localhost:3000/surveys?link=survey/' + pathId[pathId.length-1], {});
+    const json = await response.json();
+
+    return json;
+}
+
 export default class GenerateSurvey extends React.Component {
     constructor(props) {
         super(props);
@@ -31,33 +38,27 @@ export default class GenerateSurvey extends React.Component {
 
     onLoad = (path) => {
         let pathId = path.split("/");
-        $.ajax({
-            url: 'http://localhost:3000/surveys?link=survey/' + pathId[pathId.length-1],
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-            success: function(data) {
-                let survey = data[0];
-                this.setState({
-                    survey_id:survey.id,
-                    survey_title:survey.name,
-                    survey_page:'page_1',
-                    numberOfPages: survey.pages,
-                    numberOfQuestions: survey.questions,
-                    is_anonymous: survey.is_anonymous,
-                    questions_are_numbered: survey.questions_are_numbered,
-                    pages_are_numbered: survey.pages_are_numbered,
-                    randomized: survey.randomized,
-                    required_fields: survey.required_fields,
-                    progress_bar: survey.progress_bar,
-                    questions_list: survey.questions_list,
-                    navtabs: survey.navtabs
-                });
-            }.bind(this),
-            error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
+        let p1 = Promise.resolve(getSurvey(pathId));
+
+        p1.then((data) => {
+            let survey = data[0];
+            this.setState({
+                survey_id:survey.id,
+                survey_title:survey.name,
+                survey_page:'page_1',
+                numberOfPages: survey.pages,
+                numberOfQuestions: survey.questions,
+                is_anonymous: survey.is_anonymous,
+                questions_are_numbered: survey.questions_are_numbered,
+                pages_are_numbered: survey.pages_are_numbered,
+                randomized: survey.randomized,
+                required_fields: survey.required_fields,
+                progress_bar: survey.progress_bar,
+                questions_list: survey.questions_list,
+                navtabs: survey.navtabs
+            });
         });
-    }
+    };
 
     handleChangePage = (page) => {
         this.setState({
