@@ -20,7 +20,7 @@ const MySearchPanel = (props) => {
 
 function createCustomDeleteButton(onBtnClick) {
     return (
-        <button className='delete-button' onClick={ onBtnClick }>Delete selected</button>
+        <button className='delete-button surveys-delete-button' onClick={ onBtnClick }>Delete selected</button>
     );
 }
 
