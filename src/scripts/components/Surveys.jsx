@@ -100,6 +100,7 @@ export default class Surveys extends React.Component {
         let userRole = this.props.loggedInAs.role;
         const { currentPage, loggedInAs, surveyData, isFetching } = this.props;
         const options = {
+            noDataText: 'Нет записей',
             deleteBtn: createCustomDeleteButton,
             sizePerPage: 10,
             hideSizePerPage: true,

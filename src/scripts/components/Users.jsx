@@ -78,7 +78,7 @@ export default class Users extends React.Component {
     render() {
         const { currentPage, loggedInAs, userData, isFetching } = this.props;
         const options = {
-            noDataText: 'Все записи удалены',
+            noDataText: 'Нет записей',
             deleteBtn: createCustomDeleteButton,
             sizePerPage: 10,
             hideSizePerPage: true,
