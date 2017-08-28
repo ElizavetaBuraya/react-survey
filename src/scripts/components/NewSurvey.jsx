@@ -75,6 +75,32 @@ export default class NewSurvey extends React.Component {
         return dateChanged;
     };
 
+    createSurvey = (surveyId, template, dateChanged) => {
+        let newSurvey = {
+            "id": surveyId,
+            "name": this.state.survey_title,
+            "changed": dateChanged,
+            "answers": 0,
+            "link": "survey/" + surveyId,
+            "results": "survey/" + surveyId + "/results",
+            "edit_survey": "new_survey/survey/" + surveyId,
+            "template": template,
+            "pages": this.state.numberOfPages,
+            "questions": this.state.numberOfQuestions,
+            "is_anonymous": this.state.is_anonymous,
+            "questions_are_numbered": this.state.questions_are_numbered,
+            "pages_are_numbered": this.state.pages_are_numbered,
+            "randomized": this.state.randomized,
+            "required_fields": this.state.required_fields,
+            "progress_bar": this.state.progress_bar,
+            "navtabs": this.state.navtabs,
+            "questions_list":this.state.questions_list
+        };
+
+        return newSurvey;
+    };
+
+
     handleTogglePanel = () => {
         if ($('#sidebarCollapse').hasClass('active-bar')) {
             $('#sidebar, #sidebarCollapse').removeClass('active-bar');
@@ -253,26 +279,7 @@ export default class NewSurvey extends React.Component {
             ? this.state.survey_id
             : (new Date).getTime();
 
-        let newSurvey = {
-            "id": surveyId,
-            "name": this.state.survey_title,
-            "changed": dateChanged,
-            "answers": 0,
-            "link": "survey/" + surveyId,
-            "results": "survey/" + surveyId + "/results",
-            "edit_survey": "new_survey/survey/" + surveyId,
-            "template": template,
-            "pages": this.state.numberOfPages,
-            "questions": this.state.numberOfQuestions,
-            "is_anonymous": this.state.is_anonymous,
-            "questions_are_numbered": this.state.questions_are_numbered,
-            "pages_are_numbered": this.state.pages_are_numbered,
-            "randomized": this.state.randomized,
-            "required_fields": this.state.required_fields,
-            "progress_bar": this.state.progress_bar,
-            "navtabs": this.state.navtabs,
-            "questions_list":this.state.questions_list
-        };
+        let newSurvey = this.createSurvey(surveyId, template, this.getCurrentDate());
 
         if (!this.state.survey_id) {
             newSurvey.description = prompt("Введите описание опроса");
