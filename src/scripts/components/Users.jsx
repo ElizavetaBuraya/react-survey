@@ -28,7 +28,6 @@ function customConfirm(next) {
 }
 
 export default class Users extends React.Component {
-
     componentDidMount() {
         this.props.handleLoadUserData();
         if (this.props.currentPage !== '/users')
