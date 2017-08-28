@@ -25,6 +25,8 @@ export default function renderApp(state = initialState, action) {
             return {...state, currentPage: action.payload};
         case actionTypes.REQUEST_DATA:
             return {...state, isFetching: true};
+        case actionTypes.REDIRECT:
+            return {...state, redirect: !state.redirect, path: action.payload};
         case actionTypes.GET_USERS:
             return {...state, isFetching: false, userData: action.payload};
         case actionTypes.GET_SURVEYS:
