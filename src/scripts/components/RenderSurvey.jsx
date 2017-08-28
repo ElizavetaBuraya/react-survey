@@ -19,7 +19,6 @@ export default class GenerateSurvey extends React.Component {
             randomized: false,
             required_fields: true,
             progress_bar: false,
-            redirectToAbout:false,
             navtabs: [
                 { 'href':'#page_1', 'id':'page_1', 'name':'Страница 1', 'active':true }
             ]
@@ -231,12 +230,11 @@ export default class GenerateSurvey extends React.Component {
     }
 
     render() {
-        const redirectToAbout = this.state.redirectToAbout;
-        const { currentPage, loggedInAs } = this.props;
+        const { currentPage, loggedInAs, redirect, redirectPath } = this.props;
 
-        if (redirectToAbout) {
+        if (redirect) {
             return (
-                <Redirect to="/about"/>
+                <Redirect to = {redirectPath} />
             )
         }
 
