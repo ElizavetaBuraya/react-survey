@@ -58,7 +58,6 @@ const Table = (props) => {
             return (
                 <BootstrapTable data={data}
                                 options={options}
-                                ref='table'
                                 searchPlaceholder={'Поиск'}
                                 cellEdit={cellEditProp}
                                 selectRow={(data.length > 0 && isAdmin)
