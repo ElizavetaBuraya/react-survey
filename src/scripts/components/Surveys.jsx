@@ -6,19 +6,17 @@ import { Link } from 'react-router-dom';
 
 let selectedRows = [];
 
-class MySearchPanel extends React.Component {
-    render() {
-        let isAdmin = (this.props.loggedInAs.role === 'Администратор');
-        return (
-            <div className='page-head d-flex justify-content-between align-items-center'>
-                <h1>Мои опросы {isAdmin && <Link to='/new_survey' className='create-survey'>Создать опрос</Link>}</h1>
-                <div className='search-form'>
-                    { this.props.searchField }
-                </div>
+const MySearchPanel = (props) => {
+    let isAdmin = (props.loggedInAs.role === 'Администратор');
+    return (
+        <div className='page-head d-flex justify-content-between align-items-center'>
+            <h1>Мои опросы {isAdmin && <Link to='/new_survey' className='create-survey'>Создать опрос</Link>}</h1>
+            <div className='search-form'>
+                {props.searchField}
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 function createCustomDeleteButton(onBtnClick) {
     return (

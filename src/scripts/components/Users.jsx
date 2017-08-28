@@ -4,18 +4,16 @@ import Table from './Table.jsx';
 
 let selectedRows = [];
 
-class MySearchPanel extends React.Component {
-    render() {
-        return (
-            <div className="page-head d-flex justify-content-between align-items-center">
-                <h1>Пользователи</h1>
-                <div className="search-form">
-                    {this.props.searchField}
-                </div>
+const MySearchPanel = (props) => {
+    return (
+        <div className="page-head d-flex justify-content-between align-items-center">
+            <h1>Пользователи</h1>
+            <div className="search-form">
+                {props.searchField}
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 function createCustomDeleteButton(onBtnClick) {
     return (
