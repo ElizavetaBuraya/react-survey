@@ -54,11 +54,16 @@ export default class Surveys extends React.Component {
         $('.delete-button').css('visibility', visibility);
     };
 
-    onSelectAll = (isSelected) => {
+    onSelectAll = (isSelected, row) => {
         let visibility = (isSelected)
             ? 'visible'
             : 'hidden';
         $('.delete-button').css('visibility', visibility);
+        if (isSelected) {
+            selectedRows = row;
+        } else {
+            selectedRows = [];
+        }
     };
 
     handleDeletedRow = (row) => {

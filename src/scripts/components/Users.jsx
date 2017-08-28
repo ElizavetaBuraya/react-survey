@@ -50,10 +50,15 @@ export default class Users extends React.Component {
         $(".delete-button").css("visibility", visibility);
     };
 
-    onSelectAll = (isSelected) => {
+    onSelectAll = (isSelected, row) => {
         let visibility = (isSelected)
             ? "visible"
             : "hidden";
+        if (isSelected) {
+            selectedRows = row;
+        } else {
+            selectedRows = [];
+        }
         $(".delete-button").css("visibility", visibility);
     };
 
