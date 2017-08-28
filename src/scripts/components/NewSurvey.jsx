@@ -291,23 +291,9 @@ export default class NewSurvey extends React.Component {
             newSurvey.description = prompt("Введите описание опроса");
             this.props.handleCreateSurvey(newSurvey, '/surveys');
         } else {
-            $.ajax({
-                url: 'http://localhost:3000/surveys/' + surveyId,
-                method: 'PATCH',
-                data: JSON.stringify(newSurvey),
-                headers: { 'Content-Type': 'application/json' },
-                success: function() {
-                    (template)
-                        ? alert("Шаблон обновлен успешно")
-                        : alert("Опрос обновлен успешно");
-                    this.setState({
-                        redirectToTemplates: (template),
-                        redirectToSurveys: (!template),
-                    })
-                }.bind(this)
-            });
+            this.props.handleUpdateSurvey(newSurvey, surveyId, template);
         }
-    }
+    };
 
     render() {
         const { currentPage, redirect, redirectPath } = this.props;
