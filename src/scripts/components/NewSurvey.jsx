@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import Tabs from './Tabs.jsx';
-import Checkbox from './Checkbox.jsx'
+import SurveySidebar from './SurveySidebar.jsx'
 import { Link, Redirect } from 'react-router-dom';
 
 export default class NewSurvey extends React.Component {
@@ -356,85 +356,16 @@ export default class NewSurvey extends React.Component {
                           questions_are_numbered = {this.state.questions_are_numbered}
                           required_fields = {this.state.required_fields}
                     />
-                    <aside className='survey-sidebar' id='sidebar'>
-                        <a className='survey-sidebar-collapse' id='sidebarCollapse' onClick={this.handleTogglePanel}/>
-                        <div className='params'>
-                            <p>Тип вопроса</p>
-                            <ul className='question-type-list'>
-                                <li className='single-answer' onClick={() => this.handleAddQuestion('single-choice')}>Варианты ответа (один)</li>
-                                <li className='multiple-answer' onClick={() => this.handleAddQuestion('multi-choice')}>Варианты ответа (несколько)</li>
-                                <li className='text-answer' onClick={() => this.handleAddQuestion('text')}>Текст</li>
-                                <li className='file-answer' onClick={() => this.handleAddQuestion('file')}>Файл</li>
-                                <li className='star-answer' onClick={() => this.handleAddQuestion('rating')}>Рейтинг в звездах</li>
-                                <li className='range-answer' onClick={() => this.handleAddQuestion('scale')}>Шкала</li>
-                            </ul>
-                        </div>
-                        <div className='params'>
-                            <p className='params-list'>Параметры опроса</p>
-                            <ul className='survey-params-list'>
-                                <li>
-                                    <Checkbox answer = 'Анонимный опрос'
-                                              handleEditAnswer = {this.handleEditAnswer}
-                                              id = 'anonymous'
-                                              isChecked = {this.state.is_anonymous}
-                                              onChange={(val) => this.setState({
-                                                  is_anonymous: val
-                                              })}
-                                    />
-                                </li>
-                                <li>
-                                    <Checkbox answer = 'Номера вопросов'
-                                              handleEditAnswer = {this.handleEditAnswer}
-                                              id = 'questions-are-numbered'
-                                              isChecked = {this.state.questions_are_numbered}
-                                              onChange={(val) => this.setState({
-                                                  questions_are_numbered: val
-                                              })}
-                                    />
-                                </li>
-                                <li>
-                                    <Checkbox answer = 'Номера страниц'
-                                              handleEditAnswer = {this.handleEditAnswer}
-                                              id = 'pages-are-numbered'
-                                              isChecked = {this.state.pages_are_numbered}
-                                              onChange={(val) => this.setState({
-                                                  pages_are_numbered: val
-                                              })}
-                                    />
-                                </li>
-                                <li>
-                                    <Checkbox answer = 'Случайный порядок вопросов'
-                                              handleEditAnswer = {this.handleEditAnswer}
-                                              id = 'random-order'
-                                              isChecked = {this.state.randomized}
-                                              onChange={(val) => this.setState({
-                                                  randomized: val
-                                              })}
-                                    />
-                                </li>
-                                <li>
-                                    <Checkbox answer = 'Звездочки обязательных полей'
-                                              handleEditAnswer = {this.handleEditAnswer}
-                                              id = 'compulsory'
-                                              isChecked = {this.state.required_fields}
-                                              onChange={(val) => this.setState({
-                                                  required_fields: val
-                                              })}
-                                    />
-                                </li>
-                                <li>
-                                    <Checkbox answer = 'Индикатор выполнения'
-                                              handleEditAnswer = {this.handleEditAnswer}
-                                              id = 'progress'
-                                              isChecked = {this.state.progress_bar}
-                                              onChange={(val) => this.setState({
-                                                  progress_bar: val
-                                              })}
-                                    />
-                                </li>
-                            </ul>
-                        </div>
-                    </aside>
+                    <SurveySidebar handleAddQuestion = {this.handleAddQuestion}
+                                   handleTogglePanel = {this.handleTogglePanel}
+                                   handleChangeSurveySettings = {this.handleChangeSurveySettings}
+                                   is_anonymous = {this.state.is_anonymous}
+                                   questions_are_numbered = {this.state.questions_are_numbered}
+                                   pages_are_numbered = {this.state.pages_are_numbered}
+                                   randomized = {this.state.randomized}
+                                   required_fields = {this.state.required_fields}
+                                   progress_bar = {this.state.progress_bar}
+                    />
                 </div>
                 <div className='overlay' onClick={this.handleTogglePanel}/>
             </main>
