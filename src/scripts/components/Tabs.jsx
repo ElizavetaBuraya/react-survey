@@ -14,25 +14,23 @@ function TabItem(props) {
             </li>
 }
 
-class TabsList extends React.Component {
-    render() {
-        const tabs = this.props.navtabs;
+const TabsList = (props) => {
+    const tabs = props.navtabs;
 
-        return (
-            <ul className='nav nav-tabs' role='tablist'>
-                {tabs.map((tab, index) =>
-                    <TabItem key={index}
-                             href={tab.href}
-                             name={tab.name}
-                             id={tab.id}
-                             active={tab.active}
-                             handleChangePage = {this.props.handleChangePage}
-                    />
-                )}
-            </ul>
-        )
-    }
-}
+    return (
+        <ul className='nav nav-tabs' role='tablist'>
+            {tabs.map((tab, index) =>
+                <TabItem key={index}
+                         href={tab.href}
+                         name={tab.name}
+                         id={tab.id}
+                         active={tab.active}
+                         handleChangePage = {props.handleChangePage}
+                />
+            )}
+        </ul>
+    )
+};
 
 class GenerateContent extends React.Component {
     render() {
