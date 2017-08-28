@@ -32,103 +32,100 @@ const TabsList = (props) => {
     )
 };
 
-class GenerateContent extends React.Component {
-    render() {
-        const { navtabs,
-            currentPage,
-            questions_list,
-            survey_page,
-            handleDeletePage,
-            handleUpdateQuestion,
-            handleDragQuestion,
-            handleDeleteQuestion,
-            handleChangePageName,
-            handleToggleCharts,
-            questions_are_numbered,
-            pages_are_numbered,
-            required_fields,
-            displayChart,
-            user_results } = this.props;
+const GenerateContent = (props) => {
+    const { navtabs,
+        currentPage,
+        questions_list,
+        survey_page,
+        handleDeletePage,
+        handleUpdateQuestion,
+        handleDragQuestion,
+        handleDeleteQuestion,
+        handleChangePageName,
+        handleToggleCharts,
+        questions_are_numbered,
+        pages_are_numbered,
+        required_fields,
+        displayChart,
+        user_results } = props;
 
-        const tabClass = classNames({'tab-pane': true,
-            'about-pane': currentPage === '/about',
-        });
+    const tabClass = classNames({'tab-pane': true,
+        'about-pane': currentPage === '/about',
+    });
 
-        const deleteClass = classNames({'delete-page': true,
+    const deleteClass = classNames({'delete-page': true,
             'inactive-delete': survey_page === 'page_1',
-        });
+    });
 
-        const isAboutPage = (currentPage === '/about');
-        const isSurveyPage = (currentPage === '/new_survey');
-        const isResultsPage = (currentPage === '/survey/results');
+    const isAboutPage = (currentPage === '/about');
+    const isSurveyPage = (currentPage === '/new_survey');
+    const isResultsPage = (currentPage === '/survey/results');
 
-        return (
-            <div className='tab-content'>
-                {navtabs.map((tab, index) =>
-                    <div className={(tab.active ? 'active ' : '') + tabClass} id={tab.id} role='tabpanel' key={index}>
-                        {isResultsPage &&
-                            <div className='survey-content'>
-                                {pages_are_numbered &&
-                                    <h2>{tab.name}</h2>
-                                }
-                                {questions_list[survey_page] &&
-                                    <GenerateResults questions_list={questions_list}
-                                                     survey_page={survey_page}
-                                                     questions_are_numbered={questions_are_numbered}
-                                                     required_fields={required_fields}
-                                                     displayChart={displayChart}
-                                                     user_results = {user_results}
-                                                     handleToggleCharts = {handleToggleCharts}
-                                    />
-                                }
-                            </div>
+    return (
+        <div className='tab-content'>
+            {navtabs.map((tab, index) => <div className={(tab.active ? 'active ' : '') + tabClass} id={tab.id} role='tabpanel' key={index}>
+                    {isResultsPage &&
+                    <div className='survey-content'>
+                        {pages_are_numbered &&
+                        <h2>{tab.name}</h2>
                         }
-                        {isSurveyPage &&
-                            <div className='survey-content'>
-                                <span className={deleteClass} aria-hidden='true' onClick={() => handleDeletePage(tab.id)}/>
-                                <div>
-                                    <input type='text'
-                                           name='page-head'
-                                           value={tab.name}
-                                           maxLength="12"
-                                           onChange={(e) => handleChangePageName(e.target.value, tab.id)}
-                                    />
-                                </div>
-                                {questions_list[survey_page] &&
-                                    <GenerateQuestions questions_list = {questions_list}
-                                                       survey_page = {survey_page}
-                                                       handleUpdateQuestion = {handleUpdateQuestion}
-                                                       handleDragQuestion = {handleDragQuestion}
-                                                       handleDeleteQuestion = {handleDeleteQuestion}
-                                                       questions_are_numbered = {questions_are_numbered}
-                                                       required_fields = {required_fields}
-                                    />
-                                }
-                                {!questions_list[survey_page] &&
-                                    <em>Добавьте вопрос, выбрав нужный тип вопроса в меню опроса</em>
-                                }
-                            </div>
-                        }
-                        {isAboutPage &&
-                            <div>
-                                <img src='img/placeholder_2.png' alt='placeholder' height='200' />
-                                <p>
-                                    Page {index + 1}.<br />
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper
-                                    elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.
-                                    Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius. Nam nec
-                                    fringilla diam. Phasellus ac nibh sit amet nisl viverra posuere. Nulla vehicula commodo eros
-                                    eu posuere. Fusce finibus ligula pharetra, fringilla elit et, vestibulum mauris. Interdum et
-                                    malesuada fames ac ante ipsum primis in faucibus.
-                                </p>
-                            </div>
+                        {questions_list[survey_page] &&
+                        <GenerateResults questions_list={questions_list}
+                                         survey_page={survey_page}
+                                         questions_are_numbered={questions_are_numbered}
+                                         required_fields={required_fields}
+                                         displayChart={displayChart}
+                                         user_results = {user_results}
+                                         handleToggleCharts = {handleToggleCharts}
+                        />
                         }
                     </div>
-                )}
-            </div>
-        )
-    }
-}
+                    }
+                    {isSurveyPage &&
+                    <div className='survey-content'>
+                        <span className={deleteClass} aria-hidden='true' onClick={() => handleDeletePage(tab.id)}/>
+                        <div>
+                            <input type='text'
+                                   name='page-head'
+                                   value={tab.name}
+                                   maxLength="12"
+                                   onChange={(e) => handleChangePageName(e.target.value, tab.id)}
+                            />
+                        </div>
+                        {questions_list[survey_page] &&
+                        <GenerateQuestions questions_list = {questions_list}
+                                           survey_page = {survey_page}
+                                           handleUpdateQuestion = {handleUpdateQuestion}
+                                           handleDragQuestion = {handleDragQuestion}
+                                           handleDeleteQuestion = {handleDeleteQuestion}
+                                           questions_are_numbered = {questions_are_numbered}
+                                           required_fields = {required_fields}
+                        />
+                        }
+                        {!questions_list[survey_page] &&
+                        <em>Добавьте вопрос, выбрав нужный тип вопроса в меню опроса</em>
+                        }
+                    </div>
+                    }
+                    {isAboutPage &&
+                    <div>
+                        <img src='img/placeholder_2.png' alt='placeholder' height='200' />
+                        <p>
+                            Page {index + 1}.<br />
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper
+                            elementum libero sed lacinia. Quisque ac quam tempus, aliquet nibh vitae, lobortis ex.
+                            Aliquam posuere interdum ex vitae pretium. Mauris ac odio in ex feugiat varius. Nam nec
+                            fringilla diam. Phasellus ac nibh sit amet nisl viverra posuere. Nulla vehicula commodo eros
+                            eu posuere. Fusce finibus ligula pharetra, fringilla elit et, vestibulum mauris. Interdum et
+                            malesuada fames ac ante ipsum primis in faucibus.
+                        </p>
+                    </div>
+                    }
+                </div>
+            )}
+        </div>
+    )
+};
 
 const Tabs = (props) => {
     const { navtabs,
