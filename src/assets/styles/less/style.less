@@ -561,8 +561,22 @@ th {
 
 .delete-button {
   visibility: hidden;
+  position: relative;
+  top:80px;
   .custom-control-btn;
   width: 120px;
+  @media screen and (max-width: 860px) {
+    top:118px;
+  }
+  @media screen and (max-width: 767px) {
+    top:133px;
+  }
+}
+
+.surveys-delete-button {
+  @media screen and (max-width: 430px) {
+    top:178px;
+  }
 }
 
 .inactive {
