@@ -22,7 +22,7 @@ export default class GenerateQuestions extends React.Component {
         const dragQuestion = newQuestionsList[dragIndex];
 
         this.props.handleDragQuestion(dragIndex, hoverIndex, dragQuestion);
-    }
+    };
 
     shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
