@@ -14,36 +14,35 @@ const hiddenColumns = ['id','template', 'pages','questions', 'description', 'is_
 
 const linkColumns = ['link', 'results', 'respondent', 'edit_survey'];
 
-export default class Table extends React.Component {
-    render() {
-        let isAdmin = (this.props.loggedInAs.role === 'Администратор');
+const Table = (props) => {
+    const { data,
+        options,
+        surveyLink,
+        fileLink,
+        roles,
+        columnNames,
+        isFetching,
+        search,
+        pagination,
+        type, loggedInAs, onSelectAll, onRowSelect, afterSaveCell } = props;
 
-        let columns = (this.props.data.length > 0)
-            ? Object.keys(this.props.data[0])
-                : this.props.columnNames;
+        let isAdmin = (loggedInAs.role === 'Администратор');
+
+        let columns = (data.length > 0)
+            ? Object.keys(data[0])
+                : columnNames;
 
         const selectRowProp = {
             mode: 'checkbox',
-            onSelect: this.props.onRowSelect,
-            onSelectAll: this.props.onSelectAll
+            onSelect: onRowSelect,
+            onSelectAll: onSelectAll
         };
 
         const cellEditProp = {
             mode: 'click',
             blurToSave: true,
-            afterSaveCell: this.props.afterSaveCell
+            afterSaveCell: afterSaveCell
         };
-
-        const { data,
-            options,
-            surveyLink,
-            fileLink,
-            roles,
-            columnNames,
-            isFetching,
-            search,
-            pagination,
-            type } = this.props;
 
         if (isFetching) {
             return (
@@ -98,5 +97,6 @@ export default class Table extends React.Component {
                 </BootstrapTable>
             )
         }
-    }
-}
+};
+
+export default Table;
