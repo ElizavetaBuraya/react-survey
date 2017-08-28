@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactStars from 'react-stars'
 
-export default class Answer extends React.Component {
-    render() {
+const Answer = (props) => {
         const { answers,
             result,
             required,
@@ -12,7 +11,7 @@ export default class Answer extends React.Component {
             survey_page,
             type,
             questions_are_numbered,
-            required_fields } = this.props;
+            required_fields } = props;
 
         const lastQuestion  = (questions_list[survey_page].length === index + 1);
 
@@ -69,5 +68,6 @@ export default class Answer extends React.Component {
                 {!lastQuestion && <hr/>}
             </div>
         );
-    }
-}
+    };
+
+export default Answer;
