@@ -238,7 +238,7 @@ export default class GenerateSurvey extends React.Component {
                     </div>
                     <div className='submit-survey d-flex justify-content-center'>
                         <a className='submit-button disabled'
-                           onClick={() => this.handleSubmitSurvey(this.props.location.pathname)}>Завершить опрос
+                           onClick={this.handleSubmitSurvey}>Завершить опрос
                         </a>
                     </div>
                     {this.state.progress_bar &&
