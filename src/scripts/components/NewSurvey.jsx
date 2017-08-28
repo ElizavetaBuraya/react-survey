@@ -63,6 +63,18 @@ export default class NewSurvey extends React.Component {
         });
     };
 
+    getCurrentDate = () => {
+        let dateChanged = new Date();
+        let day = dateChanged.getDate();
+        let month = dateChanged.getMonth()+1;
+        let year = dateChanged.getFullYear();
+        day = (day < 10) ? '0' + day : day;
+        month = (month < 10) ? '0' + month : month;
+        dateChanged = day + '.' + month + '.' + year;
+
+        return dateChanged;
+    };
+
     handleTogglePanel = () => {
         if ($('#sidebarCollapse').hasClass('active-bar')) {
             $('#sidebar, #sidebarCollapse').removeClass('active-bar');
@@ -236,14 +248,6 @@ export default class NewSurvey extends React.Component {
             alert("Введите название опроса!");
             return;
         }
-
-        let dateChanged = new Date();
-        let day = dateChanged.getDate();
-        let month = dateChanged.getMonth()+1;
-        let year = dateChanged.getFullYear();
-        day = (day < 10) ? '0' + day : day;
-        month = (month < 10) ? '0' + month : month;
-        dateChanged = day + '.' + month + '.' + year;
 
         let surveyId = (this.state.survey_id)
             ? this.state.survey_id
