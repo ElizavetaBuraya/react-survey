@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { logIn,
-    createUser,
-    getUserData,
-    getSurveyData,
-    deleteUserData,
-    deleteSurveyData,
-    editUserData,
-    editSurveyData,
-    deleteTemplate } from '../actions/actions';
+import { logIn, createUser } from '../actions/authActionCreators';
+import { getUserData,
+        deleteUserData,
+        editUserData,
+        loadUser } from '../actions/userActionCreators';
+import { getSurveyData,
+        deleteSurveyData,
+        editSurveyData,
+        deleteTemplate,
+        createSurvey,
+        updateSurvey } from '../actions/surveyActionCreators';
 import { toggleRegistered, updateCurrentPage } from '../actions/actionCreators';
 import App from '../components/App.jsx';
 
