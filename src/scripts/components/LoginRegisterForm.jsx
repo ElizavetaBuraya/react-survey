@@ -1,6 +1,10 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
+function forgotPassword () {
+    prompt('Введите ваш email и мы пришлем вам ссылку для сброса пароля');
+};
+
 let Form = props => {
     const { handleSubmit, handleRegisteredClick, isRegistered } = props;
     return (
@@ -25,7 +29,10 @@ let Form = props => {
                            required />
                     <div className='d-flex justify-content-between'>
                         <a className='signup' href='#' onClick={handleRegisteredClick}>Регистрация</a>
-                        <a className='getpassword' href='#'>Забыли пароль?</a>
+                        <a className='getpassword' href='#'
+                           onClick={forgotPassword}>
+                           Забыли пароль?
+                        </a>
                     </div>
                     <button className='login-form-btn' type='submit'>
                         Войти
