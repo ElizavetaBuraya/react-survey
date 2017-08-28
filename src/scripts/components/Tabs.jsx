@@ -130,50 +130,23 @@ class GenerateContent extends React.Component {
     }
 }
 
-export default class Tabs extends React.Component {
-    render() {
-        const { navtabs,
-            currentPage,
-            questions_list,
-            survey_page,
-            handleDeletePage,
-            handleUpdateQuestion,
-            handleDragQuestion,
-            handleDeleteQuestion,
-            handleChangePage,
-            handleChangePageName,
-            handleToggleCharts,
-            questions_are_numbered,
-            pages_are_numbered,
-            required_fields,
-            displayChart,
-            user_results } = this.props;
+const Tabs = (props) => {
+    const { navtabs,
+        currentPage,
+        handleChangePage } = props;
 
-        let isSurveyPage = (currentPage === '/new_survey');
+    let isSurveyPage = (currentPage === '/new_survey');
 
-        return(
-            <div className={isSurveyPage ? 'survey-page' : ''}>
-                <TabsList navtabs={navtabs}
-                          handleChangePage = {handleChangePage}/>
-                <div className='tab-content'>
-                    <GenerateContent navtabs={navtabs}
-                                     currentPage={currentPage}
-                                     questions_list = {questions_list}
-                                     survey_page = {survey_page}
-                                     handleUpdateQuestion = {handleUpdateQuestion}
-                                     handleDragQuestion = {handleDragQuestion}
-                                     handleDeleteQuestion = {handleDeleteQuestion}
-                                     handleChangePageName = {handleChangePageName}
-                                     handleDeletePage = {handleDeletePage}
-                                     handleToggleCharts = {handleToggleCharts}
-                                     questions_are_numbered = {questions_are_numbered}
-                                     pages_are_numbered = {pages_are_numbered}
-                                     required_fields = {required_fields}
-                                     displayChart = {displayChart}
-                                     user_results = {user_results}
-                    />
-                </div>
+    return(
+        <div className={isSurveyPage ? 'survey-page' : ''}>
+            <TabsList navtabs={navtabs}
+                      handleChangePage = {handleChangePage}/>
+            <div className='tab-content'>
+                <GenerateContent {...props}
+                />
             </div>
-        )
-    }
-}
+        </div>
+    )
+};
+
+export default Tabs;
