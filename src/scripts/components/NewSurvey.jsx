@@ -4,6 +4,13 @@ import Tabs from './Tabs.jsx';
 import SurveySidebar from './SurveySidebar.jsx'
 import { Link, Redirect } from 'react-router-dom';
 
+async function getSurvey(pathId) {
+    const response = await fetch('http://localhost:3000/surveys?link=survey/' + pathId[pathId.length-1], {});
+    const json = await response.json();
+
+    return json;
+}
+
 export default class NewSurvey extends React.Component {
     constructor(props) {
         super(props);
@@ -32,35 +39,29 @@ export default class NewSurvey extends React.Component {
         : this.onLoad(this.props.location.pathname);
     }
 
-    onLoad(path) {
+    onLoad = (path) => {
         let pathId = path.split("/");
-        $.ajax({
-            url: 'http://localhost:3000/surveys?link=survey/' + pathId[pathId.length-1],
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-            success: function(data) {
-                let template = data[0];
-                this.setState({
-                    survey_id:(path.includes("create")) ? null : template.id,
-                    survey_title:template.name,
-                    survey_page:'page_1',
-                    numberOfPages: template.pages,
-                    numberOfQuestions: template.questions,
-                    is_anonymous: template.is_anonymous,
-                    questions_are_numbered: template.questions_are_numbered,
-                    pages_are_numbered: template.pages_are_numbered,
-                    randomized: template.randomized,
-                    required_fields: template.required_fields,
-                    progress_bar: template.progress_bar,
-                    questions_list: template.questions_list,
-                    navtabs: template.navtabs
-                });
-            }.bind(this),
-            error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
+        let p1 = Promise.resolve(getSurvey(pathId));
+
+        p1.then((data) => {
+            let template = data[0];
+            this.setState({
+                survey_id:(path.includes("create")) ? null : template.id,
+                survey_title:template.name,
+                survey_page:'page_1',
+                numberOfPages: template.pages,
+                numberOfQuestions: template.questions,
+                is_anonymous: template.is_anonymous,
+                questions_are_numbered: template.questions_are_numbered,
+                pages_are_numbered: template.pages_are_numbered,
+                randomized: template.randomized,
+                required_fields: template.required_fields,
+                progress_bar: template.progress_bar,
+                questions_list: template.questions_list,
+                navtabs: template.navtabs
+            })
         });
-    }
+    };
 
     handleTogglePanel = () => {
         if ($('#sidebarCollapse').hasClass('active-bar')) {
