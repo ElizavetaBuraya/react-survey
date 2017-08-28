@@ -175,21 +175,14 @@ export default class GenerateSurvey extends React.Component {
         let submitSurvey = confirm('Вы уверены, что хотите завершить опрос?');
 
         if (submitSurvey) {
-            let completedSurveys = 0;
-            let surveys = [];
-            let that = this;
 
             let newSurvey = {
                 "id": this.state.survey_id,
                 "results": this.state.questions_list,
             };
 
-            fetch('http://localhost:3000/users/' + this.props.loggedInAs.id)
-                .then((resp) => resp.json())
-                .then(function (data) {
-                    completedSurveys = data.completed_surveys;
-                    surveys = data.surveys;
-                    surveys.push(newSurvey);
+            this.props.handleLoadUser(this.props.loggedInAs.id, this.state.survey_id, newSurvey);
+        }
 
                     return fetch('http://localhost:3000/users/' + that.props.loggedInAs.id, {
                         method: 'PATCH',
