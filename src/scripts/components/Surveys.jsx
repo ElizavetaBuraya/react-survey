@@ -4,7 +4,7 @@ import Table from './Table.jsx';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
-const selectedRows = [];
+let selectedRows = [];
 
 class MySearchPanel extends React.Component {
     render() {

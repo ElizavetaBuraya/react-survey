@@ -2,7 +2,7 @@ import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import Table from './Table.jsx';
 
-const selectedRows = [];
+let selectedRows = [];
 
 class MySearchPanel extends React.Component {
     render() {
