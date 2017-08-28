@@ -20,7 +20,6 @@ const CustomTooltip  = React.createClass({
 
 const CustomizedLegend = React.createClass({
     render() {
-
         function getStyles(color) {
             return {
                 marginRight:'10px',
@@ -51,18 +50,18 @@ const CustomizedLegend = React.createClass({
 
 const COLORS = ['#98CCFA', '#00C49F', '#FFBB28', '#FFB6C1', '#00FF7F'];
 
-export default class Chart extends React.Component {
+const Chart = (props) => {
 
-    getPercentage = (type) => {
-        let user_results = this.props.user_results;
-        let survey_page = this.props.survey_page;
-        let answers = this.props.answers;
+    const getPercentage = (type) => {
+        let user_results = props.user_results;
+        let survey_page = props.survey_page;
+        let answers = props.answers;
         let answerStats = [0, 0, 0, 0, 0];
-        let answered = this.props.answered;
+        let answered = props.answered;
 
         user_results.map((user) => {
             user.results[survey_page].map((question) => {
-                if (question.id === this.props.id) {
+                if (question.id === props.id) {
                     if (type === 'rating') {
                         for (let i = 1; i < 6; i++) {
                             if (question.result === i) {
@@ -82,11 +81,11 @@ export default class Chart extends React.Component {
         });
 
         const data = (type === 'rating') ? [
-            {name: 1, response: Math.round((answerStats[0] * 100)/answered), number: answerStats[0]},
-            {name: 2, response: Math.round((answerStats[1] * 100)/answered), number: answerStats[1]},
-            {name: 3, response: Math.round((answerStats[2] * 100)/answered), number: answerStats[2]},
-            {name: 4, response: Math.round((answerStats[3] * 100)/answered), number: answerStats[3]},
-            {name: 5, response: Math.round((answerStats[4] * 100)/answered), number: answerStats[4]},
+            {name: '1 \u2605', response: Math.round((answerStats[0] * 100)/answered), number: answerStats[0]},
+            {name: '2 \u2605', response: Math.round((answerStats[1] * 100)/answered), number: answerStats[1]},
+            {name: '3 \u2605', response: Math.round((answerStats[2] * 100)/answered), number: answerStats[2]},
+            {name: '4 \u2605', response: Math.round((answerStats[3] * 100)/answered), number: answerStats[3]},
+            {name: '5 \u2605', response: Math.round((answerStats[4] * 100)/answered), number: answerStats[4]},
         ]
         :[
             {name: answers[0], response: Math.round((answerStats[0] * 100)/answered), number: answerStats[0]},
@@ -97,14 +96,13 @@ export default class Chart extends React.Component {
         return data;
     };
 
-    render() {
-        const { type } = this.props;
+        const { type } = props;
 
         const toPercent = (decimal, fixed = 0) => {
             return `${(decimal).toFixed(fixed)}%`;
         };
 
-        const data = this.getPercentage(type);
+        const data = getPercentage(type);
 
         return (
             <div className="chart-container">
@@ -127,5 +125,6 @@ export default class Chart extends React.Component {
                 <CustomizedLegend data={data}/>
             </div>
         );
-    }
-}
+};
+
+export default Chart;
