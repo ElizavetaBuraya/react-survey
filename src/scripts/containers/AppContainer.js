@@ -23,7 +23,9 @@ const mapStateToProps = (state) => {
         isRegistered: state.renderApp.isRegistered,
         currentPage: state.renderApp.currentPage,
         userData: state.renderApp.userData,
-        surveyData: state.renderApp.surveyData
+        surveyData: state.renderApp.surveyData,
+        redirect: state.renderApp.redirect,
+        redirectPath: state.renderApp.path
     }
 };
 
