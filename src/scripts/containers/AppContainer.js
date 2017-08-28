@@ -51,8 +51,14 @@ const mapDispatchToProps = (dispatch) => {
             bindActionCreators(editSurveyData, dispatch),
         handleRegisteredClick:
             bindActionCreators(toggleRegistered, dispatch),
-        handleUpdatePage:
-            bindActionCreators(updateCurrentPage, dispatch)
+        handleChangePage:
+            bindActionCreators(updateCurrentPage, dispatch),
+        handleCreateSurvey:
+            bindActionCreators(createSurvey, dispatch),
+        handleUpdateSurvey:
+            bindActionCreators(updateSurvey, dispatch),
+        handleLoadUser:
+            bindActionCreators(loadUser, dispatch)
     }
 };
 
