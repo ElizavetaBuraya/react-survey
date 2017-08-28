@@ -47,6 +47,8 @@ let Form = props => {
                            name='name'
                            className='form-control'
                            placeholder='Имя'
+                           pattern='[a-zA-Z0-9]{4,10}"'
+                           title='Только буквы и цифры, от 4 до 10 символов'
                            required
                            autoFocus/>
                     <label htmlFor='inputEmail' className='sr-only'>E-mail</label>
@@ -62,6 +64,8 @@ let Form = props => {
                            name='password'
                            className='form-control'
                            placeholder='Пароль'
+                           pattern='{6,20}"'
+                           title='От 6 до 20 символов'
                            required/>
                     <label htmlFor='inputRepeatPassword' className='sr-only'>Повторить пароль</label>
                     <Field component='input'
