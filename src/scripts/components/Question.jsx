@@ -225,7 +225,8 @@ export default class Question extends React.Component {
         if (type === 'multi-choice') {
             question = <div>
                             {answers.map((answer, index) =>
-                                <Checkbox index = {index}
+                                <Checkbox key = {index}
+                                          index = {index}
                                           answer = {answer}
                                           handleEditAnswer = {this.handleEditAnswer}
                                           isEdited = {this.state.isEdited}
@@ -246,6 +247,7 @@ export default class Question extends React.Component {
                                           name = {id}
                                           result={result}
                                           handleSaveAnswer = {handleSaveAnswer}
+                                <Radio key = {index}
                                 />)
                             }
                         </div>
