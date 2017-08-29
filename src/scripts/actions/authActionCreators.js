@@ -57,8 +57,6 @@ export function createUser(values) {
                         "password": values.password,
                         "surveys": []
                     };
-
-                    return newUser;
                 }
             })
             .then((newUser) => {
