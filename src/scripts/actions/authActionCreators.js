@@ -1,4 +1,5 @@
 import { setUserData, toggleRegistered } from './actionCreators.js';
+import { getCurrentDate } from '../utils/helperFunctions.js'
 
 const fetchUsers = 'http://localhost:3000/users/';
 
@@ -57,7 +58,7 @@ export function createUser(values) {
                         "id": (new Date).getTime(),
                         "name": values.name.trim(),
                         "role": 'Пользователь',
-                        "registered": date,
+                        "registered": getCurrentDate(),
                         "completed_surveys": 0,
                         "login": values.email,
                         "password": values.password,

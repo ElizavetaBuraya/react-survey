@@ -2,14 +2,8 @@ import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import Tabs from './Tabs.jsx';
 import SurveySidebar from './SurveySidebar.jsx'
+import { getCurrentDate, getSurvey } from '../utils/helperFunctions.js'
 import { Link, Redirect } from 'react-router-dom';
-
-async function getSurvey(pathId) {
-    const response = await fetch('http://localhost:3000/surveys?link=survey/' + pathId[pathId.length-1], {});
-    const json = await response.json();
-
-    return json;
-}
 
 export default class NewSurvey extends React.Component {
     constructor(props) {
@@ -63,23 +57,11 @@ export default class NewSurvey extends React.Component {
         });
     };
 
-    getCurrentDate = () => {
-        let dateChanged = new Date();
-        let day = dateChanged.getDate();
-        let month = dateChanged.getMonth()+1;
-        let year = dateChanged.getFullYear();
-        day = (day < 10) ? '0' + day : day;
-        month = (month < 10) ? '0' + month : month;
-        dateChanged = day + '.' + month + '.' + year;
-
-        return dateChanged;
-    };
-
-    createSurvey = (surveyId, template, dateChanged) => {
+    createSurvey = (surveyId, template) => {
         let newSurvey = {
             "id": surveyId,
             "name": this.state.survey_title,
-            "changed": dateChanged,
+            "changed": getCurrentDate(),
             "answers": 0,
             "link": "survey/" + surveyId,
             "results": "survey/" + surveyId + "/results",
@@ -285,7 +267,7 @@ export default class NewSurvey extends React.Component {
             ? this.state.survey_id
             : (new Date).getTime();
 
-        let newSurvey = this.createSurvey(surveyId, template, this.getCurrentDate());
+        let newSurvey = this.createSurvey(surveyId, template);
 
         if (!this.state.survey_id) {
             newSurvey.description = prompt("Введите описание опроса");

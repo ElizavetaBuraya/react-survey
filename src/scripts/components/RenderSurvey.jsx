@@ -1,14 +1,8 @@
 import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import GenerateQuestions from './GenerateQuestions.jsx';
+import { getSurvey } from '../utils/helperFunctions.js'
 import { Redirect } from 'react-router-dom';
-
-async function getSurvey(pathId) {
-    const response = await fetch('http://localhost:3000/surveys?link=survey/' + pathId[pathId.length-1], {});
-    const json = await response.json();
-
-    return json;
-}
 
 export default class GenerateSurvey extends React.Component {
     constructor(props) {

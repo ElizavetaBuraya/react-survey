@@ -1,20 +1,7 @@
 import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import Tabs from './Tabs.jsx';
-
-async function getSurveyStats(pathId) {
-    const response = await fetch('http://localhost:3000/surveys?link=survey/' + pathId[pathId.length-2], {});
-    const json = await response.json();
-
-    return json;
-}
-
-async function getUserResults() {
-    const response = await fetch('http://localhost:3000/users/', {});
-    const json = await response.json();
-
-    return json;
-}
+import { getSurveyStats, getUserResults } from '../utils/helperFunctions.js'
 
 export default class NewSurvey extends React.Component {
     constructor(props) {
