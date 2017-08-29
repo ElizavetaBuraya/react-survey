@@ -12,10 +12,8 @@ export function logIn(userData){
             return fetch(fetchUsers)
                 .then((resp) => resp.json())
                 .then(function (data) {
-                    let login = userData.login;
-                    let password = userData.password;
-
-                    return data.find((user) => (user.login === login && user.password === password));
+                    return data.find((user) =>
+                        (user.login === userData.login && user.password === userData.password));
                 })
                 .then(function (user) {
                     if (user === undefined) {
