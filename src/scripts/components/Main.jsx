@@ -107,13 +107,19 @@ const Main = (props) => {
                 )
             )}/>
             <Route exact path='/new_survey'
-                   component={() => <NewSurvey push to='/new_survey'
-                                               handleChangePage = {handleChangePage}
-                                               handleCreateSurvey = {handleCreateSurvey}
-                                               redirect = {redirect}
-                                               redirectPath = {redirectPath}
-                                               currentPage = {'/new_survey'}
-                   />}
+                   render={(props) => (
+                       !isAuthorized ? (
+                           <Redirect to='/'/>
+                       ) : (
+                           <NewSurvey push to='/new_survey'
+                                       handleChangePage = {handleChangePage}
+                                       handleCreateSurvey = {handleCreateSurvey}
+                                       redirect = {redirect}
+                                       redirectPath = {redirectPath}
+                                       currentPage = {'/new_survey'}
+                           />
+                       )
+                   )}
             />
             <Route exact path='/new' render={() => (
                 !isAuthorized  || (loggedInAs.role === 'Пользователь') ? (
