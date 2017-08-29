@@ -11,18 +11,30 @@
       "surveys": []
     },
     {
-      "id": 1,
-      "name": "Юзер1",
+      "id": 2,
+      "name": "Юзер2",
       "role": "Пользователь",
-      "registered": "02.01.2017",
-      "completed_surveys": 8,
-      "login": "user1@example.com",
+      "registered": "03.01.2017",
+      "completed_surveys": 1,
+      "login": "user2@example.com",
       "password": "123user",
       "surveys": [
         {
           "id": 1503497628019,
           "results": {
             "page_1": [
+              {
+                "id": 1503497430898,
+                "title": "Rate the lecture",
+                "type": "rating",
+                "required": true,
+                "answers": [
+                  null,
+                  null,
+                  null
+                ],
+                "result": 5
+              },
               {
                 "id": 1503497315216,
                 "title": "What do child components get from parent?",
@@ -47,19 +59,7 @@
                   null,
                   null
                 ],
-                "result": "getInitialState\ngetDefaultProps"
-              },
-              {
-                "id": 1503497430898,
-                "title": "Rate the lecture",
-                "type": "rating",
-                "required": true,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ],
-                "result": 4
+                "result": "<h1><span style=\"color: rgb(230, 0, 0);\">Big header</span><sub style=\"color: rgb(230, 0, 0);\">1</sub></h1><h2 class=\"ql-align-center\"><span style=\"background-color: rgb(255, 255, 102);\" class=\"ql-font-serif\">Medium header</span><sup class=\"ql-font-serif\" style=\"background-color: rgb(255, 255, 102);\">2</sup></h2><p class=\"ql-align-right\"><span class=\"ql-font-monospace\">Small header</span></p><pre class=\"ql-syntax\" spellcheck=\"false\">Code\n</pre><p class=\"ql-indent-1\">paragraph</p>"
               }
             ],
             "page_1503497458718": [
@@ -73,7 +73,7 @@
                   null,
                   null
                 ],
-                "result": "97"
+                "result": "88"
               },
               {
                 "id": 1503497484500,
@@ -114,413 +114,8 @@
               }
             ]
           }
-        },
-        {
-          "id": 8,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  2
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": 2,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  2
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": 10,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  2
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": 9,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  1
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": 1,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": 3,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  2
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": 1503911487635,
-          "results": {
-            "page_1": [
-              {
-                "id": 1503911426035,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  1,
-                  2
-                ]
-              },
-              {
-                "id": 1503911426363,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": 1503911425667,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  2
-                ]
-              },
-              {
-                "id": 1503911427219,
-                "title": "Новый вопрос",
-                "type": "rating",
-                "required": true,
-                "answers": [],
-                "result": 3
-              }
-            ],
-            "page_1503911428755": [
-              {
-                "id": 1503911431435,
-                "title": "Новый вопрос",
-                "type": "scale",
-                "required": true,
-                "answers": [],
-                "result": "49"
-              },
-              {
-                "id": 1503911431731,
-                "title": "Новый вопрос",
-                "type": "rating",
-                "required": true,
-                "answers": [],
-                "result": 5
-              },
-              {
-                "id": 1503911432283,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": 1503911432675,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  2,
-                  0
-                ]
-              },
-              {
-                "id": 1503911433219,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              }
-            ]
-          }
         }
       ]
-    },
-    {
-      "id": 2,
-      "name": "Юзер2",
-      "role": "Пользователь",
-      "registered": "03.01.2017",
-      "completed_surveys": 0,
-      "login": "user2@example.com",
-      "password": "123user",
-      "surveys": []
     },
     {
       "id": 3,
@@ -593,29 +188,31 @@
       "surveys": []
     },
     {
-      "id": 1503067776935,
+      "id": 1503922489117,
       "name": "Елизавета",
       "role": "Пользователь",
-      "registered": "18.08.2017",
-      "completed_surveys": 11,
+      "registered": "28.08.2017",
+      "completed_surveys": 1,
       "login": "lizaburaya@gmail.com",
-      "password": "123",
+      "password": "123liza",
       "surveys": [
         {
           "id": 1503497628019,
           "results": {
             "page_1": [
               {
-                "id": 1503497376599,
-                "title": "What lifecycle components do you know?",
-                "type": "text",
-                "required": false,
+                "id": 1503497315216,
+                "title": "What do child components get from parent?",
+                "type": "single-choice",
+                "required": true,
                 "answers": [
-                  null,
-                  null,
-                  null
+                  "state",
+                  "props",
+                  "refs"
                 ],
-                "result": "componentWillMount\ncomponentDidMount\nrender\ncomponentWillUnmount"
+                "result": [
+                  1
+                ]
               },
               {
                 "id": 1503497430898,
@@ -630,18 +227,16 @@
                 "result": 5
               },
               {
-                "id": 1503497315216,
-                "title": "What do child components get from parent?",
-                "type": "single-choice",
-                "required": true,
+                "id": 1503497376599,
+                "title": "What lifecycle components do you know?",
+                "type": "text",
+                "required": false,
                 "answers": [
-                  "state",
-                  "props",
-                  "refs"
+                  null,
+                  null,
+                  null
                 ],
-                "result": [
-                  1
-                ]
+                "result": "<ol><li><u>getInitialState</u></li><li><u>getDefaultProps</u></li><li>componentWillMount</li><li>componentDidMount</li><li><strong>render</strong></li><li>shouldComponentUpdate</li><li>componentWillUpdate</li><li>componentDidUpdate</li><li>componentWillReceiveProps</li><li>componentWillUnmount</li></ol><p><br></p><p class=\"ql-indent-1\"><em>*underlined components are available in ES5</em></p>"
               }
             ],
             "page_1503497458718": [
@@ -682,7 +277,7 @@
                   null,
                   null
                 ],
-                "result": "It provides a third-party extension point between dispatching an action, and the moment it reaches the reducer."
+                "result": "<p>It provides a third-party extension point between dispatching an action, and the moment it reaches the reducer.</p>"
               },
               {
                 "id": 1503497586098,
@@ -699,478 +294,6 @@
                   "url": "data:text/plain;base64,SG9tZXdvcms=",
                   "type": "text/plain"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "id": 6,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  2
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ],
-                "result": "Answer"
-              }
-            ]
-          }
-        },
-        {
-          "id": 3,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  2
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ],
-                "result": "Answer"
-              }
-            ]
-          }
-        },
-        {
-          "id": 7,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ],
-                "result": "Answer"
-              }
-            ]
-          }
-        },
-        {
-          "id": 3,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  2
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ],
-                "result": "Answer"
-              }
-            ]
-          }
-        },
-        {
-          "id": 4,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": 9,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  2
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": 2,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  1
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": 1,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  1
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": 10,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  1
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": 8,
-          "results": {
-            "page_1": [
-              {
-                "id": 1502456983871,
-                "title": "Новый вопрос",
-                "type": "single-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0
-                ]
-              },
-              {
-                "id": 1502456984166,
-                "title": "Новый вопрос",
-                "type": "multi-choice",
-                "required": true,
-                "answers": [
-                  "Ответ 1",
-                  "Ответ 2",
-                  "Ответ 3"
-                ],
-                "result": [
-                  0,
-                  1
-                ]
-              },
-              {
-                "id": 1502456984486,
-                "title": "Новый вопрос",
-                "type": "text",
-                "required": false,
-                "answers": [
-                  null,
-                  null,
-                  null
-                ]
               }
             ]
           }
@@ -1247,7 +370,7 @@
       "id": 2,
       "name": "CSS lecture feedback",
       "changed": "03.01.2017",
-      "answers": 1,
+      "answers": 0,
       "link": "survey/2",
       "results": "survey/2/results",
       "edit_survey": "new_survey/survey/2",
@@ -1311,7 +434,7 @@
       "id": 3,
       "name": "Ruby lecture feedback",
       "changed": "24.08.2017",
-      "answers": 3,
+      "answers": 0,
       "link": "survey/3",
       "results": "survey/3/results",
       "edit_survey": "new_survey/survey/3",
@@ -1375,7 +498,7 @@
       "id": 4,
       "name": "Python lecture feedback",
       "changed": "25.08.2017",
-      "answers": 1,
+      "answers": 0,
       "link": "survey/4",
       "results": "survey/4/results",
       "edit_survey": "new_survey/survey/4",
@@ -1438,7 +561,7 @@
     {
       "id": 5,
       "name": "JS async lecture feedback",
-      "changed": "28.08.2017",
+      "changed": "29.08.2017",
       "answers": 0,
       "link": "survey/5",
       "results": "survey/5/results",
@@ -1503,7 +626,7 @@
       "id": 6,
       "name": "React lecture feedback",
       "changed": "07.01.2017",
-      "answers": 1,
+      "answers": 0,
       "link": "survey/6",
       "results": "survey/6/results",
       "edit_survey": "new_survey/survey/6",
@@ -1567,7 +690,7 @@
       "id": 7,
       "name": "Redux lecture feedback",
       "changed": "08.01.2017",
-      "answers": 1,
+      "answers": 0,
       "link": "survey/7",
       "results": "survey/7/results",
       "edit_survey": "new_survey/survey/7",
@@ -1631,7 +754,7 @@
       "id": 8,
       "name": "Angular.js lecture feedback",
       "changed": "25.08.2017",
-      "answers": 2,
+      "answers": 0,
       "link": "survey/8",
       "results": "survey/8/results",
       "edit_survey": "new_survey/survey/8",
@@ -1759,7 +882,7 @@
       "id": 10,
       "name": "ES6 lecture feedback",
       "changed": "24.08.2017",
-      "answers": 2,
+      "answers": 0,
       "link": "survey/10",
       "results": "survey/10/results",
       "edit_survey": "new_survey/survey/10",
