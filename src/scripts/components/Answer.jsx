@@ -24,9 +24,9 @@ const Answer = (props) => {
             question = result.map((val, index) => <div key={index}>{answers[val]}</div>)
         }
         if (type === 'text') {
-            question = <div>
-                <pre>{result}</pre>
-            </div>
+            question = <div className='ql-snow'>
+                            <div className='ql-editor' dangerouslySetInnerHTML={{ __html: result }} />
+                        </div>
         }
         if (type === 'file') {
             question = <div>
