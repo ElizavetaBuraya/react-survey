@@ -31,7 +31,6 @@ export function logIn(userData){
                             "surveys": user.surveys.map((survey) => survey.id)
                         };
 
-                        alert("Вход успешен");
                         dispatch(setUserData(userData));
                     }
                 });
@@ -83,8 +82,7 @@ export function createUser(values) {
                         body: JSON.stringify(newUser)
                     }).then((response) => {
                         if (response.ok) {
-                            alert('Профиль создан успешно!');
-                            dispatch(toggleRegistered);
+                            dispatch(toggleRegistered());
                         } else {
                             throw new Error('Ошибка при создании профиля');
                         }
