@@ -32,7 +32,8 @@ const Main = (props) => {
         handleEditSurveyData,
         handleDeleteTemplate,
         handleUpdateSurvey,
-        handleCreateSurvey, handleLoadUser } = props;
+        handleCreateSurvey,
+        handleLoadUser} = props;
 
     return (
         <Switch>
