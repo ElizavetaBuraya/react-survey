@@ -133,7 +133,7 @@ const Main = (props) => {
                                       handleChangePage = {handleChangePage}
                                       redirect = {redirect}
                                       redirectPath = {redirectPath}
-                                      currentPage='new_survey/:link'
+                                      currentPage={'/new_survey/:link'}
                            />
                        )
                    )}
@@ -144,7 +144,7 @@ const Main = (props) => {
                            <Redirect to='/'/>
                        ) : (
                            <SurveyResults {...props}
-                                          currentPage='survey/:link/results'
+                                          currentPage={currentPage}
                                           handleChangePage = {handleChangePage}
                            />
                        )
@@ -156,6 +156,7 @@ const Main = (props) => {
                            <Redirect to='/'/>
                        ) : (
                            <GenerateSurvey {...props}
+                                           currentPage={currentPage}
                                            handleLoadUser = {handleLoadUser}
                                            handleChangePage = {handleChangePage}
                                            redirect = {redirect}
