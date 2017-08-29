@@ -31,14 +31,12 @@ let Form = props => {
                            name='login'
                            type='text'
                            placeholder='Логин'
-                           validate={[ required ]}
                            auto={true}
                     />
                     <Field component={renderField}
                            name='password'
                            type='password'
                            placeholder='******'
-                           validate={[ required ]}
                     />
                     <div className='login-links d-flex justify-content-between'>
                         <a className='signup' href='#' onClick={handleRegisteredClick}>Регистрация</a>
