@@ -47,16 +47,7 @@ export function createUser(values) {
                         _error: 'Ошибка регистрации'
                     });
                 } else {
-                    let date = new Date();
-                    let day = date.getDate();
-                    let month = date.getMonth() + 1;
-                    let year = date.getFullYear();
-
-                    day = (day < 10) ? '0' + day : day;
-                    month = (month < 10) ? '0' + month : month;
-                    date = day + '.' + month + '.' + year;
-
-                    let newUser = {
+                    return {
                         "id": (new Date).getTime(),
                         "name": values.name.trim(),
                         "role": 'Пользователь',
