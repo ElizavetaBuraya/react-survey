@@ -4,6 +4,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import { findDOMNode } from 'react-dom';
 import Checkbox from './Checkbox.jsx'
 import Radio from './Radio.jsx'
+import ReactQuill from 'react-quill';
 
 /* Drag and Drop logic start */
 
@@ -87,13 +88,31 @@ export default class Question extends React.Component {
         super(props);
         this.state = {
             rangeValue: 0,
-            textboxValue:"",
+            textboxValue:(this.props.result) ? this.props.result : "",
             isEdited: false
         };
 
         this.title = null;
         this.required = this.props.required;
         this.answersArray = [];
+        this.modules = {
+            toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['blockquote', 'code-block'],
+
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+                [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+                [{ 'direction': 'rtl' }],                         // text direction
+
+                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+                [{ 'font': [] }],
+                [{ 'align': [] }],
+            ],
+        };
     }
 
     handleChange = (id, event) => {
@@ -177,6 +196,15 @@ export default class Question extends React.Component {
         this.props.handleSaveAnswer(this.props.id, newRating);
     };
 
+    handleChangeTextAnswer = (value) => {
+        this.setState({
+            textboxValue: value
+        });
+        (this.props.handleSaveAnswer)
+            ? this.props.handleSaveAnswer(this.props.id, this.state.textboxValue)
+                : '';
+    };
+
     render() {
         const { connectDragSource,
             connectDropTarget,
@@ -223,12 +251,13 @@ export default class Question extends React.Component {
                         </div>
         }
         if (type === 'text') {
-            question = <div>
-                            <textarea name='text-area'
-                                      id='text-area'
-                                      style={{width: 300, height: 100}}
-                                      defaultValue={(result) ? result : ""}
-                                      onChange={(event) => handleSaveAnswer(id, event.target.value)}
+            question = <div className="text-editor">
+                            <ReactQuill name='text-area'
+                                        theme='snow'
+                                        modules={this.modules}
+                                        id='text-area'
+                                        value={this.state.textboxValue}
+                                        onChange={this.handleChangeTextAnswer}
                             />
                         </div>
         }
