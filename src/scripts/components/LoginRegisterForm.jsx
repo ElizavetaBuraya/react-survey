@@ -1,9 +1,24 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { required,
+    checkPassword,
+    noSpecialChars,
+    minLength2,
+    minLength6,
+    maxLength20,
+    email,
+    rememberPassword } from '../utils/validate.js'
 
 function forgotPassword () {
     prompt('Введите ваш email и мы пришлем вам ссылку для сброса пароля');
-};
+}
+
+const renderField = ({ input, placeholder, type, auto, meta: { touched, error } }) => (
+    <div>
+        <input {...input} className='form-control' placeholder={placeholder} type={type} autoFocus={auto}/>
+        {touched && (error && <span className="error">{error}</span>)}
+    </div>
+);
 
 let Form = props => {
     const { handleSubmit, handleRegisteredClick, isRegistered } = props;
@@ -12,22 +27,20 @@ let Form = props => {
             <h2 className='login-form-heading'>{isRegistered ? 'Вход' : 'Регистрация'}</h2>
             {isRegistered &&
                 <div>
-                    <label htmlFor='inputLogin' className='sr-only'>Логин</label>
-                    <Field component='input'
-                           type='text'
+                    <Field component={renderField}
                            name='login'
-                           className='form-control'
+                           type='text'
                            placeholder='Логин'
-                           required
-                           autoFocus />
-                    <label htmlFor='inputPassword' className='sr-only'>Пароль</label>
-                    <Field component='input'
-                           type='password'
+                           validate={[ required ]}
+                           auto={true}
+                    />
+                    <Field component={renderField}
                            name='password'
-                           className='form-control'
+                           type='password'
                            placeholder='******'
-                           required />
-                    <div className='d-flex justify-content-between'>
+                           validate={[ required ]}
+                    />
+                    <div className='login-links d-flex justify-content-between'>
                         <a className='signup' href='#' onClick={handleRegisteredClick}>Регистрация</a>
                         <a className='getpassword' href='#'
                            onClick={forgotPassword}>
@@ -41,39 +54,31 @@ let Form = props => {
             }
             {!isRegistered &&
                 <div>
-                    <label htmlFor='inputName' className='sr-only'>Имя</label>
-                    <Field component='input'
-                           type='text'
+                    <Field component={renderField}
                            name='name'
-                           className='form-control'
+                           type='text'
                            placeholder='Имя'
-                           pattern='[a-zA-Z0-9]{4,10}"'
-                           title='Только буквы и цифры, от 4 до 10 символов'
-                           required
-                           autoFocus/>
-                    <label htmlFor='inputEmail' className='sr-only'>E-mail</label>
-                    <Field component='input'
-                           type='email'
+                           validate={[ required, noSpecialChars, minLength2,  maxLength20 ]}
+                           auto={true}
+                    />
+                    <Field component={renderField}
                            name='email'
-                           className='form-control'
+                           type='text'
                            placeholder='Логин (e-mail)'
-                           required/>
-                    <label htmlFor='inputPassword' className='sr-only'>Пароль</label>
-                    <Field component='input'
+                           validate={[ required, email ]}
+                    />
+                    <Field component={renderField}
                            type='password'
                            name='password'
-                           className='form-control'
                            placeholder='Пароль'
-                           pattern='{6,20}"'
-                           title='От 6 до 20 символов'
-                           required/>
-                    <label htmlFor='inputRepeatPassword' className='sr-only'>Повторить пароль</label>
-                    <Field component='input'
+                           validate={[ required, minLength6, maxLength20, rememberPassword ]}
+                    />
+                    <Field component={renderField}
                            type='password'
                            name='repeat_password'
-                           className='form-control'
                            placeholder='Повторить пароль'
-                           required/>
+                           validate={[ required, checkPassword ]}
+                    />
                     <button className='login-form-btn' type='submit'>
                         Создать аккаунт
                     </button>
