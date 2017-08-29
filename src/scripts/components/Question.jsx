@@ -240,14 +240,14 @@ export default class Question extends React.Component {
         if (type === 'single-choice') {
             question = <div>
                             {answers.map((answer, index) =>
-                                <Radio    index = {index}
-                                          answer = {answer}
-                                          handleEditAnswer = {this.handleEditAnswer}
-                                          isEdited = {this.state.isEdited}
-                                          name = {id}
-                                          result={result}
-                                          handleSaveAnswer = {handleSaveAnswer}
                                 <Radio key = {index}
+                                       index = {index}
+                                       answer = {answer}
+                                       handleEditAnswer = {this.handleEditAnswer}
+                                       isEdited = {this.state.isEdited}
+                                       name = {id}
+                                       result={result}
+                                       handleSaveAnswer = {handleSaveAnswer}
                                 />)
                             }
                         </div>
