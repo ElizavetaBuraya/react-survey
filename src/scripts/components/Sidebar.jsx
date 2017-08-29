@@ -18,9 +18,8 @@ const Sidebar = (props) => {
             }
             {!asUser &&
                 <div className='sidebar-navigation'>
-                    <Link to='/new_survey'
+                    <Link to='/new'
                           className={currentPage === '/new_survey'
-                          || currentPage === 'new_survey/:link'
                               ? 'sidebar-nav active-nav'
                               : 'sidebar-nav'}>Новый опрос
                     </Link>
