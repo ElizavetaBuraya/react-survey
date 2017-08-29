@@ -312,10 +312,10 @@ export default class NewSurvey extends React.Component {
                             <p className='page-number'>cтраниц: <span>{this.state.numberOfPages}</span></p>
                         </div>
                         <div className='survey-command-panel'>
-                            <a href='#' onClick = {() => this.handleSaveSurvey(false)}>Сохранить</a>
-                            <a href='#' onClick = {() => this.handleSaveSurvey(true)}>Сохранить как шаблон</a>
+                            <a onClick = {() => this.handleSaveSurvey(false)}>Сохранить</a>
+                            <a onClick = {() => this.handleSaveSurvey(true)}>Сохранить как шаблон</a>
                             <Link to='/surveys'>Отмена</Link>
-                            <a href='#' onClick = {this.handleAddPage}>Новая страница</a>
+                            <a onClick = {this.handleAddPage}>Новая страница</a>
                         </div>
                     </div>
                     <Tabs questions_list = {this.state.questions_list}
