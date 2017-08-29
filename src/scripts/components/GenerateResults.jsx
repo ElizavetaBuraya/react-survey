@@ -17,6 +17,7 @@ const GenerateResults = (props) => {
             <div>
                 {questions_list[survey_page].map((question, index) => <Answer
                         key={question.id}
+                        id={question.id}
                         index={index}
                         title={question.title}
                         type={question.type}
