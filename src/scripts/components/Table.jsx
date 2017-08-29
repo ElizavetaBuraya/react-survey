@@ -14,38 +14,35 @@ const hiddenColumns = ['id','template', 'pages','questions', 'description', 'is_
 
 const linkColumns = ['link', 'results', 'respondent', 'edit_survey'];
 
-export default class Table extends React.Component {
-    render() {
-        let isAdmin = (this.props.loggedInAs.role === 'Администратор');
-        let columns = null;
-        if (this.props.data.length > 0) {
-            columns = Object.keys(this.props.data[0]);
-        } else {
-            columns = this.props.columnNames;
-        }
+const Table = (props) => {
+    const { data,
+        options,
+        surveyLink,
+        fileLink,
+        roles,
+        columnNames,
+        isFetching,
+        search,
+        pagination,
+        type, loggedInAs, onSelectAll, onRowSelect, afterSaveCell } = props;
+
+        let isAdmin = (loggedInAs.role === 'Администратор');
+
+        let columns = (data.length > 0)
+            ? Object.keys(data[0])
+                : columnNames;
 
         const selectRowProp = {
             mode: 'checkbox',
-            onSelect: this.props.onRowSelect,
-            onSelectAll: this.props.onSelectAll
+            onSelect: onRowSelect,
+            onSelectAll: onSelectAll
         };
 
         const cellEditProp = {
             mode: 'click',
             blurToSave: true,
-            afterSaveCell: this.props.afterSaveCell
+            afterSaveCell: afterSaveCell
         };
-
-        const {data,
-            options,
-            surveyLink,
-            fileLink,
-            roles,
-            columnNames,
-            isFetching,
-            search,
-            pagination,
-            type} = this.props;
 
         if (isFetching) {
             return (
@@ -61,12 +58,11 @@ export default class Table extends React.Component {
             return (
                 <BootstrapTable data={data}
                                 options={options}
-                                ref='table'
                                 searchPlaceholder={'Поиск'}
                                 cellEdit={cellEditProp}
                                 selectRow={(data.length > 0 && isAdmin)
                                     ? selectRowProp
-                                    : undefined}
+                                        : undefined}
                                 deleteRow={(isAdmin)}
                                 search={search}
                                 hover
@@ -80,25 +76,26 @@ export default class Table extends React.Component {
                             dataFormat = {
                                 (linkColumns.includes(key))
                                     ? surveyLink
-                                    : (key === 'name' && type === 'file')
-                                        ? fileLink
-                                            : undefined
+                                        : (key === 'name' && type === 'file')
+                                            ? fileLink
+                                                : undefined
                             }
-                            thStyle={ { 'text-align': 'center' } }
-                            tdStyle={ { 'text-align': 'center' } }
+                            thStyle={{ 'textAlign': 'center' }}
+                            tdStyle={{ 'textAlign': 'center' }}
                             width='120'
                             editable={(key === 'name' && !type)
                                 ? true
-                                : (key === 'role')
-                                    ? { type: 'select', options: { values: roles }}
-                                    : false }
+                                    : (key === 'role')
+                                        ? {type: 'select', options: { values: roles }}
+                                            : false}
                             dataSort = {(key === 'name')}
-                            caretRender={ (key === 'name') ? getCaret : null }
+                            caretRender={(key === 'name') ? getCaret : null}
                             hidden = {hiddenColumns.includes(key)}
                         >{columnNames[index]}</TableHeaderColumn>
                     )}
                 </BootstrapTable>
             )
         }
-    }
-}
+};
+
+export default Table;

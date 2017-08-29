@@ -10,9 +10,6 @@ export default class Templates extends React.Component {
         this.state = {
             filterText: '',
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleDeleteTemplate = this.handleDeleteTemplate.bind(this);
-        this.handleEditTemplate = this.handleEditTemplate.bind(this);
     }
 
     componentDidMount() {
@@ -23,33 +20,20 @@ export default class Templates extends React.Component {
         this.props.handleLoadSurveyData();
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         this.setState({
             filterText: event.target.value,
         })
-    }
+    };
 
-    handleDeleteTemplate(id) {
+    handleDeleteTemplate = (id) => {
         let deleteTemplate = confirm('Вы уверены, что хотите удалить шаблон?');
         if (deleteTemplate) {
-            $.ajax({
-                url: 'http://localhost:3000/surveys/' + id ,
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                data: JSON.stringify({
-                    'template':false
-                }),
-                success: function() {
-                    this.props.handleLoadSurveyData();
-                }.bind(this),
-                error: function(xhr, status, err) {
-                    console.error(this.props.url, status, err.toString());
-                }.bind(this)
-            });
+            this.props.handleDeleteTemplate(id);
         }
-    }
+    };
 
-    handleEditTemplate(target, display) {
+    handleEditTemplate = (target, display) => {
         function show() {
             $(target).parent('.template-wrapper').find('.active-template').show();
             $('.template').css('box-shadow', 'none');
@@ -67,7 +51,7 @@ export default class Templates extends React.Component {
         } else {
             setTimeout(show, 110);
         }
-    }
+    };
 
     render() {
         const { surveyData, isFetching } = this.props;
@@ -81,7 +65,12 @@ export default class Templates extends React.Component {
                     <div className='page-head d-flex justify-content-between align-items-center'>
                         <h1>Шаблоны <Link to='/new_survey/' className='create-survey'>Новый шаблон</Link></h1>
                         <div className='search-form'>
-                            <input className='form-control' type='text' placeholder='Поиск' value={this.state.filterText} onChange={(e) => this.handleChange(e)} />
+                            <input className='form-control'
+                                   type='text'
+                                   placeholder='Поиск'
+                                   value={this.state.filterText}
+                                   onChange={(e) => this.handleChange(e)}
+                            />
                         </div>
                     </div>
                     {isFetching &&

@@ -84,11 +84,23 @@ html {
 [data-reactroot] {
   display: flex;
   flex-direction: column;
-  padding-top: 2.5em;
+  padding-top: -3em;
   overflow-x: hidden;
   background-color: @light-gray;
   font-family: "Open Sans", sans-serif;
   height: 100vh;
+}
+
+:invalid {
+  box-shadow: none;
+}
+
+:-moz-submit-invalid {
+  box-shadow: none;
+}
+
+:-moz-ui-invalid {
+  box-shadow:none;
 }
 
 /* --NAVIGATION-- */
@@ -184,10 +196,10 @@ nav {
 /* --MAIN CONTENT-- */
 
 main {
+  padding-top: 2em;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 0em;
   flex: 1 0 auto;
   transition: all 0.3s;
 }
@@ -245,9 +257,16 @@ main {
   @media screen and (max-width: 475px) {
     width: 85%;
   }
-  & input, h2, div {
+  & input, h2, .login-links {
     margin-bottom: 2.5rem;
   }
+}
+
+.error {
+  position: relative;
+  bottom: 2rem;
+  color: red;
+  font-size: .9em;
 }
 
 .login-form-heading {
@@ -282,7 +301,7 @@ main {
 
 .sidebar-navigation {
   position: sticky;
-  top: 3em;
+  top: 5em;
 }
 
 .sidebar-nav {
@@ -549,13 +568,21 @@ th {
 
 .delete-button {
   visibility: hidden;
+  position: relative;
+  top:80px;
   .custom-control-btn;
-  position: absolute;
   width: 120px;
-  top:57px;
-  padding:.3rem .5rem;
-  @media screen and (max-width: 768px) {
-    top:107px;
+  @media screen and (max-width: 860px) {
+    top:118px;
+  }
+  @media screen and (max-width: 767px) {
+    top:133px;
+  }
+}
+
+.surveys-delete-button {
+  @media screen and (max-width: 430px) {
+    top:178px;
   }
 }
 
@@ -860,6 +887,10 @@ label {
   }
 }
 
+.text-editor {
+  max-width: 550px;
+}
+
 pre {
   font-family: "Open Sans", sans-serif;
   font-size: 1rem;
@@ -1039,8 +1070,8 @@ footer {
   color: @light-gray;
   text-align: center;
   flex-shrink: 0;
-  padding: .7em;
+  padding-top: .7em;
+  padding-bottom: 1em;
   background-color: @dark-gray;
   z-index: 6;
 }
-

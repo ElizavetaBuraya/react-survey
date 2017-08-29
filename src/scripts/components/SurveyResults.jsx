@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import Tabs from './Tabs.jsx';
+import { getSurveyStats, getUserResults } from '../utils/helperFunctions.js'
 
 export default class NewSurvey extends React.Component {
     constructor(props) {
@@ -25,86 +26,65 @@ export default class NewSurvey extends React.Component {
                 { 'href':'#page_1', 'id':'page_1', 'name':'Страница 1', 'active':true }
             ]
         };
-        this.handleToggleCharts = this.handleToggleCharts.bind(this);
-        this.onLoad = this.onLoad.bind(this);
-        this.handleChangePage = this.handleChangePage.bind(this);
-        this.handleChangeUser = this.handleChangeUser.bind(this);
     }
 
     componentDidMount() {
-        this.props.handleChangePage
-            ? this.props.handleChangePage('/new_survey')
-            : this.onLoad(this.props.location.pathname);
+        this.props.handleChangePage('/survey/:link/results');
+        this.onLoad(this.props.location.pathname);
     }
 
-    onLoad(path) {
+    onLoad = (path) => {
         let pathId = path.split("/");
         let surveyId = pathId[pathId.length-2];
 
-        $.ajax({
-            url: 'http://localhost:3000/surveys?link=survey/' + pathId[pathId.length-2],
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-            success: function(data) {
-                let template = data[0];
-                this.setState({
-                    survey_id : template.id,
-                    survey_title:template.name,
-                    survey_page:'page_1',
-                    numberOfPages: template.pages,
-                    numberOfQuestions: template.questions,
-                    is_anonymous: template.is_anonymous,
-                    questions_are_numbered: template.questions_are_numbered,
-                    pages_are_numbered: template.pages_are_numbered,
-                    required_fields: template.required_fields,
-                    navtabs: template.navtabs
-                });
-            }.bind(this),
-            error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
+        let p1 = Promise.resolve(getSurveyStats(pathId));
+        let p2 = Promise.resolve(getUserResults());
 
-        $.ajax({
-            url: 'http://localhost:3000/users/',
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-            success: function(data) {
-                let userResults = [];
+        Promise.all([p1, p2]).then(values => {
+            let surveyData = values[0];
+            let userData = values[1];
 
-                data.map((user) => {
-                    user.surveys.map((survey) => {
-                        if (survey.id.toString() === surveyId) {
-                            let results = {
-                                'id': user.id,
-                                'name': user.name,
-                                'results': survey.results
-                            };
-                            userResults.push(results);
-                        }
-                    })
-                });
+            let template = surveyData[0];
+            let userResults = [];
 
-                this.setState({
-                    times_completed:userResults.length,
-                    user_results: userResults,
-                    questions_list:userResults[0].results
+            userData.map((user) => {
+                user.surveys.map((survey) => {
+                    if (survey.id.toString() === surveyId) {
+                        let results = {
+                            'id': user.id,
+                            'name': user.name,
+                            'results': survey.results
+                        };
+                        userResults.push(results);
+                    }
                 })
-            }.bind(this),
-            error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
+            });
 
-    }
+            this.setState({
+                survey_id : template.id,
+                survey_title:template.name,
+                survey_page:'page_1',
+                numberOfPages: template.pages,
+                numberOfQuestions: template.questions,
+                is_anonymous: template.is_anonymous,
+                questions_are_numbered: template.questions_are_numbered,
+                pages_are_numbered: template.pages_are_numbered,
+                required_fields: template.required_fields,
+                navtabs: template.navtabs,
+                times_completed:userResults.length,
+                user_results: userResults,
+                questions_list:userResults[0].results
+            })
+        })
+    };
 
-    handleChangePage(page) {
+    handleChangePage = (page) => {
         this.setState({
             survey_page: page,
         })
-    }
+    };
 
-    handleChangeUser(event, userIndex) {
+    handleChangeUser = (event, userIndex) => {
         let index = (userIndex !== undefined) ? userIndex : event.target.value;
         let userResults = this.state.user_results;
 
@@ -112,9 +92,9 @@ export default class NewSurvey extends React.Component {
             selectedUser: index,
             questions_list:userResults[index].results
         })
-    }
+    };
 
-    handleToggleCharts(event, userIndex) {
+    handleToggleCharts = (event, userIndex) => {
         if (userIndex !== undefined) {
             this.handleChangeUser(event, userIndex)
         }
@@ -122,7 +102,7 @@ export default class NewSurvey extends React.Component {
         this.setState({
             displayChart:!this.state.displayChart
         })
-    }
+    };
 
     render() {
         const { currentPage } = this.props;

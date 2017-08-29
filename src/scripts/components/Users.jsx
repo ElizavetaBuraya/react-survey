@@ -2,51 +2,32 @@ import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import Table from './Table.jsx';
 
-class MySearchPanel extends React.Component {
-    render() {
-        return (
-            <div className="page-head d-flex justify-content-between align-items-center">
-                <h1>Пользователи</h1>
-                <div className="search-form">
-                    { this.props.searchField }
-                </div>
+let selectedRows = [];
+
+const MySearchPanel = (props) => {
+    return (
+        <div className="page-head d-flex justify-content-between align-items-center">
+            <h1>Пользователи</h1>
+            <div className="search-form">
+                {props.searchField}
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 function createCustomDeleteButton(onBtnClick) {
     return (
-        <button className="delete-button" onClick={ onBtnClick }>Delete selected</button>
+        <button className="delete-button" onClick={onBtnClick}>Delete selected</button>
     );
 }
 
-export default class Users extends React.Component {
-    constructor(props) {
-        super(props);
-        this.afterSaveCell = this.afterSaveCell.bind(this);
-        this.onRowSelect = this.onRowSelect.bind(this);
-        this.onSelectAll = this.onSelectAll.bind(this);
-        this.handleDeletedRow = this.handleDeletedRow.bind(this);
-        this.renderTotal = this.renderTotal.bind(this);
-        this.selectedRows = [];
-        this.state = {
-            roles: ['Администратор', 'Пользователь'],
-            columnNames: ['id', 'Имя','Роль','Зарегистрирован','Опросы'],
-        },
-        this.options = {
-            noDataText: 'Все записи удалены',
-            deleteBtn: createCustomDeleteButton,
-            sizePerPage: 10,
-            hideSizePerPage: true,
-            paginationShowsTotal: this.renderTotal,
-            defaultSortName: 'name',  // default sort column name
-            defaultSortOrder: 'asc',  // default sort order
-            searchPanel: (props) => (<MySearchPanel { ...props }/>),
-            afterDeleteRow: this.handleDeletedRow,
-        };
+function customConfirm(next) {
+    if (confirm('Вы уверены, что хотите удалить выбранных пользователей?')) {
+        next();
     }
+}
 
+export default class Users extends React.Component {
     componentDidMount() {
         this.props.handleLoadUserData();
         if (this.props.currentPage !== '/users')
@@ -55,69 +36,72 @@ export default class Users extends React.Component {
         }
     }
 
-    afterSaveCell(row) {
-        $.ajax({
-            url: 'http://localhost:3000/users/' + row.id,
-            method: 'PUT',
-            data: JSON.stringify(row),
-            headers: { 'Content-Type': 'application/json' },
-            success: function() {
-                this.props.handleLoadUserData();
-            }.bind(this)
-        });
-    }
+    afterSaveCell = (row) => {
+        this.props.handleEditUserData(row);
+    };
 
-    onRowSelect(row, isSelected) {
+    onRowSelect = (row, isSelected) => {
         (isSelected)
-            ? this.selectedRows.push(row)
-            : this.selectedRows.pop();
-        let visibility = (this.selectedRows.length > 0)
+            ? selectedRows.push(row)
+            : selectedRows.pop();
+        let visibility = (selectedRows.length > 0)
             ? "visible"
             : "hidden";
         $(".delete-button").css("visibility", visibility);
-    }
+    };
 
-    onSelectAll(isSelected) {
+    onSelectAll = (isSelected, row) => {
         let visibility = (isSelected)
             ? "visible"
             : "hidden";
+        if (isSelected) {
+            selectedRows = row;
+        } else {
+            selectedRows = [];
+        }
         $(".delete-button").css("visibility", visibility);
-    }
+    };
 
-    handleDeletedRow(row) {
+    handleDeletedRow = (row) => {
         for (let index in row) {
-            $.ajax({
-                url: 'http://localhost:3000/users/' + row[index],
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                success: function() {
-                    this.props.handleLoadUserData();
-                }.bind(this)
-            });
+            this.props.handleDeleteUserData(row[index]);
         }
         $(".delete-button").css("visibility", "hidden");
-    }
+    };
 
-    renderTotal() {
+    renderTotal = () => {
         return (
             <span className="users-number">
-                Всего пользователей: { this.props.userData.length }
+                Всего пользователей: {this.props.userData.length}
             </span>
         );
-    }
+    };
 
     render() {
         const { currentPage, loggedInAs, userData, isFetching } = this.props;
+        const options = {
+            noDataText: 'Нет записей',
+            deleteBtn: createCustomDeleteButton,
+            sizePerPage: 10,
+            hideSizePerPage: true,
+            handleConfirmDeleteRow: customConfirm,
+            paginationShowsTotal: this.renderTotal,
+            defaultSortName: 'name',  // default sort column name
+            defaultSortOrder: 'asc',  // default sort order
+            searchPanel: (props) => (<MySearchPanel { ...props }/>),
+            afterDeleteRow: this.handleDeletedRow,
+        };
+
         return (
             <main className="d-flex flex-row justify-content-start">
                 <Sidebar
                     currentPage = {currentPage}
                 />
-                <div className="main-content d-flex flex-column">
+                <div className="main-content">
                     <Table data={userData}
-                           roles={this.state.roles}
-                           options={this.options}
-                           columnNames={this.state.columnNames}
+                           roles={['Администратор', 'Пользователь']}
+                           options={options}
+                           columnNames={['id', 'Имя','Роль','Зарегистрирован','Опросы']}
                            afterSaveCell = {this.afterSaveCell}
                            handleDeletedRow = {this.handleDeletedRow}
                            onRowSelect = {this.onRowSelect}

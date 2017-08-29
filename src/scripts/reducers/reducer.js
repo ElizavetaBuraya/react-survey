@@ -6,6 +6,8 @@ const initialState = {
     loggedInAs: JSON.parse(sessionStorage.getItem('loggedInAs')),
     currentPage: '',
     isFetching: false,
+    redirect: false,
+    path: null,
     userData: [{"id":"нет данных","name":"нет данных","role":"нет данных",
         "registered":"нет данных","completed_surveys":"нет данных"}],
     surveyData: [{'id':'нет данных','name':'нет данных','changed':'нет данных','answers':'нет данных',
@@ -25,6 +27,8 @@ export default function renderApp(state = initialState, action) {
             return {...state, currentPage: action.payload};
         case actionTypes.REQUEST_DATA:
             return {...state, isFetching: true};
+        case actionTypes.REDIRECT:
+            return {...state, redirect: !state.redirect, path: action.payload};
         case actionTypes.GET_USERS:
             return {...state, isFetching: false, userData: action.payload};
         case actionTypes.GET_SURVEYS:

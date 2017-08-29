@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from './Sidebar.jsx';
 import GenerateQuestions from './GenerateQuestions.jsx';
+import { getSurvey } from '../utils/helperFunctions.js'
 import { Redirect } from 'react-router-dom';
 
 export default class GenerateSurvey extends React.Component {
@@ -19,90 +20,95 @@ export default class GenerateSurvey extends React.Component {
             randomized: false,
             required_fields: true,
             progress_bar: false,
-            redirectToAbout:false,
             navtabs: [
                 { 'href':'#page_1', 'id':'page_1', 'name':'Страница 1', 'active':true }
             ]
         };
-        this.onLoad = this.onLoad.bind(this);
-        this.handleChangePage = this.handleChangePage.bind(this);
-        this.handleSubmitSurvey = this.handleSubmitSurvey.bind(this);
-        this.handleSaveAnswer = this.handleSaveAnswer.bind(this);
     }
 
     componentDidMount() {
+        this.props.handleChangePage('/survey/:link');
         this.onLoad(this.props.location.pathname);
     }
 
-    onLoad(path) {
+    onLoad = (path) => {
         let pathId = path.split("/");
-        $.ajax({
-            url: 'http://localhost:3000/surveys?link=survey/' + pathId[pathId.length-1],
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-            success: function(data) {
-                let survey = data[0];
-                this.setState({
-                    survey_id:survey.id,
-                    survey_title:survey.name,
-                    survey_page:'page_1',
-                    numberOfPages: survey.pages,
-                    numberOfQuestions: survey.questions,
-                    is_anonymous: survey.is_anonymous,
-                    questions_are_numbered: survey.questions_are_numbered,
-                    pages_are_numbered: survey.pages_are_numbered,
-                    randomized: survey.randomized,
-                    required_fields: survey.required_fields,
-                    progress_bar: survey.progress_bar,
-                    questions_list: survey.questions_list,
-                    navtabs: survey.navtabs
-                });
-            }.bind(this),
-            error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
-    }
+        let p1 = Promise.resolve(getSurvey(pathId));
 
-    handleChangePage(page) {
+        p1.then((data) => {
+            let survey = data[0];
+            this.setState({
+                survey_id:survey.id,
+                survey_title:survey.name,
+                survey_page:'page_1',
+                numberOfPages: survey.pages,
+                numberOfQuestions: survey.questions,
+                is_anonymous: survey.is_anonymous,
+                questions_are_numbered: survey.questions_are_numbered,
+                pages_are_numbered: survey.pages_are_numbered,
+                randomized: survey.randomized,
+                required_fields: survey.required_fields,
+                progress_bar: survey.progress_bar,
+                questions_list: survey.questions_list,
+                navtabs: survey.navtabs
+            });
+        });
+    };
+
+    handleChangePage = (page) => {
         this.setState({
             survey_page: page,
         })
-    }
+    };
 
-    handleSaveAnswer(id, value, checked) {
+    handleSaveAnswer = (id, value, checked) => {
         let newQuestionsList = this.state.questions_list;
         let surveyPage = this.state.survey_page;
-        let index = 0;
         let results = null;
 
         newQuestionsList[surveyPage].map((question) => {
            if (question.id === id) {
-               if (question.type === "single-choice" || question.type === "multi-choice") {
-                   results = (question.result) ? (question.result) : [];
-                   if (checked) {
-                       results.push(value)
-                   } else {
-                       index = results.indexOf(value);
-                       results.splice(index, 1);
-                   }
-                   question.result = results;
-               } else {
-                   results = value;
+               switch (question.type) {
+                   case 'multi-choice':
+                       results = (question.result) ? (question.result) : [];
+                       if (checked) {
+                           results.push(value);
+                           question.result = results;
+                       } else {
+                           results.splice(results.indexOf(value), 1);
+                           (results.length === 0)
+                               ? delete question.result
+                               : question.result = results;
+                       }
+                       break;
+                   case 'single-choice':
+                       results = (question.result) ? (question.result) : [];
+                       results.pop();
+                       results.push(value);
+                       question.result = results;
+                       break;
+                   case 'text' || 'scale':
+                       results = value;
+                       (results.replace(/<(?:.|\n)*?>/gm, '').trim() === '')
+                           ? delete question.result
+                           :  question.result = results;
+                       break;
+                   default:
+                       results = value;
+                       question.result = results;
                }
-
-               question.result = results;
             }
         });
 
-         this.setState({
-            questions_list: newQuestionsList });
+        this.setState({
+            questions_list: newQuestionsList
+        });
 
         this.updateProgressBar();
 
-    }
+    };
 
-    updateProgressBar() {
+    updateProgressBar = () => {
         let questionsList = this.state.questions_list;
         let questionNumber = this.state.numberOfQuestions;
         let requiredQuestionNumber = 0;
@@ -116,24 +122,16 @@ export default class GenerateSurvey extends React.Component {
             })
         }
 
-        for (let page in questionsList){
+         for (let page in questionsList){
             questionsList[page].forEach((question) => {
-                if (Number.isInteger(question.result)) {
-                    if (question.result > 0) {
-                        answeredQuestions++;
-
-                        (question.required)
-                            ? requiredQuestionNumber--
-                            : requiredQuestionNumber;
-                    }
-                } else if (question.result && (question.result.length > 0 || question.result.name)) {
+                if (question.result) {
                     answeredQuestions++;
 
                     (question.required)
                         ? requiredQuestionNumber--
                         : requiredQuestionNumber;
-                }
-            })
+                    }
+                })
         }
 
         let percent = Math.round((answeredQuestions * 100)/questionNumber);
@@ -149,10 +147,9 @@ export default class GenerateSurvey extends React.Component {
             progressBar.css('background-color', 'red');
             $('.submit-button').addClass('disabled');
         }
-    }
+    };
 
-    handleSubmitSurvey(path) {
-        let pathId = path.split("/");
+    handleSubmitSurvey = () => {
         let questionsList = this.state.questions_list;
         let textAreaLength = 100;
 
@@ -173,68 +170,23 @@ export default class GenerateSurvey extends React.Component {
         let submitSurvey = confirm('Вы уверены, что хотите завершить опрос?');
 
         if (submitSurvey) {
-            let completedSurveys = 0;
-            let surveys = [];
-            let that = this;
 
             let newSurvey = {
                 "id": this.state.survey_id,
                 "results": this.state.questions_list,
             };
 
-            fetch('http://localhost:3000/users/' + this.props.loggedInAs.id)
-                .then((resp) => resp.json())
-                .then(function (data) {
-                    completedSurveys = data.completed_surveys;
-                    surveys = data.surveys;
-                    surveys.push(newSurvey);
+            this.props.handleLoadUser(this.props.loggedInAs.id, this.state.survey_id, newSurvey);
+        }
 
-                    return fetch('http://localhost:3000/users/' + that.props.loggedInAs.id, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            'completed_surveys':++completedSurveys,
-                            'surveys': surveys
-                        })
-                    }).then((response) => {
-                        if (response.ok) {
-                            alert('Опрос отправлен успешно!');
-                            that.setState({
-                                redirectToAbout: true,
-                            });
-                        } else {
-                            throw new Error('Ошибка при отправке опроса!');
-                        }
-                    });
-                });
-
-            fetch('http://localhost:3000/surveys/' + pathId[pathId.length-1])
-                .then((resp) => resp.json())
-                .then(function (data) {
-                    let timesCompleted = data.answers;
-
-                    return fetch('http://localhost:3000/surveys/' + pathId[pathId.length-1], {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            'answers':++timesCompleted,
-                        })
-                    })
-                });
-            }
-    }
+    };
 
     render() {
-        const redirectToAbout = this.state.redirectToAbout;
-        const { currentPage, loggedInAs } = this.props;
+        const { currentPage, loggedInAs, redirect, redirectPath } = this.props;
 
-        if (redirectToAbout) {
+        if (redirect) {
             return (
-                <Redirect to="/about"/>
+                <Redirect to = {redirectPath} />
             )
         }
 
@@ -281,7 +233,7 @@ export default class GenerateSurvey extends React.Component {
                     </div>
                     <div className='submit-survey d-flex justify-content-center'>
                         <a className='submit-button disabled'
-                           onClick={() => this.handleSubmitSurvey(this.props.location.pathname)}>Завершить опрос
+                           onClick={this.handleSubmitSurvey}>Завершить опрос
                         </a>
                     </div>
                     {this.state.progress_bar &&
