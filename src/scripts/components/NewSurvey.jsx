@@ -13,6 +13,7 @@ export default class NewSurvey extends React.Component {
             survey_title:"",
             questions_list:{"page_1" : null},
             survey_page:"page_1",
+            description: "",
             numberOfPages: 1,
             numberOfQuestions: 0,
             is_anonymous: false,
@@ -45,6 +46,7 @@ export default class NewSurvey extends React.Component {
                 survey_page:'page_1',
                 numberOfPages: template.pages,
                 numberOfQuestions: template.questions,
+                description: template.description,
                 is_anonymous: template.is_anonymous,
                 questions_are_numbered: template.questions_are_numbered,
                 pages_are_numbered: template.pages_are_numbered,
@@ -268,6 +270,7 @@ export default class NewSurvey extends React.Component {
             : (new Date).getTime();
 
         let newSurvey = this.createSurvey(surveyId, template);
+        newSurvey.description = prompt("Введите описание опроса", this.state.description);
 
         if (!this.state.survey_id) {
             newSurvey.description = prompt("Введите описание опроса");
