@@ -41,7 +41,11 @@ const AnswerStats = (props) => {
                           }
                         : {
                             'id':index,
-                            "name": (question.result && question.result.length) ? question.result : 'Нет ответа',
+                            "name": (question.result && question.result.length)
+                                        ? (type === 'text')
+                                            ? question.result.replace(/<(?:.|\n)*?>/gm, ' ')
+                                                : question.result
+                                        : 'Нет ответа',
                             "respondent": user.id
                           };
 
