@@ -1,5 +1,6 @@
 import { setUserData, toggleRegistered } from './actionCreators.js';
 import { getCurrentDate } from '../utils/helperFunctions.js'
+import { SubmissionError } from 'redux-form';
 
 const fetchUsers = 'http://localhost:3000/users/';
 
@@ -18,7 +19,10 @@ export function logIn(userData){
                 })
                 .then(function (user) {
                     if (user === undefined) {
-                        alert("Неверное имя пользователя или пароль");
+                        throw new SubmissionError({
+                            login: 'Неверное имя пользователя или пароль',
+                            _error: 'Ошибка входа'
+                        })
                     } else {
                         let userData = {
                             "id": user.id,
@@ -37,13 +41,14 @@ export function logIn(userData){
 
 export function createUser(values) {
     return (dispatch) => {
-        fetch(fetchUsers)
+        return fetch(fetchUsers)
             .then((resp) => resp.json())
-            .then((data) => {
+            .then(function (data) {
                 if (data.find((user) => (user.login === values.email))) {
-                    alert('Такой пользователь уже существует!')
-                } else if (values.password !== values.repeat_password) {
-                    alert('Пароли не совпадают!')
+                    throw new SubmissionError({
+                        email: 'Такой пользователь уже существует',
+                        _error: 'Ошибка регистрации'
+                    });
                 } else {
                     let date = new Date();
                     let day = date.getDate();
@@ -84,8 +89,6 @@ export function createUser(values) {
                             throw new Error('Ошибка при создании профиля');
                         }
                     });
-                } else {
-                    return null;
                 }
             })
     }
