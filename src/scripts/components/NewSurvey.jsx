@@ -270,14 +270,16 @@ export default class NewSurvey extends React.Component {
             : (new Date).getTime();
 
         let newSurvey = this.createSurvey(surveyId, template);
-        newSurvey.description = prompt("Введите описание опроса", this.state.description);
+        let description = prompt("Введите описание опроса", this.state.description);
 
-        if (!this.state.survey_id) {
-            newSurvey.description = prompt("Введите описание опроса");
-            this.props.handleCreateSurvey(newSurvey, '/surveys');
-        } else {
-            this.props.handleUpdateSurvey(newSurvey, surveyId, template);
-        }
+        (description !== null)
+                ? newSurvey.description = description
+                    : newSurvey.description = this.state.description;
+
+
+        (!this.state.survey_id)
+            ? this.props.handleCreateSurvey(newSurvey, '/surveys')
+                : this.props.handleUpdateSurvey(newSurvey, surveyId, template);
     };
 
     render() {
