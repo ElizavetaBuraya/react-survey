@@ -29,9 +29,8 @@ export default class NewSurvey extends React.Component {
     }
 
     componentDidMount() {
-        this.props.handleChangePage
-            ? this.props.handleChangePage('/new_survey')
-            : this.onLoad(this.props.location.pathname);
+        this.props.handleChangePage('/survey/:link/results');
+        this.onLoad(this.props.location.pathname);
     }
 
     onLoad = (path) => {

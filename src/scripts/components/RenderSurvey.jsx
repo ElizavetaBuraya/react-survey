@@ -27,6 +27,7 @@ export default class GenerateSurvey extends React.Component {
     }
 
     componentDidMount() {
+        this.props.handleChangePage('/survey/:link');
         this.onLoad(this.props.location.pathname);
     }
 
