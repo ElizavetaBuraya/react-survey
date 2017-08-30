@@ -63,7 +63,8 @@ const GenerateContent = (props) => {
 
     return (
         <div className='tab-content'>
-            {navtabs.map((tab, index) => <div className={(tab.active ? 'active ' : '') + tabClass} id={tab.id} role='tabpanel' key={index}>
+            {navtabs.map((tab, index) =>
+                <div className={(tab.active ? 'active ' : '') + tabClass} id={tab.id} role='tabpanel' key={index}>
                     {isResultsPage &&
                     <div className='survey-content'>
                         {pages_are_numbered &&
