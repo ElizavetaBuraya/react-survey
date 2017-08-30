@@ -108,11 +108,10 @@ const Main = (props) => {
             )}/>
             <Route exact path='/new_survey'
                    render={(props) => (
-                       !isAuthorized ? (
+                       !isAuthorized  || (loggedInAs.role === 'Пользователь') ? (
                            <Redirect to='/'/>
                        ) : (
-                           <NewSurvey push to='/new_survey'
-                                       handleChangePage = {handleChangePage}
+                           <NewSurvey  handleChangePage = {handleChangePage}
                                        handleCreateSurvey = {handleCreateSurvey}
                                        redirect = {redirect}
                                        redirectPath = {redirectPath}
