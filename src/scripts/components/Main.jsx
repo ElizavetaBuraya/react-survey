@@ -120,13 +120,6 @@ const Main = (props) => {
                        )
                    )}
             />
-            <Route exact path='/new' render={() => (
-                !isAuthorized  || (loggedInAs.role === 'Пользователь') ? (
-                    <Redirect to='/'/>
-                ) : (
-                    <Redirect push to='/new_survey'/>
-                )
-            )}/>
             <Route path='/new_survey/:link'
                    render={(props) => (
                        !isAuthorized ? (
