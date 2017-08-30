@@ -29,11 +29,33 @@ export default class NewSurvey extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.currentPage === '/new_survey') {
-            this.props.handleChangePage('/new_survey')
-        } else {
-            this.props.handleChangePage(this.props.currentPage);
+        this.props.handleChangePage(this.props.currentPage);
+        if (this.props.currentPage !== '/new_survey') {
             this.onLoad(this.props.location.pathname);
+        }
+    }
+
+    componentWillReceiveProps(props) {
+        if (props.currentPage === '/new_survey') {
+            this.props.handleChangePage('/new_survey');
+            this.setState({
+                survey_id:null,
+                survey_title:"",
+                questions_list:{"page_1" : null},
+                survey_page:"page_1",
+                description: "",
+                numberOfPages: 1,
+                numberOfQuestions: 0,
+                is_anonymous: false,
+                questions_are_numbered: true,
+                pages_are_numbered: true,
+                randomized: false,
+                required_fields: false,
+                progress_bar: false,
+                navtabs: [
+                    { 'href':'#page_1', 'id':'page_1', 'name':'Страница 1', 'active':true }
+                ]
+            })
         }
     }
 
