@@ -67,47 +67,47 @@ const GenerateContent = (props) => {
             {navtabs.map((tab, index) =>
                 <div className={(tab.active ? 'active ' : '') + tabClass} id={tab.id} role='tabpanel' key={index}>
                     {isResultsPage &&
-                    <div className='survey-content'>
-                        {pages_are_numbered &&
-                        <h2>{tab.name}</h2>
-                        }
-                        {questions_list[survey_page] &&
-                        <GenerateResults questions_list={questions_list}
-                                         survey_page={survey_page}
-                                         questions_are_numbered={questions_are_numbered}
-                                         required_fields={required_fields}
-                                         displayChart={displayChart}
-                                         user_results = {user_results}
-                                         handleToggleCharts = {handleToggleCharts}
-                        />
-                        }
-                    </div>
+                        <div className='survey-content'>
+                            {pages_are_numbered &&
+                                <h2>{tab.name}</h2>
+                            }
+                            {questions_list[survey_page] &&
+                                <GenerateResults questions_list={questions_list}
+                                                 survey_page={survey_page}
+                                                 questions_are_numbered={questions_are_numbered}
+                                                 required_fields={required_fields}
+                                                 displayChart={displayChart}
+                                                 user_results = {user_results}
+                                                 handleToggleCharts = {handleToggleCharts}
+                                />
+                            }
+                        </div>
                     }
                     {isSurveyPage &&
-                    <div className='survey-content'>
-                        <span className={deleteClass} aria-hidden='true' onClick={() => handleDeletePage(tab.id)}/>
-                        <div>
-                            <input type='text'
-                                   name='page-head'
-                                   value={tab.name}
-                                   maxLength="12"
-                                   onChange={(e) => handleChangePageName(e.target.value, tab.id)}
-                            />
-                        </div>
+                        <div className='survey-content'>
+                            <span className={deleteClass} aria-hidden='true' onClick={() => handleDeletePage(tab.id)}/>
+                            <div>
+                                <input type='text'
+                                       name='page-head'
+                                       value={tab.name}
+                                       maxLength="12"
+                                       onChange={(e) => handleChangePageName(e.target.value, tab.id)}
+                                />
+                            </div>
                         {questions_list[survey_page] &&
-                        <GenerateQuestions questions_list = {questions_list}
-                                           survey_page = {survey_page}
-                                           handleUpdateQuestion = {handleUpdateQuestion}
-                                           handleDragQuestion = {handleDragQuestion}
-                                           handleDeleteQuestion = {handleDeleteQuestion}
-                                           questions_are_numbered = {questions_are_numbered}
-                                           required_fields = {required_fields}
-                        />
+                            <GenerateQuestions questions_list = {questions_list}
+                                               survey_page = {survey_page}
+                                               handleUpdateQuestion = {handleUpdateQuestion}
+                                               handleDragQuestion = {handleDragQuestion}
+                                               handleDeleteQuestion = {handleDeleteQuestion}
+                                               questions_are_numbered = {questions_are_numbered}
+                                               required_fields = {required_fields}
+                            />
                         }
                         {!questions_list[survey_page] &&
-                        <em>Добавьте вопрос, выбрав нужный тип вопроса в меню опроса</em>
+                            <em>Добавьте вопрос, выбрав нужный тип вопроса в меню опроса</em>
                         }
-                    </div>
+                        </div>
                     }
                     {isAboutPage &&
                         <AboutPageContent index={index}/>
