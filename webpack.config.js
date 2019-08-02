@@ -1,64 +1,66 @@
-var path = require('path');
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-
-const extractSass = new ExtractTextPlugin('./css/bootstrap.css');
-const extractLess = new ExtractTextPlugin('./css/style.css');
+const path = require('path');
 
 module.exports = {
-    entry: [
-        'babel-polyfill',
-        './src/scripts/index.js',
-        'font-awesome/scss/font-awesome.scss',
-        './src/assets/styles/sass/style.scss',
-        './src/assets/styles/less/style.less'
-    ],
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+    mode: 'development',
+    entry: {
+        app: './src/index.js'
+    },
+    devtool: 'inline-source-map',
+    devServer: {
+        contentBase: './dist'
     },
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
-                exclude: /(node_modules|bower_components)/,
+                test: /\.(ts|js)x?$/,
+                exclude: /(node_modules)/,
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        plugins: ['transform-runtime', "transform-decorators-legacy"],
-                        presets:[
-                            'es2015', 'stage-0', 'react'
+                        presets: [
+                            '@babel/env',
+                            '@babel/preset-typescript',
+                            '@babel/preset-react'
+                        ],
+                        plugins: [
+                            [
+                                '@babel/plugin-proposal-decorators',
+                                { legacy: true }
+                            ],
+                            [
+                                '@babel/plugin-proposal-class-properties',
+                                { loose: true }
+                            ]
                         ]
                     }
                 }
             },
             {
-                test:   /\.css$/,
-                use: ["style-loader", "css-loader"]
+                test: /\.js$/,
+                use: ['source-map-loader'],
+                enforce: 'pre'
             },
             {
                 test: /\.scss$/,
-                use: extractSass.extract([ 'css-loader', {
-                    loader: 'postcss-loader',
-                    options: {
-                        plugins: function () {
-                            return [autoprefixer]
-                        }
-                    }
-                }, 'sass-loader'])
+                use: [
+                    'style-loader',
+                    { loader: 'css-loader', options: { importLoaders: 1 } },
+                    {
+                        loader: 'postcss-loader'
+                    },
+                    'sass-loader'
+                ]
             },
             {
                 test: /\.less$/i,
-                use: extractLess.extract([ 'css-loader', {
-                    loader: 'postcss-loader',
-                    options: {
-                        plugins: function () {
-                            return [autoprefixer]
-                        }
-                    }
-                }, 'less-loader'])
+                use: [
+                    'style-loader',
+                    { loader: 'css-loader', options: { importLoaders: 1 } },
+                    {
+                        loader: 'postcss-loader'
+                    },
+                    'less-loader'
+                ]
             },
             {
                 // Match woff2 in addition to patterns like .woff?v=1.1.1.
@@ -66,18 +68,14 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                     name: './fonts/[name].[ext]',
-                    publicPath: '../',
-                },
-            },
+                    publicPath: '../'
+                }
+            }
         ]
     },
-    devServer: {
-        contentBase: path.join(__dirname, "dist"),
-        historyApiFallback: true,
-    },
-    plugins: [
-        extractLess,
-        extractSass,
-        //new UglifyJSPlugin()
-    ]
-}
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
+    }
+};
