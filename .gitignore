@@ -1,6 +1,9 @@
 # IntelliJ
 .idea/
 
+# VSCode
+.vscode
+
 # Auto-generated
 package-lock.json
 
